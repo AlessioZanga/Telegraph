@@ -29,6 +29,9 @@ if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
     endif()
 endif()
 
+include_directories(extern/eigen/Eigen)
+add_subdirectory(extern/eigen)
+
 enable_testing()
 include(GoogleTest)
 add_subdirectory(tests)
