@@ -24,19 +24,16 @@ using SparseAdjacencyMatrix = Eigen::SparseMatrix<int8_t, Eigen::RowMajor>;
 class IGraph {
    public:
     //! Destroy the IGraph object.
-    virtual ~IGraph(){};
+    inline virtual ~IGraph(){};
 
     /**
      * @brief Output stream operator.
      *
      * @param out Output stream reference.
-     * @param other Given graph reference.
+     * @param G Given graph reference.
      * @return std::ostream& Modified output stream reference.
      */
-    friend std::ostream &operator<<(std::ostream &out, const IGraph &other) {
-        other.print(out);
-        return out;
-    }
+    friend std::ostream &operator<<(std::ostream &out, const IGraph &G);
 
     /**
      * @brief Whether a vertex id exists or not.
@@ -114,7 +111,7 @@ class IGraph {
      * @param X Given vertex id.
      * @return VIDs Vertices adjacent to a given vertex id.
      */
-    virtual VIDs adjacent(const VID &X) const = 0;
+    inline virtual VIDs adjacent(const VID &X) const = 0;
 
     /**
      * @brief The adjacency list representation of the graph.
@@ -157,7 +154,7 @@ class IGraph {
      * @return true If the graph is null,
      * @return false Otherwise.
      */
-    virtual bool is_null() const = 0;
+    inline virtual bool is_null() const = 0;
 
     /**
      * @brief A graph is trivial if it has one vertex and no edges.
@@ -165,7 +162,7 @@ class IGraph {
      * @return true If the graph is trivial,
      * @return false Otherwise.
      */
-    virtual bool is_trivial() const = 0;
+    inline virtual bool is_trivial() const = 0;
 
     /**
      * @brief A graph is complete if every vertex is connected to all the others.
@@ -173,7 +170,7 @@ class IGraph {
      * @return true If the graph is complete,
      * @return false Otherwise.
      */
-    virtual bool is_complete() const = 0;
+    inline virtual bool is_complete() const = 0;
 
     /**
      * @brief The number of incident edges on a vertex.
@@ -183,7 +180,7 @@ class IGraph {
      * @param X Given vertex id.
      * @return size_t Degree of the given vertex id.
      */
-    virtual size_t degree(const VID &X) const = 0;
+    inline virtual size_t degree(const VID &X) const = 0;
 
     /**
      * @brief A graph is regular if every vertex has the same degree.
@@ -191,7 +188,14 @@ class IGraph {
      * @return true If the graph is regular,
      * @return false Otherwise.
      */
-    virtual bool is_regular() const = 0;
+    inline virtual bool is_regular() const = 0;
+
+    /**
+     * @brief Hash function of a graph.
+     *
+     * @return size_t Hash of a graph.
+     */
+    inline virtual size_t hash() const = 0;
 
    private:
     /**
@@ -201,3 +205,19 @@ class IGraph {
      */
     virtual void print(std::ostream &out) const = 0;
 };
+
+//! Output stream operator adapter.
+std::ostream &operator<<(std::ostream &out, const IGraph &G) {
+    G.print(out);
+    return out;
+}
+
+namespace std {
+
+template <>
+struct hash<IGraph> {
+    //! Hash function adapter.
+    size_t operator()(const IGraph &G) const { return G.hash(); }
+};
+
+};  // namespace std
