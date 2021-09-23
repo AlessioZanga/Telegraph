@@ -23,11 +23,8 @@ using SparseAdjacencyMatrix = Eigen::SparseMatrix<int8_t, Eigen::RowMajor>;
 
 class IGraph {
    public:
-    //! Construct a new IGraph object.
-    IGraph(){};
-
     //! Destroy the IGraph object.
-    ~IGraph(){};
+    virtual ~IGraph(){};
 
     /**
      * @brief Whether a vertex id exists or not.
