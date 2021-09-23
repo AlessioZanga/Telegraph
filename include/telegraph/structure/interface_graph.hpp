@@ -27,6 +27,18 @@ class IGraph {
     virtual ~IGraph(){};
 
     /**
+     * @brief Output stream operator.
+     *
+     * @param out Output stream reference.
+     * @param other Given graph reference.
+     * @return std::ostream& Modified output stream reference.
+     */
+    friend std::ostream &operator<<(std::ostream &out, const IGraph &other) {
+        other.print(out);
+        return out;
+    }
+
+    /**
      * @brief Whether a vertex id exists or not.
      *
      * @param X Given vertex id.
@@ -98,7 +110,7 @@ class IGraph {
 
     /**
      * @brief The set of vertices adjacent to a given vertex id.
-     * 
+     *
      * @param X Given vertex id.
      * @return VIDs Vertices adjacent to a given vertex id.
      */
@@ -106,21 +118,21 @@ class IGraph {
 
     /**
      * @brief The adjacency list representation of the graph.
-     * 
+     *
      * @return AdjacencyList Adjacency list of the graph.
      */
     inline virtual AdjacencyList adjacency_list() const = 0;
 
     /**
      * @brief The adjacency matrix representation of the graph in a dense format.
-     * 
+     *
      * @return AdjacencyMatrix Dense adjacency matrix of the graph.
      */
     inline virtual AdjacencyMatrix adjacency_matrix() const = 0;
 
     /**
      * @brief The adjacency matrix representation of the graph in a sparse format.
-     * 
+     *
      * @return SparseAdjacencyMatrix Sparse adjacency matrix of the graph.
      */
     inline virtual SparseAdjacencyMatrix sparse_adjacency_matrix() const = 0;
@@ -180,4 +192,12 @@ class IGraph {
      * @return false Otherwise.
      */
     virtual bool is_regular() const = 0;
+
+   private:
+    /**
+     * @brief Print utility function.
+     *
+     * @param out Output stream reference.
+     */
+    virtual void print(std::ostream &out) const = 0;
 };
