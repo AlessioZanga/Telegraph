@@ -29,7 +29,7 @@ if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
     endif()
 endif()
 
-include_directories(extern/eigen/Eigen)
+include_directories(extern/eigen)
 
 enable_testing()
 include(GoogleTest)
