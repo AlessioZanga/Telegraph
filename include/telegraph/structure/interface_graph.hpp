@@ -30,10 +30,10 @@ class IGraph {
     ~IGraph(){};
 
     /**
-     * @brief Whether a vertex exists or not.
+     * @brief Whether a vertex id exists or not.
      *
-     * @param X Selected vertex.
-     * @return true If the vertex exists,
+     * @param X Given vertex id.
+     * @return true If the vertex id exists,
      * @return false Otherwise.
      */
     inline virtual bool has_vertex(const VID &X) const = 0;
@@ -41,21 +41,21 @@ class IGraph {
     /**
      * @brief Add a vertex to the graph.
      *
-     * @return VID The vertex ID.
+     * @return VID The vertex id.
      */
     inline virtual VID add_vertex() = 0;
 
     /**
-     * @brief Add a vertex to the graph with a predefined ID.
+     * @brief Add a vertex id to the graph.
      *
-     * @param X Selected vertex.
+     * @param X Given vertex id.
      */
     inline virtual void add_vertex(const VID &X) = 0;
 
     /**
-     * @brief Delete a vertex from the graph.
+     * @brief Delete a vertex id from the graph.
      *
-     * @param X Selected vertex.
+     * @param X Given vertex id.
      */
     inline virtual void del_vertex(const VID &X) = 0;
 
@@ -69,8 +69,8 @@ class IGraph {
     /**
      * @brief Whether an edge exists or not.
      *
-     * @param X First edge endpoint.
-     * @param Y Second edge endpoint.
+     * @param X First edge vertex id.
+     * @param Y Second edge vertex id.
      * @return true If the edge exists,
      * @return false Otherwise.
      */
@@ -79,16 +79,16 @@ class IGraph {
     /**
      * @brief Add an edge to the graph.
      *
-     * @param X First edge endpoint.
-     * @param Y Second edge endpoint.
+     * @param X First edge vertex id.
+     * @param Y Second edge vertex id.
      */
     inline virtual void add_edge(const VID &X, const VID &Y) = 0;
 
     /**
      * @brief Delete an edge from the graph.
      *
-     * @param X First edge endpoint.
-     * @param Y Second edge endpoint.
+     * @param X First edge vertex id.
+     * @param Y Second edge vertex id.
      */
     inline virtual void del_edge(const VID &X, const VID &Y) = 0;
 
@@ -171,8 +171,8 @@ class IGraph {
      * @details The degree of a vertex X is computed by summing the number
      * of proper edges and *twice* the number of self-edges incident on X.
      *
-     * @param X Selected vertex.
-     * @return size_t Degree of the selected vertex.
+     * @param X Given vertex id.
+     * @return size_t Degree of the given vertex id.
      */
     virtual size_t degree(const VID &X) const = 0;
 
