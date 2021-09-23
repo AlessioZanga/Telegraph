@@ -1,6 +1,8 @@
 #pragma once
 
+#include <Eigen/Eigen>
 #include <cstdint>
+#include <map>
 #include <set>
 #include <utility>
 
@@ -12,6 +14,12 @@ using EID = std::pair<VID, VID>;
 using VIDs = std::set<VID>;
 //! Edge set.
 using EIDs = std::set<EID>;
+//! Adjacency list.
+using AdjacencyList = std::map<VID, VIDs>;
+//! Dense adjacency matrix.
+using AdjacencyMatrix = Eigen::Matrix<int8_t, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>;
+//! Sparse adjacency matrix.
+using SparseAdjacencyMatrix = Eigen::SparseMatrix<int8_t, Eigen::RowMajor>;
 
 class IGraph {
    public:
@@ -90,6 +98,35 @@ class IGraph {
      * @return EIDs Edge set of the graph.
      */
     inline virtual EIDs edges() const = 0;
+
+    /**
+     * @brief The set of vertices adjacent to a given vertex id.
+     * 
+     * @param X Given vertex id.
+     * @return VIDs Vertices adjacent to a given vertex id.
+     */
+    virtual VIDs adjacent(const VID &X) const = 0;
+
+    /**
+     * @brief The adjacency list representation of the graph.
+     * 
+     * @return AdjacencyList Adjacency list of the graph.
+     */
+    inline virtual AdjacencyList adjacency_list() const = 0;
+
+    /**
+     * @brief The adjacency matrix representation of the graph in a dense format.
+     * 
+     * @return AdjacencyMatrix Dense adjacency matrix of the graph.
+     */
+    inline virtual AdjacencyMatrix adjacency_matrix() const = 0;
+
+    /**
+     * @brief The adjacency matrix representation of the graph in a sparse format.
+     * 
+     * @return SparseAdjacencyMatrix Sparse adjacency matrix of the graph.
+     */
+    inline virtual SparseAdjacencyMatrix sparse_adjacency_matrix() const = 0;
 
     /**
      * @brief The number of vertices of a graph is called its order.
