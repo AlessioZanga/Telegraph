@@ -32,5 +32,6 @@
 *.app
 
 # Folders
+.vscode
 build
 docs
