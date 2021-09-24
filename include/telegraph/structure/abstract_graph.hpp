@@ -18,7 +18,7 @@ using ELBs = std::set<ELB>;
 class AbstractGraph : public IGraph {
    private:
     //! Graph label, aka its name.
-    GLB label;
+    GLB glb;
     //! Bidirectional mapping for vertex ids and labels.
     boost::bimap<VID, VLB> vlbs;
     //! Bidirectional mapping for edge ids and labels.
