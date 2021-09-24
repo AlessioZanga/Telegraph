@@ -356,28 +356,28 @@ class AbstractGraph : public IGraph {
      * @return true If the vertex label exists,
      * @return false Otherwise.
      */
-    inline virtual bool has_vertex(const VLB &X) const;
+    inline bool has_vertex(const VLB &X) const;
 
     /**
      * @brief Add a vertex label to the graph.
      *
      * @param X Given vertex label.
      */
-    inline virtual void add_vertex(const VLB &X);
+    inline void add_vertex(const VLB &X);
 
     /**
      * @brief Delete a vertex label from the graph.
      *
      * @param X Given vertex label.
      */
-    inline virtual void del_vertex(const VLB &X);
+    inline void del_vertex(const VLB &X);
 
     /**
      * @brief The vertices of a graph.
      *
      * @return VLBs Vertex set of the graph.
      */
-    inline virtual VLBs vertices_labels() const;
+    inline VLBs vertices_labels() const;
 
     /**
      * @brief Whether an edge exists or not.
@@ -387,7 +387,7 @@ class AbstractGraph : public IGraph {
      * @return true If the edge exists,
      * @return false Otherwise.
      */
-    inline virtual bool has_edge(const VLB &X, const VLB &Y) const;
+    inline bool has_edge(const VLB &X, const VLB &Y) const;
 
     /**
      * @brief Add an edge to the graph.
@@ -395,7 +395,7 @@ class AbstractGraph : public IGraph {
      * @param X First edge vertex label.
      * @param Y Second edge vertex label.
      */
-    inline virtual void add_edge(const VLB &X, const VLB &Y);
+    inline void add_edge(const VLB &X, const VLB &Y);
 
     /**
      * @brief Delete an edge from the graph.
@@ -403,14 +403,14 @@ class AbstractGraph : public IGraph {
      * @param X First edge vertex label.
      * @param Y Second edge vertex label.
      */
-    inline virtual void del_edge(const VLB &X, const VLB &Y);
+    inline void del_edge(const VLB &X, const VLB &Y);
 
     /**
      * @brief The edges of a graph.
      *
      * @return ELBs Edge set of the graph.
      */
-    inline virtual ELBs edges_labels() const;
+    inline ELBs edges_labels() const;
 
     /**
      * @brief The set of vertices adjacent to a given vertex label.
@@ -418,7 +418,7 @@ class AbstractGraph : public IGraph {
      * @param X Given vertex label.
      * @return VLBs Vertices adjacent to a given vertex label.
      */
-    inline virtual VLBs adjacent(const VLB &X) const;
+    inline VLBs adjacent(const VLB &X) const;
 
     /**
      * @brief The number of incident edges on a vertex.
@@ -428,5 +428,5 @@ class AbstractGraph : public IGraph {
      * @param X Given vertex label.
      * @return size_t Degree of the given vertex label.
      */
-    inline virtual size_t degree(const VLB &X) const = 0;
+    inline size_t degree(const VLB &X) const;
 };
