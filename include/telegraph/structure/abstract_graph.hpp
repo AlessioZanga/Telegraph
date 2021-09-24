@@ -4,6 +4,8 @@
 
 #include "interface_graph.hpp"
 
+//! Graph label.
+using GLB = std::string;
 //! Vertex label.
 using VLB = std::string;
 //! Edge label.
@@ -15,6 +17,8 @@ using ELBs = std::set<ELB>;
 
 class AbstractGraph : public IGraph {
    private:
+    //! Graph label, aka its name.
+    GLB label;
     //! Bidirectional mapping for vertex ids and labels.
     boost::bimap<VID, VLB> vlbs;
     //! Bidirectional mapping for edge ids and labels.
@@ -36,7 +40,102 @@ class AbstractGraph : public IGraph {
     AbstractGraph &operator=(const AbstractGraph &other);
 
     //! Destroy the Abstract Graph object
-    virtual ~AbstractGraph();
+    inline virtual ~AbstractGraph();
+
+    /**
+     * @brief Check if the graph has a label.
+     *
+     * @return true If the graph has a label,
+     * @return false Otherwise.
+     */
+    inline bool has_label() const;
+
+    /**
+     * @brief Check if a vertex has a label.
+     *
+     * @param X Given vertex id.
+     * @return true If the vertex has a label,
+     * @return false Otherwise.
+     */
+    inline bool has_label(const VID &X) const;
+
+    /**
+     * @brief Check if an edge has a label.
+     *
+     * @param X First edge vertex id.
+     * @param Y Second edge vertex id.
+     * @return true If the edge has a label,
+     * @return false Otherwise.
+     */
+    inline bool has_label(const VID &X, const VID &Y) const;
+
+    /**
+     * @brief Get the graph label.
+     *
+     * @return GLB The graph label.
+     */
+    inline GLB get_label() const;
+
+    /**
+     * @brief Get the vertex label given its id.
+     *
+     * @param X Given vertex id.
+     * @return VLB The vertex label.
+     */
+    inline VLB get_label(const VID &X) const;
+
+    /**
+     * @brief Get the edge label given its vertices ids.
+     *
+     * @param X First edge vertex id.
+     * @param Y Second edge vertex id.
+     * @return ELB The edge label.
+     */
+    inline ELB get_label(const VID &X, const VID &Y) const;
+
+    /**
+     * @brief Set the graph label.
+     *
+     * @param label Given graph label.
+     */
+    inline void set_label(const GLB &label);
+
+    /**
+     * @brief Set the vertex label given its id.
+     *
+     * @param X Given vertex id.
+     * @param label Given vertex label.
+     */
+    inline void set_label(const VID &X, const VLB &label);
+
+    /**
+     * @brief Set the edge label given its vertices ids.
+     *
+     * @param X First edge vertex id.
+     * @param Y Second edge vertex id.
+     * @param label Given edge label.
+     */
+    inline void set_label(const VID &X, const VID &Y, const ELB &label);
+
+    /**
+     * @brief Delete the graph label;
+     */
+    inline void del_label();
+
+    /**
+     * @brief Delete the vertex label given its id.
+     *
+     * @param X Given vertex id.
+     */
+    inline void del_label(const VID &X);
+
+    /**
+     * @brief Delete the edge label given its vertices ids.
+     *
+     * @param X First edge vertex id.
+     * @param Y Second edge vertex id.
+     */
+    inline void del_label(const VID &X, const VID &Y);
 
     /**
      * @brief Whether a vertex label exists or not.
@@ -107,7 +206,7 @@ class AbstractGraph : public IGraph {
      * @param X Given vertex label.
      * @return VLBs Vertices adjacent to a given vertex label.
      */
-    virtual VLBs adjacent(const VLB &X) const;
+    inline virtual VLBs adjacent(const VLB &X) const;
 
     /**
      * @brief The number of incident edges on a vertex.
@@ -117,5 +216,5 @@ class AbstractGraph : public IGraph {
      * @param X Given vertex label.
      * @return size_t Degree of the given vertex label.
      */
-    virtual size_t degree(const VLB &X) const = 0;
+    inline virtual size_t degree(const VLB &X) const = 0;
 };
