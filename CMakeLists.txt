@@ -1,15 +1,17 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.8)
 
-project(MyProject
+project(Telegraph
     VERSION 0.0.1
     DESCRIPTION "Telegraph"
     LANGUAGES CXX
 )
 
-set(CMAKE_CXX_STANDARD_REQUIRED 17)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_compile_options(-Wall -Wextra -pedantic)
-add_compile_options(-O3 -march=native -shared -std=c++17 -fPIC)
+add_compile_options(-O3 -march=native -shared -fPIC)
 
 include_directories(include)
 add_subdirectory(src)
