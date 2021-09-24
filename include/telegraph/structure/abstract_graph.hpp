@@ -1,5 +1,6 @@
 #pragma once
 
+#include <any>
 #include <boost/bimap.hpp>
 
 #include "interface_graph.hpp"
@@ -23,6 +24,13 @@ class AbstractGraph : public IGraph {
     boost::bimap<VID, VLB> vlbs;
     //! Bidirectional mapping for edge ids and labels.
     boost::bimap<EID, ELB> elbs;
+
+    //! Graph attributes.
+    std::map<std::string, std::any> gattrs;
+    //! Vertices attributes.
+    std::map<VID, std::map<std::string, std::any>> vattrs;
+    //! Edges attributes.
+    std::map<EID, std::map<std::string, std::any>> eattrs;
 
    public:
     //! Default constructor for a new Abstract Graph object
@@ -136,6 +144,210 @@ class AbstractGraph : public IGraph {
      * @param Y Second edge vertex id.
      */
     inline void del_label(const VID &X, const VID &Y);
+
+    /**
+     * @brief Check if the graph has an attribute given its key.
+     *
+     * @param key Given attribute key.
+     * @return true If the graph has the attribute,
+     * @return false Otherwise.
+     */
+    inline bool has_attr(const std::string &key) const;
+
+    /**
+     * @brief Check if a vertex has an attribute given its key.
+     *
+     * @param X Given vertex id.
+     * @param key Given attribute key.
+     * @return true If the vertex has the attribute,
+     * @return false Otherwise.
+     */
+    inline bool has_attr(const VID &X, const std::string &key) const;
+
+    /**
+     * @brief Check if a vertex has an attribute given its key.
+     *
+     * @param X Given vertex label.
+     * @param key Given attribute key.
+     * @return true If the vertex has the attribute,
+     * @return false Otherwise.
+     */
+    inline bool has_attr(const VLB &X, const std::string &key) const;
+
+    /**
+     * @brief Check if an edge has an attribute given its key.
+     *
+     * @param X First edge vertex id.
+     * @param Y Second edge vertex id.
+     * @param key Given attribute key.
+     * @return true If the edge has the attribute,
+     * @return false Otherwise.
+     */
+    inline bool has_attr(const VID &X, const VID &Y, const std::string &key) const;
+
+    /**
+     * @brief Check if an edge has an attribute given its key.
+     *
+     * @param X First edge vertex label.
+     * @param Y Second edge vertex label.
+     * @param key Given attribute key.
+     * @return true If the edge has the attribute,
+     * @return false Otherwise.
+     */
+    inline bool has_attr(const VLB &X, const VLB &Y, const std::string &key) const;
+
+    /**
+     * @brief Get the graph attribute value given its key.
+     *
+     * @tparam T Return attribute value type.
+     * @param key Given attribute key.
+     * @return T The attribute value.
+     */
+    template <typename T>
+    inline T get_attr(const std::string &key) const;
+
+    /**
+     * @brief Get the vertex attribute value given its key.
+     *
+     * @tparam T Return attribute value type.
+     * @param X Given vertex id.
+     * @param key Given attribute key.
+     * @return T The attribute value.
+     */
+    template <typename T>
+    inline T get_attr(const VID &X, const std::string &key) const;
+
+    /**
+     * @brief Get the vertex attribute value given its key.
+     *
+     * @tparam T Return attribute value type.
+     * @param X Given vertex label.
+     * @param key Given attribute key.
+     * @return T The attribute value.
+     */
+    template <typename T>
+    inline T get_attr(const VLB &X, const std::string &key) const;
+
+    /**
+     * @brief Get the edge attribute value given its key.
+     *
+     * @tparam T Return attribute value type.
+     * @param X First edge vertex id.
+     * @param Y Second edge vertex id.
+     * @param key Given attribute key.
+     * @return T The attribute value.
+     */
+    template <typename T>
+    inline T get_attr(const VID &X, const VID &Y, const std::string &key) const;
+
+    /**
+     * @brief Get the edge attribute value given its key.
+     *
+     * @tparam T Attribute value type.
+     * @param X First edge vertex label.
+     * @param Y Second edge vertex label.
+     * @param key Given attribute key.
+     * @return T The attribute value.
+     */
+    template <typename T>
+    inline T get_attr(const VLB &X, const VLB &Y, const std::string &key) const;
+
+    /**
+     * @brief Set the graph attribute given its key and value.
+     *
+     * @tparam T Attribute value type.
+     * @param key Given attribute key.
+     * @param value Given attribute value.
+     */
+    template <typename T>
+    inline void set_attr(const std::string &key, const T &value);
+
+    /**
+     * @brief Set the vertex attribute given its key and value.
+     *
+     * @tparam T Attribute value type.
+     * @param X Given vertex id.
+     * @param key Given attribute key.
+     * @param value Given attribute value.
+     */
+    template <typename T>
+    inline void set_attr(const VID &X, const std::string &key, const T &value);
+
+    /**
+     * @brief Set the vertex attribute given its key and value.
+     *
+     * @tparam T Attribute value type.
+     * @param X Given vertex label.
+     * @param key Given attribute key.
+     * @param value Given attribute value.
+     */
+    template <typename T>
+    inline void set_attr(const VLB &X, const std::string &key, const T &value);
+
+    /**
+     * @brief Set the edge attribute given its key and value.
+     *
+     * @tparam T Attribute value type.
+     * @param X First edge vertex id.
+     * @param Y Second edge vertex id.
+     * @param key Given attribute key.
+     * @param value Given attribute value.
+     */
+    template <typename T>
+    inline void set_attr(const VID &X, const VID &Y, const std::string &key, const T &value);
+
+    /**
+     * @brief Set the edge attribute given its key and value.
+     *
+     * @tparam T Attribute value type.
+     * @param X First edge vertex label.
+     * @param Y Second edge vertex label.
+     * @param key Given attribute key.
+     * @param value Given attribute value.
+     */
+    template <typename T>
+    inline void set_attr(const VLB &X, const VLB &Y, const std::string &key, const T &value);
+
+    /**
+     * @brief Delete the graph attribute given its key.
+     *
+     * @param key Given attribute key.
+     */
+    inline void del_attr(const std::string &key) const;
+
+    /**
+     * @brief Delete the vertex attribute given its key.
+     *
+     * @param X Given vertex id.
+     * @param key Given attribute key.
+     */
+    inline void del_attr(const VID &X, const std::string &key) const;
+
+    /**
+     * @brief Delete the vertex attribute given its key.
+     *
+     * @param X Given vertex label.
+     * @param key Given attribute key.
+     */
+    inline void del_attr(const VLB &X, const std::string &key) const;
+
+    /**
+     * @brief Delete the edge attribute given its key.
+     *
+     * @param X First edge vertex id.
+     * @param Y Second edge vertex id
+     * @param key Given attribute key.
+     */
+    inline void del_attr(const VID &X, const VID &Y, const std::string &key) const;
+
+    /**
+     * @brief Delete the edge attribute given its key.
+     *
+     * @param X First edge vertex label.
+     * @param Y Second edge vertex label.
+     * @param key Given attribute key.
+     */
+    inline void del_attr(const VLB &X, const VLB &Y, const std::string &key) const;
 
     /**
      * @brief Whether a vertex label exists or not.
