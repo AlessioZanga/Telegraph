@@ -103,7 +103,7 @@ class AbstractGraph : public IGraph {
      *
      * @param key Given attribute key.
      */
-    inline void del_attr(const std::string &key) const;
+    inline void del_attr(const std::string &key);
 
     /** \addtogroup vertices
      *  @{
@@ -226,7 +226,7 @@ class AbstractGraph : public IGraph {
      * @param X Given vertex id.
      * @param key Given attribute key.
      */
-    inline void del_attr(const VID &X, const std::string &key) const;
+    inline void del_attr(const VID &X, const std::string &key);
 
     /**
      * @brief Delete the vertex attribute given its key.
@@ -234,7 +234,7 @@ class AbstractGraph : public IGraph {
      * @param X Given vertex label.
      * @param key Given attribute key.
      */
-    inline void del_attr(const VLB &X, const std::string &key) const;
+    inline void del_attr(const VLB &X, const std::string &key);
 
     /**
      * @brief Whether a vertex label exists or not.
@@ -542,7 +542,7 @@ class AbstractGraph : public IGraph {
      * @param X Given edge id.
      * @param key Given attribute key.
      */
-    inline void del_attr(const EID &X, const std::string &key) const;
+    inline void del_attr(const EID &X, const std::string &key);
 
     /**
      * @brief Delete the edge attribute given its key.
@@ -550,7 +550,7 @@ class AbstractGraph : public IGraph {
      * @param X Given edge label.
      * @param key Given attribute key.
      */
-    inline void del_attr(const ELB &X, const std::string &key) const;
+    inline void del_attr(const ELB &X, const std::string &key);
 
     /**
      * @brief Delete the edge attribute given its key.
@@ -559,7 +559,7 @@ class AbstractGraph : public IGraph {
      * @param Y Second edge vertex id.
      * @param key Given attribute key.
      */
-    inline void del_attr(const VID &X, const VID &Y, const std::string &key) const;
+    inline void del_attr(const VID &X, const VID &Y, const std::string &key);
 
     /**
      * @brief Delete the edge attribute given its key.
@@ -568,7 +568,7 @@ class AbstractGraph : public IGraph {
      * @param Y Second edge vertex label.
      * @param key Given attribute key.
      */
-    inline void del_attr(const VLB &X, const VLB &Y, const std::string &key) const;
+    inline void del_attr(const VLB &X, const VLB &Y, const std::string &key);
 
     /**
      * @brief Whether an edge exists or not.
