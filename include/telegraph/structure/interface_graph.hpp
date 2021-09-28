@@ -106,6 +106,10 @@ class IGraph {
      */
     inline virtual bool is_regular() const = 0;
 
+    /** \addtogroup vertices
+     *  @{
+     */
+
     /**
      * @brief The vertices of a graph.
      *
@@ -161,6 +165,12 @@ class IGraph {
      */
     inline virtual size_t degree(const VID &X) const = 0;
 
+    /** @}*/
+
+    /** \addtogroup edges
+     *  @{
+     */
+
     /**
      * @brief The edges of a graph.
      *
@@ -193,6 +203,8 @@ class IGraph {
      * @param Y Second edge vertex id.
      */
     inline virtual void del_edge(const VID &X, const VID &Y) = 0;
+
+    /** @}*/
 
    private:
     /**

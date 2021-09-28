@@ -105,6 +105,10 @@ class AbstractGraph : public IGraph {
      */
     inline void del_attr(const std::string &key) const;
 
+    /** \addtogroup vertices
+     *  @{
+     */
+
     /**
      * @brief The vertices of a graph.
      *
@@ -272,6 +276,12 @@ class AbstractGraph : public IGraph {
      * @return size_t Degree of the given vertex label.
      */
     inline size_t degree(const VLB &X) const;
+
+    /** @}*/
+
+    /** \addtogroup edges
+     *  @{
+     */
 
     /**
      * @brief The edges of a graph.
@@ -594,4 +604,6 @@ class AbstractGraph : public IGraph {
      * @param Y Second edge vertex label.
      */
     inline void del_edge(const VLB &X, const VLB &Y);
+
+    /** @}*/
 };
