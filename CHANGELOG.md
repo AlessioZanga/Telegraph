@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Added .gitignore
+- Added CMake configuration.
 - Added initial Graph interface.
 - Added initial Graph abstraction with labels and attributes support.
 - Added Boost Bimaps as bidirectional mapping utility.
