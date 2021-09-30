@@ -275,24 +275,6 @@ class AbstractGraph : public IGraph {
      */
     inline void del_vertex(const VLB &X);
 
-    /**
-     * @brief The set of vertices adjacent to a given vertex label.
-     *
-     * @param X Given vertex label.
-     * @return VLBs Vertices adjacent to a given vertex label.
-     */
-    inline VLBs adjacent(const VLB &X) const;
-
-    /**
-     * @brief The number of incident edges on a vertex.
-     * @details The degree of a vertex X is computed by summing the number
-     * of proper edges and *twice* the number of self-edges incident on X.
-     *
-     * @param X Given vertex label.
-     * @return size_t Degree of the given vertex label.
-     */
-    inline size_t degree(const VLB &X) const;
-
     /** @}*/
 
     /** \addtogroup edges

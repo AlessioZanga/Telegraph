@@ -98,14 +98,6 @@ class IGraph {
      */
     inline virtual bool is_complete() const = 0;
 
-    /**
-     * @brief A graph is regular if every vertex has the same degree.
-     *
-     * @return true If the graph is regular,
-     * @return false Otherwise.
-     */
-    inline virtual bool is_regular() const = 0;
-
     /** \addtogroup vertices
      *  @{
      */
@@ -146,24 +138,6 @@ class IGraph {
      * @param X Given vertex id.
      */
     inline virtual void del_vertex(const VID &X) = 0;
-
-    /**
-     * @brief The set of vertices adjacent to a given vertex id.
-     *
-     * @param X Given vertex id.
-     * @return VIDs Vertices adjacent to a given vertex id.
-     */
-    inline virtual VIDs adjacent(const VID &X) const = 0;
-
-    /**
-     * @brief The number of incident edges on a vertex.
-     * @details The degree of a vertex X is computed by summing the number
-     * of proper edges and *twice* the number of self-edges incident on X.
-     *
-     * @param X Given vertex id.
-     * @return size_t Degree of the given vertex id.
-     */
-    inline virtual size_t degree(const VID &X) const = 0;
 
     /** @}*/
 
