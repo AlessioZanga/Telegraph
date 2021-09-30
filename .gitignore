@@ -34,6 +34,4 @@
 # Folders
 .vscode
 build
-docs/html
-docs/latex
-docs/man
+docs
