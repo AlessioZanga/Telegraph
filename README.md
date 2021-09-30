@@ -1,5 +1,5 @@
 # Telegraph
-[![CodeFactor](https://www.codefactor.io/repository/github/alessiozanga/telegraph/badge?s=8eebf77a57fce4b466f8eaa7fd485e0a3e6ed269)](https://www.codefactor.io/repository/github/alessiozanga/telegraph)  
+[![docs](https://github.com/AlessioZanga/Telegraph/actions/workflows/gh-pages.yml/badge.svg)](https://github.com/AlessioZanga/Telegraph/actions/workflows/gh-pages.yml)[![CodeFactor](https://www.codefactor.io/repository/github/alessiozanga/telegraph/badge?s=8eebf77a57fce4b466f8eaa7fd485e0a3e6ed269)](https://www.codefactor.io/repository/github/alessiozanga/telegraph)  
 
 A Graph Theory library
 
