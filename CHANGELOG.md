@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Added initial Graph interface.
+- Added initial Graph abstraction with labels and attributes support.
+- Added Boost Bimaps as bidirectional mapping utility.
+- Added Eigen submodule as matrix utility.
+- Added Doxygen documentation with themes.
 
 ### Changed
 
