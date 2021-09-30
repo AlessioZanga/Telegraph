@@ -14,11 +14,6 @@ jobs:
           submodules: recursive
       - name: Build Doxygen documentation
         uses: mattnotmitt/doxygen-action@v1.3.1
-        with:
-          enable-latex: true
-      - name: Patch Jekyll
-        run: cd docs/html
-          && touch .nojekyll
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
