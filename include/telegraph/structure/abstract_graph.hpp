@@ -110,6 +110,14 @@ class AbstractGraph : public IGraph {
      */
 
     /**
+     * @brief Get the vertex id.
+     *
+     * @param X Given vertex label.
+     * @return VID The vertex id.
+     */
+    inline VID get_vid(const VLB &X) const;
+
+    /**
      * @brief The vertices of a graph.
      *
      * @return VLBs Vertex set of the graph.
@@ -126,7 +134,7 @@ class AbstractGraph : public IGraph {
     inline bool has_label(const VID &X) const;
 
     /**
-     * @brief Get the vertex label given its id.
+     * @brief Get the vertex label.
      *
      * @param X Given vertex id.
      * @return VLB The vertex label.
@@ -134,7 +142,7 @@ class AbstractGraph : public IGraph {
     inline VLB get_label(const VID &X) const;
 
     /**
-     * @brief Set the vertex label given its id.
+     * @brief Set the vertex label.
      *
      * @param X Given vertex id.
      * @param label Given vertex label.
@@ -150,11 +158,18 @@ class AbstractGraph : public IGraph {
     inline void set_label(const VLB &X, const VLB &label);
 
     /**
-     * @brief Delete the vertex label given its id.
+     * @brief Delete the vertex label.
      *
      * @param X Given vertex id.
      */
     inline void del_label(const VID &X);
+
+    /**
+     * @brief Delete the vertex label.
+     *
+     * @param X Given vertex label.
+     */
+    inline void del_label(const VLB &X);
 
     /**
      * @brief Check if a vertex has an attribute given its key.
@@ -249,8 +264,9 @@ class AbstractGraph : public IGraph {
      * @brief Add a vertex label to the graph.
      *
      * @param X Given vertex label.
+     * @return VID Added vertex id.
      */
-    inline void add_vertex(const VLB &X);
+    inline VID add_vertex(const VLB &X);
 
     /**
      * @brief Delete a vertex label from the graph.
@@ -282,6 +298,14 @@ class AbstractGraph : public IGraph {
     /** \addtogroup edges
      *  @{
      */
+
+    /**
+     * @brief Get the edge id.
+     *
+     * @param X Given edge label.
+     * @return EID The edge id.
+     */
+    inline EID get_eid(const ELB &X) const;
 
     /**
      * @brief The edges of a graph.
@@ -385,6 +409,13 @@ class AbstractGraph : public IGraph {
      * @param X Given edge id.
      */
     inline void del_label(const EID &X);
+
+    /**
+     * @brief Delete the edge label.
+     *
+     * @param X Given edge label.
+     */
+    inline void del_label(const ELB &X);
 
     /**
      * @brief Delete the edge label.
