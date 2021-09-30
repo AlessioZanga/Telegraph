@@ -1,0 +1,28 @@
+var class_i_graph =
+[
+    [ "~IGraph", "class_i_graph.html#a97105e33bdfaca4f6bdc1777870ff941", null ],
+    [ "adjacency_list", "class_i_graph.html#a483202a13a78af979034f62ffb337988", null ],
+    [ "adjacency_matrix", "class_i_graph.html#a878f36afab45d503aba138c59fbff98b", null ],
+    [ "sparse_adjacency_matrix", "class_i_graph.html#a548c563db83fd36e2c79e28b56165d31", null ],
+    [ "order", "class_i_graph.html#ab0021c1351199d80e3ceeb68cd480e7e", null ],
+    [ "size", "class_i_graph.html#a0cc8609c091f500bfd81bc36d96d4d28", null ],
+    [ "is_null", "class_i_graph.html#a2202201324f23fc39e517b1d7c31ea36", null ],
+    [ "is_trivial", "class_i_graph.html#afea22fe95b4c1a00b9295f573fe07da9", null ],
+    [ "is_complete", "class_i_graph.html#ac589eb8a09b0828b3463a1f974c0cb28", null ],
+    [ "is_regular", "class_i_graph.html#a670d6779030766fda0ca3fffcbe58693", null ],
+    [ "vertices", "group__vertices.html#gaec2f3215312495b8711b10ba63f07487", null ],
+    [ "has_vertex", "group__vertices.html#ga1d008920f6f2d58a5718c16a77fdfd6c", null ],
+    [ "add_vertex", "group__vertices.html#ga7acd226e1357dd415ff87b1dc21316ae", null ],
+    [ "add_vertex", "group__vertices.html#gaf2e39bc8f442d1b425c697734c9b45c6", null ],
+    [ "del_vertex", "group__vertices.html#ga277423ffc7a3cfae65caedba24545e27", null ],
+    [ "adjacent", "group__vertices.html#gaeec526a17d8ff81913dc066505f28300", null ],
+    [ "degree", "group__vertices.html#gadfd78d43ef00825f8483c7cd7bf86894", null ],
+    [ "edges", "group__edges.html#ga0d1565fa0e94155e5c4f63c9b0ebd3b9", null ],
+    [ "has_edge", "group__edges.html#ga8e887fc50bfcba65d29689dc6313a9a0", null ],
+    [ "add_edge", "group__edges.html#ga40f479fcb45eed980697a9d5c3be8616", null ],
+    [ "del_edge", "group__edges.html#gacda600d4365bbd93fb4063d9e59a6413", null ],
+    [ "hash", "class_i_graph.html#a3a1ef9cf0815ff6ea0e66d8877ade88c", null ],
+    [ "print", "class_i_graph.html#a736887c24504fff816d2ba870cb34e17", null ],
+    [ "std::hash< IGraph >", "class_i_graph.html#a2b8d9b0cdd23e8de1d9617fbf7a16b00", null ],
+    [ "operator<<", "class_i_graph.html#a6dab171bdfb98ed67d90e7337d8d1a4e", null ]
+];
