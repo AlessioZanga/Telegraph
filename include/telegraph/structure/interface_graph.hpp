@@ -25,14 +25,14 @@ using SparseAdjacencyMatrix = Eigen::SparseMatrix<int8_t, Eigen::RowMajor>;
 class IGraph {
    public:
     //! Destroy the IGraph object.
-    inline virtual ~IGraph(){};
+    inline virtual ~IGraph();
 
     /**
      * @brief Output stream operator.
      *
      * @param out Output stream reference.
      * @param G Given graph reference.
-     * @return std::ostream& Modified output stream reference.
+     * @return std::ostream& Output stream reference.
      */
     friend std::ostream &operator<<(std::ostream &out, const IGraph &G);
 
@@ -80,7 +80,7 @@ class IGraph {
      * @return true If the graph is null,
      * @return false Otherwise.
      */
-    inline virtual bool is_null() const = 0;
+    inline virtual bool is_null() const;
 
     /**
      * @brief A graph is trivial if it has one vertex and no edges.
@@ -88,7 +88,7 @@ class IGraph {
      * @return true If the graph is trivial,
      * @return false Otherwise.
      */
-    inline virtual bool is_trivial() const = 0;
+    inline virtual bool is_trivial() const;
 
     /**
      * @brief A graph is complete if every vertex is connected to all the others.
@@ -155,28 +155,25 @@ class IGraph {
     /**
      * @brief Whether an edge exists or not.
      *
-     * @param X First edge vertex id.
-     * @param Y Second edge vertex id.
+     * @param X Given edge id.
      * @return true If the edge exists,
      * @return false Otherwise.
      */
-    inline virtual bool has_edge(const VID &X, const VID &Y) const = 0;
+    inline virtual bool has_edge(const EID &X) const = 0;
 
     /**
      * @brief Add an edge to the graph.
      *
-     * @param X First edge vertex id.
-     * @param Y Second edge vertex id.
+     * @param X Given edge id.
      */
-    inline virtual void add_edge(const VID &X, const VID &Y) = 0;
+    inline virtual void add_edge(const EID &X) = 0;
 
     /**
      * @brief Delete an edge from the graph.
      *
-     * @param X First edge vertex id.
-     * @param Y Second edge vertex id.
+     * @param X Given edge id.
      */
-    inline virtual void del_edge(const VID &X, const VID &Y) = 0;
+    inline virtual void del_edge(const EID &X) = 0;
 
     /** @}*/
 
@@ -195,19 +192,3 @@ class IGraph {
      */
     virtual void print(std::ostream &out) const = 0;
 };
-
-//! Output stream operator adapter.
-std::ostream &operator<<(std::ostream &out, const IGraph &G) {
-    G.print(out);
-    return out;
-}
-
-namespace std {
-
-template <>
-struct hash<IGraph> {
-    //! Hash function adapter.
-    size_t operator()(const IGraph &G) const { return G.hash(); }
-};
-
-};  // namespace std

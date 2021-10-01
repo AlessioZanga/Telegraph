@@ -3,7 +3,7 @@
 #include <any>
 #include <boost/bimap.hpp>
 
-#include "interface_graph.hpp"
+#include "interface_graph.ipp"
 
 //! Graph label.
 using GLB = std::string;
@@ -252,28 +252,35 @@ class AbstractGraph : public IGraph {
     inline void del_attr(const VLB &X, const std::string &key);
 
     /**
-     * @brief Whether a vertex label exists or not.
+     * @brief Whether a vertex exists or not.
      *
      * @param X Given vertex label.
      * @return true If the vertex label exists,
      * @return false Otherwise.
      */
-    inline bool has_vertex(const VLB &X) const;
+    inline virtual bool has_vertex(const VLB &X) const;
 
     /**
-     * @brief Add a vertex label to the graph.
+     * @brief Add a vertex to the graph.
      *
      * @param X Given vertex label.
      * @return VID Added vertex id.
      */
-    inline VID add_vertex(const VLB &X);
+    inline virtual VID add_vertex(const VLB &label);
 
     /**
-     * @brief Delete a vertex label from the graph.
+     * @brief Delete a vertex from the graph.
+     *
+     * @param X Given vertex id.
+     */
+    inline virtual void del_vertex(const VID &X);
+
+    /**
+     * @brief Delete a vertex from the graph.
      *
      * @param X Given vertex label.
      */
-    inline void del_vertex(const VLB &X);
+    inline virtual void del_vertex(const VLB &X);
 
     /** @}*/
 
@@ -590,7 +597,17 @@ class AbstractGraph : public IGraph {
      * @return true If the edge exists,
      * @return false Otherwise.
      */
-    inline bool has_edge(const ELB &X) const;
+    inline virtual bool has_edge(const ELB &X) const;
+
+    /**
+     * @brief Whether an edge exists or not.
+     *
+     * @param X First edge vertex id.
+     * @param Y Second edge vertex id.
+     * @return true If the edge exists,
+     * @return false Otherwise.
+     */
+    inline virtual bool has_edge(const VID &X, const VID &Y) const;
 
     /**
      * @brief Whether an edge exists or not.
@@ -600,7 +617,15 @@ class AbstractGraph : public IGraph {
      * @return true If the edge exists,
      * @return false Otherwise.
      */
-    inline bool has_edge(const VLB &X, const VLB &Y) const;
+    inline virtual bool has_edge(const VLB &X, const VLB &Y) const;
+
+    /**
+     * @brief Add an edge to the graph.
+     *
+     * @param X First edge vertex id.
+     * @param Y Second edge vertex id.
+     */
+    inline virtual void add_edge(const VID &X, const VID &Y);
 
     /**
      * @brief Add an edge to the graph.
@@ -608,7 +633,22 @@ class AbstractGraph : public IGraph {
      * @param X First edge vertex label.
      * @param Y Second edge vertex label.
      */
-    inline void add_edge(const VLB &X, const VLB &Y);
+    inline virtual void add_edge(const VLB &X, const VLB &Y);
+
+    /**
+     * @brief Delete an edge from the graph.
+     *
+     * @param X Given edge id.
+     */
+    inline virtual void del_edge(const EID &X);
+
+    /**
+     * @brief Delete an edge from the graph.
+     *
+     * @param X First edge vertex id.
+     * @param Y Second edge vertex id.
+     */
+    inline virtual void del_edge(const VID &X, const VID &Y);
 
     /**
      * @brief Delete an edge from the graph.
@@ -616,7 +656,7 @@ class AbstractGraph : public IGraph {
      * @param X First edge vertex label.
      * @param Y Second edge vertex label.
      */
-    inline void del_edge(const VLB &X, const VLB &Y);
+    inline virtual void del_edge(const VLB &X, const VLB &Y);
 
     /** @}*/
 };
