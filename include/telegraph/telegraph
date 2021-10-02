@@ -1,0 +1,7 @@
+#pragma once
+
+namespace telegraph {
+#include "structure/abstract_graph.ipp"
+#include "structure/exceptions.hpp"
+#include "structure/interface_graph.ipp"
+};  // namespace telegraph
