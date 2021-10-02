@@ -1,0 +1,5 @@
+<map id="AbstractGraph::has_label" name="AbstractGraph::has_label">
+<area shape="rect" id="node1" title="Check if an edge has a label." alt="" coords="5,27,139,69"/>
+<area shape="rect" id="node2" href="$group__vertices.html#ga3f16205d21c003dc805fb75743b9b5a4" title="Get the vertex id." alt="" coords="187,5,341,32"/>
+<area shape="rect" id="node3" href="$class_abstract_graph.html#a75a239e2f8df4e8ad29e3f52f73a11a2" title="Check if the graph has a label." alt="" coords="197,57,331,98"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="AbstractGraph::del_attr" name="AbstractGraph::del_attr">
+<area shape="rect" id="node1" title="Delete the vertex attribute given its key." alt="" coords="5,5,160,32"/>
+<area shape="rect" id="node2" href="$class_abstract_graph.html#a710011eaad4820110cce74fab5e78db6" title="Check if the graph has an attribute given its key." alt="" coords="208,5,367,32"/>
+</map>

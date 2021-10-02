@@ -1,0 +1,6 @@
+<map id="AbstractGraph::has_label" name="AbstractGraph::has_label">
+<area shape="rect" id="node1" title="Check if the graph has a label." alt="" coords="365,39,499,80"/>
+<area shape="rect" id="node2" href="$class_abstract_graph.html#af81bbc733cc70a9979bbb46fb6bad84c" title="Get the graph label." alt="" coords="185,5,316,47"/>
+<area shape="rect" id="node4" href="$group__edges.html#ga855e646613c23abd470debff177cfd49" title="Check if an edge has a label." alt="" coords="184,71,317,112"/>
+<area shape="rect" id="node3" href="$group__edges.html#ga77c98626a1a9bfe626da99e2388579d0" title="Get the edge label." alt="" coords="5,5,136,47"/>
+</map>

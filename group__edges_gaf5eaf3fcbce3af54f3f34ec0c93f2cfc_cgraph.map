@@ -1,0 +1,5 @@
+<map id="AbstractGraph::del_label" name="AbstractGraph::del_label">
+<area shape="rect" id="node1" title="Delete the edge label." alt="" coords="5,35,135,76"/>
+<area shape="rect" id="node2" href="$class_abstract_graph.html#a61cf6d858b5a13dcbd9c64f6e333e942" title="Delete the graph label;." alt="" coords="195,5,325,47"/>
+<area shape="rect" id="node3" href="$group__vertices.html#ga3f16205d21c003dc805fb75743b9b5a4" title="Get the vertex id." alt="" coords="183,71,337,98"/>
+</map>

@@ -1,12 +1,13 @@
 <map id="include/telegraph/structure/abstract_graph.hpp" name="include/telegraph/structure/abstract_graph.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="46,5,221,47"/>
-<area shape="rect" id="node2" title=" " alt="" coords="8,95,51,121"/>
-<area shape="rect" id="node3" title=" " alt="" coords="75,95,192,121"/>
-<area shape="rect" id="node4" href="$interface__graph_8hpp.html" title=" " alt="" coords="217,95,351,121"/>
-<area shape="rect" id="node5" title=" " alt="" coords="5,169,96,196"/>
-<area shape="rect" id="node6" title=" " alt="" coords="120,169,181,196"/>
-<area shape="rect" id="node7" title=" " alt="" coords="205,169,277,196"/>
-<area shape="rect" id="node8" title=" " alt="" coords="302,169,349,196"/>
-<area shape="rect" id="node9" title=" " alt="" coords="373,169,413,196"/>
-<area shape="rect" id="node10" title=" " alt="" coords="438,169,490,196"/>
+<area shape="rect" id="node1" title=" " alt="" coords="47,5,222,47"/>
+<area shape="rect" id="node2" title=" " alt="" coords="9,95,52,121"/>
+<area shape="rect" id="node3" title=" " alt="" coords="76,95,193,121"/>
+<area shape="rect" id="node4" href="$interface__graph_8ipp.html" title=" " alt="" coords="217,95,348,121"/>
+<area shape="rect" id="node5" href="$interface__graph_8hpp.html" title=" " alt="" coords="215,169,350,196"/>
+<area shape="rect" id="node6" title=" " alt="" coords="5,244,96,271"/>
+<area shape="rect" id="node7" title=" " alt="" coords="120,244,181,271"/>
+<area shape="rect" id="node8" title=" " alt="" coords="205,244,277,271"/>
+<area shape="rect" id="node9" title=" " alt="" coords="302,244,349,271"/>
+<area shape="rect" id="node10" title=" " alt="" coords="373,244,413,271"/>
+<area shape="rect" id="node11" title=" " alt="" coords="438,244,490,271"/>
 </map>

@@ -1,0 +1,4 @@
+<map id="AbstractGraph::del_vertex" name="AbstractGraph::del_vertex">
+<area shape="rect" id="node1" title="Delete a vertex from the graph." alt="" coords="5,5,135,47"/>
+<area shape="rect" id="node2" href="$group__vertices.html#ga277423ffc7a3cfae65caedba24545e27" title="Delete a vertex id from the graph." alt="" coords="183,13,309,39"/>
+</map>

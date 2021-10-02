@@ -1,0 +1,4 @@
+<map id="IGraph::is_null" name="IGraph::is_null">
+<area shape="rect" id="node1" title="A graph is null if it has no vertices." alt="" coords="5,5,109,32"/>
+<area shape="rect" id="node2" href="$class_i_graph.html#ab0021c1351199d80e3ceeb68cd480e7e" title="The number of vertices of a graph is called its order." alt="" coords="157,5,253,32"/>
+</map>

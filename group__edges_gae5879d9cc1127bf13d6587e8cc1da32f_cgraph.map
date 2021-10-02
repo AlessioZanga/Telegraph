@@ -1,0 +1,4 @@
+<map id="AbstractGraph::get_attr" name="AbstractGraph::get_attr">
+<area shape="rect" id="node1" title="Get the edge attribute value given its key." alt="" coords="5,5,161,32"/>
+<area shape="rect" id="node2" href="$class_abstract_graph.html#a710011eaad4820110cce74fab5e78db6" title="Check if the graph has an attribute given its key." alt="" coords="209,5,368,32"/>
+</map>

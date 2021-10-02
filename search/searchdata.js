@@ -1,14 +1,15 @@
 var indexSectionsWithContent =
 {
-  0: "acdeghilopsv~",
-  1: "ahi",
+  0: "acdeghilnopstv~",
+  1: "ahin",
   2: "s",
-  3: "aci",
-  4: "adeghilopsv~",
+  3: "acei",
+  4: "adeghilnopstv~",
   5: "egv",
   6: "aegsv",
   7: "os",
-  8: "ev"
+  8: "din",
+  9: "ev"
 };
 
 var indexSectionNames =
@@ -21,7 +22,8 @@ var indexSectionNames =
   5: "variables",
   6: "typedefs",
   7: "related",
-  8: "groups"
+  8: "defines",
+  9: "groups"
 };
 
 var indexSectionLabels =
@@ -34,6 +36,7 @@ var indexSectionLabels =
   5: "Variables",
   6: "Typedefs",
   7: "Friends",
-  8: "Modules"
+  8: "Macros",
+  9: "Modules"
 };
 

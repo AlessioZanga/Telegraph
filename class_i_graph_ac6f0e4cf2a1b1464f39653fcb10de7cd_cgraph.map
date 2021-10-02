@@ -1,0 +1,5 @@
+<map id="IGraph::is_trivial" name="IGraph::is_trivial">
+<area shape="rect" id="node1" title="A graph is trivial if it has one vertex and no edges." alt="" coords="5,31,120,57"/>
+<area shape="rect" id="node2" href="$class_i_graph.html#ab0021c1351199d80e3ceeb68cd480e7e" title="The number of vertices of a graph is called its order." alt="" coords="168,5,264,32"/>
+<area shape="rect" id="node3" href="$class_i_graph.html#a0cc8609c091f500bfd81bc36d96d4d28" title="The number of edges of a graph is called its size." alt="" coords="171,56,261,83"/>
+</map>

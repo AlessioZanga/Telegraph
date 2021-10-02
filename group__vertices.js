@@ -1,7 +1,7 @@
 var group__vertices =
 [
     [ "get_vid", "group__vertices.html#ga3f16205d21c003dc805fb75743b9b5a4", null ],
-    [ "labels", "group__vertices.html#ga04116e4e3299ebdde260e65f7429c609", null ],
+    [ "labels", "group__vertices.html#gab7886092bf6449822b54923eff15b07e", null ],
     [ "has_label", "group__vertices.html#ga80a999673de49d3146f3d70cacf5b5c1", null ],
     [ "get_label", "group__vertices.html#gaf636b500b9572fc1ce412aad0c8b29f5", null ],
     [ "set_label", "group__vertices.html#ga92350995491b41f7bea6d0f62798ac95", null ],
@@ -17,15 +17,12 @@ var group__vertices =
     [ "del_attr", "group__vertices.html#ga7f3812edfb9932f10dad2384766539a8", null ],
     [ "del_attr", "group__vertices.html#ga24a738f4ff69adf8b4de67daeaa997a5", null ],
     [ "has_vertex", "group__vertices.html#ga55e441c0ab24121c77799419d54c92a3", null ],
-    [ "add_vertex", "group__vertices.html#gad6b3c9c51486b61c61e85c14a2ae0c6b", null ],
+    [ "add_vertex", "group__vertices.html#ga52c082db107cad2c56d75fa1506547c8", null ],
+    [ "del_vertex", "group__vertices.html#ga6f3e9c3f81d38420a46d01b58b03fa08", null ],
     [ "del_vertex", "group__vertices.html#ga1e97c0736bebc7ec54ec135e9fc22cf4", null ],
-    [ "adjacent", "group__vertices.html#gad3551eef478da211e85b83630a0630a1", null ],
-    [ "degree", "group__vertices.html#gad84c5ab573c25ea7c6571bb559fba9d0", null ],
     [ "vertices", "group__vertices.html#gaec2f3215312495b8711b10ba63f07487", null ],
     [ "has_vertex", "group__vertices.html#ga1d008920f6f2d58a5718c16a77fdfd6c", null ],
     [ "add_vertex", "group__vertices.html#ga7acd226e1357dd415ff87b1dc21316ae", null ],
     [ "add_vertex", "group__vertices.html#gaf2e39bc8f442d1b425c697734c9b45c6", null ],
-    [ "del_vertex", "group__vertices.html#ga277423ffc7a3cfae65caedba24545e27", null ],
-    [ "adjacent", "group__vertices.html#gaeec526a17d8ff81913dc066505f28300", null ],
-    [ "degree", "group__vertices.html#gadfd78d43ef00825f8483c7cd7bf86894", null ]
+    [ "del_vertex", "group__vertices.html#ga277423ffc7a3cfae65caedba24545e27", null ]
 ];

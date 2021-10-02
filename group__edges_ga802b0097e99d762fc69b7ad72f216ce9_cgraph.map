@@ -1,0 +1,5 @@
+<map id="AbstractGraph::set_label" name="AbstractGraph::set_label">
+<area shape="rect" id="node1" title="Set the edge label." alt="" coords="5,27,136,69"/>
+<area shape="rect" id="node2" href="$group__vertices.html#ga3f16205d21c003dc805fb75743b9b5a4" title="Get the vertex id." alt="" coords="184,5,339,32"/>
+<area shape="rect" id="node3" href="$class_abstract_graph.html#a6e84967a418fc92211c91cc78aa0b415" title="Set the graph label." alt="" coords="196,57,327,98"/>
+</map>

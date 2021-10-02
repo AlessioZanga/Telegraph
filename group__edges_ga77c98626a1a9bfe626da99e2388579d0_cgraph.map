@@ -1,0 +1,5 @@
+<map id="AbstractGraph::get_label" name="AbstractGraph::get_label">
+<area shape="rect" id="node1" title="Get the edge label." alt="" coords="5,5,136,47"/>
+<area shape="rect" id="node2" href="$class_abstract_graph.html#af81bbc733cc70a9979bbb46fb6bad84c" title="Get the graph label." alt="" coords="184,5,315,47"/>
+<area shape="rect" id="node3" href="$class_abstract_graph.html#a75a239e2f8df4e8ad29e3f52f73a11a2" title="Check if the graph has a label." alt="" coords="363,5,496,47"/>
+</map>
