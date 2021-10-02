@@ -1,5 +1,5 @@
 # Telegraph
-[![docs](https://github.com/AlessioZanga/Telegraph/actions/workflows/gh-pages.yml/badge.svg)](https://github.com/AlessioZanga/Telegraph/actions/workflows/gh-pages.yml)[![CodeFactor](https://www.codefactor.io/repository/github/alessiozanga/telegraph/badge?s=8eebf77a57fce4b466f8eaa7fd485e0a3e6ed269)](https://www.codefactor.io/repository/github/alessiozanga/telegraph)  
+[![docs](https://github.com/AlessioZanga/Telegraph/actions/workflows/gh-pages.yml/badge.svg)](https://github.com/AlessioZanga/Telegraph/actions/workflows/gh-pages.yml)[![Codacy Badge](https://app.codacy.com/project/badge/Grade/0a4e01f4397e42e9ab5db6267f42f580)](https://www.codacy.com/gh/AlessioZanga/Telegraph/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AlessioZanga/Telegraph&amp;utm_campaign=Badge_Grade)
 
 A Graph Theory library
 
