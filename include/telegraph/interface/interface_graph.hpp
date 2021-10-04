@@ -63,16 +63,16 @@ class IGraph {
     /**
      * @brief The number of vertices of a graph is called its order.
      *
-     * @return size_t Number of vertices of the graph.
+     * @return std::size_t Number of vertices of the graph.
      */
-    inline virtual size_t order() const = 0;
+    inline virtual std::size_t order() const = 0;
 
     /**
      * @brief The number of edges of a graph is called its size.
      *
-     * @return size_t Number of edges of the graph.
+     * @return std::size_t Number of edges of the graph.
      */
-    inline virtual size_t size() const = 0;
+    inline virtual std::size_t size() const = 0;
 
     /**
      * @brief A graph is null if it has no vertices.
@@ -96,7 +96,7 @@ class IGraph {
      * @return true If the graph is complete,
      * @return false Otherwise.
      */
-    inline virtual bool is_complete() const = 0;
+    inline virtual bool is_complete() const;
 
     /** \addtogroup vertices
      *  @{
@@ -177,13 +177,13 @@ class IGraph {
 
     /** @}*/
 
-   private:
+   protected:
     /**
      * @brief Hash function of a graph.
      *
-     * @return size_t Hash of a graph.
+     * @return std::size_t Hash of a graph.
      */
-    inline virtual size_t hash() const = 0;
+    inline virtual std::size_t hash() const = 0;
 
     /**
      * @brief Print utility function.

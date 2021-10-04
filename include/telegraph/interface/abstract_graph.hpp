@@ -3,7 +3,7 @@
 #include <any>
 #include <boost/bimap.hpp>
 
-#include "interface_graph.ipp"
+#include <telegraph/interface/interface_graph.ipp>
 
 //! Graph label.
 using GLB = std::string;
@@ -17,7 +17,7 @@ using VLBs = std::set<VLB>;
 using ELBs = std::set<ELB>;
 
 class AbstractGraph : public IGraph {
-   private:
+   protected:
     //! Graph label, aka its name.
     GLB glb;
     //! Bidirectional mapping for vertex ids and labels.
