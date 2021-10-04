@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added Boost Bimaps as bidirectional mapping utility.
 - Added Eigen submodule as matrix utility.
 - Added Doxygen documentation with themes.
+- Added Codacy code coverage & code quality.
 
 ### Changed
 

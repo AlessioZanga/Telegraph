@@ -1,5 +1,8 @@
 # Telegraph
-[![docs](https://github.com/AlessioZanga/Telegraph/actions/workflows/gh-pages.yml/badge.svg)](https://github.com/AlessioZanga/Telegraph/actions/workflows/gh-pages.yml)[![Codacy Badge](https://app.codacy.com/project/badge/Grade/0a4e01f4397e42e9ab5db6267f42f580)](https://www.codacy.com/gh/AlessioZanga/Telegraph/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AlessioZanga/Telegraph&amp;utm_campaign=Badge_Grade)
+[![build](https://github.com/AlessioZanga/Telegraph/actions/workflows/build.yml/badge.svg)](https://github.com/AlessioZanga/Telegraph/actions/workflows/build.yml) 
+[![docs](https://github.com/AlessioZanga/Telegraph/actions/workflows/gh-pages.yml/badge.svg)](https://github.com/AlessioZanga/Telegraph/actions/workflows/gh-pages.yml) 
+[![Codacy Badge Coverage](https://app.codacy.com/project/badge/Coverage/0a4e01f4397e42e9ab5db6267f42f580)](https://www.codacy.com/gh/AlessioZanga/Telegraph/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AlessioZanga/Telegraph&amp;utm_campaign=Badge_Coverage) 
+[![Codacy Badge Quality](https://app.codacy.com/project/badge/Grade/0a4e01f4397e42e9ab5db6267f42f580)](https://www.codacy.com/gh/AlessioZanga/Telegraph/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AlessioZanga/Telegraph&amp;utm_campaign=Badge_Grade)
 
 A Graph Theory library
 
