@@ -1,12 +1,9 @@
 #pragma once
 
-namespace telegraph {
-
 /** INTERFACES */
 #include "interface/interface_graph.ipp"
 #include "interface/abstract_graph.ipp"
 #include "interface/exceptions.hpp"
-#include "structure/abstract_graph.ipp"
-#include "structure/exceptions.hpp"
-#include "structure/interface_graph.ipp"
-};  // namespace telegraph
+
+/** CONTAINERS */
+#include "container/dense_graph.ipp"

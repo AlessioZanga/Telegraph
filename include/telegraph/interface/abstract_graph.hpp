@@ -3,14 +3,16 @@
 #include <any>
 #include <boost/bimap.hpp>
 
-#include <telegraph/interface/interface_graph.ipp>
+#include "interface_graph.ipp"
 
 //! Graph label.
 using GLB = std::string;
 //! Vertex label.
 using VLB = std::string;
 //! Edge label.
-using ELB = std::string;
+class ELB : public std::string {
+    explicit ELB(const std::string &&other) : std::string(other) {}
+};
 //! Vertex labels set.
 using VLBs = std::set<VLB>;
 //! Edge labels set.
@@ -110,6 +112,36 @@ class AbstractGraph : public IGraph {
      */
 
     /**
+     * @brief Whether a vertex id exists or not.
+     *
+     * @param X Given vertex id.
+     * @return true If the vertex id exists,
+     * @return false Otherwise.
+     */
+    inline virtual bool has_vertex(const VID &X) const = 0;
+
+    /**
+     * @brief Add a vertex to the graph.
+     *
+     * @return VID The vertex id.
+     */
+    inline virtual VID add_vertex() = 0;
+
+    /**
+     * @brief Add a vertex id to the graph.
+     *
+     * @param X Given vertex id.
+     */
+    inline virtual void add_vertex(const VID &X) = 0;
+
+    /**
+     * @brief Delete a vertex id from the graph.
+     *
+     * @param X Given vertex id.
+     */
+    inline virtual void del_vertex(const VID &X) = 0;
+
+    /**
      * @brief Get the vertex id.
      *
      * @param X Given vertex label.
@@ -122,7 +154,7 @@ class AbstractGraph : public IGraph {
      *
      * @return VLBs Vertex set of the graph.
      */
-    inline VLBs labels() const;
+    inline VLBs get_vlbs() const;
 
     /**
      * @brief Check if a vertex has a label.
@@ -271,13 +303,6 @@ class AbstractGraph : public IGraph {
     /**
      * @brief Delete a vertex from the graph.
      *
-     * @param X Given vertex id.
-     */
-    inline virtual void del_vertex(const VID &X);
-
-    /**
-     * @brief Delete a vertex from the graph.
-     *
      * @param X Given vertex label.
      */
     inline virtual void del_vertex(const VLB &X);
@@ -287,6 +312,29 @@ class AbstractGraph : public IGraph {
     /** \addtogroup edges
      *  @{
      */
+
+    /**
+     * @brief Whether an edge exists or not.
+     *
+     * @param X Given edge id.
+     * @return true If the edge exists,
+     * @return false Otherwise.
+     */
+    inline virtual bool has_edge(const EID &X) const = 0;
+
+    /**
+     * @brief Add an edge to the graph.
+     *
+     * @param X Given edge id.
+     */
+    inline virtual void add_edge(const EID &X) = 0;
+
+    /**
+     * @brief Delete an edge from the graph.
+     *
+     * @param X Given edge id.
+     */
+    inline virtual void del_edge(const EID &X) = 0;
 
     /**
      * @brief Get the edge id.
@@ -301,7 +349,7 @@ class AbstractGraph : public IGraph {
      *
      * @return ELBs Edge set of the graph.
      */
-    inline ELBs labels() const;
+    inline ELBs get_elbs() const;
 
     /**
      * @brief Check if an edge has a label.
@@ -638,9 +686,9 @@ class AbstractGraph : public IGraph {
     /**
      * @brief Delete an edge from the graph.
      *
-     * @param X Given edge id.
+     * @param X Given edge label.
      */
-    inline virtual void del_edge(const EID &X);
+    inline virtual void del_edge(const ELB &X);
 
     /**
      * @brief Delete an edge from the graph.

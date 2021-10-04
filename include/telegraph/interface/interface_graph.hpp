@@ -3,9 +3,12 @@
 #include <Eigen/Eigen>
 #include <cstdint>
 #include <iostream>
+#include <iterator>
 #include <map>
 #include <set>
 #include <utility>
+
+#define require_iter_value_type(I, T) typename std::enable_if<std::is_same<typename std::iterator_traits<I>::value_type, T>::value>::type
 
 //! Vertex identifier.
 using VID = uintmax_t;
