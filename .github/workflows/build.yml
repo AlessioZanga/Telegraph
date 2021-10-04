@@ -20,3 +20,5 @@ jobs:
         run: |
           lcov -c -d . -o coverage --include "*/include/telegraph/*"
           bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r coverage
+        env:
+          CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
