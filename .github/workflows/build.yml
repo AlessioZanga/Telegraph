@@ -18,5 +18,5 @@ jobs:
           cmake -DBUILD_TESTS=ON .. && make && make test
       - name: Coverage
         run: |
-          lcov -c -d . -o coverage --include *include/telegraph/*
+          lcov -c -d . -o coverage --include "*/include/telegraph/*"
           bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r coverage
