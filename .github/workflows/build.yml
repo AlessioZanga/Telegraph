@@ -1,0 +1,22 @@
+name: build
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: Test
+        run: |
+          apt-get install -y lcov
+          mkdir build && cd build
+          cmake -DBUILD_TESTS=ON .. && make && make test
+      - name: Coverage
+        run: |
+          lcov -c -d . -o coverage --include *include/telegraph/*
+          bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r coverage
