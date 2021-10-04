@@ -24,4 +24,4 @@ struct hash<IGraph> {
     std::size_t operator()(const IGraph &G) const { return G.hash(); }
 };
 
-};  // namespace std
+}  // namespace std

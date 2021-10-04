@@ -15,7 +15,7 @@ class DenseGraph : public AbstractGraph {
 
     virtual ~DenseGraph();
 
-    DenseGraph(std::size_t n);
+    explicit DenseGraph(std::size_t n);
 
     /**
      * @brief Construct a new Dense Graph object from VIDs iterators.
@@ -53,11 +53,11 @@ class DenseGraph : public AbstractGraph {
     template <typename I, require_iter_value_type(I, EID)>
     DenseGraph(const I &begin, const I &end);
 
-    DenseGraph(const AdjacencyList &other);
+    explicit DenseGraph(const AdjacencyList &other);
 
-    DenseGraph(const AdjacencyMatrix &other);
+    explicit DenseGraph(const AdjacencyMatrix &other);
 
-    DenseGraph(const SparseAdjacencyMatrix &other);
+    explicit DenseGraph(const SparseAdjacencyMatrix &other);
 
     inline virtual AdjacencyList adjacency_list() const override;
 

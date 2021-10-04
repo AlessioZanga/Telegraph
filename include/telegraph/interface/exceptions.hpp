@@ -11,7 +11,7 @@ inline string to_string(const string &__val) { return __val; }
 class NOT_DEFINED : public std::invalid_argument {
    public:
     template <typename T>
-    NOT_DEFINED(const T &X) : std::invalid_argument("Vertex " + std::to_string(X) + " is not defined.") {}
+    explicit NOT_DEFINED(const T &X) : std::invalid_argument("Vertex " + std::to_string(X) + " is not defined.") {}
 
     template <typename T, typename U>
     NOT_DEFINED(const T &X, const U &Y)
@@ -28,7 +28,7 @@ class NO_LABEL : public std::invalid_argument {
     NO_LABEL() : std::invalid_argument("Graph label is not defined.") {}
 
     template <typename T>
-    NO_LABEL(const T &X) : std::invalid_argument("Vertex " + std::to_string(X) + " label is not defined.") {}
+    explicit NO_LABEL(const T &X) : std::invalid_argument("Vertex " + std::to_string(X) + " label is not defined.") {}
 
     template <typename T, typename U>
     NO_LABEL(const T &X, const U &Y)
