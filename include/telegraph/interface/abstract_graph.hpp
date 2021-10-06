@@ -2,6 +2,8 @@
 
 #include <any>
 #include <boost/bimap.hpp>
+#include <boost/bimap/support/lambda.hpp>
+#include <boost/container_hash/hash.hpp>
 
 #include "interface_graph.ipp"
 
