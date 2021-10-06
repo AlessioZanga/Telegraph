@@ -31,7 +31,7 @@ class DenseGraph : public AbstractGraph {
      * @param begin First iterator.
      * @param end Last iterator.
      */
-    template <typename I, require_iter_value_type(I, VID)>
+    template <typename I, require_iter_value_type(I, VID) = 0>
     DenseGraph(const I &begin, const I &end);
 
     /**
@@ -50,7 +50,7 @@ class DenseGraph : public AbstractGraph {
      * @param begin First iterator.
      * @param end Last iterator.
      */
-    template <typename I, require_iter_value_type(I, EID)>
+    template <typename I, require_iter_value_type(I, EID) = 0>
     DenseGraph(const I &begin, const I &end);
 
     explicit DenseGraph(const AdjacencyList &other);
