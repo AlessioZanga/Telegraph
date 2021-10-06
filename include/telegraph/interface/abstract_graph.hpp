@@ -152,13 +152,6 @@ class AbstractGraph : public IGraph {
     inline VID get_vid(const VLB &X) const;
 
     /**
-     * @brief The vertices of a graph.
-     *
-     * @return VLBs Vertex set of the graph.
-     */
-    inline VLBs get_vlbs() const;
-
-    /**
      * @brief Check if a vertex has a label.
      *
      * @param X Given vertex id.
@@ -345,13 +338,6 @@ class AbstractGraph : public IGraph {
      * @return EID The edge id.
      */
     inline EID get_eid(const ELB &X) const;
-
-    /**
-     * @brief The edges of a graph.
-     *
-     * @return ELBs Edge set of the graph.
-     */
-    inline ELBs get_elbs() const;
 
     /**
      * @brief Check if an edge has a label.

@@ -69,8 +69,6 @@ class DenseGraph : public AbstractGraph {
 
     inline virtual std::size_t size() const override;
 
-    inline virtual VIDs vertices() const override;
-
     inline virtual bool has_vertex(const VID &X) const override;
 
     inline virtual VID add_vertex() override;
@@ -78,8 +76,6 @@ class DenseGraph : public AbstractGraph {
     inline virtual void add_vertex(const VID &X) override;
 
     inline virtual void del_vertex(const VID &X) override;
-
-    inline virtual EIDs edges() const override;
 
     inline virtual bool has_edge(const EID &X) const override;
 

@@ -106,13 +106,6 @@ class IGraph {
      */
 
     /**
-     * @brief The vertices of a graph.
-     *
-     * @return VIDs Vertex set of the graph.
-     */
-    inline virtual VIDs vertices() const = 0;
-
-    /**
      * @brief Whether a vertex id exists or not.
      *
      * @param X Given vertex id.
@@ -147,13 +140,6 @@ class IGraph {
     /** \addtogroup edges
      *  @{
      */
-
-    /**
-     * @brief The edges of a graph.
-     *
-     * @return EIDs Edge set of the graph.
-     */
-    inline virtual EIDs edges() const = 0;
 
     /**
      * @brief Whether an edge exists or not.
