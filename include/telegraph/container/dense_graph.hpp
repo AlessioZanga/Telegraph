@@ -59,32 +59,32 @@ class DenseGraph : public AbstractGraph {
 
     explicit DenseGraph(const SparseAdjacencyMatrix &other);
 
-    inline virtual operator AdjacencyList() const override;
+    inline virtual operator AdjacencyList() const;
 
-    inline virtual operator AdjacencyMatrix() const override;
+    inline virtual operator AdjacencyMatrix() const;
 
-    inline virtual operator SparseAdjacencyMatrix() const override;
+    inline virtual operator SparseAdjacencyMatrix() const;
 
-    inline virtual std::size_t order() const override;
+    inline virtual std::size_t order() const;
 
-    inline virtual std::size_t size() const override;
+    inline virtual std::size_t size() const;
 
-    inline virtual bool has_vertex(const VID &X) const override;
+    inline virtual bool has_vertex(const VID &X) const;
 
-    inline virtual VID add_vertex() override;
+    inline virtual VID add_vertex();
 
-    inline virtual void add_vertex(const VID &X) override;
+    inline virtual void add_vertex(const VID &X);
 
-    inline virtual void del_vertex(const VID &X) override;
+    inline virtual void del_vertex(const VID &X);
 
-    inline virtual bool has_edge(const EID &X) const override;
+    inline virtual bool has_edge(const EID &X) const;
 
-    inline virtual void add_edge(const EID &X) override;
+    inline virtual void add_edge(const EID &X);
 
-    inline virtual void del_edge(const EID &X) override;
+    inline virtual void del_edge(const EID &X);
 
    private:
-    inline virtual std::size_t hash() const override;
+    inline virtual std::size_t hash() const;
 
-    virtual void print(std::ostream &out) const override;
+    virtual void print(std::ostream &out) const;
 };
