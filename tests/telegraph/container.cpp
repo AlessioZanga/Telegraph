@@ -5,6 +5,8 @@
 #include <numeric>
 #include <telegraph/telegraph>
 
+#define MAX 256
+
 // Define fixture class template
 template <typename T>
 class ContainerTest : public ::testing::Test {};
@@ -40,12 +42,12 @@ TYPED_TEST(ContainerTest, SizedConstructor) {
     ASSERT_EQ(H.order(), 1);
 
     std::srand(std::time(0));           // Use current time as seed.
-    std::size_t n = std::rand() % 100;  // Generate random number.
+    std::size_t n = std::rand() % MAX;  // Generate random number.
     TypeParam J(n);
     ASSERT_EQ(J.order(), n);
 
-    TypeParam K(256);  // Very high bound.
-    ASSERT_EQ(K.order(), 256);
+    TypeParam K(MAX);  // Very high bound.
+    ASSERT_EQ(K.order(), MAX);
 }
 
 TYPED_TEST(ContainerTest, VertexIteratorConstructor) {
@@ -65,12 +67,12 @@ TYPED_TEST(ContainerTest, VertexIteratorConstructor) {
     TypeParam K(Y.begin(), Y.end());
     ASSERT_EQ(K.order(), Y.size());
 
-    std::vector<VID> Z(1e3);  // Very long sequence.
+    std::vector<VID> Z(MAX);  // Very long sequence.
     std::iota(Z.begin(), Z.end(), 0);
     TypeParam L(Z.begin(), Z.end());
     ASSERT_EQ(L.order(), Z.size());
 
-    std::list<VID> N(1e3);  // Very long sequence with non-contiguous memory.
+    std::list<VID> N(MAX);  // Very long sequence with non-contiguous memory.
     std::iota(N.begin(), N.end(), 0);
     TypeParam M(N.begin(), N.end());
     ASSERT_EQ(M.order(), N.size());
@@ -94,7 +96,7 @@ TYPED_TEST(ContainerTest, EdgeIteratorConstructor) {
     ASSERT_EQ(K.size(), Y.size());
 
     std::vector<EID> Z;  // Very long sequence.
-    for (VID i = 0; i < 100; i++) {
+    for (VID i = 0; i < MAX; i++) {
         for (VID j = 0; j < i; j++) {
             Z.push_back({i, j});
         }
@@ -103,7 +105,7 @@ TYPED_TEST(ContainerTest, EdgeIteratorConstructor) {
     ASSERT_EQ(L.size(), Z.size());
 
     std::list<EID> N;  // Very long sequence with non-contiguous memory.
-    for (VID i = 0; i < 100; i++) {
+    for (VID i = 0; i < MAX; i++) {
         for (VID j = 0; j < i; j++) {
             N.push_back({i, j});
         }
@@ -113,50 +115,131 @@ TYPED_TEST(ContainerTest, EdgeIteratorConstructor) {
 }
 
 TYPED_TEST(ContainerTest, AdjacencyListConstructor) {
-    AdjacencyList A = {};  // Empty sequence.
+    AdjacencyList A;  // Empty sequence.
     TypeParam G(A);
-    ASSERT_EQ(G.order(), A.size());
+    ASSERT_EQ(G.order(), 0);
+    ASSERT_EQ(G.size(), 0);
 
     AdjacencyList B = {{0, {}}};  // Single sequence.
     TypeParam H(B);
     ASSERT_EQ(H.order(), 1);
     ASSERT_EQ(H.size(), 0);
 
-    AdjacencyList C = {
-        {0, {0, 1, 3}},
-        {1, {1, 2}},
-        {2, {4}},
-        {3, {}},
-        {4, {0, 2, 3, 4}}
-    };  // Multiple sequence.
+    AdjacencyList C = {{0, {0, 1, 3}}, {1, {1, 2}}, {2, {4}}, {3, {}}, {4, {0, 2, 3, 4}}};  // Multiple sequence.
     TypeParam J(C);
     ASSERT_EQ(J.order(), 5);
     ASSERT_EQ(J.size(), 10);
 
-    AdjacencyList D = {
-        {0, {0, 2}},
-        {2, {0}}
-    };  // Invalid AdjacencyList (1)
+    AdjacencyList D = {{0, {0, 2}}, {2, {0}}};  // Invalid input (1)
     ASSERT_ANY_THROW({ TypeParam K(D); });
 
-    AdjacencyList E = {
-        {0, {3}},
-        {1, {0}}
-    };  // Invalid AdjacencyList (2)
+    AdjacencyList E = {{0, {3}}, {1, {0}}};  // Invalid input (2)
     ASSERT_ANY_THROW({ TypeParam L(E); });
 }
 
-TYPED_TEST(ContainerTest, DISABLED_AdjacencyMatrixConstructor) {}
+TYPED_TEST(ContainerTest, AdjacencyMatrixConstructor) {
+    AdjacencyMatrix A;  // Empty sequence.
+    TypeParam G(A);
+    ASSERT_EQ(G.order(), 0);
+    ASSERT_EQ(G.size(), 0);
 
-TYPED_TEST(ContainerTest, DISABLED_SparseAdjacencyMatrixConstructor) {}
+    AdjacencyMatrix B(1, 1);
+    B << 0;  // Single sequence.
+    TypeParam H(B);
+    ASSERT_EQ(H.order(), 1);
+    ASSERT_EQ(H.size(), 0);
 
-TYPED_TEST(ContainerTest, DISABLED_AdjacencyListOperator) {}
+    AdjacencyMatrix C(3, 3);
+    C << 0, 1, 0, 0, 0, 1, 0, 0, 0;  // Multiple sequence.
+    TypeParam J(C);
+    ASSERT_EQ(J.order(), 3);
+    ASSERT_EQ(J.size(), 2);
 
-TYPED_TEST(ContainerTest, DISABLED_AdjacencyMatrixOperator) {}
+    AdjacencyMatrix D(3, 3);
+    D << 0, 1, 0, 0, 0, 3, 0, 0, 0;  // Non-binary sequence.
+    TypeParam K(D);
+    ASSERT_EQ(K.order(), 3);
+    ASSERT_EQ(K.size(), 2);
 
-TYPED_TEST(ContainerTest, DISABLED_SparseAdjacencyMatrixOperator) {}
+    AdjacencyMatrix E(2, 3);  // Invalid input (1)
+    ASSERT_ANY_THROW({ TypeParam L(E); });
+}
 
-TYPED_TEST(ContainerTest, DISABLED_Order) {}
+TYPED_TEST(ContainerTest, SparseAdjacencyMatrixConstructor) {
+    SparseAdjacencyMatrix A;  // Empty sequence.
+    TypeParam G(A);
+    ASSERT_EQ(G.order(), 0);
+    ASSERT_EQ(G.size(), 0);
+
+    SparseAdjacencyMatrix B(1, 1);
+    B.coeffRef(0, 0) = 0;  // Single sequence.
+    TypeParam H(B);
+    ASSERT_EQ(H.order(), 1);
+    ASSERT_EQ(H.size(), 0);
+
+    SparseAdjacencyMatrix C(3, 3);
+    C.coeffRef(0, 1) = 1;
+    C.coeffRef(1, 2) = 1;  // Multiple sequence.
+    TypeParam J(C);
+    ASSERT_EQ(J.order(), 3);
+    ASSERT_EQ(J.size(), 2);
+
+    SparseAdjacencyMatrix D(3, 3);
+    D.coeffRef(0, 1) = 1;
+    D.coeffRef(1, 2) = 3;  // Non-binary sequence.
+    TypeParam K(D);
+    ASSERT_EQ(K.order(), 3);
+    ASSERT_EQ(K.size(), 2);
+
+    SparseAdjacencyMatrix E(2, 3);  // Invalid input (1)
+    ASSERT_ANY_THROW({ TypeParam L(E); });
+}
+
+TYPED_TEST(ContainerTest, AdjacencyListOperator) {
+    AdjacencyList A;
+    TypeParam G;
+    ASSERT_EQ(((AdjacencyList)G), A);
+
+    AdjacencyList B = {{0, {0, 1, 3}}, {1, {1, 2}}, {2, {4}}, {3, {}}, {4, {0, 2, 3, 4}}};
+    TypeParam H(B);
+    ASSERT_EQ(((AdjacencyList)H), B);
+}
+
+TYPED_TEST(ContainerTest, AdjacencyMatrixOperator) {
+    AdjacencyMatrix A;
+    TypeParam G;
+    ASSERT_EQ(((AdjacencyMatrix)G), A);
+
+    AdjacencyMatrix B(3, 3);
+    B << 0, 1, 0, 0, 0, 1, 0, 0, 0;  // Multiple sequence.
+    TypeParam H(B);
+    ASSERT_EQ(((AdjacencyMatrix)H), B);
+}
+
+TYPED_TEST(ContainerTest, SparseAdjacencyMatrixOperator) {
+    SparseAdjacencyMatrix A(1, 1);
+    TypeParam G(A);
+    ASSERT_TRUE(((SparseAdjacencyMatrix)G).isApprox(A, 0));
+
+    SparseAdjacencyMatrix B(3, 3);
+    B.coeffRef(0, 1) = 1;
+    B.coeffRef(1, 2) = 1;  // Multiple sequence.
+    TypeParam H(B);
+    ASSERT_TRUE(((SparseAdjacencyMatrix)H).isApprox(B, 0));
+}
+
+TYPED_TEST(ContainerTest, Order) {
+    TypeParam G;
+    ASSERT_EQ(G.order(), 0);
+
+    TypeParam H(0);
+    ASSERT_EQ(H.order(), 0);
+
+    for (std::size_t i = 1; i < MAX; i++) {
+        TypeParam J(i);
+        ASSERT_EQ(J.order(), i);
+    }
+}
 
 TYPED_TEST(ContainerTest, DISABLED_Size) {}
 
