@@ -1,9 +1,0 @@
-<map id="IGraph::has_vertex" name="IGraph::has_vertex">
-<area shape="rect" id="node1" title="Whether a vertex id exists or not." alt="" coords="212,166,343,193"/>
-<area shape="rect" id="node2" href="$group__vertices.html#ga0d2b035efb139a6b50296702ad0582b7" title="Delete the vertex label." alt="" coords="20,5,149,47"/>
-<area shape="rect" id="node3" href="$group__vertices.html#gaf636b500b9572fc1ce412aad0c8b29f5" title="Get the vertex label." alt="" coords="19,71,150,112"/>
-<area shape="rect" id="node4" href="$group__vertices.html#gaa5aa8425ef6c1ec56c524ee93c49f47b" title="Check if a vertex has an attribute given its key." alt="" coords="5,137,164,163"/>
-<area shape="rect" id="node5" href="$group__vertices.html#ga80a999673de49d3146f3d70cacf5b5c1" title="Check if a vertex has a label." alt="" coords="18,188,151,229"/>
-<area shape="rect" id="node6" href="$group__vertices.html#gab1286b8244c5155065f360099dd4d0fd" title="Set the vertex attribute given its key and value." alt="" coords="7,254,163,281"/>
-<area shape="rect" id="node7" href="$group__vertices.html#ga92350995491b41f7bea6d0f62798ac95" title="Set the vertex label." alt="" coords="19,305,150,347"/>
-</map>

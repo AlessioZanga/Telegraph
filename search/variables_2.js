@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['vattrs_125',['vattrs',['../class_abstract_graph.html#a9c5ed5a1a148728e87927780884e0a20',1,'AbstractGraph']]],
-  ['vlbs_126',['vlbs',['../class_abstract_graph.html#a0aba0e4ee33b24b7c6807201352e45ac',1,'AbstractGraph']]]
+  ['gattrs_134',['gattrs',['../class_abstract_graph.html#a1e47794cbff31a3aae8d2f8274d0b850',1,'AbstractGraph']]],
+  ['glb_135',['glb',['../class_abstract_graph.html#ad8eb8ef80b5f6911ffd1205094bc057a',1,'AbstractGraph']]]
 ];

@@ -1,0 +1,5 @@
+<map id="DenseGraph::has_edge" name="DenseGraph::has_edge">
+<area shape="rect" id="node1" title="Whether an edge exists or not." alt="" coords="209,31,365,57"/>
+<area shape="rect" id="node2" href="$class_dense_graph.html#a85955d3c972e8c09d9556f08a228abf6" title="Add an edge to the graph." alt="" coords="5,5,161,32"/>
+<area shape="rect" id="node3" href="$class_dense_graph.html#a5c32aad5ca647e7e96e178797014b04a" title="Delete an edge from the graph." alt="" coords="7,56,159,83"/>
+</map>

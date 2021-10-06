@@ -1,6 +1,5 @@
 <map id="AbstractGraph::del_vertex" name="AbstractGraph::del_vertex">
 <area shape="rect" id="node1" title="Delete a vertex from the graph." alt="" coords="5,35,135,76"/>
-<area shape="rect" id="node2" href="$group__vertices.html#ga6f3e9c3f81d38420a46d01b58b03fa08" title="Delete a vertex from the graph." alt="" coords="195,5,325,47"/>
-<area shape="rect" id="node4" href="$group__vertices.html#ga3f16205d21c003dc805fb75743b9b5a4" title="Get the vertex id." alt="" coords="183,71,337,98"/>
-<area shape="rect" id="node3" href="$group__vertices.html#ga277423ffc7a3cfae65caedba24545e27" title="Delete a vertex id from the graph." alt="" coords="385,13,512,39"/>
+<area shape="rect" id="node2" href="$group__vertices.html#gac0a0d895b7a116b1fcd4bc4bf48f32ab" title="Delete a vertex id from the graph." alt="" coords="195,5,325,47"/>
+<area shape="rect" id="node3" href="$group__vertices.html#ga3f16205d21c003dc805fb75743b9b5a4" title="Get the vertex id." alt="" coords="183,71,337,98"/>
 </map>

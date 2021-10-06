@@ -1,0 +1,5 @@
+<map id="DenseGraph::hash" name="DenseGraph::hash">
+<area shape="rect" id="node1" title="Hash function of a graph." alt="" coords="5,42,133,69"/>
+<area shape="rect" id="node2" href="$class_abstract_graph.html#a75a239e2f8df4e8ad29e3f52f73a11a2" title="Check if the graph has a label." alt="" coords="181,5,315,47"/>
+<area shape="rect" id="node3" href="$class_dense_graph.html#a0a854fb94a80c57116bf1d6ec33facc5" title="The number of vertices of a graph is called its order." alt="" coords="183,71,313,98"/>
+</map>

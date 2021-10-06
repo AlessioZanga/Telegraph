@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['sparseadjacencymatrix_134',['SparseAdjacencyMatrix',['../interface__graph_8hpp.html#afc9babc767f8313c6649eec86ef58514',1,'interface_graph.hpp']]]
+  ['sparseadjacencymatrix_144',['SparseAdjacencyMatrix',['../interface__graph_8hpp.html#afc9babc767f8313c6649eec86ef58514',1,'interface_graph.hpp']]]
 ];

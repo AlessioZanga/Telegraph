@@ -1,4 +1,0 @@
-<map id="IGraph::size" name="IGraph::size">
-<area shape="rect" id="node1" title="The number of edges of a graph is called its size." alt="" coords="168,5,259,32"/>
-<area shape="rect" id="node2" href="$class_i_graph.html#ac6f0e4cf2a1b1464f39653fcb10de7cd" title="A graph is trivial if it has one vertex and no edges." alt="" coords="5,5,120,32"/>
-</map>

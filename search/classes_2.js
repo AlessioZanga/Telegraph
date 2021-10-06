@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['igraph_73',['IGraph',['../class_i_graph.html',1,'']]]
+  ['elb_78',['ELB',['../class_e_l_b.html',1,'']]]
 ];

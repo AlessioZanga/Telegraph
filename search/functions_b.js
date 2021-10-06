@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['to_5fstring_117',['to_string',['../namespacestd.html#a6dd6707536e807a44c9ad8f6ba86bdcb',1,'std']]]
+  ['_7eabstractgraph_128',['~AbstractGraph',['../class_abstract_graph.html#a468a9dd5783926675495c2d5493fef32',1,'AbstractGraph']]],
+  ['_7edensegraph_129',['~DenseGraph',['../class_dense_graph.html#a193ca269ce7325588433c7bea2a7524e',1,'DenseGraph']]],
+  ['_7eigraph_130',['~IGraph',['../class_i_graph.html#affbd1a34008233d76619742805a64c96',1,'IGraph']]]
 ];

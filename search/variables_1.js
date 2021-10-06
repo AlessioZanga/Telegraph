@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['gattrs_123',['gattrs',['../class_abstract_graph.html#a1e47794cbff31a3aae8d2f8274d0b850',1,'AbstractGraph']]],
-  ['glb_124',['glb',['../class_abstract_graph.html#ad8eb8ef80b5f6911ffd1205094bc057a',1,'AbstractGraph']]]
+  ['eattrs_132',['eattrs',['../class_abstract_graph.html#ae496db8239549028d1faa03a2939b26c',1,'AbstractGraph']]],
+  ['elbs_133',['elbs',['../class_abstract_graph.html#a4a98e9812f6b924cb144a5e3c43be21d',1,'AbstractGraph']]]
 ];

@@ -1,0 +1,5 @@
+<map id="DenseGraph::del_vertex" name="DenseGraph::del_vertex">
+<area shape="rect" id="node1" title="Delete a vertex id from the graph." alt="" coords="5,31,164,57"/>
+<area shape="rect" id="node2" href="$class_dense_graph.html#ae04e0ea939153873bd2a025ec24ee2e3" title="Whether a vertex id exists or not." alt="" coords="212,5,375,32"/>
+<area shape="rect" id="node3" href="$class_dense_graph.html#a0a854fb94a80c57116bf1d6ec33facc5" title="The number of vertices of a graph is called its order." alt="" coords="423,31,552,57"/>
+</map>

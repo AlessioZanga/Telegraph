@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Telegraph: include/telegraph/structure/abstract_graph.hpp File Reference</title>
+<title>Telegraph: include/telegraph/interface/abstract_graph.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -92,32 +92,39 @@ $(document).ready(function(){initNavTree('abstract__graph_8hpp.html',''); initRe
 <div class="contents">
 <div class="textblock"><code>#include &lt;any&gt;</code><br />
 <code>#include &lt;boost/bimap.hpp&gt;</code><br />
+<code>#include &lt;boost/bimap/support/lambda.hpp&gt;</code><br />
+<code>#include &lt;boost/container_hash/hash.hpp&gt;</code><br />
 <code>#include &quot;<a class="el" href="interface__graph_8ipp_source.html">interface_graph.ipp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for abstract_graph.hpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="abstract__graph_8hpp__incl.png" border="0" usemap="#ainclude_2telegraph_2structure_2abstract__graph_8hpp" alt=""/></div>
-<map name="ainclude_2telegraph_2structure_2abstract__graph_8hpp" id="ainclude_2telegraph_2structure_2abstract__graph_8hpp">
-<area shape="rect" title=" " alt="" coords="47,5,222,47"/>
-<area shape="rect" title=" " alt="" coords="9,95,52,121"/>
-<area shape="rect" title=" " alt="" coords="76,95,193,121"/>
-<area shape="rect" href="interface__graph_8ipp.html" title=" " alt="" coords="217,95,348,121"/>
-<area shape="rect" href="interface__graph_8hpp.html" title=" " alt="" coords="215,169,350,196"/>
-<area shape="rect" title=" " alt="" coords="5,244,96,271"/>
-<area shape="rect" title=" " alt="" coords="120,244,181,271"/>
-<area shape="rect" title=" " alt="" coords="205,244,277,271"/>
-<area shape="rect" title=" " alt="" coords="302,244,349,271"/>
-<area shape="rect" title=" " alt="" coords="373,244,413,271"/>
-<area shape="rect" title=" " alt="" coords="438,244,490,271"/>
+<div class="center"><img src="abstract__graph_8hpp__incl.png" border="0" usemap="#ainclude_2telegraph_2interface_2abstract__graph_8hpp" alt=""/></div>
+<map name="ainclude_2telegraph_2interface_2abstract__graph_8hpp" id="ainclude_2telegraph_2interface_2abstract__graph_8hpp">
+<area shape="rect" title=" " alt="" coords="197,5,371,47"/>
+<area shape="rect" title=" " alt="" coords="5,102,48,129"/>
+<area shape="rect" title=" " alt="" coords="72,102,189,129"/>
+<area shape="rect" title=" " alt="" coords="214,95,354,136"/>
+<area shape="rect" title=" " alt="" coords="379,95,525,136"/>
+<area shape="rect" href="interface__graph_8ipp.html" title=" " alt="" coords="549,102,680,129"/>
+<area shape="rect" href="interface__graph_8hpp.html" title=" " alt="" coords="547,184,682,211"/>
+<area shape="rect" title=" " alt="" coords="287,259,377,285"/>
+<area shape="rect" title=" " alt="" coords="401,259,463,285"/>
+<area shape="rect" title=" " alt="" coords="487,259,559,285"/>
+<area shape="rect" title=" " alt="" coords="583,259,646,285"/>
+<area shape="rect" title=" " alt="" coords="670,259,717,285"/>
+<area shape="rect" title=" " alt="" coords="741,259,781,285"/>
+<area shape="rect" title=" " alt="" coords="806,259,858,285"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><img src="abstract__graph_8hpp__dep__incl.png" border="0" usemap="#ainclude_2telegraph_2structure_2abstract__graph_8hppdep" alt=""/></div>
-<map name="ainclude_2telegraph_2structure_2abstract__graph_8hppdep" id="ainclude_2telegraph_2structure_2abstract__graph_8hppdep">
-<area shape="rect" title=" " alt="" coords="5,5,180,47"/>
-<area shape="rect" href="abstract__graph_8ipp.html" title=" " alt="" coords="5,95,180,136"/>
+<div class="center"><img src="abstract__graph_8hpp__dep__incl.png" border="0" usemap="#ainclude_2telegraph_2interface_2abstract__graph_8hppdep" alt=""/></div>
+<map name="ainclude_2telegraph_2interface_2abstract__graph_8hppdep" id="ainclude_2telegraph_2interface_2abstract__graph_8hppdep">
+<area shape="rect" title=" " alt="" coords="7,5,181,47"/>
+<area shape="rect" href="abstract__graph_8ipp.html" title=" " alt="" coords="7,95,181,136"/>
+<area shape="rect" href="dense__graph_8hpp.html" title=" " alt="" coords="5,184,183,225"/>
+<area shape="rect" href="dense__graph_8ipp.html" title=" " alt="" coords="5,273,183,315"/>
 </map>
 </div>
 </div>
@@ -125,6 +132,9 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_e_l_b.html">ELB</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Edge label.  <a href="class_e_l_b.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_abstract_graph.html">AbstractGraph</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -136,13 +146,10 @@ Typedefs</h2></td></tr>
 <tr class="memitem:ab3314bb3ec0edf7495e49829cd2e9768"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="abstract__graph_8hpp.html#ab3314bb3ec0edf7495e49829cd2e9768">VLB</a> = std::string</td></tr>
 <tr class="memdesc:ab3314bb3ec0edf7495e49829cd2e9768"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vertex label.  <a href="abstract__graph_8hpp.html#ab3314bb3ec0edf7495e49829cd2e9768">More...</a><br /></td></tr>
 <tr class="separator:ab3314bb3ec0edf7495e49829cd2e9768"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9803f35af0be5dcee4999f8c52d89172"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="abstract__graph_8hpp.html#a9803f35af0be5dcee4999f8c52d89172">ELB</a> = std::string</td></tr>
-<tr class="memdesc:a9803f35af0be5dcee4999f8c52d89172"><td class="mdescLeft">&#160;</td><td class="mdescRight">Edge label.  <a href="abstract__graph_8hpp.html#a9803f35af0be5dcee4999f8c52d89172">More...</a><br /></td></tr>
-<tr class="separator:a9803f35af0be5dcee4999f8c52d89172"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22e43056a024f76392608bec895cd145"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="abstract__graph_8hpp.html#a22e43056a024f76392608bec895cd145">VLBs</a> = std::set&lt; <a class="el" href="abstract__graph_8hpp.html#ab3314bb3ec0edf7495e49829cd2e9768">VLB</a> &gt;</td></tr>
 <tr class="memdesc:a22e43056a024f76392608bec895cd145"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vertex labels set.  <a href="abstract__graph_8hpp.html#a22e43056a024f76392608bec895cd145">More...</a><br /></td></tr>
 <tr class="separator:a22e43056a024f76392608bec895cd145"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aad4b63c329e6d124a31c768758c76638"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="abstract__graph_8hpp.html#aad4b63c329e6d124a31c768758c76638">ELBs</a> = std::set&lt; <a class="el" href="abstract__graph_8hpp.html#a9803f35af0be5dcee4999f8c52d89172">ELB</a> &gt;</td></tr>
+<tr class="memitem:aad4b63c329e6d124a31c768758c76638"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="abstract__graph_8hpp.html#aad4b63c329e6d124a31c768758c76638">ELBs</a> = std::set&lt; <a class="el" href="class_e_l_b.html">ELB</a> &gt;</td></tr>
 <tr class="memdesc:aad4b63c329e6d124a31c768758c76638"><td class="mdescLeft">&#160;</td><td class="mdescRight">Edge labels set.  <a href="abstract__graph_8hpp.html#aad4b63c329e6d124a31c768758c76638">More...</a><br /></td></tr>
 <tr class="separator:aad4b63c329e6d124a31c768758c76638"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -161,7 +168,7 @@ Typedefs</h2></td></tr>
 
 <p>Graph label. </p>
 
-<p class="definition">Definition at line <a class="el" href="abstract__graph_8hpp_source.html#l00009">9</a> of file <a class="el" href="abstract__graph_8hpp_source.html">abstract_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="abstract__graph_8hpp_source.html#l00011">11</a> of file <a class="el" href="abstract__graph_8hpp_source.html">abstract_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -178,24 +185,6 @@ Typedefs</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Vertex label. </p>
-
-<p class="definition">Definition at line <a class="el" href="abstract__graph_8hpp_source.html#l00011">11</a> of file <a class="el" href="abstract__graph_8hpp_source.html">abstract_graph.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a9803f35af0be5dcee4999f8c52d89172"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9803f35af0be5dcee4999f8c52d89172">&#9670;&nbsp;</a></span>ELB</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="abstract__graph_8hpp.html#a9803f35af0be5dcee4999f8c52d89172">ELB</a> =  std::string</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Edge label. </p>
 
 <p class="definition">Definition at line <a class="el" href="abstract__graph_8hpp_source.html#l00013">13</a> of file <a class="el" href="abstract__graph_8hpp_source.html">abstract_graph.hpp</a>.</p>
 
@@ -215,7 +204,7 @@ Typedefs</h2></td></tr>
 
 <p>Vertex labels set. </p>
 
-<p class="definition">Definition at line <a class="el" href="abstract__graph_8hpp_source.html#l00015">15</a> of file <a class="el" href="abstract__graph_8hpp_source.html">abstract_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="abstract__graph_8hpp_source.html#l00019">19</a> of file <a class="el" href="abstract__graph_8hpp_source.html">abstract_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -226,14 +215,14 @@ Typedefs</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="abstract__graph_8hpp.html#aad4b63c329e6d124a31c768758c76638">ELBs</a> =  std::set&lt;<a class="el" href="abstract__graph_8hpp.html#a9803f35af0be5dcee4999f8c52d89172">ELB</a>&gt;</td>
+          <td class="memname">using <a class="el" href="abstract__graph_8hpp.html#aad4b63c329e6d124a31c768758c76638">ELBs</a> =  std::set&lt;<a class="el" href="class_e_l_b.html">ELB</a>&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Edge labels set. </p>
 
-<p class="definition">Definition at line <a class="el" href="abstract__graph_8hpp_source.html#l00017">17</a> of file <a class="el" href="abstract__graph_8hpp_source.html">abstract_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="abstract__graph_8hpp_source.html#l00021">21</a> of file <a class="el" href="abstract__graph_8hpp_source.html">abstract_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -242,7 +231,7 @@ Typedefs</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_f30acf35b5efa314e0dc707c2b4c8f66.html">telegraph</a></li><li class="navelem"><a class="el" href="dir_f783d37df0f432cf443eef2aa4cac36d.html">structure</a></li><li class="navelem"><a class="el" href="abstract__graph_8hpp.html">abstract_graph.hpp</a></li>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_f30acf35b5efa314e0dc707c2b4c8f66.html">telegraph</a></li><li class="navelem"><a class="el" href="dir_4b9511eaf70fc26769f51b5f31bc0e75.html">interface</a></li><li class="navelem"><a class="el" href="abstract__graph_8hpp.html">abstract_graph.hpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

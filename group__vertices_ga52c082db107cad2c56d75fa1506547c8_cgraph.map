@@ -1,5 +1,5 @@
 <map id="AbstractGraph::add_vertex" name="AbstractGraph::add_vertex">
-<area shape="rect" id="node1" title="Add a vertex to the graph." alt="" coords="5,27,139,69"/>
-<area shape="rect" id="node2" href="$group__vertices.html#ga7acd226e1357dd415ff87b1dc21316ae" title="Add a vertex to the graph." alt="" coords="187,5,317,32"/>
-<area shape="rect" id="node3" href="$class_abstract_graph.html#a6e84967a418fc92211c91cc78aa0b415" title="Set the graph label." alt="" coords="187,57,317,98"/>
+<area shape="rect" id="node1" title="Add a vertex to the graph." alt="" coords="5,39,139,80"/>
+<area shape="rect" id="node2" href="$group__vertices.html#gaeefa60f404620e69a17f8deed3f45393" title="Add a vertex to the graph." alt="" coords="187,5,320,47"/>
+<area shape="rect" id="node3" href="$class_abstract_graph.html#a6e84967a418fc92211c91cc78aa0b415" title="Set the graph label." alt="" coords="188,71,319,112"/>
 </map>

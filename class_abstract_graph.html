@@ -85,8 +85,8 @@ $(document).ready(function(){initNavTree('class_abstract_graph.html',''); initRe
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pri-methods">Private Member Functions</a> &#124;
-<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_abstract_graph-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">AbstractGraph Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
@@ -100,6 +100,7 @@ Inheritance diagram for AbstractGraph:</div>
 <div class="center"><img src="class_abstract_graph__inherit__graph.png" border="0" usemap="#a_abstract_graph_inherit__map" alt="Inheritance graph"/></div>
 <map name="a_abstract_graph_inherit__map" id="a_abstract_graph_inherit__map">
 <area shape="rect" title=" " alt="" coords="5,80,112,107"/>
+<area shape="rect" href="class_dense_graph.html" title=" " alt="" coords="11,155,106,181"/>
 <area shape="rect" href="class_i_graph.html" title=" " alt="" coords="28,5,89,32"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
@@ -150,12 +151,21 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a57be1d700f04ae072f9d2014e2da56c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_abstract_graph.html#a57be1d700f04ae072f9d2014e2da56c8">del_attr</a> (const std::string &amp;key)</td></tr>
 <tr class="memdesc:a57be1d700f04ae072f9d2014e2da56c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete the graph attribute given its key.  <a href="class_abstract_graph.html#a57be1d700f04ae072f9d2014e2da56c8">More...</a><br /></td></tr>
 <tr class="separator:a57be1d700f04ae072f9d2014e2da56c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab3beb83132f3fff703aa6b0a1175d1f6"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vertices.html#gab3beb83132f3fff703aa6b0a1175d1f6">has_vertex</a> (const <a class="el" href="interface__graph_8hpp.html#a5fd37095d99552e7dcd78beb8e969d5f">VID</a> &amp;X) const =0</td></tr>
+<tr class="memdesc:gab3beb83132f3fff703aa6b0a1175d1f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether a vertex id exists or not.  <a href="group__vertices.html#gab3beb83132f3fff703aa6b0a1175d1f6">More...</a><br /></td></tr>
+<tr class="separator:gab3beb83132f3fff703aa6b0a1175d1f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaeefa60f404620e69a17f8deed3f45393"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="interface__graph_8hpp.html#a5fd37095d99552e7dcd78beb8e969d5f">VID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vertices.html#gaeefa60f404620e69a17f8deed3f45393">add_vertex</a> ()=0</td></tr>
+<tr class="memdesc:gaeefa60f404620e69a17f8deed3f45393"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a vertex to the graph.  <a href="group__vertices.html#gaeefa60f404620e69a17f8deed3f45393">More...</a><br /></td></tr>
+<tr class="separator:gaeefa60f404620e69a17f8deed3f45393"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga837a074ce64f4557f7b19b4726f2d754"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vertices.html#ga837a074ce64f4557f7b19b4726f2d754">add_vertex</a> (const <a class="el" href="interface__graph_8hpp.html#a5fd37095d99552e7dcd78beb8e969d5f">VID</a> &amp;X)=0</td></tr>
+<tr class="memdesc:ga837a074ce64f4557f7b19b4726f2d754"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a vertex id to the graph.  <a href="group__vertices.html#ga837a074ce64f4557f7b19b4726f2d754">More...</a><br /></td></tr>
+<tr class="separator:ga837a074ce64f4557f7b19b4726f2d754"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac0a0d895b7a116b1fcd4bc4bf48f32ab"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vertices.html#gac0a0d895b7a116b1fcd4bc4bf48f32ab">del_vertex</a> (const <a class="el" href="interface__graph_8hpp.html#a5fd37095d99552e7dcd78beb8e969d5f">VID</a> &amp;X)=0</td></tr>
+<tr class="memdesc:gac0a0d895b7a116b1fcd4bc4bf48f32ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete a vertex id from the graph.  <a href="group__vertices.html#gac0a0d895b7a116b1fcd4bc4bf48f32ab">More...</a><br /></td></tr>
+<tr class="separator:gac0a0d895b7a116b1fcd4bc4bf48f32ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga3f16205d21c003dc805fb75743b9b5a4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="interface__graph_8hpp.html#a5fd37095d99552e7dcd78beb8e969d5f">VID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vertices.html#ga3f16205d21c003dc805fb75743b9b5a4">get_vid</a> (const <a class="el" href="abstract__graph_8hpp.html#ab3314bb3ec0edf7495e49829cd2e9768">VLB</a> &amp;X) const</td></tr>
 <tr class="memdesc:ga3f16205d21c003dc805fb75743b9b5a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the vertex id.  <a href="group__vertices.html#ga3f16205d21c003dc805fb75743b9b5a4">More...</a><br /></td></tr>
 <tr class="separator:ga3f16205d21c003dc805fb75743b9b5a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab7886092bf6449822b54923eff15b07e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="abstract__graph_8hpp.html#a22e43056a024f76392608bec895cd145">VLBs</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vertices.html#gab7886092bf6449822b54923eff15b07e">labels</a> () const</td></tr>
-<tr class="memdesc:gab7886092bf6449822b54923eff15b07e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The vertices of a graph.  <a href="group__vertices.html#gab7886092bf6449822b54923eff15b07e">More...</a><br /></td></tr>
-<tr class="separator:gab7886092bf6449822b54923eff15b07e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga80a999673de49d3146f3d70cacf5b5c1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vertices.html#ga80a999673de49d3146f3d70cacf5b5c1">has_label</a> (const <a class="el" href="interface__graph_8hpp.html#a5fd37095d99552e7dcd78beb8e969d5f">VID</a> &amp;X) const</td></tr>
 <tr class="memdesc:ga80a999673de49d3146f3d70cacf5b5c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if a vertex has a label.  <a href="group__vertices.html#ga80a999673de49d3146f3d70cacf5b5c1">More...</a><br /></td></tr>
 <tr class="separator:ga80a999673de49d3146f3d70cacf5b5c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -208,18 +218,21 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ga52c082db107cad2c56d75fa1506547c8"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="interface__graph_8hpp.html#a5fd37095d99552e7dcd78beb8e969d5f">VID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vertices.html#ga52c082db107cad2c56d75fa1506547c8">add_vertex</a> (const <a class="el" href="abstract__graph_8hpp.html#ab3314bb3ec0edf7495e49829cd2e9768">VLB</a> &amp;label)</td></tr>
 <tr class="memdesc:ga52c082db107cad2c56d75fa1506547c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a vertex to the graph.  <a href="group__vertices.html#ga52c082db107cad2c56d75fa1506547c8">More...</a><br /></td></tr>
 <tr class="separator:ga52c082db107cad2c56d75fa1506547c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6f3e9c3f81d38420a46d01b58b03fa08"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vertices.html#ga6f3e9c3f81d38420a46d01b58b03fa08">del_vertex</a> (const <a class="el" href="interface__graph_8hpp.html#a5fd37095d99552e7dcd78beb8e969d5f">VID</a> &amp;X)</td></tr>
-<tr class="memdesc:ga6f3e9c3f81d38420a46d01b58b03fa08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete a vertex from the graph.  <a href="group__vertices.html#ga6f3e9c3f81d38420a46d01b58b03fa08">More...</a><br /></td></tr>
-<tr class="separator:ga6f3e9c3f81d38420a46d01b58b03fa08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga1e97c0736bebc7ec54ec135e9fc22cf4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vertices.html#ga1e97c0736bebc7ec54ec135e9fc22cf4">del_vertex</a> (const <a class="el" href="abstract__graph_8hpp.html#ab3314bb3ec0edf7495e49829cd2e9768">VLB</a> &amp;X)</td></tr>
 <tr class="memdesc:ga1e97c0736bebc7ec54ec135e9fc22cf4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete a vertex from the graph.  <a href="group__vertices.html#ga1e97c0736bebc7ec54ec135e9fc22cf4">More...</a><br /></td></tr>
 <tr class="separator:ga1e97c0736bebc7ec54ec135e9fc22cf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga07f20888156851698423658442785e5d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="interface__graph_8hpp.html#a8b1dd0cc86cb9d108e92f42b1314ca42">EID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#ga07f20888156851698423658442785e5d">get_eid</a> (const <a class="el" href="abstract__graph_8hpp.html#a9803f35af0be5dcee4999f8c52d89172">ELB</a> &amp;X) const</td></tr>
+<tr class="memitem:gac51907be8f8113527c343ea956a92072"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#gac51907be8f8113527c343ea956a92072">has_edge</a> (const <a class="el" href="interface__graph_8hpp.html#a8b1dd0cc86cb9d108e92f42b1314ca42">EID</a> &amp;X) const =0</td></tr>
+<tr class="memdesc:gac51907be8f8113527c343ea956a92072"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether an edge exists or not.  <a href="group__edges.html#gac51907be8f8113527c343ea956a92072">More...</a><br /></td></tr>
+<tr class="separator:gac51907be8f8113527c343ea956a92072"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga64dc1cacb7c529a667805c33690981e6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#ga64dc1cacb7c529a667805c33690981e6">add_edge</a> (const <a class="el" href="interface__graph_8hpp.html#a8b1dd0cc86cb9d108e92f42b1314ca42">EID</a> &amp;X)=0</td></tr>
+<tr class="memdesc:ga64dc1cacb7c529a667805c33690981e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add an edge to the graph.  <a href="group__edges.html#ga64dc1cacb7c529a667805c33690981e6">More...</a><br /></td></tr>
+<tr class="separator:ga64dc1cacb7c529a667805c33690981e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga61a513502d0e93070b01ff2cff398f88"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#ga61a513502d0e93070b01ff2cff398f88">del_edge</a> (const <a class="el" href="interface__graph_8hpp.html#a8b1dd0cc86cb9d108e92f42b1314ca42">EID</a> &amp;X)=0</td></tr>
+<tr class="memdesc:ga61a513502d0e93070b01ff2cff398f88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete an edge from the graph.  <a href="group__edges.html#ga61a513502d0e93070b01ff2cff398f88">More...</a><br /></td></tr>
+<tr class="separator:ga61a513502d0e93070b01ff2cff398f88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga07f20888156851698423658442785e5d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="interface__graph_8hpp.html#a8b1dd0cc86cb9d108e92f42b1314ca42">EID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#ga07f20888156851698423658442785e5d">get_eid</a> (const <a class="el" href="class_e_l_b.html">ELB</a> &amp;X) const</td></tr>
 <tr class="memdesc:ga07f20888156851698423658442785e5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the edge id.  <a href="group__edges.html#ga07f20888156851698423658442785e5d">More...</a><br /></td></tr>
 <tr class="separator:ga07f20888156851698423658442785e5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab7886092bf6449822b54923eff15b07e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="abstract__graph_8hpp.html#aad4b63c329e6d124a31c768758c76638">ELBs</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#gab7886092bf6449822b54923eff15b07e">labels</a> () const</td></tr>
-<tr class="memdesc:gab7886092bf6449822b54923eff15b07e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The edges of a graph.  <a href="group__edges.html#gab7886092bf6449822b54923eff15b07e">More...</a><br /></td></tr>
-<tr class="separator:gab7886092bf6449822b54923eff15b07e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gafff5db12d874d7d3fd8262ec13dc3450"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#gafff5db12d874d7d3fd8262ec13dc3450">has_label</a> (const <a class="el" href="interface__graph_8hpp.html#a8b1dd0cc86cb9d108e92f42b1314ca42">EID</a> &amp;X) const</td></tr>
 <tr class="memdesc:gafff5db12d874d7d3fd8262ec13dc3450"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if an edge has a label.  <a href="group__edges.html#gafff5db12d874d7d3fd8262ec13dc3450">More...</a><br /></td></tr>
 <tr class="separator:gafff5db12d874d7d3fd8262ec13dc3450"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -229,31 +242,31 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:gae2efde99dd3c58c10273bbf428f59563"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#gae2efde99dd3c58c10273bbf428f59563">has_label</a> (const <a class="el" href="abstract__graph_8hpp.html#ab3314bb3ec0edf7495e49829cd2e9768">VLB</a> &amp;X, const <a class="el" href="abstract__graph_8hpp.html#ab3314bb3ec0edf7495e49829cd2e9768">VLB</a> &amp;Y) const</td></tr>
 <tr class="memdesc:gae2efde99dd3c58c10273bbf428f59563"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if an edge has a label.  <a href="group__edges.html#gae2efde99dd3c58c10273bbf428f59563">More...</a><br /></td></tr>
 <tr class="separator:gae2efde99dd3c58c10273bbf428f59563"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae983b6189c984509ec8a6c9a0e85aeb1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="abstract__graph_8hpp.html#a9803f35af0be5dcee4999f8c52d89172">ELB</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#gae983b6189c984509ec8a6c9a0e85aeb1">get_label</a> (const <a class="el" href="interface__graph_8hpp.html#a8b1dd0cc86cb9d108e92f42b1314ca42">EID</a> &amp;X) const</td></tr>
+<tr class="memitem:gae983b6189c984509ec8a6c9a0e85aeb1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_e_l_b.html">ELB</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#gae983b6189c984509ec8a6c9a0e85aeb1">get_label</a> (const <a class="el" href="interface__graph_8hpp.html#a8b1dd0cc86cb9d108e92f42b1314ca42">EID</a> &amp;X) const</td></tr>
 <tr class="memdesc:gae983b6189c984509ec8a6c9a0e85aeb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the edge label.  <a href="group__edges.html#gae983b6189c984509ec8a6c9a0e85aeb1">More...</a><br /></td></tr>
 <tr class="separator:gae983b6189c984509ec8a6c9a0e85aeb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga77c98626a1a9bfe626da99e2388579d0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="abstract__graph_8hpp.html#a9803f35af0be5dcee4999f8c52d89172">ELB</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#ga77c98626a1a9bfe626da99e2388579d0">get_label</a> (const <a class="el" href="interface__graph_8hpp.html#a5fd37095d99552e7dcd78beb8e969d5f">VID</a> &amp;X, const <a class="el" href="interface__graph_8hpp.html#a5fd37095d99552e7dcd78beb8e969d5f">VID</a> &amp;Y) const</td></tr>
+<tr class="memitem:ga77c98626a1a9bfe626da99e2388579d0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_e_l_b.html">ELB</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#ga77c98626a1a9bfe626da99e2388579d0">get_label</a> (const <a class="el" href="interface__graph_8hpp.html#a5fd37095d99552e7dcd78beb8e969d5f">VID</a> &amp;X, const <a class="el" href="interface__graph_8hpp.html#a5fd37095d99552e7dcd78beb8e969d5f">VID</a> &amp;Y) const</td></tr>
 <tr class="memdesc:ga77c98626a1a9bfe626da99e2388579d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the edge label.  <a href="group__edges.html#ga77c98626a1a9bfe626da99e2388579d0">More...</a><br /></td></tr>
 <tr class="separator:ga77c98626a1a9bfe626da99e2388579d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga10f273dbdf2f7723ce0de13ef67f845d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="abstract__graph_8hpp.html#a9803f35af0be5dcee4999f8c52d89172">ELB</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#ga10f273dbdf2f7723ce0de13ef67f845d">get_label</a> (const <a class="el" href="abstract__graph_8hpp.html#ab3314bb3ec0edf7495e49829cd2e9768">VLB</a> &amp;X, const <a class="el" href="abstract__graph_8hpp.html#ab3314bb3ec0edf7495e49829cd2e9768">VLB</a> &amp;Y) const</td></tr>
+<tr class="memitem:ga10f273dbdf2f7723ce0de13ef67f845d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_e_l_b.html">ELB</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#ga10f273dbdf2f7723ce0de13ef67f845d">get_label</a> (const <a class="el" href="abstract__graph_8hpp.html#ab3314bb3ec0edf7495e49829cd2e9768">VLB</a> &amp;X, const <a class="el" href="abstract__graph_8hpp.html#ab3314bb3ec0edf7495e49829cd2e9768">VLB</a> &amp;Y) const</td></tr>
 <tr class="memdesc:ga10f273dbdf2f7723ce0de13ef67f845d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the edge label.  <a href="group__edges.html#ga10f273dbdf2f7723ce0de13ef67f845d">More...</a><br /></td></tr>
 <tr class="separator:ga10f273dbdf2f7723ce0de13ef67f845d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9c61c41466abef1aa297cefd082e6326"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#ga9c61c41466abef1aa297cefd082e6326">set_label</a> (const <a class="el" href="interface__graph_8hpp.html#a8b1dd0cc86cb9d108e92f42b1314ca42">EID</a> &amp;X, const <a class="el" href="abstract__graph_8hpp.html#a9803f35af0be5dcee4999f8c52d89172">ELB</a> &amp;label)</td></tr>
+<tr class="memitem:ga9c61c41466abef1aa297cefd082e6326"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#ga9c61c41466abef1aa297cefd082e6326">set_label</a> (const <a class="el" href="interface__graph_8hpp.html#a8b1dd0cc86cb9d108e92f42b1314ca42">EID</a> &amp;X, const <a class="el" href="class_e_l_b.html">ELB</a> &amp;label)</td></tr>
 <tr class="memdesc:ga9c61c41466abef1aa297cefd082e6326"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the edge label.  <a href="group__edges.html#ga9c61c41466abef1aa297cefd082e6326">More...</a><br /></td></tr>
 <tr class="separator:ga9c61c41466abef1aa297cefd082e6326"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac45165486f7edb47b3dd041fdd5bb0b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#gac45165486f7edb47b3dd041fdd5bb0b4">set_label</a> (const <a class="el" href="abstract__graph_8hpp.html#a9803f35af0be5dcee4999f8c52d89172">ELB</a> &amp;X, const <a class="el" href="abstract__graph_8hpp.html#a9803f35af0be5dcee4999f8c52d89172">ELB</a> &amp;label)</td></tr>
+<tr class="memitem:gac45165486f7edb47b3dd041fdd5bb0b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#gac45165486f7edb47b3dd041fdd5bb0b4">set_label</a> (const <a class="el" href="class_e_l_b.html">ELB</a> &amp;X, const <a class="el" href="class_e_l_b.html">ELB</a> &amp;label)</td></tr>
 <tr class="memdesc:gac45165486f7edb47b3dd041fdd5bb0b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the edge label.  <a href="group__edges.html#gac45165486f7edb47b3dd041fdd5bb0b4">More...</a><br /></td></tr>
 <tr class="separator:gac45165486f7edb47b3dd041fdd5bb0b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0245ba55936e83633121842e12a2b147"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#ga0245ba55936e83633121842e12a2b147">set_label</a> (const <a class="el" href="interface__graph_8hpp.html#a5fd37095d99552e7dcd78beb8e969d5f">VID</a> &amp;X, const <a class="el" href="interface__graph_8hpp.html#a5fd37095d99552e7dcd78beb8e969d5f">VID</a> &amp;Y, const <a class="el" href="abstract__graph_8hpp.html#a9803f35af0be5dcee4999f8c52d89172">ELB</a> &amp;label)</td></tr>
+<tr class="memitem:ga0245ba55936e83633121842e12a2b147"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#ga0245ba55936e83633121842e12a2b147">set_label</a> (const <a class="el" href="interface__graph_8hpp.html#a5fd37095d99552e7dcd78beb8e969d5f">VID</a> &amp;X, const <a class="el" href="interface__graph_8hpp.html#a5fd37095d99552e7dcd78beb8e969d5f">VID</a> &amp;Y, const <a class="el" href="class_e_l_b.html">ELB</a> &amp;label)</td></tr>
 <tr class="memdesc:ga0245ba55936e83633121842e12a2b147"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the edge label.  <a href="group__edges.html#ga0245ba55936e83633121842e12a2b147">More...</a><br /></td></tr>
 <tr class="separator:ga0245ba55936e83633121842e12a2b147"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga802b0097e99d762fc69b7ad72f216ce9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#ga802b0097e99d762fc69b7ad72f216ce9">set_label</a> (const <a class="el" href="abstract__graph_8hpp.html#ab3314bb3ec0edf7495e49829cd2e9768">VLB</a> &amp;X, const <a class="el" href="abstract__graph_8hpp.html#ab3314bb3ec0edf7495e49829cd2e9768">VLB</a> &amp;Y, const <a class="el" href="abstract__graph_8hpp.html#a9803f35af0be5dcee4999f8c52d89172">ELB</a> &amp;label)</td></tr>
+<tr class="memitem:ga802b0097e99d762fc69b7ad72f216ce9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#ga802b0097e99d762fc69b7ad72f216ce9">set_label</a> (const <a class="el" href="abstract__graph_8hpp.html#ab3314bb3ec0edf7495e49829cd2e9768">VLB</a> &amp;X, const <a class="el" href="abstract__graph_8hpp.html#ab3314bb3ec0edf7495e49829cd2e9768">VLB</a> &amp;Y, const <a class="el" href="class_e_l_b.html">ELB</a> &amp;label)</td></tr>
 <tr class="memdesc:ga802b0097e99d762fc69b7ad72f216ce9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the edge label.  <a href="group__edges.html#ga802b0097e99d762fc69b7ad72f216ce9">More...</a><br /></td></tr>
 <tr class="separator:ga802b0097e99d762fc69b7ad72f216ce9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaf6f2c9bf65635462baaee5a55ce87cd6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#gaf6f2c9bf65635462baaee5a55ce87cd6">del_label</a> (const <a class="el" href="interface__graph_8hpp.html#a8b1dd0cc86cb9d108e92f42b1314ca42">EID</a> &amp;X)</td></tr>
 <tr class="memdesc:gaf6f2c9bf65635462baaee5a55ce87cd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete the edge label.  <a href="group__edges.html#gaf6f2c9bf65635462baaee5a55ce87cd6">More...</a><br /></td></tr>
 <tr class="separator:gaf6f2c9bf65635462baaee5a55ce87cd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae2aaeb677e5d2e651ca2b1772e8422fe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#gae2aaeb677e5d2e651ca2b1772e8422fe">del_label</a> (const <a class="el" href="abstract__graph_8hpp.html#a9803f35af0be5dcee4999f8c52d89172">ELB</a> &amp;X)</td></tr>
+<tr class="memitem:gae2aaeb677e5d2e651ca2b1772e8422fe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#gae2aaeb677e5d2e651ca2b1772e8422fe">del_label</a> (const <a class="el" href="class_e_l_b.html">ELB</a> &amp;X)</td></tr>
 <tr class="memdesc:gae2aaeb677e5d2e651ca2b1772e8422fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete the edge label.  <a href="group__edges.html#gae2aaeb677e5d2e651ca2b1772e8422fe">More...</a><br /></td></tr>
 <tr class="separator:gae2aaeb677e5d2e651ca2b1772e8422fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga51ff34557dbded46b2a02baafe26a8ac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#ga51ff34557dbded46b2a02baafe26a8ac">del_label</a> (const <a class="el" href="interface__graph_8hpp.html#a5fd37095d99552e7dcd78beb8e969d5f">VID</a> &amp;X, const <a class="el" href="interface__graph_8hpp.html#a5fd37095d99552e7dcd78beb8e969d5f">VID</a> &amp;Y)</td></tr>
@@ -265,7 +278,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ga4cb0d53cde2e3a08f40a4b2eb445eba1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#ga4cb0d53cde2e3a08f40a4b2eb445eba1">has_attr</a> (const <a class="el" href="interface__graph_8hpp.html#a8b1dd0cc86cb9d108e92f42b1314ca42">EID</a> &amp;X, const std::string &amp;key) const</td></tr>
 <tr class="memdesc:ga4cb0d53cde2e3a08f40a4b2eb445eba1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if an edge has an attribute given its key.  <a href="group__edges.html#ga4cb0d53cde2e3a08f40a4b2eb445eba1">More...</a><br /></td></tr>
 <tr class="separator:ga4cb0d53cde2e3a08f40a4b2eb445eba1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga91979021e90f8cb07a32fd88d57b42b1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#ga91979021e90f8cb07a32fd88d57b42b1">has_attr</a> (const <a class="el" href="abstract__graph_8hpp.html#a9803f35af0be5dcee4999f8c52d89172">ELB</a> &amp;X, const std::string &amp;key) const</td></tr>
+<tr class="memitem:ga91979021e90f8cb07a32fd88d57b42b1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#ga91979021e90f8cb07a32fd88d57b42b1">has_attr</a> (const <a class="el" href="class_e_l_b.html">ELB</a> &amp;X, const std::string &amp;key) const</td></tr>
 <tr class="memdesc:ga91979021e90f8cb07a32fd88d57b42b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if an edge has an attribute given its key.  <a href="group__edges.html#ga91979021e90f8cb07a32fd88d57b42b1">More...</a><br /></td></tr>
 <tr class="separator:ga91979021e90f8cb07a32fd88d57b42b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga52cd81947d21455d64c670cdccd3cae5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#ga52cd81947d21455d64c670cdccd3cae5">has_attr</a> (const <a class="el" href="interface__graph_8hpp.html#a5fd37095d99552e7dcd78beb8e969d5f">VID</a> &amp;X, const <a class="el" href="interface__graph_8hpp.html#a5fd37095d99552e7dcd78beb8e969d5f">VID</a> &amp;Y, const std::string &amp;key) const</td></tr>
@@ -279,7 +292,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:gae5879d9cc1127bf13d6587e8cc1da32f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the edge attribute value given its key.  <a href="group__edges.html#gae5879d9cc1127bf13d6587e8cc1da32f">More...</a><br /></td></tr>
 <tr class="separator:gae5879d9cc1127bf13d6587e8cc1da32f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga35d8f45cfd30e0efbb5cc52ca119538b"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:ga35d8f45cfd30e0efbb5cc52ca119538b"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__edges.html#ga35d8f45cfd30e0efbb5cc52ca119538b">get_attr</a> (const <a class="el" href="abstract__graph_8hpp.html#a9803f35af0be5dcee4999f8c52d89172">ELB</a> &amp;X, const std::string &amp;key) const</td></tr>
+<tr class="memitem:ga35d8f45cfd30e0efbb5cc52ca119538b"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__edges.html#ga35d8f45cfd30e0efbb5cc52ca119538b">get_attr</a> (const <a class="el" href="class_e_l_b.html">ELB</a> &amp;X, const std::string &amp;key) const</td></tr>
 <tr class="memdesc:ga35d8f45cfd30e0efbb5cc52ca119538b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the edge attribute value given its key.  <a href="group__edges.html#ga35d8f45cfd30e0efbb5cc52ca119538b">More...</a><br /></td></tr>
 <tr class="separator:ga35d8f45cfd30e0efbb5cc52ca119538b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga75253ab02f63d95369933f9d1438b0c8"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
@@ -295,7 +308,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:gafd6351dbd597f9876256e27b74fe5d34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the edge attribute given its key and value.  <a href="group__edges.html#gafd6351dbd597f9876256e27b74fe5d34">More...</a><br /></td></tr>
 <tr class="separator:gafd6351dbd597f9876256e27b74fe5d34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga59bb0f57daf7b48d7fe1c28b0db9bcfc"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:ga59bb0f57daf7b48d7fe1c28b0db9bcfc"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__edges.html#ga59bb0f57daf7b48d7fe1c28b0db9bcfc">set_attr</a> (const <a class="el" href="abstract__graph_8hpp.html#a9803f35af0be5dcee4999f8c52d89172">ELB</a> &amp;X, const std::string &amp;key, const T &amp;value)</td></tr>
+<tr class="memitem:ga59bb0f57daf7b48d7fe1c28b0db9bcfc"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__edges.html#ga59bb0f57daf7b48d7fe1c28b0db9bcfc">set_attr</a> (const <a class="el" href="class_e_l_b.html">ELB</a> &amp;X, const std::string &amp;key, const T &amp;value)</td></tr>
 <tr class="memdesc:ga59bb0f57daf7b48d7fe1c28b0db9bcfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the edge attribute given its key and value.  <a href="group__edges.html#ga59bb0f57daf7b48d7fe1c28b0db9bcfc">More...</a><br /></td></tr>
 <tr class="separator:ga59bb0f57daf7b48d7fe1c28b0db9bcfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga9bd710ad31273a2bf592e8f4824a0abe"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
@@ -309,7 +322,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ga4830e94ea9dfca121a177aae66c32eaf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#ga4830e94ea9dfca121a177aae66c32eaf">del_attr</a> (const <a class="el" href="interface__graph_8hpp.html#a8b1dd0cc86cb9d108e92f42b1314ca42">EID</a> &amp;X, const std::string &amp;key)</td></tr>
 <tr class="memdesc:ga4830e94ea9dfca121a177aae66c32eaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete the edge attribute given its key.  <a href="group__edges.html#ga4830e94ea9dfca121a177aae66c32eaf">More...</a><br /></td></tr>
 <tr class="separator:ga4830e94ea9dfca121a177aae66c32eaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab6377f071193384f9a568e03fc247555"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#gab6377f071193384f9a568e03fc247555">del_attr</a> (const <a class="el" href="abstract__graph_8hpp.html#a9803f35af0be5dcee4999f8c52d89172">ELB</a> &amp;X, const std::string &amp;key)</td></tr>
+<tr class="memitem:gab6377f071193384f9a568e03fc247555"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#gab6377f071193384f9a568e03fc247555">del_attr</a> (const <a class="el" href="class_e_l_b.html">ELB</a> &amp;X, const std::string &amp;key)</td></tr>
 <tr class="memdesc:gab6377f071193384f9a568e03fc247555"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete the edge attribute given its key.  <a href="group__edges.html#gab6377f071193384f9a568e03fc247555">More...</a><br /></td></tr>
 <tr class="separator:gab6377f071193384f9a568e03fc247555"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga74db6d5a46b53edb2448f69dec3bccab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#ga74db6d5a46b53edb2448f69dec3bccab">del_attr</a> (const <a class="el" href="interface__graph_8hpp.html#a5fd37095d99552e7dcd78beb8e969d5f">VID</a> &amp;X, const <a class="el" href="interface__graph_8hpp.html#a5fd37095d99552e7dcd78beb8e969d5f">VID</a> &amp;Y, const std::string &amp;key)</td></tr>
@@ -318,7 +331,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ga3822a04d09b3000c8af3e35e9d56ea65"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#ga3822a04d09b3000c8af3e35e9d56ea65">del_attr</a> (const <a class="el" href="abstract__graph_8hpp.html#ab3314bb3ec0edf7495e49829cd2e9768">VLB</a> &amp;X, const <a class="el" href="abstract__graph_8hpp.html#ab3314bb3ec0edf7495e49829cd2e9768">VLB</a> &amp;Y, const std::string &amp;key)</td></tr>
 <tr class="memdesc:ga3822a04d09b3000c8af3e35e9d56ea65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete the edge attribute given its key.  <a href="group__edges.html#ga3822a04d09b3000c8af3e35e9d56ea65">More...</a><br /></td></tr>
 <tr class="separator:ga3822a04d09b3000c8af3e35e9d56ea65"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf6f5f24cd66a8015b08b6f7906e5ba3a"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#gaf6f5f24cd66a8015b08b6f7906e5ba3a">has_edge</a> (const <a class="el" href="abstract__graph_8hpp.html#a9803f35af0be5dcee4999f8c52d89172">ELB</a> &amp;X) const</td></tr>
+<tr class="memitem:gaf6f5f24cd66a8015b08b6f7906e5ba3a"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#gaf6f5f24cd66a8015b08b6f7906e5ba3a">has_edge</a> (const <a class="el" href="class_e_l_b.html">ELB</a> &amp;X) const</td></tr>
 <tr class="memdesc:gaf6f5f24cd66a8015b08b6f7906e5ba3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether an edge exists or not.  <a href="group__edges.html#gaf6f5f24cd66a8015b08b6f7906e5ba3a">More...</a><br /></td></tr>
 <tr class="separator:gaf6f5f24cd66a8015b08b6f7906e5ba3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga5d511a0451cea4b50fa05b52ef139e51"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#ga5d511a0451cea4b50fa05b52ef139e51">has_edge</a> (const <a class="el" href="interface__graph_8hpp.html#a5fd37095d99552e7dcd78beb8e969d5f">VID</a> &amp;X, const <a class="el" href="interface__graph_8hpp.html#a5fd37095d99552e7dcd78beb8e969d5f">VID</a> &amp;Y) const</td></tr>
@@ -333,79 +346,58 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ga09fcb512ecc066a30fa9db90fb3f5066"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#ga09fcb512ecc066a30fa9db90fb3f5066">add_edge</a> (const <a class="el" href="abstract__graph_8hpp.html#ab3314bb3ec0edf7495e49829cd2e9768">VLB</a> &amp;X, const <a class="el" href="abstract__graph_8hpp.html#ab3314bb3ec0edf7495e49829cd2e9768">VLB</a> &amp;Y)</td></tr>
 <tr class="memdesc:ga09fcb512ecc066a30fa9db90fb3f5066"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add an edge to the graph.  <a href="group__edges.html#ga09fcb512ecc066a30fa9db90fb3f5066">More...</a><br /></td></tr>
 <tr class="separator:ga09fcb512ecc066a30fa9db90fb3f5066"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4135232375771092774941eabb0c536e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#ga4135232375771092774941eabb0c536e">del_edge</a> (const <a class="el" href="interface__graph_8hpp.html#a8b1dd0cc86cb9d108e92f42b1314ca42">EID</a> &amp;X)</td></tr>
-<tr class="memdesc:ga4135232375771092774941eabb0c536e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete an edge from the graph.  <a href="group__edges.html#ga4135232375771092774941eabb0c536e">More...</a><br /></td></tr>
-<tr class="separator:ga4135232375771092774941eabb0c536e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga03c2034c919890c99b5df94139546c61"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#ga03c2034c919890c99b5df94139546c61">del_edge</a> (const <a class="el" href="class_e_l_b.html">ELB</a> &amp;X)</td></tr>
+<tr class="memdesc:ga03c2034c919890c99b5df94139546c61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete an edge from the graph.  <a href="group__edges.html#ga03c2034c919890c99b5df94139546c61">More...</a><br /></td></tr>
+<tr class="separator:ga03c2034c919890c99b5df94139546c61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga1eca60e6bbf8c2c201b1ac597b056da4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#ga1eca60e6bbf8c2c201b1ac597b056da4">del_edge</a> (const <a class="el" href="interface__graph_8hpp.html#a5fd37095d99552e7dcd78beb8e969d5f">VID</a> &amp;X, const <a class="el" href="interface__graph_8hpp.html#a5fd37095d99552e7dcd78beb8e969d5f">VID</a> &amp;Y)</td></tr>
 <tr class="memdesc:ga1eca60e6bbf8c2c201b1ac597b056da4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete an edge from the graph.  <a href="group__edges.html#ga1eca60e6bbf8c2c201b1ac597b056da4">More...</a><br /></td></tr>
 <tr class="separator:ga1eca60e6bbf8c2c201b1ac597b056da4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga41e87f6fb5cafa9c98a91b538646f825"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#ga41e87f6fb5cafa9c98a91b538646f825">del_edge</a> (const <a class="el" href="abstract__graph_8hpp.html#ab3314bb3ec0edf7495e49829cd2e9768">VLB</a> &amp;X, const <a class="el" href="abstract__graph_8hpp.html#ab3314bb3ec0edf7495e49829cd2e9768">VLB</a> &amp;Y)</td></tr>
 <tr class="memdesc:ga41e87f6fb5cafa9c98a91b538646f825"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete an edge from the graph.  <a href="group__edges.html#ga41e87f6fb5cafa9c98a91b538646f825">More...</a><br /></td></tr>
 <tr class="separator:ga41e87f6fb5cafa9c98a91b538646f825"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a483202a13a78af979034f62ffb337988"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="interface__graph_8hpp.html#abc65cd272bd4732b8a68adb660135653">AdjacencyList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_graph.html#a483202a13a78af979034f62ffb337988">adjacency_list</a> () const =0</td></tr>
-<tr class="memdesc:a483202a13a78af979034f62ffb337988"><td class="mdescLeft">&#160;</td><td class="mdescRight">The adjacency list representation of the graph.  <a href="class_i_graph.html#a483202a13a78af979034f62ffb337988">More...</a><br /></td></tr>
-<tr class="separator:a483202a13a78af979034f62ffb337988"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a878f36afab45d503aba138c59fbff98b"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="interface__graph_8hpp.html#ad1dfb3b7137ee9368acf75aaad1378f5">AdjacencyMatrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_graph.html#a878f36afab45d503aba138c59fbff98b">adjacency_matrix</a> () const =0</td></tr>
-<tr class="memdesc:a878f36afab45d503aba138c59fbff98b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The adjacency matrix representation of the graph in a dense format.  <a href="class_i_graph.html#a878f36afab45d503aba138c59fbff98b">More...</a><br /></td></tr>
-<tr class="separator:a878f36afab45d503aba138c59fbff98b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a548c563db83fd36e2c79e28b56165d31"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="interface__graph_8hpp.html#afc9babc767f8313c6649eec86ef58514">SparseAdjacencyMatrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_graph.html#a548c563db83fd36e2c79e28b56165d31">sparse_adjacency_matrix</a> () const =0</td></tr>
-<tr class="memdesc:a548c563db83fd36e2c79e28b56165d31"><td class="mdescLeft">&#160;</td><td class="mdescRight">The adjacency matrix representation of the graph in a sparse format.  <a href="class_i_graph.html#a548c563db83fd36e2c79e28b56165d31">More...</a><br /></td></tr>
-<tr class="separator:a548c563db83fd36e2c79e28b56165d31"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab0021c1351199d80e3ceeb68cd480e7e"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_graph.html#ab0021c1351199d80e3ceeb68cd480e7e">order</a> () const =0</td></tr>
-<tr class="memdesc:ab0021c1351199d80e3ceeb68cd480e7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of vertices of a graph is called its order.  <a href="class_i_graph.html#ab0021c1351199d80e3ceeb68cd480e7e">More...</a><br /></td></tr>
-<tr class="separator:ab0021c1351199d80e3ceeb68cd480e7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0cc8609c091f500bfd81bc36d96d4d28"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_graph.html#a0cc8609c091f500bfd81bc36d96d4d28">size</a> () const =0</td></tr>
-<tr class="memdesc:a0cc8609c091f500bfd81bc36d96d4d28"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of edges of a graph is called its size.  <a href="class_i_graph.html#a0cc8609c091f500bfd81bc36d96d4d28">More...</a><br /></td></tr>
-<tr class="separator:a0cc8609c091f500bfd81bc36d96d4d28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a337dbac0390a76c2f6f8728f415e49d5"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_graph.html#a337dbac0390a76c2f6f8728f415e49d5">operator AdjacencyList</a> () const =0</td></tr>
+<tr class="memdesc:a337dbac0390a76c2f6f8728f415e49d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">The adjacency list representation of the graph.  <a href="class_i_graph.html#a337dbac0390a76c2f6f8728f415e49d5">More...</a><br /></td></tr>
+<tr class="separator:a337dbac0390a76c2f6f8728f415e49d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a4d8a840fdc125818bbdfcb24df8dcc"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_graph.html#a3a4d8a840fdc125818bbdfcb24df8dcc">operator AdjacencyMatrix</a> () const =0</td></tr>
+<tr class="memdesc:a3a4d8a840fdc125818bbdfcb24df8dcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">The adjacency matrix representation of the graph in a dense format.  <a href="class_i_graph.html#a3a4d8a840fdc125818bbdfcb24df8dcc">More...</a><br /></td></tr>
+<tr class="separator:a3a4d8a840fdc125818bbdfcb24df8dcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14fe1a45ccaf10ee89a4d347d2704a13"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_graph.html#a14fe1a45ccaf10ee89a4d347d2704a13">operator SparseAdjacencyMatrix</a> () const =0</td></tr>
+<tr class="memdesc:a14fe1a45ccaf10ee89a4d347d2704a13"><td class="mdescLeft">&#160;</td><td class="mdescRight">The adjacency matrix representation of the graph in a sparse format.  <a href="class_i_graph.html#a14fe1a45ccaf10ee89a4d347d2704a13">More...</a><br /></td></tr>
+<tr class="separator:a14fe1a45ccaf10ee89a4d347d2704a13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bb7400a804a59b9628c75ecf6999719"><td class="memItemLeft" align="right" valign="top">virtual std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_graph.html#a3bb7400a804a59b9628c75ecf6999719">order</a> () const =0</td></tr>
+<tr class="memdesc:a3bb7400a804a59b9628c75ecf6999719"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of vertices of a graph is called its order.  <a href="class_i_graph.html#a3bb7400a804a59b9628c75ecf6999719">More...</a><br /></td></tr>
+<tr class="separator:a3bb7400a804a59b9628c75ecf6999719"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af65efd8b43c76afc7616968de14183ae"><td class="memItemLeft" align="right" valign="top">virtual std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_graph.html#af65efd8b43c76afc7616968de14183ae">size</a> () const =0</td></tr>
+<tr class="memdesc:af65efd8b43c76afc7616968de14183ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of edges of a graph is called its size.  <a href="class_i_graph.html#af65efd8b43c76afc7616968de14183ae">More...</a><br /></td></tr>
+<tr class="separator:af65efd8b43c76afc7616968de14183ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0d3f1ad2346c64a8b10cf8ee7be653c"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_graph.html#ac0d3f1ad2346c64a8b10cf8ee7be653c">is_null</a> () const</td></tr>
 <tr class="memdesc:ac0d3f1ad2346c64a8b10cf8ee7be653c"><td class="mdescLeft">&#160;</td><td class="mdescRight">A graph is null if it has no vertices.  <a href="class_i_graph.html#ac0d3f1ad2346c64a8b10cf8ee7be653c">More...</a><br /></td></tr>
 <tr class="separator:ac0d3f1ad2346c64a8b10cf8ee7be653c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac6f0e4cf2a1b1464f39653fcb10de7cd"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_graph.html#ac6f0e4cf2a1b1464f39653fcb10de7cd">is_trivial</a> () const</td></tr>
 <tr class="memdesc:ac6f0e4cf2a1b1464f39653fcb10de7cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">A graph is trivial if it has one vertex and no edges.  <a href="class_i_graph.html#ac6f0e4cf2a1b1464f39653fcb10de7cd">More...</a><br /></td></tr>
 <tr class="separator:ac6f0e4cf2a1b1464f39653fcb10de7cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac589eb8a09b0828b3463a1f974c0cb28"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_graph.html#ac589eb8a09b0828b3463a1f974c0cb28">is_complete</a> () const =0</td></tr>
-<tr class="memdesc:ac589eb8a09b0828b3463a1f974c0cb28"><td class="mdescLeft">&#160;</td><td class="mdescRight">A graph is complete if every vertex is connected to all the others.  <a href="class_i_graph.html#ac589eb8a09b0828b3463a1f974c0cb28">More...</a><br /></td></tr>
-<tr class="separator:ac589eb8a09b0828b3463a1f974c0cb28"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaec2f3215312495b8711b10ba63f07487"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="interface__graph_8hpp.html#a8b511f09686d0814921734b3cb2aecf7">VIDs</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vertices.html#gaec2f3215312495b8711b10ba63f07487">vertices</a> () const =0</td></tr>
-<tr class="memdesc:gaec2f3215312495b8711b10ba63f07487"><td class="mdescLeft">&#160;</td><td class="mdescRight">The vertices of a graph.  <a href="group__vertices.html#gaec2f3215312495b8711b10ba63f07487">More...</a><br /></td></tr>
-<tr class="separator:gaec2f3215312495b8711b10ba63f07487"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1d008920f6f2d58a5718c16a77fdfd6c"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vertices.html#ga1d008920f6f2d58a5718c16a77fdfd6c">has_vertex</a> (const <a class="el" href="interface__graph_8hpp.html#a5fd37095d99552e7dcd78beb8e969d5f">VID</a> &amp;X) const =0</td></tr>
-<tr class="memdesc:ga1d008920f6f2d58a5718c16a77fdfd6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether a vertex id exists or not.  <a href="group__vertices.html#ga1d008920f6f2d58a5718c16a77fdfd6c">More...</a><br /></td></tr>
-<tr class="separator:ga1d008920f6f2d58a5718c16a77fdfd6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7acd226e1357dd415ff87b1dc21316ae"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="interface__graph_8hpp.html#a5fd37095d99552e7dcd78beb8e969d5f">VID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vertices.html#ga7acd226e1357dd415ff87b1dc21316ae">add_vertex</a> ()=0</td></tr>
-<tr class="memdesc:ga7acd226e1357dd415ff87b1dc21316ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a vertex to the graph.  <a href="group__vertices.html#ga7acd226e1357dd415ff87b1dc21316ae">More...</a><br /></td></tr>
-<tr class="separator:ga7acd226e1357dd415ff87b1dc21316ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf2e39bc8f442d1b425c697734c9b45c6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__vertices.html#gaf2e39bc8f442d1b425c697734c9b45c6">add_vertex</a> (const <a class="el" href="interface__graph_8hpp.html#a5fd37095d99552e7dcd78beb8e969d5f">VID</a> &amp;X)=0</td></tr>
-<tr class="memdesc:gaf2e39bc8f442d1b425c697734c9b45c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a vertex id to the graph.  <a href="group__vertices.html#gaf2e39bc8f442d1b425c697734c9b45c6">More...</a><br /></td></tr>
-<tr class="separator:gaf2e39bc8f442d1b425c697734c9b45c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0d1565fa0e94155e5c4f63c9b0ebd3b9"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="interface__graph_8hpp.html#aa0647dafa17edc01df74a8c011cd908a">EIDs</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#ga0d1565fa0e94155e5c4f63c9b0ebd3b9">edges</a> () const =0</td></tr>
-<tr class="memdesc:ga0d1565fa0e94155e5c4f63c9b0ebd3b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">The edges of a graph.  <a href="group__edges.html#ga0d1565fa0e94155e5c4f63c9b0ebd3b9">More...</a><br /></td></tr>
-<tr class="separator:ga0d1565fa0e94155e5c4f63c9b0ebd3b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga77697dddee3bf020591a7780b882219f"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#ga77697dddee3bf020591a7780b882219f">has_edge</a> (const <a class="el" href="interface__graph_8hpp.html#a8b1dd0cc86cb9d108e92f42b1314ca42">EID</a> &amp;X) const =0</td></tr>
-<tr class="memdesc:ga77697dddee3bf020591a7780b882219f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether an edge exists or not.  <a href="group__edges.html#ga77697dddee3bf020591a7780b882219f">More...</a><br /></td></tr>
-<tr class="separator:ga77697dddee3bf020591a7780b882219f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf86acb5200fddcd25ef0bba819067acc"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__edges.html#gaf86acb5200fddcd25ef0bba819067acc">add_edge</a> (const <a class="el" href="interface__graph_8hpp.html#a8b1dd0cc86cb9d108e92f42b1314ca42">EID</a> &amp;X)=0</td></tr>
-<tr class="memdesc:gaf86acb5200fddcd25ef0bba819067acc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add an edge to the graph.  <a href="group__edges.html#gaf86acb5200fddcd25ef0bba819067acc">More...</a><br /></td></tr>
-<tr class="separator:gaf86acb5200fddcd25ef0bba819067acc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee9683ac728be94481b12b5dced796eb"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_graph.html#aee9683ac728be94481b12b5dced796eb">is_complete</a> () const</td></tr>
+<tr class="memdesc:aee9683ac728be94481b12b5dced796eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">A graph is complete if every vertex is connected to all the others.  <a href="class_i_graph.html#aee9683ac728be94481b12b5dced796eb">More...</a><br /></td></tr>
+<tr class="separator:aee9683ac728be94481b12b5dced796eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
-Private Member Functions</h2></td></tr>
-<tr class="memitem:a3a1ef9cf0815ff6ea0e66d8877ade88c"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_graph.html#a3a1ef9cf0815ff6ea0e66d8877ade88c">hash</a> () const =0</td></tr>
-<tr class="memdesc:a3a1ef9cf0815ff6ea0e66d8877ade88c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hash function of a graph.  <a href="class_i_graph.html#a3a1ef9cf0815ff6ea0e66d8877ade88c">More...</a><br /></td></tr>
-<tr class="separator:a3a1ef9cf0815ff6ea0e66d8877ade88c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a0d4bcb77c14a922a08e3e5bf20c88df0"><td class="memItemLeft" align="right" valign="top">virtual std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_graph.html#a0d4bcb77c14a922a08e3e5bf20c88df0">hash</a> () const =0</td></tr>
+<tr class="memdesc:a0d4bcb77c14a922a08e3e5bf20c88df0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hash function of a graph.  <a href="class_i_graph.html#a0d4bcb77c14a922a08e3e5bf20c88df0">More...</a><br /></td></tr>
+<tr class="separator:a0d4bcb77c14a922a08e3e5bf20c88df0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a736887c24504fff816d2ba870cb34e17"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_graph.html#a736887c24504fff816d2ba870cb34e17">print</a> (std::ostream &amp;out) const =0</td></tr>
 <tr class="memdesc:a736887c24504fff816d2ba870cb34e17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print utility function.  <a href="class_i_graph.html#a736887c24504fff816d2ba870cb34e17">More...</a><br /></td></tr>
 <tr class="separator:a736887c24504fff816d2ba870cb34e17"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
-Private Attributes</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
 <tr class="memitem:ad8eb8ef80b5f6911ffd1205094bc057a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="abstract__graph_8hpp.html#a0e1d385d9775aaf39d3753ec4146544f">GLB</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_abstract_graph.html#ad8eb8ef80b5f6911ffd1205094bc057a">glb</a></td></tr>
 <tr class="memdesc:ad8eb8ef80b5f6911ffd1205094bc057a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Graph label, aka its name.  <a href="class_abstract_graph.html#ad8eb8ef80b5f6911ffd1205094bc057a">More...</a><br /></td></tr>
 <tr class="separator:ad8eb8ef80b5f6911ffd1205094bc057a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0aba0e4ee33b24b7c6807201352e45ac"><td class="memItemLeft" align="right" valign="top">boost::bimap&lt; <a class="el" href="interface__graph_8hpp.html#a5fd37095d99552e7dcd78beb8e969d5f">VID</a>, <a class="el" href="abstract__graph_8hpp.html#ab3314bb3ec0edf7495e49829cd2e9768">VLB</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_abstract_graph.html#a0aba0e4ee33b24b7c6807201352e45ac">vlbs</a></td></tr>
 <tr class="memdesc:a0aba0e4ee33b24b7c6807201352e45ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bidirectional mapping for vertex ids and labels.  <a href="class_abstract_graph.html#a0aba0e4ee33b24b7c6807201352e45ac">More...</a><br /></td></tr>
 <tr class="separator:a0aba0e4ee33b24b7c6807201352e45ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a98e9812f6b924cb144a5e3c43be21d"><td class="memItemLeft" align="right" valign="top">boost::bimap&lt; <a class="el" href="interface__graph_8hpp.html#a8b1dd0cc86cb9d108e92f42b1314ca42">EID</a>, <a class="el" href="abstract__graph_8hpp.html#a9803f35af0be5dcee4999f8c52d89172">ELB</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_abstract_graph.html#a4a98e9812f6b924cb144a5e3c43be21d">elbs</a></td></tr>
+<tr class="memitem:a4a98e9812f6b924cb144a5e3c43be21d"><td class="memItemLeft" align="right" valign="top">boost::bimap&lt; <a class="el" href="interface__graph_8hpp.html#a8b1dd0cc86cb9d108e92f42b1314ca42">EID</a>, <a class="el" href="class_e_l_b.html">ELB</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_abstract_graph.html#a4a98e9812f6b924cb144a5e3c43be21d">elbs</a></td></tr>
 <tr class="memdesc:a4a98e9812f6b924cb144a5e3c43be21d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bidirectional mapping for edge ids and labels.  <a href="class_abstract_graph.html#a4a98e9812f6b924cb144a5e3c43be21d">More...</a><br /></td></tr>
 <tr class="separator:a4a98e9812f6b924cb144a5e3c43be21d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e47794cbff31a3aae8d2f8274d0b850"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, std::any &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_abstract_graph.html#a1e47794cbff31a3aae8d2f8274d0b850">gattrs</a></td></tr>
@@ -420,7 +412,7 @@ Private Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="abstract__graph_8hpp_source.html#l00019">19</a> of file <a class="el" href="abstract__graph_8hpp_source.html">abstract_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="abstract__graph_8hpp_source.html#l00023">23</a> of file <a class="el" href="abstract__graph_8hpp_source.html">abstract_graph.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a7902641c97ef3410bc9830ebf3d560ed"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7902641c97ef3410bc9830ebf3d560ed">&#9670;&nbsp;</a></span>AbstractGraph() <span class="overload">[1/2]</span></h2>
@@ -529,9 +521,10 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_abstract_graph_a75a239e2f8df4e8ad29e3f52f73a11a2_icgraph.png" border="0" usemap="#aclass_abstract_graph_a75a239e2f8df4e8ad29e3f52f73a11a2_icgraph" alt=""/></div>
 <map name="aclass_abstract_graph_a75a239e2f8df4e8ad29e3f52f73a11a2_icgraph" id="aclass_abstract_graph_a75a239e2f8df4e8ad29e3f52f73a11a2_icgraph">
-<area shape="rect" title="Check if the graph has a label." alt="" coords="365,39,499,80"/>
+<area shape="rect" title="Check if the graph has a label." alt="" coords="365,71,499,112"/>
 <area shape="rect" href="class_abstract_graph.html#af81bbc733cc70a9979bbb46fb6bad84c" title="Get the graph label." alt="" coords="185,5,316,47"/>
 <area shape="rect" href="group__edges.html#ga855e646613c23abd470debff177cfd49" title="Check if an edge has a label." alt="" coords="184,71,317,112"/>
+<area shape="rect" href="class_dense_graph.html#a427aa1904d8a8a7ce78c93d582e25afc" title="Hash function of a graph." alt="" coords="187,137,315,163"/>
 <area shape="rect" href="group__edges.html#ga77c98626a1a9bfe626da99e2388579d0" title="Get the edge label." alt="" coords="5,5,136,47"/>
 </map>
 </div>
@@ -865,8 +858,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a483202a13a78af979034f62ffb337988"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a483202a13a78af979034f62ffb337988">&#9670;&nbsp;</a></span>adjacency_list()</h2>
+<a id="a337dbac0390a76c2f6f8728f415e49d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a337dbac0390a76c2f6f8728f415e49d5">&#9670;&nbsp;</a></span>operator AdjacencyList()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -875,7 +868,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="interface__graph_8hpp.html#abc65cd272bd4732b8a68adb660135653">AdjacencyList</a> IGraph::adjacency_list </td>
+          <td class="memname">virtual IGraph::operator <a class="el" href="interface__graph_8hpp.html#abc65cd272bd4732b8a68adb660135653">AdjacencyList</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -891,10 +884,12 @@ Here is the caller graph for this function:</div>
 <p>The adjacency list representation of the graph. </p>
 <dl class="section return"><dt>Returns</dt><dd>AdjacencyList Adjacency list of the graph. </dd></dl>
 
+<p>Implemented in <a class="el" href="class_dense_graph.html#a7f2a475b2b1575b5cdf2078384c654c1">DenseGraph</a>.</p>
+
 </div>
 </div>
-<a id="a878f36afab45d503aba138c59fbff98b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a878f36afab45d503aba138c59fbff98b">&#9670;&nbsp;</a></span>adjacency_matrix()</h2>
+<a id="a3a4d8a840fdc125818bbdfcb24df8dcc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a4d8a840fdc125818bbdfcb24df8dcc">&#9670;&nbsp;</a></span>operator AdjacencyMatrix()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -903,7 +898,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="interface__graph_8hpp.html#ad1dfb3b7137ee9368acf75aaad1378f5">AdjacencyMatrix</a> IGraph::adjacency_matrix </td>
+          <td class="memname">virtual IGraph::operator <a class="el" href="interface__graph_8hpp.html#ad1dfb3b7137ee9368acf75aaad1378f5">AdjacencyMatrix</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -919,10 +914,12 @@ Here is the caller graph for this function:</div>
 <p>The adjacency matrix representation of the graph in a dense format. </p>
 <dl class="section return"><dt>Returns</dt><dd>AdjacencyMatrix Dense adjacency matrix of the graph. </dd></dl>
 
+<p>Implemented in <a class="el" href="class_dense_graph.html#a70a30322c7ab17512ce897f7a71f35c5">DenseGraph</a>.</p>
+
 </div>
 </div>
-<a id="a548c563db83fd36e2c79e28b56165d31"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a548c563db83fd36e2c79e28b56165d31">&#9670;&nbsp;</a></span>sparse_adjacency_matrix()</h2>
+<a id="a14fe1a45ccaf10ee89a4d347d2704a13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14fe1a45ccaf10ee89a4d347d2704a13">&#9670;&nbsp;</a></span>operator SparseAdjacencyMatrix()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -931,7 +928,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="interface__graph_8hpp.html#afc9babc767f8313c6649eec86ef58514">SparseAdjacencyMatrix</a> IGraph::sparse_adjacency_matrix </td>
+          <td class="memname">virtual IGraph::operator <a class="el" href="interface__graph_8hpp.html#afc9babc767f8313c6649eec86ef58514">SparseAdjacencyMatrix</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -947,10 +944,12 @@ Here is the caller graph for this function:</div>
 <p>The adjacency matrix representation of the graph in a sparse format. </p>
 <dl class="section return"><dt>Returns</dt><dd>SparseAdjacencyMatrix Sparse adjacency matrix of the graph. </dd></dl>
 
+<p>Implemented in <a class="el" href="class_dense_graph.html#a4f45a9740853805c14f4d5e97da49c5b">DenseGraph</a>.</p>
+
 </div>
 </div>
-<a id="ab0021c1351199d80e3ceeb68cd480e7e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab0021c1351199d80e3ceeb68cd480e7e">&#9670;&nbsp;</a></span>order()</h2>
+<a id="a3bb7400a804a59b9628c75ecf6999719"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3bb7400a804a59b9628c75ecf6999719">&#9670;&nbsp;</a></span>order()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -959,7 +958,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual size_t IGraph::order </td>
+          <td class="memname">virtual std::size_t IGraph::order </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -973,22 +972,25 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p>The number of vertices of a graph is called its order. </p>
-<dl class="section return"><dt>Returns</dt><dd>size_t Number of vertices of the graph. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>std::size_t Number of vertices of the graph. </dd></dl>
+
+<p>Implemented in <a class="el" href="class_dense_graph.html#a0a854fb94a80c57116bf1d6ec33facc5">DenseGraph</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_i_graph_ab0021c1351199d80e3ceeb68cd480e7e_icgraph.png" border="0" usemap="#aclass_i_graph_ab0021c1351199d80e3ceeb68cd480e7e_icgraph" alt=""/></div>
-<map name="aclass_i_graph_ab0021c1351199d80e3ceeb68cd480e7e_icgraph" id="aclass_i_graph_ab0021c1351199d80e3ceeb68cd480e7e_icgraph">
-<area shape="rect" title="The number of vertices of a graph is called its order." alt="" coords="168,31,264,57"/>
-<area shape="rect" href="class_i_graph.html#ac0d3f1ad2346c64a8b10cf8ee7be653c" title="A graph is null if it has no vertices." alt="" coords="11,5,115,32"/>
-<area shape="rect" href="class_i_graph.html#ac6f0e4cf2a1b1464f39653fcb10de7cd" title="A graph is trivial if it has one vertex and no edges." alt="" coords="5,56,120,83"/>
+<div class="center"><img src="class_i_graph_a3bb7400a804a59b9628c75ecf6999719_icgraph.png" border="0" usemap="#aclass_i_graph_a3bb7400a804a59b9628c75ecf6999719_icgraph" alt=""/></div>
+<map name="aclass_i_graph_a3bb7400a804a59b9628c75ecf6999719_icgraph" id="aclass_i_graph_a3bb7400a804a59b9628c75ecf6999719_icgraph">
+<area shape="rect" title="The number of vertices of a graph is called its order." alt="" coords="191,56,287,83"/>
+<area shape="rect" href="class_i_graph.html#aee9683ac728be94481b12b5dced796eb" title="A graph is complete if every vertex is connected to all the others." alt="" coords="5,5,143,32"/>
+<area shape="rect" href="class_i_graph.html#ac0d3f1ad2346c64a8b10cf8ee7be653c" title="A graph is null if it has no vertices." alt="" coords="22,56,126,83"/>
+<area shape="rect" href="class_i_graph.html#ac6f0e4cf2a1b1464f39653fcb10de7cd" title="A graph is trivial if it has one vertex and no edges." alt="" coords="17,107,131,133"/>
 </map>
 </div>
 
 </div>
 </div>
-<a id="a0cc8609c091f500bfd81bc36d96d4d28"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0cc8609c091f500bfd81bc36d96d4d28">&#9670;&nbsp;</a></span>size()</h2>
+<a id="af65efd8b43c76afc7616968de14183ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af65efd8b43c76afc7616968de14183ae">&#9670;&nbsp;</a></span>size()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -997,7 +999,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual size_t IGraph::size </td>
+          <td class="memname">virtual std::size_t IGraph::size </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1011,14 +1013,17 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p>The number of edges of a graph is called its size. </p>
-<dl class="section return"><dt>Returns</dt><dd>size_t Number of edges of the graph. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>std::size_t Number of edges of the graph. </dd></dl>
+
+<p>Implemented in <a class="el" href="class_dense_graph.html#afb402cd21e3b1122f2d02020317b218c">DenseGraph</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_i_graph_a0cc8609c091f500bfd81bc36d96d4d28_icgraph.png" border="0" usemap="#aclass_i_graph_a0cc8609c091f500bfd81bc36d96d4d28_icgraph" alt=""/></div>
-<map name="aclass_i_graph_a0cc8609c091f500bfd81bc36d96d4d28_icgraph" id="aclass_i_graph_a0cc8609c091f500bfd81bc36d96d4d28_icgraph">
-<area shape="rect" title="The number of edges of a graph is called its size." alt="" coords="168,5,259,32"/>
-<area shape="rect" href="class_i_graph.html#ac6f0e4cf2a1b1464f39653fcb10de7cd" title="A graph is trivial if it has one vertex and no edges." alt="" coords="5,5,120,32"/>
+<div class="center"><img src="class_i_graph_af65efd8b43c76afc7616968de14183ae_icgraph.png" border="0" usemap="#aclass_i_graph_af65efd8b43c76afc7616968de14183ae_icgraph" alt=""/></div>
+<map name="aclass_i_graph_af65efd8b43c76afc7616968de14183ae_icgraph" id="aclass_i_graph_af65efd8b43c76afc7616968de14183ae_icgraph">
+<area shape="rect" title="The number of edges of a graph is called its size." alt="" coords="191,31,281,57"/>
+<area shape="rect" href="class_i_graph.html#aee9683ac728be94481b12b5dced796eb" title="A graph is complete if every vertex is connected to all the others." alt="" coords="5,5,143,32"/>
+<area shape="rect" href="class_i_graph.html#ac6f0e4cf2a1b1464f39653fcb10de7cd" title="A graph is trivial if it has one vertex and no edges." alt="" coords="17,56,131,83"/>
 </map>
 </div>
 
@@ -1059,7 +1064,7 @@ Here is the call graph for this function:</div>
 <div class="center"><img src="class_i_graph_ac0d3f1ad2346c64a8b10cf8ee7be653c_cgraph.png" border="0" usemap="#aclass_i_graph_ac0d3f1ad2346c64a8b10cf8ee7be653c_cgraph" alt=""/></div>
 <map name="aclass_i_graph_ac0d3f1ad2346c64a8b10cf8ee7be653c_cgraph" id="aclass_i_graph_ac0d3f1ad2346c64a8b10cf8ee7be653c_cgraph">
 <area shape="rect" title="A graph is null if it has no vertices." alt="" coords="5,5,109,32"/>
-<area shape="rect" href="class_i_graph.html#ab0021c1351199d80e3ceeb68cd480e7e" title="The number of vertices of a graph is called its order." alt="" coords="157,5,253,32"/>
+<area shape="rect" href="class_i_graph.html#a3bb7400a804a59b9628c75ecf6999719" title="The number of vertices of a graph is called its order." alt="" coords="157,5,253,32"/>
 </map>
 </div>
 
@@ -1100,15 +1105,15 @@ Here is the call graph for this function:</div>
 <div class="center"><img src="class_i_graph_ac6f0e4cf2a1b1464f39653fcb10de7cd_cgraph.png" border="0" usemap="#aclass_i_graph_ac6f0e4cf2a1b1464f39653fcb10de7cd_cgraph" alt=""/></div>
 <map name="aclass_i_graph_ac6f0e4cf2a1b1464f39653fcb10de7cd_cgraph" id="aclass_i_graph_ac6f0e4cf2a1b1464f39653fcb10de7cd_cgraph">
 <area shape="rect" title="A graph is trivial if it has one vertex and no edges." alt="" coords="5,31,120,57"/>
-<area shape="rect" href="class_i_graph.html#ab0021c1351199d80e3ceeb68cd480e7e" title="The number of vertices of a graph is called its order." alt="" coords="168,5,264,32"/>
-<area shape="rect" href="class_i_graph.html#a0cc8609c091f500bfd81bc36d96d4d28" title="The number of edges of a graph is called its size." alt="" coords="171,56,261,83"/>
+<area shape="rect" href="class_i_graph.html#a3bb7400a804a59b9628c75ecf6999719" title="The number of vertices of a graph is called its order." alt="" coords="168,5,264,32"/>
+<area shape="rect" href="class_i_graph.html#af65efd8b43c76afc7616968de14183ae" title="The number of edges of a graph is called its size." alt="" coords="171,56,261,83"/>
 </map>
 </div>
 
 </div>
 </div>
-<a id="ac589eb8a09b0828b3463a1f974c0cb28"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac589eb8a09b0828b3463a1f974c0cb28">&#9670;&nbsp;</a></span>is_complete()</h2>
+<a id="aee9683ac728be94481b12b5dced796eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee9683ac728be94481b12b5dced796eb">&#9670;&nbsp;</a></span>is_complete()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1117,7 +1122,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool IGraph::is_complete </td>
+          <td class="memname">bool IGraph::is_complete </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1125,7 +1130,7 @@ Here is the call graph for this function:</div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">pure virtual</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1135,10 +1140,22 @@ Here is the call graph for this function:</div>
 <dd>
 false Otherwise. </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="interface__graph_8ipp_source.html#l00011">11</a> of file <a class="el" href="interface__graph_8ipp_source.html">interface_graph.ipp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_i_graph_aee9683ac728be94481b12b5dced796eb_cgraph.png" border="0" usemap="#aclass_i_graph_aee9683ac728be94481b12b5dced796eb_cgraph" alt=""/></div>
+<map name="aclass_i_graph_aee9683ac728be94481b12b5dced796eb_cgraph" id="aclass_i_graph_aee9683ac728be94481b12b5dced796eb_cgraph">
+<area shape="rect" title="A graph is complete if every vertex is connected to all the others." alt="" coords="5,31,143,57"/>
+<area shape="rect" href="class_i_graph.html#a3bb7400a804a59b9628c75ecf6999719" title="The number of vertices of a graph is called its order." alt="" coords="191,5,287,32"/>
+<area shape="rect" href="class_i_graph.html#af65efd8b43c76afc7616968de14183ae" title="The number of edges of a graph is called its size." alt="" coords="193,56,284,83"/>
+</map>
+</div>
+
 </div>
 </div>
-<a id="a3a1ef9cf0815ff6ea0e66d8877ade88c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3a1ef9cf0815ff6ea0e66d8877ade88c">&#9670;&nbsp;</a></span>hash()</h2>
+<a id="a0d4bcb77c14a922a08e3e5bf20c88df0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d4bcb77c14a922a08e3e5bf20c88df0">&#9670;&nbsp;</a></span>hash()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1147,7 +1164,7 @@ false Otherwise. </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual size_t IGraph::hash </td>
+          <td class="memname">virtual std::size_t IGraph::hash </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1155,20 +1172,22 @@ false Otherwise. </dd></dl>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span><span class="mlabel">pure virtual</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">pure virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Hash function of a graph. </p>
-<dl class="section return"><dt>Returns</dt><dd>size_t Hash of a graph. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>std::size_t Hash of a graph. </dd></dl>
+
+<p>Implemented in <a class="el" href="class_dense_graph.html#a427aa1904d8a8a7ce78c93d582e25afc">DenseGraph</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_i_graph_a3a1ef9cf0815ff6ea0e66d8877ade88c_icgraph.png" border="0" usemap="#aclass_i_graph_a3a1ef9cf0815ff6ea0e66d8877ade88c_icgraph" alt=""/></div>
-<map name="aclass_i_graph_a3a1ef9cf0815ff6ea0e66d8877ade88c_icgraph" id="aclass_i_graph_a3a1ef9cf0815ff6ea0e66d8877ade88c_icgraph">
+<div class="center"><img src="class_i_graph_a0d4bcb77c14a922a08e3e5bf20c88df0_icgraph.png" border="0" usemap="#aclass_i_graph_a0d4bcb77c14a922a08e3e5bf20c88df0_icgraph" alt=""/></div>
+<map name="aclass_i_graph_a0d4bcb77c14a922a08e3e5bf20c88df0_icgraph" id="aclass_i_graph_a0d4bcb77c14a922a08e3e5bf20c88df0_icgraph">
 <area shape="rect" title="Hash function of a graph." alt="" coords="188,13,283,39"/>
-<area shape="rect" href="structstd_1_1hash_3_01_i_graph_01_4.html#a90b3986512544ca33623f09f7f2b703e" title="Hash function adapter." alt="" coords="5,5,140,47"/>
+<area shape="rect" href="structstd_1_1hash_3_01_i_graph_01_4.html#a7e849f50e288ec5198100b6373c03c0b" title="Hash function adapter." alt="" coords="5,5,140,47"/>
 </map>
 </div>
 
@@ -1193,7 +1212,7 @@ Here is the caller graph for this function:</div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">pure virtual</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">pure virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1205,6 +1224,8 @@ Here is the caller graph for this function:</div>
   </table>
   </dd>
 </dl>
+
+<p>Implemented in <a class="el" href="class_dense_graph.html#aa7a0d14d171adaebb4b30284cadd7ebf">DenseGraph</a>.</p>
 
 </div>
 </div>
@@ -1224,14 +1245,14 @@ Here is the caller graph for this function:</div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Graph label, aka its name. </p>
 
-<p class="definition">Definition at line <a class="el" href="abstract__graph_8hpp_source.html#l00022">22</a> of file <a class="el" href="abstract__graph_8hpp_source.html">abstract_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="abstract__graph_8hpp_source.html#l00026">26</a> of file <a class="el" href="abstract__graph_8hpp_source.html">abstract_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -1250,14 +1271,14 @@ Here is the caller graph for this function:</div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Bidirectional mapping for vertex ids and labels. </p>
 
-<p class="definition">Definition at line <a class="el" href="abstract__graph_8hpp_source.html#l00024">24</a> of file <a class="el" href="abstract__graph_8hpp_source.html">abstract_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="abstract__graph_8hpp_source.html#l00028">28</a> of file <a class="el" href="abstract__graph_8hpp_source.html">abstract_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -1271,19 +1292,19 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">boost::bimap&lt;<a class="el" href="interface__graph_8hpp.html#a8b1dd0cc86cb9d108e92f42b1314ca42">EID</a>, <a class="el" href="abstract__graph_8hpp.html#a9803f35af0be5dcee4999f8c52d89172">ELB</a>&gt; AbstractGraph::elbs</td>
+          <td class="memname">boost::bimap&lt;<a class="el" href="interface__graph_8hpp.html#a8b1dd0cc86cb9d108e92f42b1314ca42">EID</a>, <a class="el" href="class_e_l_b.html">ELB</a>&gt; AbstractGraph::elbs</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Bidirectional mapping for edge ids and labels. </p>
 
-<p class="definition">Definition at line <a class="el" href="abstract__graph_8hpp_source.html#l00026">26</a> of file <a class="el" href="abstract__graph_8hpp_source.html">abstract_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="abstract__graph_8hpp_source.html#l00030">30</a> of file <a class="el" href="abstract__graph_8hpp_source.html">abstract_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -1302,14 +1323,14 @@ Here is the caller graph for this function:</div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Graph attributes. </p>
 
-<p class="definition">Definition at line <a class="el" href="abstract__graph_8hpp_source.html#l00029">29</a> of file <a class="el" href="abstract__graph_8hpp_source.html">abstract_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="abstract__graph_8hpp_source.html#l00033">33</a> of file <a class="el" href="abstract__graph_8hpp_source.html">abstract_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -1328,14 +1349,14 @@ Here is the caller graph for this function:</div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Vertices attributes. </p>
 
-<p class="definition">Definition at line <a class="el" href="abstract__graph_8hpp_source.html#l00031">31</a> of file <a class="el" href="abstract__graph_8hpp_source.html">abstract_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="abstract__graph_8hpp_source.html#l00035">35</a> of file <a class="el" href="abstract__graph_8hpp_source.html">abstract_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -1354,20 +1375,20 @@ Here is the caller graph for this function:</div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Edges attributes. </p>
 
-<p class="definition">Definition at line <a class="el" href="abstract__graph_8hpp_source.html#l00033">33</a> of file <a class="el" href="abstract__graph_8hpp_source.html">abstract_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="abstract__graph_8hpp_source.html#l00037">37</a> of file <a class="el" href="abstract__graph_8hpp_source.html">abstract_graph.hpp</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>include/telegraph/structure/<a class="el" href="abstract__graph_8hpp_source.html">abstract_graph.hpp</a></li>
-<li>include/telegraph/structure/<a class="el" href="abstract__graph_8ipp_source.html">abstract_graph.ipp</a></li>
+<li>include/telegraph/interface/<a class="el" href="abstract__graph_8hpp_source.html">abstract_graph.hpp</a></li>
+<li>include/telegraph/interface/<a class="el" href="abstract__graph_8ipp_source.html">abstract_graph.ipp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

@@ -1,4 +1,4 @@
 <map id="AbstractGraph::has_attr" name="AbstractGraph::has_attr">
-<area shape="rect" id="node1" title="Check if a vertex has an attribute given its key." alt="" coords="5,5,164,32"/>
-<area shape="rect" id="node2" href="$group__vertices.html#ga1d008920f6f2d58a5718c16a77fdfd6c" title="Whether a vertex id exists or not." alt="" coords="212,5,343,32"/>
+<area shape="rect" id="node1" title="Check if a vertex has an attribute given its key." alt="" coords="5,13,164,39"/>
+<area shape="rect" id="node2" href="$group__vertices.html#gab3beb83132f3fff703aa6b0a1175d1f6" title="Whether a vertex id exists or not." alt="" coords="212,5,345,47"/>
 </map>

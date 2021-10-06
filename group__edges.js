@@ -1,7 +1,9 @@
 var group__edges =
 [
+    [ "has_edge", "group__edges.html#gac51907be8f8113527c343ea956a92072", null ],
+    [ "add_edge", "group__edges.html#ga64dc1cacb7c529a667805c33690981e6", null ],
+    [ "del_edge", "group__edges.html#ga61a513502d0e93070b01ff2cff398f88", null ],
     [ "get_eid", "group__edges.html#ga07f20888156851698423658442785e5d", null ],
-    [ "labels", "group__edges.html#gab7886092bf6449822b54923eff15b07e", null ],
     [ "has_label", "group__edges.html#gafff5db12d874d7d3fd8262ec13dc3450", null ],
     [ "has_label", "group__edges.html#ga855e646613c23abd470debff177cfd49", null ],
     [ "has_label", "group__edges.html#gae2efde99dd3c58c10273bbf428f59563", null ],
@@ -37,10 +39,9 @@ var group__edges =
     [ "has_edge", "group__edges.html#gae409708d17063edd46e17e11964d23a7", null ],
     [ "add_edge", "group__edges.html#ga4c34be64af6a429b9acf5a50e7ae4460", null ],
     [ "add_edge", "group__edges.html#ga09fcb512ecc066a30fa9db90fb3f5066", null ],
-    [ "del_edge", "group__edges.html#ga4135232375771092774941eabb0c536e", null ],
+    [ "del_edge", "group__edges.html#ga03c2034c919890c99b5df94139546c61", null ],
     [ "del_edge", "group__edges.html#ga1eca60e6bbf8c2c201b1ac597b056da4", null ],
     [ "del_edge", "group__edges.html#ga41e87f6fb5cafa9c98a91b538646f825", null ],
-    [ "edges", "group__edges.html#ga0d1565fa0e94155e5c4f63c9b0ebd3b9", null ],
     [ "has_edge", "group__edges.html#ga77697dddee3bf020591a7780b882219f", null ],
     [ "add_edge", "group__edges.html#gaf86acb5200fddcd25ef0bba819067acc", null ],
     [ "del_edge", "group__edges.html#gad223182da72dfed104ccdb936d2bdc65", null ]

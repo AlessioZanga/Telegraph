@@ -1,0 +1,6 @@
+<map id="DenseGraph::add_vertex" name="DenseGraph::add_vertex">
+<area shape="rect" id="node1" title="Add a vertex id to the graph." alt="" coords="5,56,168,83"/>
+<area shape="rect" id="node2" href="$class_dense_graph.html#a337863ff43236051660df9116a027f85" title="Add a vertex to the graph." alt="" coords="216,5,379,32"/>
+<area shape="rect" id="node3" href="$class_dense_graph.html#a0a854fb94a80c57116bf1d6ec33facc5" title="The number of vertices of a graph is called its order." alt="" coords="427,31,556,57"/>
+<area shape="rect" id="node4" href="$namespacestd.html#a6dd6707536e807a44c9ad8f6ba86bdcb" title="Overloading to_string for transparent exception handling." alt="" coords="249,107,345,133"/>
+</map>

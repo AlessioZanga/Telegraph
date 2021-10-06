@@ -1,0 +1,4 @@
+<map id="DenseGraph::has_vertex" name="DenseGraph::has_vertex">
+<area shape="rect" id="node1" title="Whether a vertex id exists or not." alt="" coords="5,5,168,32"/>
+<area shape="rect" id="node2" href="$class_dense_graph.html#a0a854fb94a80c57116bf1d6ec33facc5" title="The number of vertices of a graph is called its order." alt="" coords="216,5,345,32"/>
+</map>

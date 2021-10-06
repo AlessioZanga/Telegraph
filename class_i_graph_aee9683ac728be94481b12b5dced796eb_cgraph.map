@@ -1,0 +1,5 @@
+<map id="IGraph::is_complete" name="IGraph::is_complete">
+<area shape="rect" id="node1" title="A graph is complete if every vertex is connected to all the others." alt="" coords="5,31,143,57"/>
+<area shape="rect" id="node2" href="$class_i_graph.html#a3bb7400a804a59b9628c75ecf6999719" title="The number of vertices of a graph is called its order." alt="" coords="191,5,287,32"/>
+<area shape="rect" id="node3" href="$class_i_graph.html#af65efd8b43c76afc7616968de14183ae" title="The number of edges of a graph is called its size." alt="" coords="193,56,284,83"/>
+</map>

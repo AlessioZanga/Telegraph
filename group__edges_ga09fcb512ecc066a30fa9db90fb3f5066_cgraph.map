@@ -1,6 +1,5 @@
 <map id="AbstractGraph::add_edge" name="AbstractGraph::add_edge">
 <area shape="rect" id="node1" title="Add an edge to the graph." alt="" coords="5,31,173,57"/>
-<area shape="rect" id="node2" href="$group__edges.html#ga4c34be64af6a429b9acf5a50e7ae4460" title="Add an edge to the graph." alt="" coords="221,5,389,32"/>
-<area shape="rect" id="node4" href="$group__vertices.html#ga3f16205d21c003dc805fb75743b9b5a4" title="Get the vertex id." alt="" coords="228,56,383,83"/>
-<area shape="rect" id="node3" href="$group__edges.html#gaf86acb5200fddcd25ef0bba819067acc" title="Add an edge to the graph." alt="" coords="437,5,560,32"/>
+<area shape="rect" id="node2" href="$group__edges.html#ga64dc1cacb7c529a667805c33690981e6" title="Add an edge to the graph." alt="" coords="221,5,389,32"/>
+<area shape="rect" id="node3" href="$group__vertices.html#ga3f16205d21c003dc805fb75743b9b5a4" title="Get the vertex id." alt="" coords="228,56,383,83"/>
 </map>

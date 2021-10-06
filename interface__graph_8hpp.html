@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Telegraph: include/telegraph/structure/interface_graph.hpp File Reference</title>
+<title>Telegraph: include/telegraph/interface/interface_graph.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -85,6 +85,7 @@ $(document).ready(function(){initNavTree('interface__graph_8hpp.html',''); initR
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle">
 <div class="title">interface_graph.hpp File Reference</div>  </div>
@@ -93,32 +94,36 @@ $(document).ready(function(){initNavTree('interface__graph_8hpp.html',''); initR
 <div class="textblock"><code>#include &lt;Eigen/Eigen&gt;</code><br />
 <code>#include &lt;cstdint&gt;</code><br />
 <code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;iterator&gt;</code><br />
 <code>#include &lt;map&gt;</code><br />
 <code>#include &lt;set&gt;</code><br />
 <code>#include &lt;utility&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for interface_graph.hpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="interface__graph_8hpp__incl.png" border="0" usemap="#ainclude_2telegraph_2structure_2interface__graph_8hpp" alt=""/></div>
-<map name="ainclude_2telegraph_2structure_2interface__graph_8hpp" id="ainclude_2telegraph_2structure_2interface__graph_8hpp">
-<area shape="rect" title=" " alt="" coords="195,5,370,47"/>
+<div class="center"><img src="interface__graph_8hpp__incl.png" border="0" usemap="#ainclude_2telegraph_2interface_2interface__graph_8hpp" alt=""/></div>
+<map name="ainclude_2telegraph_2interface_2interface__graph_8hpp" id="ainclude_2telegraph_2interface_2interface__graph_8hpp">
+<area shape="rect" title=" " alt="" coords="246,5,421,47"/>
 <area shape="rect" title=" " alt="" coords="5,95,96,121"/>
 <area shape="rect" title=" " alt="" coords="120,95,181,121"/>
 <area shape="rect" title=" " alt="" coords="205,95,277,121"/>
-<area shape="rect" title=" " alt="" coords="302,95,349,121"/>
-<area shape="rect" title=" " alt="" coords="373,95,413,121"/>
-<area shape="rect" title=" " alt="" coords="438,95,490,121"/>
+<area shape="rect" title=" " alt="" coords="302,95,365,121"/>
+<area shape="rect" title=" " alt="" coords="389,95,435,121"/>
+<area shape="rect" title=" " alt="" coords="460,95,500,121"/>
+<area shape="rect" title=" " alt="" coords="525,95,577,121"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><img src="interface__graph_8hpp__dep__incl.png" border="0" usemap="#ainclude_2telegraph_2structure_2interface__graph_8hppdep" alt=""/></div>
-<map name="ainclude_2telegraph_2structure_2interface__graph_8hppdep" id="ainclude_2telegraph_2structure_2interface__graph_8hppdep">
-<area shape="rect" title=" " alt="" coords="5,5,180,47"/>
-<area shape="rect" href="interface__graph_8ipp.html" title=" " alt="" coords="5,95,180,136"/>
-<area shape="rect" href="abstract__graph_8hpp.html" title=" " alt="" coords="5,184,180,225"/>
-<area shape="rect" href="abstract__graph_8ipp.html" title=" " alt="" coords="5,273,180,315"/>
+<div class="center"><img src="interface__graph_8hpp__dep__incl.png" border="0" usemap="#ainclude_2telegraph_2interface_2interface__graph_8hppdep" alt=""/></div>
+<map name="ainclude_2telegraph_2interface_2interface__graph_8hppdep" id="ainclude_2telegraph_2interface_2interface__graph_8hppdep">
+<area shape="rect" title=" " alt="" coords="7,5,181,47"/>
+<area shape="rect" href="interface__graph_8ipp.html" title=" " alt="" coords="7,95,181,136"/>
+<area shape="rect" href="abstract__graph_8hpp.html" title=" " alt="" coords="7,184,181,225"/>
+<area shape="rect" href="abstract__graph_8ipp.html" title=" " alt="" coords="7,273,181,315"/>
+<area shape="rect" href="dense__graph_8hpp.html" title=" " alt="" coords="5,363,183,404"/>
+<area shape="rect" href="dense__graph_8ipp.html" title=" " alt="" coords="5,452,183,493"/>
 </map>
 </div>
 </div>
@@ -128,6 +133,11 @@ This graph shows which files directly or indirectly include this file:</div>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_graph.html">IGraph</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a22b5f0406310b556aff55d8c0fd60c61"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface__graph_8hpp.html#a22b5f0406310b556aff55d8c0fd60c61">require_iter_value_type</a>(I,  T)&#160;&#160;&#160;typename std::enable_if&lt;std::is_same&lt;typename std::iterator_traits&lt;I&gt;::value_type, T&gt;::value, int&gt;::type</td></tr>
+<tr class="separator:a22b5f0406310b556aff55d8c0fd60c61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -153,6 +163,37 @@ Typedefs</h2></td></tr>
 <tr class="memdesc:afc9babc767f8313c6649eec86ef58514"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sparse adjacency matrix.  <a href="interface__graph_8hpp.html#afc9babc767f8313c6649eec86ef58514">More...</a><br /></td></tr>
 <tr class="separator:afc9babc767f8313c6649eec86ef58514"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a22b5f0406310b556aff55d8c0fd60c61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22b5f0406310b556aff55d8c0fd60c61">&#9670;&nbsp;</a></span>require_iter_value_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define require_iter_value_type</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">I, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">T&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;typename std::enable_if&lt;std::is_same&lt;typename std::iterator_traits&lt;I&gt;::value_type, T&gt;::value, int&gt;::type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="interface__graph_8hpp_source.html#l00011">11</a> of file <a class="el" href="interface__graph_8hpp_source.html">interface_graph.hpp</a>.</p>
+
+</div>
+</div>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="a5fd37095d99552e7dcd78beb8e969d5f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5fd37095d99552e7dcd78beb8e969d5f">&#9670;&nbsp;</a></span>VID</h2>
@@ -168,7 +209,7 @@ Typedefs</h2></td></tr>
 
 <p>Vertex identifier. </p>
 
-<p class="definition">Definition at line <a class="el" href="interface__graph_8hpp_source.html#l00011">11</a> of file <a class="el" href="interface__graph_8hpp_source.html">interface_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="interface__graph_8hpp_source.html#l00014">14</a> of file <a class="el" href="interface__graph_8hpp_source.html">interface_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -186,7 +227,7 @@ Typedefs</h2></td></tr>
 
 <p>Edge identifier. </p>
 
-<p class="definition">Definition at line <a class="el" href="interface__graph_8hpp_source.html#l00013">13</a> of file <a class="el" href="interface__graph_8hpp_source.html">interface_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="interface__graph_8hpp_source.html#l00016">16</a> of file <a class="el" href="interface__graph_8hpp_source.html">interface_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -204,7 +245,7 @@ Typedefs</h2></td></tr>
 
 <p>Vertex set. </p>
 
-<p class="definition">Definition at line <a class="el" href="interface__graph_8hpp_source.html#l00015">15</a> of file <a class="el" href="interface__graph_8hpp_source.html">interface_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="interface__graph_8hpp_source.html#l00018">18</a> of file <a class="el" href="interface__graph_8hpp_source.html">interface_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -222,7 +263,7 @@ Typedefs</h2></td></tr>
 
 <p>Edge set. </p>
 
-<p class="definition">Definition at line <a class="el" href="interface__graph_8hpp_source.html#l00017">17</a> of file <a class="el" href="interface__graph_8hpp_source.html">interface_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="interface__graph_8hpp_source.html#l00020">20</a> of file <a class="el" href="interface__graph_8hpp_source.html">interface_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -240,7 +281,7 @@ Typedefs</h2></td></tr>
 
 <p>Adjacency list. </p>
 
-<p class="definition">Definition at line <a class="el" href="interface__graph_8hpp_source.html#l00019">19</a> of file <a class="el" href="interface__graph_8hpp_source.html">interface_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="interface__graph_8hpp_source.html#l00022">22</a> of file <a class="el" href="interface__graph_8hpp_source.html">interface_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -258,7 +299,7 @@ Typedefs</h2></td></tr>
 
 <p>Dense adjacency matrix. </p>
 
-<p class="definition">Definition at line <a class="el" href="interface__graph_8hpp_source.html#l00021">21</a> of file <a class="el" href="interface__graph_8hpp_source.html">interface_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="interface__graph_8hpp_source.html#l00024">24</a> of file <a class="el" href="interface__graph_8hpp_source.html">interface_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -276,7 +317,7 @@ Typedefs</h2></td></tr>
 
 <p>Sparse adjacency matrix. </p>
 
-<p class="definition">Definition at line <a class="el" href="interface__graph_8hpp_source.html#l00023">23</a> of file <a class="el" href="interface__graph_8hpp_source.html">interface_graph.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="interface__graph_8hpp_source.html#l00026">26</a> of file <a class="el" href="interface__graph_8hpp_source.html">interface_graph.hpp</a>.</p>
 
 </div>
 </div>
@@ -285,7 +326,7 @@ Typedefs</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_f30acf35b5efa314e0dc707c2b4c8f66.html">telegraph</a></li><li class="navelem"><a class="el" href="dir_f783d37df0f432cf443eef2aa4cac36d.html">structure</a></li><li class="navelem"><a class="el" href="interface__graph_8hpp.html">interface_graph.hpp</a></li>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_f30acf35b5efa314e0dc707c2b4c8f66.html">telegraph</a></li><li class="navelem"><a class="el" href="dir_4b9511eaf70fc26769f51b5f31bc0e75.html">interface</a></li><li class="navelem"><a class="el" href="interface__graph_8hpp.html">interface_graph.hpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
