@@ -11,7 +11,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_compile_options(-Wall -Wextra -pedantic)
-add_compile_options(-O3 -march=native -shared -fPIC)
+
+if(CMAKE_BUILD_TYPE STREQUAL "Release")
+    add_compile_options(-O3 -march=native -shared -fPIC)
+endif()
 
 include_directories(include)
 add_subdirectory(src)
@@ -38,8 +41,8 @@ include_directories(extern/eigen)
 
 option (BUILD_TESTS "Build tests cases." OFF)
 if (BUILD_TESTS AND (PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR))
-    set(CMAKE_CXX_FLAGS "-O0 -g --coverage")
-    set(CMAKE_EXE_LINKER_FLAGS "-lgcov")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -g --coverage")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lgcov")
     enable_testing()
     include(GoogleTest)
     add_subdirectory(tests)

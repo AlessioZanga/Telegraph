@@ -15,7 +15,8 @@ jobs:
         run: |
           sudo apt-get install -y libboost-all-dev lcov
           mkdir build && cd build
-          cmake -DBUILD_TESTS=ON .. && make && make test
+          cmake -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTS=ON ..
+          make && make CTEST_OUTPUT_ON_FAILURE=1 test
       - name: Coverage
         run: |
           lcov -c -d . -o coverage --include "*/include/telegraph/*"
