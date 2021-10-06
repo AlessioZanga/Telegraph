@@ -1,8 +1,8 @@
 # Telegraph
 [![build](https://github.com/AlessioZanga/Telegraph/actions/workflows/build.yml/badge.svg)](https://github.com/AlessioZanga/Telegraph/actions/workflows/build.yml) 
 [![docs](https://github.com/AlessioZanga/Telegraph/actions/workflows/gh-pages.yml/badge.svg)](https://github.com/AlessioZanga/Telegraph/actions/workflows/gh-pages.yml) 
-[![Codacy Badge Coverage](https://app.codacy.com/project/badge/Coverage/0a4e01f4397e42e9ab5db6267f42f580)](https://www.codacy.com/gh/AlessioZanga/Telegraph/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AlessioZanga/Telegraph&amp;utm_campaign=Badge_Coverage) 
-[![Codacy Badge Quality](https://app.codacy.com/project/badge/Grade/0a4e01f4397e42e9ab5db6267f42f580)](https://www.codacy.com/gh/AlessioZanga/Telegraph/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AlessioZanga/Telegraph&amp;utm_campaign=Badge_Grade)
+[![codecov](https://codecov.io/gh/AlessioZanga/Telegraph/branch/main/graph/badge.svg?token=eVpAPPGeR2)](https://codecov.io/gh/AlessioZanga/Telegraph)
+[![CodeFactor](https://www.codefactor.io/repository/github/alessiozanga/telegraph/badge/main)](https://www.codefactor.io/repository/github/alessiozanga/telegraph/overview/main)
 
 A Graph Theory library
 
