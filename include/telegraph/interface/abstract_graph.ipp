@@ -58,12 +58,6 @@ inline VID AbstractGraph::get_vid(const VLB &X) const {
     return i->second;
 }
 
-inline VLBs AbstractGraph::get_vlbs() const {
-    VLBs out;
-    for (const auto &v : vlbs.right) out.insert(v.first);
-    return out;
-}
-
 inline bool AbstractGraph::has_label(const VID &X) const {
     if (!has_vertex(X)) throw NOT_DEFINED(X);  // Check if X is a valid vertex.
     return vlbs.left.find(X) != vlbs.left.end();       // Check if X has a defined label.
@@ -158,12 +152,6 @@ inline EID AbstractGraph::get_eid(const ELB &X) const {
     auto i = elbs.right.find(X);
     if (i == elbs.right.end()) throw NO_LABEL(X, "\b\b");  // Use backspaces to patch NO_LABEL argument.
     return i->second;
-}
-
-inline ELBs AbstractGraph::get_elbs() const {
-    ELBs out;
-    for (const auto &e : elbs) out.insert(e.right);
-    return out;
 }
 
 inline bool AbstractGraph::has_label(const EID &X) const {

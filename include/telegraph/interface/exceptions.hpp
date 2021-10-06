@@ -23,6 +23,22 @@ class NOT_DEFINED : public std::invalid_argument {
     NOT_DEFINED &operator=(NOT_DEFINED &&) = default;
 };
 
+class ALREADY_DEFINED : public std::invalid_argument {
+   public:
+    template <typename T>
+    explicit ALREADY_DEFINED(const T &X)
+        : std::invalid_argument("Vertex " + std::to_string(X) + " is already defined.") {}
+
+    template <typename T, typename U>
+    ALREADY_DEFINED(const T &X, const U &Y)
+        : std::invalid_argument("Edge (" + std::to_string(X) + ", " + std::to_string(Y) + ") is already defined.") {}
+
+    ALREADY_DEFINED(const ALREADY_DEFINED &) = default;
+    ALREADY_DEFINED &operator=(const ALREADY_DEFINED &) = default;
+    ALREADY_DEFINED(ALREADY_DEFINED &&) = default;
+    ALREADY_DEFINED &operator=(ALREADY_DEFINED &&) = default;
+};
+
 class NO_LABEL : public std::invalid_argument {
    public:
     NO_LABEL() : std::invalid_argument("Graph label is not defined.") {}
