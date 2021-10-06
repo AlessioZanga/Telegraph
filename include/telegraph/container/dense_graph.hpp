@@ -59,11 +59,11 @@ class DenseGraph : public AbstractGraph {
 
     explicit DenseGraph(const SparseAdjacencyMatrix &other);
 
-    inline virtual AdjacencyList adjacency_list() const override;
+    inline virtual operator AdjacencyList() const override;
 
-    inline virtual AdjacencyMatrix adjacency_matrix() const override;
+    inline virtual operator AdjacencyMatrix() const override;
 
-    inline virtual SparseAdjacencyMatrix sparse_adjacency_matrix() const override;
+    inline virtual operator SparseAdjacencyMatrix() const override;
 
     inline virtual std::size_t order() const override;
 

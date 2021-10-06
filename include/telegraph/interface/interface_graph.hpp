@@ -47,21 +47,21 @@ class IGraph {
      *
      * @return AdjacencyList Adjacency list of the graph.
      */
-    inline virtual AdjacencyList adjacency_list() const = 0;
+    inline virtual operator AdjacencyList() const = 0;
 
     /**
      * @brief The adjacency matrix representation of the graph in a dense format.
      *
      * @return AdjacencyMatrix Dense adjacency matrix of the graph.
      */
-    inline virtual AdjacencyMatrix adjacency_matrix() const = 0;
+    inline virtual operator AdjacencyMatrix() const = 0;
 
     /**
      * @brief The adjacency matrix representation of the graph in a sparse format.
      *
      * @return SparseAdjacencyMatrix Sparse adjacency matrix of the graph.
      */
-    inline virtual SparseAdjacencyMatrix sparse_adjacency_matrix() const = 0;
+    inline virtual operator SparseAdjacencyMatrix() const = 0;
 
     /**
      * @brief The number of vertices of a graph is called its order.
