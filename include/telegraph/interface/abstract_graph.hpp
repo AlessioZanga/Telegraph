@@ -13,6 +13,7 @@ using GLB = std::string;
 using VLB = std::string;
 //! Edge label.
 class ELB : public std::string {
+   public:
     explicit ELB(const std::string &&other) : std::string(other) {}
 };
 //! Vertex labels set.
