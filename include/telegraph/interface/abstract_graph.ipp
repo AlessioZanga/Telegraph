@@ -285,7 +285,7 @@ inline void AbstractGraph::del_attr(const VLB &X, const VLB &Y, const std::strin
     del_attr(get_vid(X), get_vid(Y), key);
 }
 
-inline bool AbstractGraph::has_edge(const ELB &X) const { return has_edge(get_eid(X)); }
+inline bool AbstractGraph::has_edge(const ELB &X) const { return elbs.right.find(X) != elbs.right.end(); }
 
 inline bool AbstractGraph::has_edge(const VID &X, const VID &Y) const { return has_edge(EID(X, Y)); }
 
