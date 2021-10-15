@@ -263,21 +263,87 @@ TYPED_TEST(ContainerTest, Size) {
     ASSERT_EQ(J.size(), count);
 }
 
-TYPED_TEST(ContainerTest, DISABLED_GetVertexID) {}
+TYPED_TEST(ContainerTest, GetVertexID) {
+    TypeParam G(1);
+    G.set_label(0, "0");
+    ASSERT_EQ(G.get_vid("0"), 0);      // Valid argument.
+    ASSERT_ANY_THROW(G.get_vid("1"));  // Invalid argument.
+}
 
-TYPED_TEST(ContainerTest, DISABLED_HasVertex0) {}
+TYPED_TEST(ContainerTest, HasVertex0) {
+    TypeParam G(1);
+    ASSERT_TRUE(G.has_vertex(0));   // Valid argument.
+    ASSERT_FALSE(G.has_vertex(1));  // Invalid argument.
+}
 
-TYPED_TEST(ContainerTest, DISABLED_HasVertex1) {}
+TYPED_TEST(ContainerTest, HasVertex1) {
+    TypeParam G(1);
+    G.set_label(0, "0");
+    ASSERT_TRUE(G.has_vertex("0"));   // Valid argument.
+    ASSERT_FALSE(G.has_vertex("1"));  // Invalid argument.
+}
 
-TYPED_TEST(ContainerTest, DISABLED_AddVertex0) {}
+TYPED_TEST(ContainerTest, AddVertex0) {
+    TypeParam G;
 
-TYPED_TEST(ContainerTest, DISABLED_AddVertex1) {}
+    VID i;
+    for (std::size_t j = 0; j < MAX; j++) {
+        i = G.add_vertex();
+        ASSERT_EQ(i, j);
+        ASSERT_TRUE(G.has_vertex(i));
+        ASSERT_EQ(G.order(), (j + 1));
+    }
 
-TYPED_TEST(ContainerTest, DISABLED_AddVertex2) {}
+    ASSERT_ANY_THROW(G.add_vertex(0));
+}
 
-TYPED_TEST(ContainerTest, DISABLED_DelVertex0) {}
+TYPED_TEST(ContainerTest, AddVertex1) {
+    TypeParam G;
 
-TYPED_TEST(ContainerTest, DISABLED_DelVertex1) {}
+    for (std::size_t j = 0; j < MAX; j++) {
+        G.add_vertex(j);
+        ASSERT_TRUE(G.has_vertex(j));
+        ASSERT_EQ(G.order(), (j + 1));
+    }
+
+    ASSERT_ANY_THROW(G.add_vertex(0));
+}
+
+TYPED_TEST(ContainerTest, AddVertex2) {
+    TypeParam G;
+
+    VID i;
+    VLB l;
+    for (std::size_t j = 0; j < MAX; j++) {
+        l = std::to_string(j);
+        i = G.add_vertex(l);
+        ASSERT_EQ(i, j);
+        ASSERT_TRUE(G.has_vertex(i));
+        ASSERT_EQ(G.order(), (j + 1));
+        ASSERT_TRUE(G.has_label(i));
+        ASSERT_EQ(G.get_label(i), l);
+    }
+
+    ASSERT_ANY_THROW(G.add_vertex(0));
+    ASSERT_ANY_THROW(G.add_vertex("0"));
+}
+
+TYPED_TEST(ContainerTest, DelVertex0) {
+    TypeParam G;
+
+    VID i = G.add_vertex();
+    ASSERT_NO_THROW(G.del_vertex(i));
+    ASSERT_ANY_THROW(G.del_vertex(i));
+}
+
+TYPED_TEST(ContainerTest, DelVertex1) {
+    TypeParam G;
+
+    VLB l = "0";
+    G.add_vertex(l);
+    ASSERT_NO_THROW(G.del_vertex(l));
+    ASSERT_ANY_THROW(G.del_vertex(l));
+}
 
 TYPED_TEST(ContainerTest, DISABLED_GetEdgeID) {}
 
