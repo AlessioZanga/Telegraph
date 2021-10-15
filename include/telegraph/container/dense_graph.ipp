@@ -145,8 +145,8 @@ inline void DenseGraph::del_vertex(const VID &X) {
     // Copy the remaining edges and resize matrix.
     std::size_t rows = A.rows();
     std::size_t cols = A.cols();
-    A.block(X, 0, rows - 1 - X, cols) = A.block(X + 1, 0, rows - 1 - X, cols);
-    A.block(0, X, rows, cols - 1 - X) = A.block(0, X + 1, rows, cols - 1 - X);
+    A.block(X, 0, rows - X - 1, cols) = A.block(X + 1, 0, rows - X - 1, cols);
+    A.block(0, X, rows, cols - X - 1) = A.block(0, X + 1, rows, cols - X - 1);
     A.conservativeResize(rows - 1, cols - 1);
     // Get current matrix size.
     std::size_t n = order();
