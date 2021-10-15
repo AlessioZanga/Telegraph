@@ -69,17 +69,29 @@ class DenseGraph : public AbstractGraph {
 
     inline virtual std::size_t size() const;
 
+    using AbstractGraph::has_vertex;
+
     inline virtual bool has_vertex(const VID &X) const;
+
+    using AbstractGraph::add_vertex;
 
     inline virtual VID add_vertex();
 
     inline virtual void add_vertex(const VID &X);
 
+    using AbstractGraph::del_vertex;
+
     inline virtual void del_vertex(const VID &X);
+
+    using AbstractGraph::has_edge;
 
     inline virtual bool has_edge(const EID &X) const;
 
+    using AbstractGraph::add_edge;
+
     inline virtual void add_edge(const EID &X);
+
+    using AbstractGraph::del_edge;
 
     inline virtual void del_edge(const EID &X);
 

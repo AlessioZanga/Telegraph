@@ -241,7 +241,27 @@ TYPED_TEST(ContainerTest, Order) {
     }
 }
 
-TYPED_TEST(ContainerTest, DISABLED_Size) {}
+TYPED_TEST(ContainerTest, Size) {
+    TypeParam G;
+    ASSERT_EQ(G.size(), 0);
+
+    TypeParam H(0);
+    ASSERT_EQ(H.size(), 0);
+
+    VID i, j;
+    TypeParam J(MAX);
+    std::size_t count = 0;
+    std::srand(std::time(0));
+    for (std::size_t k = 0; k < MAX; k++) {
+        i = std::rand() % MAX;
+        j = std::rand() % MAX;
+        if (!J.has_edge(i, j)) {
+            J.add_edge(i, j);
+            count++;
+        }
+    }
+    ASSERT_EQ(J.size(), count);
+}
 
 TYPED_TEST(ContainerTest, DISABLED_GetVertexID) {}
 
