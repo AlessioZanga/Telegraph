@@ -368,22 +368,61 @@ TYPED_TEST(ContainerTest, HasEdge3) {
 
 TYPED_TEST(ContainerTest, AddEdge0) {
     TypeParam G(2);
+    ASSERT_EQ(G.add_edge(EID(0, 1)), EID(0, 1));                 // Valid argument.
+    ASSERT_THROW(G.add_edge(EID(0, 1)), std::invalid_argument);  // Invalid argument.
+    ASSERT_THROW(G.add_edge(EID(0, 2)), std::invalid_argument);  // Invalid argument.
+}
+
+TYPED_TEST(ContainerTest, AddEdge1) {
+    TypeParam G(2);
     ASSERT_EQ(G.add_edge(0, 1), EID(0, 1));                 // Valid argument.
-    ASSERT_THROW(G.add_edge(0, 1), std::invalid_argument);  // Valid argument.
+    ASSERT_THROW(G.add_edge(0, 1), std::invalid_argument);  // Invalid argument.
     ASSERT_THROW(G.add_edge(0, 2), std::invalid_argument);  // Invalid argument.
 }
 
-TYPED_TEST(ContainerTest, DISABLED_AddEdge1) {}
+TYPED_TEST(ContainerTest, AddEdge2) {
+    TypeParam G(2);
+    G.set_label(0, "0");
+    G.set_label(1, "1");
+    ASSERT_EQ(G.add_edge("0", "1"), EID(0, 1));                 // Valid argument.
+    ASSERT_THROW(G.add_edge("0", "1"), std::invalid_argument);  // Invalid argument.
+    ASSERT_THROW(G.add_edge("0", "2"), std::invalid_argument);  // Invalid argument.
+}
 
-TYPED_TEST(ContainerTest, DISABLED_AddEdge2) {}
+TYPED_TEST(ContainerTest, DelEdge0) {
+    TypeParam G(2);
+    G.add_edge(EID(0, 1));
+    ASSERT_EQ(G.del_edge(EID(0, 1)), EID(0, 1));                 // Valid argument.
+    ASSERT_THROW(G.del_edge(EID(0, 1)), std::invalid_argument);  // Invalid argument.
+    ASSERT_THROW(G.del_edge(EID(0, 2)), std::invalid_argument);  // Invalid argument.
+}
 
-TYPED_TEST(ContainerTest, DISABLED_DelEdge0) {}
+TYPED_TEST(ContainerTest, DelEdge1) {
+    TypeParam G(2);
+    G.add_edge(0, 1);
+    ASSERT_EQ(G.del_edge(0, 1), EID(0, 1));                 // Valid argument.
+    ASSERT_THROW(G.del_edge(0, 1), std::invalid_argument);  // Invalid argument.
+    ASSERT_THROW(G.del_edge(0, 2), std::invalid_argument);  // Invalid argument.
+}
 
-TYPED_TEST(ContainerTest, DISABLED_DelEdge1) {}
+TYPED_TEST(ContainerTest, DelEdge2) {
+    TypeParam G(2);
+    G.add_edge(0, 1);
+    G.set_label(0, "0");
+    G.set_label(1, "1");
+    ASSERT_EQ(G.del_edge("0", "1"), EID(0, 1));                 // Valid argument.
+    ASSERT_THROW(G.del_edge("0", "1"), std::invalid_argument);  // Invalid argument.
+    ASSERT_THROW(G.del_edge("0", "2"), std::invalid_argument);  // Invalid argument.
+}
 
-TYPED_TEST(ContainerTest, DISABLED_DelEdge2) {}
-
-TYPED_TEST(ContainerTest, DISABLED_DelEdge3) {}
+TYPED_TEST(ContainerTest, DelEdge3) {
+    TypeParam G(2);
+    G.add_edge(0, 1);
+    G.set_label({0, 1}, ELB("0 -- 1"));
+    ASSERT_EQ(G.del_edge(ELB("0 -- 1")), EID(0, 1));                 // Valid argument.
+    ASSERT_THROW(G.del_edge(ELB("0 -- 1")), std::invalid_argument);  // Invalid argument.
+    ASSERT_THROW(G.del_edge(ELB("0 -- 2")), std::invalid_argument);  // Invalid argument.
+}
 
 TYPED_TEST(ContainerTest, DISABLED_HasLabel0) {}
 
