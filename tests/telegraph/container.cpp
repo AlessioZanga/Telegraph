@@ -131,10 +131,10 @@ TYPED_TEST(ContainerTest, AdjacencyListConstructor) {
     ASSERT_EQ(J.size(), 10);
 
     AdjacencyList D = {{0, {0, 2}}, {2, {0}}};  // Invalid input (1)
-    ASSERT_ANY_THROW({ TypeParam K(D); });
+    ASSERT_THROW({ TypeParam K(D); }, std::invalid_argument);
 
     AdjacencyList E = {{0, {3}}, {1, {0}}};  // Invalid input (2)
-    ASSERT_ANY_THROW({ TypeParam L(E); });
+    ASSERT_THROW({ TypeParam L(E); }, std::invalid_argument);
 }
 
 TYPED_TEST(ContainerTest, AdjacencyMatrixConstructor) {
@@ -162,7 +162,7 @@ TYPED_TEST(ContainerTest, AdjacencyMatrixConstructor) {
     ASSERT_EQ(K.size(), 2);
 
     AdjacencyMatrix E(2, 3);  // Invalid input (1)
-    ASSERT_ANY_THROW({ TypeParam L(E); });
+    ASSERT_THROW({ TypeParam L(E); }, std::invalid_argument);
 }
 
 TYPED_TEST(ContainerTest, SparseAdjacencyMatrixConstructor) {
@@ -192,7 +192,7 @@ TYPED_TEST(ContainerTest, SparseAdjacencyMatrixConstructor) {
     ASSERT_EQ(K.size(), 2);
 
     SparseAdjacencyMatrix E(2, 3);  // Invalid input (1)
-    ASSERT_ANY_THROW({ TypeParam L(E); });
+    ASSERT_THROW({ TypeParam L(E); }, std::invalid_argument);
 }
 
 TYPED_TEST(ContainerTest, AdjacencyListOperator) {
@@ -266,8 +266,8 @@ TYPED_TEST(ContainerTest, Size) {
 TYPED_TEST(ContainerTest, GetVertexID) {
     TypeParam G(1);
     G.set_label(0, "0");
-    ASSERT_EQ(G.get_vid("0"), 0);      // Valid argument.
-    ASSERT_ANY_THROW(G.get_vid("1"));  // Invalid argument.
+    ASSERT_EQ(G.get_vid("0"), 0);                         // Valid argument.
+    ASSERT_THROW(G.get_vid("1"), std::invalid_argument);  // Invalid argument.
 }
 
 TYPED_TEST(ContainerTest, HasVertex0) {
@@ -286,51 +286,33 @@ TYPED_TEST(ContainerTest, HasVertex1) {
 TYPED_TEST(ContainerTest, AddVertex0) {
     TypeParam G;
 
-    VID i;
-    for (std::size_t j = 0; j < MAX; j++) {
-        i = G.add_vertex();
-        ASSERT_EQ(i, j);
-        ASSERT_TRUE(G.has_vertex(i));
-    }
-
-    ASSERT_ANY_THROW(G.add_vertex(0));
+    ASSERT_EQ(G.add_vertex(), 0);                          // Valid argument.
+    ASSERT_THROW(G.add_vertex(0), std::invalid_argument);  // Invalid argument.
 }
 
 TYPED_TEST(ContainerTest, AddVertex1) {
     TypeParam G;
 
-    for (std::size_t j = 0; j < MAX; j++) {
-        ASSERT_EQ(G.add_vertex(j), j);
-        ASSERT_TRUE(G.has_vertex(j));
-    }
-
-    ASSERT_ANY_THROW(G.add_vertex(0));
+    ASSERT_EQ(G.add_vertex(0), 0);                         // Valid argument.
+    ASSERT_THROW(G.add_vertex(0), std::invalid_argument);  // Invalid argument.
 }
 
 TYPED_TEST(ContainerTest, AddVertex2) {
     TypeParam G;
 
-    VID i;
-    VLB l;
-    for (std::size_t j = 0; j < MAX; j++) {
-        l = std::to_string(j);
-        i = G.add_vertex(l);
-        ASSERT_EQ(i, j);
-        ASSERT_TRUE(G.has_vertex(i));
-        ASSERT_TRUE(G.has_label(i));
-        ASSERT_EQ(G.get_label(i), l);
-    }
-
-    ASSERT_ANY_THROW(G.add_vertex(0));
-    ASSERT_ANY_THROW(G.add_vertex("0"));
+    VID i = 0;
+    VLB j = std::to_string(i);
+    ASSERT_EQ(G.add_vertex(j), i);  // Valid argument.
+    ASSERT_EQ(G.get_label(i), j);
+    ASSERT_THROW(G.add_vertex(j), std::invalid_argument);  // Invalid argument.
 }
 
 TYPED_TEST(ContainerTest, DelVertex0) {
     TypeParam G;
 
     VID i = G.add_vertex();
-    ASSERT_EQ(G.del_vertex(i), i);
-    ASSERT_ANY_THROW(G.del_vertex(i));
+    ASSERT_EQ(G.del_vertex(i), i);                         // Valid argument.
+    ASSERT_THROW(G.del_vertex(i), std::invalid_argument);  // Invalid argument.
 }
 
 TYPED_TEST(ContainerTest, DelVertex1) {
@@ -338,32 +320,32 @@ TYPED_TEST(ContainerTest, DelVertex1) {
 
     VLB l = "0";
     VID i = G.add_vertex(l);
-    ASSERT_EQ(G.del_vertex(l), i);
-    ASSERT_ANY_THROW(G.del_vertex(l));
+    ASSERT_EQ(G.del_vertex(l), i);                         // Valid argument.
+    ASSERT_THROW(G.del_vertex(l), std::invalid_argument);  // Invalid argument.
 }
 
 TYPED_TEST(ContainerTest, GetEdgeID) {
     TypeParam G(2);
     EID e = G.add_edge(0, 1);
     G.set_label({0, 1}, ELB("0 -- 1"));
-    ASSERT_EQ(G.get_eid(ELB("0 -- 1")), e);      // Valid argument.
-    ASSERT_ANY_THROW(G.get_eid(ELB("0 -- 2")));  // Invalid argument.
+    ASSERT_EQ(G.get_eid(ELB("0 -- 1")), e);                         // Valid argument.
+    ASSERT_THROW(G.get_eid(ELB("0 -- 2")), std::invalid_argument);  // Invalid argument.
 }
 
 TYPED_TEST(ContainerTest, HasEdge0) {
     TypeParam G(2);
     EID e = G.add_edge(0, 1);
-    ASSERT_TRUE(G.has_edge(e));
-    ASSERT_FALSE(G.has_edge({1, 1}));
-    ASSERT_ANY_THROW(G.has_edge({1, 2}));
+    ASSERT_TRUE(G.has_edge(e));                               // Valid argument.
+    ASSERT_FALSE(G.has_edge({1, 1}));                         // Valid argument.
+    ASSERT_THROW(G.has_edge({1, 2}), std::invalid_argument);  // Invalid argument.
 }
 
 TYPED_TEST(ContainerTest, HasEdge1) {
     TypeParam G(2);
     EID e = G.add_edge(0, 1);
-    ASSERT_TRUE(G.has_edge(e.first, e.second));
-    ASSERT_FALSE(G.has_edge(1, 1));
-    ASSERT_ANY_THROW(G.has_edge(1, 2));
+    ASSERT_TRUE(G.has_edge(e.first, e.second));             // Valid argument.
+    ASSERT_FALSE(G.has_edge(1, 1));                         // Valid argument.
+    ASSERT_THROW(G.has_edge(1, 2), std::invalid_argument);  // Invalid argument.
 }
 
 TYPED_TEST(ContainerTest, HasEdge2) {
@@ -371,24 +353,24 @@ TYPED_TEST(ContainerTest, HasEdge2) {
     G.set_label(0, "0");
     G.set_label(1, "1");
     G.add_edge("0", "1");
-    ASSERT_TRUE(G.has_edge("0", "1"));
-    ASSERT_FALSE(G.has_edge("1", "1"));
-    ASSERT_ANY_THROW(G.has_edge("1", "2"));
+    ASSERT_TRUE(G.has_edge("0", "1"));                          // Valid argument.
+    ASSERT_FALSE(G.has_edge("1", "1"));                         // Valid argument.
+    ASSERT_THROW(G.has_edge("1", "2"), std::invalid_argument);  // Invalid argument.
 }
 
 TYPED_TEST(ContainerTest, HasEdge3) {
     TypeParam G(2);
     EID e = G.add_edge(0, 1);
     G.set_label(e, ELB("0 -- 1"));
-    ASSERT_TRUE(G.has_edge(ELB("0 -- 1")));
-    ASSERT_FALSE(G.has_edge(ELB("1 -- 1")));
+    ASSERT_TRUE(G.has_edge(ELB("0 -- 1")));   // Valid argument.
+    ASSERT_FALSE(G.has_edge(ELB("1 -- 1")));  // Valid argument.
 }
 
 TYPED_TEST(ContainerTest, AddEdge0) {
     TypeParam G(2);
-    ASSERT_EQ(G.add_edge(0, 1), EID(0, 1));
-    ASSERT_ANY_THROW(G.add_edge(0, 1));
-    ASSERT_ANY_THROW(G.add_edge(0, 2));
+    ASSERT_EQ(G.add_edge(0, 1), EID(0, 1));                 // Valid argument.
+    ASSERT_THROW(G.add_edge(0, 1), std::invalid_argument);  // Valid argument.
+    ASSERT_THROW(G.add_edge(0, 2), std::invalid_argument);  // Invalid argument.
 }
 
 TYPED_TEST(ContainerTest, DISABLED_AddEdge1) {}

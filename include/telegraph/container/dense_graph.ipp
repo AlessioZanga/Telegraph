@@ -73,7 +73,7 @@ DenseGraph::DenseGraph(const AdjacencyList &other) {
         for (const auto &[v, adj] : other) {
             for (const auto &u : adj) {
                 // Check EID if is inconsistent with given VIDs.
-                if (other.find(u) == other.end()) throw std::out_of_range("AdjacencyList ill formed.");
+                if (other.find(u) == other.end()) throw std::invalid_argument("AdjacencyList ill formed.");
                 // Set the edge.
                 A(v, u) = 1;
             }
