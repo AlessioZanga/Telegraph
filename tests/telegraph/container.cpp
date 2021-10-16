@@ -291,7 +291,6 @@ TYPED_TEST(ContainerTest, AddVertex0) {
         i = G.add_vertex();
         ASSERT_EQ(i, j);
         ASSERT_TRUE(G.has_vertex(i));
-        ASSERT_EQ(G.order(), (j + 1));
     }
 
     ASSERT_ANY_THROW(G.add_vertex(0));
@@ -301,9 +300,8 @@ TYPED_TEST(ContainerTest, AddVertex1) {
     TypeParam G;
 
     for (std::size_t j = 0; j < MAX; j++) {
-        G.add_vertex(j);
+        ASSERT_EQ(G.add_vertex(j), j);
         ASSERT_TRUE(G.has_vertex(j));
-        ASSERT_EQ(G.order(), (j + 1));
     }
 
     ASSERT_ANY_THROW(G.add_vertex(0));
@@ -319,7 +317,6 @@ TYPED_TEST(ContainerTest, AddVertex2) {
         i = G.add_vertex(l);
         ASSERT_EQ(i, j);
         ASSERT_TRUE(G.has_vertex(i));
-        ASSERT_EQ(G.order(), (j + 1));
         ASSERT_TRUE(G.has_label(i));
         ASSERT_EQ(G.get_label(i), l);
     }
@@ -332,7 +329,7 @@ TYPED_TEST(ContainerTest, DelVertex0) {
     TypeParam G;
 
     VID i = G.add_vertex();
-    ASSERT_NO_THROW(G.del_vertex(i));
+    ASSERT_EQ(G.del_vertex(i), i);
     ASSERT_ANY_THROW(G.del_vertex(i));
 }
 
@@ -340,31 +337,31 @@ TYPED_TEST(ContainerTest, DelVertex1) {
     TypeParam G;
 
     VLB l = "0";
-    G.add_vertex(l);
-    ASSERT_NO_THROW(G.del_vertex(l));
+    VID i = G.add_vertex(l);
+    ASSERT_EQ(G.del_vertex(l), i);
     ASSERT_ANY_THROW(G.del_vertex(l));
 }
 
 TYPED_TEST(ContainerTest, GetEdgeID) {
     TypeParam G(2);
-    G.add_edge(0, 1);
+    EID e = G.add_edge(0, 1);
     G.set_label({0, 1}, ELB("0 -- 1"));
-    ASSERT_EQ(G.get_eid(ELB("0 -- 1")), EID(0, 1));  // Valid argument.
-    ASSERT_ANY_THROW(G.get_eid(ELB("0 -- 2")));      // Invalid argument.
+    ASSERT_EQ(G.get_eid(ELB("0 -- 1")), e);      // Valid argument.
+    ASSERT_ANY_THROW(G.get_eid(ELB("0 -- 2")));  // Invalid argument.
 }
 
 TYPED_TEST(ContainerTest, HasEdge0) {
     TypeParam G(2);
-    G.add_edge(0, 1);
-    ASSERT_TRUE(G.has_edge({0, 1}));
+    EID e = G.add_edge(0, 1);
+    ASSERT_TRUE(G.has_edge(e));
     ASSERT_FALSE(G.has_edge({1, 1}));
     ASSERT_ANY_THROW(G.has_edge({1, 2}));
 }
 
 TYPED_TEST(ContainerTest, HasEdge1) {
     TypeParam G(2);
-    G.add_edge(0, 1);
-    ASSERT_TRUE(G.has_edge(0, 1));
+    EID e = G.add_edge(0, 1);
+    ASSERT_TRUE(G.has_edge(e.first, e.second));
     ASSERT_FALSE(G.has_edge(1, 1));
     ASSERT_ANY_THROW(G.has_edge(1, 2));
 }
@@ -381,13 +378,18 @@ TYPED_TEST(ContainerTest, HasEdge2) {
 
 TYPED_TEST(ContainerTest, HasEdge3) {
     TypeParam G(2);
-    G.add_edge(0, 1);
-    G.set_label({0, 1}, ELB("0 -- 1"));
+    EID e = G.add_edge(0, 1);
+    G.set_label(e, ELB("0 -- 1"));
     ASSERT_TRUE(G.has_edge(ELB("0 -- 1")));
     ASSERT_FALSE(G.has_edge(ELB("1 -- 1")));
 }
 
-TYPED_TEST(ContainerTest, DISABLED_AddEdge0) {}
+TYPED_TEST(ContainerTest, AddEdge0) {
+    TypeParam G(2);
+    ASSERT_EQ(G.add_edge(0, 1), EID(0, 1));
+    ASSERT_ANY_THROW(G.add_edge(0, 1));
+    ASSERT_ANY_THROW(G.add_edge(0, 2));
+}
 
 TYPED_TEST(ContainerTest, DISABLED_AddEdge1) {}
 
