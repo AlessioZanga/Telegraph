@@ -327,7 +327,7 @@ TYPED_TEST(ContainerTest, DelVertex1) {
 TYPED_TEST(ContainerTest, GetEdgeID) {
     TypeParam G(2);
     EID e = G.add_edge(0, 1);
-    G.set_label({0, 1}, ELB("0 -- 1"));
+    G.set_label(0, 1, ELB("0 -- 1"));
     ASSERT_EQ(G.get_eid(ELB("0 -- 1")), e);                         // Valid argument.
     ASSERT_THROW(G.get_eid(ELB("0 -- 2")), std::invalid_argument);  // Invalid argument.
 }
@@ -418,21 +418,71 @@ TYPED_TEST(ContainerTest, DelEdge2) {
 TYPED_TEST(ContainerTest, DelEdge3) {
     TypeParam G(2);
     G.add_edge(0, 1);
-    G.set_label({0, 1}, ELB("0 -- 1"));
+    G.set_label(0, 1, ELB("0 -- 1"));
     ASSERT_EQ(G.del_edge(ELB("0 -- 1")), EID(0, 1));                 // Valid argument.
     ASSERT_THROW(G.del_edge(ELB("0 -- 1")), std::invalid_argument);  // Invalid argument.
     ASSERT_THROW(G.del_edge(ELB("0 -- 2")), std::invalid_argument);  // Invalid argument.
 }
 
-TYPED_TEST(ContainerTest, DISABLED_HasLabel0) {}
+TYPED_TEST(ContainerTest, HasLabel0) {
+    TypeParam G;
+    ASSERT_FALSE(G.has_label());
+    G.set_label("G");
+    ASSERT_TRUE(G.has_label());
+}
 
-TYPED_TEST(ContainerTest, DISABLED_HasLabel1) {}
+TYPED_TEST(ContainerTest, HasLabel1) {
+    TypeParam G(2);
+    G.set_label(0, "0");
+    ASSERT_TRUE(G.has_label(0));
+    ASSERT_FALSE(G.has_label(1));
+    ASSERT_THROW(G.has_label(2), std::invalid_argument);
+}
 
-TYPED_TEST(ContainerTest, DISABLED_HasLabel2) {}
+TYPED_TEST(ContainerTest, HasLabel2) {
+    TypeParam G(2);
+    G.set_label(0, "0");
+    ASSERT_TRUE(G.has_label("0"));
+    ASSERT_FALSE(G.has_label("1"));
+}
 
-TYPED_TEST(ContainerTest, DISABLED_HasLabel3) {}
+TYPED_TEST(ContainerTest, HasLabel3) {
+    TypeParam G(3);
+    G.add_edge(0, 1);
+    G.set_label(0, 1, ELB("0 -- 1"));
+    ASSERT_TRUE(G.has_label(EID(0, 1)));
+    ASSERT_THROW(G.has_label(EID(1, 2)), std::invalid_argument);  // Valid vertices but no edge.
+    ASSERT_THROW(G.has_label(EID(1, 3)), std::invalid_argument);  // Invalid vertices.
+}
 
-TYPED_TEST(ContainerTest, DISABLED_HasLabel4) {}
+TYPED_TEST(ContainerTest, HasLabel4) {
+    TypeParam G(3);
+    G.add_edge(0, 1);
+    G.set_label(0, 1, ELB("0 -- 1"));
+    ASSERT_TRUE(G.has_label(ELB("0 -- 1")));
+    ASSERT_FALSE(G.has_label(ELB("1 -- 1")));
+}
+
+TYPED_TEST(ContainerTest, HasLabel5) {
+    TypeParam G(3);
+    G.add_edge(0, 1);
+    G.set_label(0, 1, ELB("0 -- 1"));
+    ASSERT_TRUE(G.has_label(0, 1));
+    ASSERT_THROW(G.has_label(1, 2), std::invalid_argument);  // Valid vertices but no edge.
+    ASSERT_THROW(G.has_label(1, 3), std::invalid_argument);  // Invalid vertices.
+}
+
+TYPED_TEST(ContainerTest, HasLabel6) {
+    TypeParam G(3);
+    G.add_edge(0, 1);
+    G.set_label(0, "0");
+    G.set_label(1, "1");
+    G.set_label(2, "2");
+    G.set_label(0, 1, ELB("0 -- 1"));
+    ASSERT_TRUE(G.has_label("0", "1"));
+    ASSERT_THROW(G.has_label("1", "2"), std::invalid_argument);  // Valid vertices but no edge.
+    ASSERT_THROW(G.has_label("1", "3"), std::invalid_argument);  // Invalid vertices.
+}
 
 TYPED_TEST(ContainerTest, DISABLED_GetLabel0) {}
 

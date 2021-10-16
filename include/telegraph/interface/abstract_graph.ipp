@@ -59,9 +59,11 @@ inline VID AbstractGraph::get_vid(const VLB &X) const {
 }
 
 inline bool AbstractGraph::has_label(const VID &X) const {
-    if (!has_vertex(X)) throw NOT_DEFINED(X);  // Check if X is a valid vertex.
-    return vlbs.left.find(X) != vlbs.left.end();       // Check if X has a defined label.
+    if (!has_vertex(X)) throw NOT_DEFINED(X);     // Check if X is a valid vertex.
+    return vlbs.left.find(X) != vlbs.left.end();  // Check if X has a defined label.
 }
+
+inline bool AbstractGraph::has_label(const VLB &X) const { return has_vertex(X); }
 
 inline VLB AbstractGraph::get_label(const VID &X) const {
     if (!has_vertex(X)) throw NOT_DEFINED(X);  // Check if X is a valid vertex.
@@ -71,7 +73,7 @@ inline VLB AbstractGraph::get_label(const VID &X) const {
 }
 
 inline void AbstractGraph::set_label(const VID &X, const VLB &label) {
-    if (label.empty()) throw INVALID_LABEL;            // Check if label is valid.
+    if (label.empty()) throw INVALID_LABEL;    // Check if label is valid.
     if (!has_vertex(X)) throw NOT_DEFINED(X);  // Check if X is a valid vertex.
     // Check if the label as already been defined.
     auto i = vlbs.right.find(label);
@@ -159,6 +161,8 @@ inline bool AbstractGraph::has_label(const EID &X) const {
     return elbs.left.find(X) != elbs.left.end();
 }
 
+inline bool AbstractGraph::has_label(const ELB &X) const { return has_edge(X); }
+
 inline bool AbstractGraph::has_label(const VID &X, const VID &Y) const { return has_label(EID(X, Y)); }
 
 inline bool AbstractGraph::has_label(const VLB &X, const VLB &Y) const {
@@ -176,7 +180,7 @@ inline ELB AbstractGraph::get_label(const VID &X, const VID &Y) const { return g
 inline ELB AbstractGraph::get_label(const VLB &X, const VLB &Y) const { return get_label(get_vid(X), get_vid(Y)); }
 
 inline void AbstractGraph::set_label(const EID &X, const ELB &label) {
-    if (label.empty()) throw INVALID_LABEL;                          // Check if label is valid.
+    if (label.empty()) throw INVALID_LABEL;                  // Check if label is valid.
     if (!has_edge(X)) throw NOT_DEFINED(X.first, X.second);  // Check if X is a valid edge.
     // Check if the label as already been defined.
     auto i = elbs.right.find(label);

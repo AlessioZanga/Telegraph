@@ -166,6 +166,15 @@ class AbstractGraph : public IGraph {
     inline bool has_label(const VID &X) const;
 
     /**
+     * @brief Check if a vertex has a label.
+     *
+     * @param X Given vertex label.
+     * @return true If the vertex has a label,
+     * @return false Otherwise.
+     */
+    inline bool has_label(const VLB &X) const;
+
+    /**
      * @brief Get the vertex label.
      *
      * @param X Given vertex id.
@@ -357,6 +366,15 @@ class AbstractGraph : public IGraph {
      * @return false Otherwise.
      */
     inline bool has_label(const EID &X) const;
+
+    /**
+     * @brief Check if an edge has a label.
+     *
+     * @param X Given edge label.
+     * @return true If the edge has a label,
+     * @return false Otherwise.
+     */
+    inline bool has_label(const ELB &X) const;
 
     /**
      * @brief Check if an edge has a label.
