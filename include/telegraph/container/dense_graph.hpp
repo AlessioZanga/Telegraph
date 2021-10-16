@@ -77,11 +77,11 @@ class DenseGraph : public AbstractGraph {
 
     inline virtual VID add_vertex();
 
-    inline virtual void add_vertex(const VID &X);
+    inline virtual VID add_vertex(const VID &X);
 
     using AbstractGraph::del_vertex;
 
-    inline virtual void del_vertex(const VID &X);
+    inline virtual VID del_vertex(const VID &X);
 
     using AbstractGraph::has_edge;
 
@@ -89,11 +89,11 @@ class DenseGraph : public AbstractGraph {
 
     using AbstractGraph::add_edge;
 
-    inline virtual void add_edge(const EID &X);
+    inline virtual EID add_edge(const EID &X);
 
     using AbstractGraph::del_edge;
 
-    inline virtual void del_edge(const EID &X);
+    inline virtual EID del_edge(const EID &X);
 
    private:
     inline virtual std::size_t hash() const;

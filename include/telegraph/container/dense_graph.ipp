@@ -130,17 +130,17 @@ inline VID DenseGraph::add_vertex() {
     return n;
 }
 
-inline void DenseGraph::add_vertex(const VID &X) {
+inline VID DenseGraph::add_vertex(const VID &X) {
     // Get current matrix size.
     VID n = order();
     // Check if it is possible to add the requested VID.
     if (X < n) throw ALREADY_DEFINED(X);
     if (X > n) throw std::out_of_range("VID " + std::to_string(X) + " out of range.");
     // Add requested vertex.
-    add_vertex();
+    return add_vertex();
 }
 
-inline void DenseGraph::del_vertex(const VID &X) {
+inline VID DenseGraph::del_vertex(const VID &X) {
     if (!has_vertex(X)) throw NOT_DEFINED(X);
     // Copy the remaining edges and resize matrix.
     std::size_t rows = A.rows();
@@ -174,6 +174,8 @@ inline void DenseGraph::del_vertex(const VID &X) {
             vattrs.insert(std::move(pair));  // Move pair back into map.
         }
     }
+    // Return vertex id.
+    return X;
 }
 
 inline bool DenseGraph::has_edge(const EID &X) const {
@@ -182,12 +184,13 @@ inline bool DenseGraph::has_edge(const EID &X) const {
     return A(X.first, X.second) != 0;
 }
 
-inline void DenseGraph::add_edge(const EID &X) {
+inline EID DenseGraph::add_edge(const EID &X) {
     if (has_edge(X)) throw ALREADY_DEFINED(X.first, X.second);
     A(X.first, X.second) = 1;
+    return X;
 }
 
-inline void DenseGraph::del_edge(const EID &X) {
+inline EID DenseGraph::del_edge(const EID &X) {
     if (!has_edge(X)) throw NOT_DEFINED(X.first, X.second);
     A(X.first, X.second) = 0;
     // Delete associated label.
@@ -196,6 +199,8 @@ inline void DenseGraph::del_edge(const EID &X) {
     // Delete associated attributes.
     auto j = eattrs.find(X);
     if (j != eattrs.end()) eattrs.erase(j);
+    // Return edge id.
+    return X;
 }
 
 inline std::size_t DenseGraph::hash() const {

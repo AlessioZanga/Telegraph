@@ -146,7 +146,7 @@ inline VID AbstractGraph::add_vertex(const VLB &label) {
     return X;
 }
 
-inline void AbstractGraph::del_vertex(const VLB &X) { del_vertex(get_vid(X)); }
+inline VID AbstractGraph::del_vertex(const VLB &X) { return del_vertex(get_vid(X)); }
 
 inline EID AbstractGraph::get_eid(const ELB &X) const {
     auto i = elbs.right.find(X);
@@ -291,12 +291,12 @@ inline bool AbstractGraph::has_edge(const VID &X, const VID &Y) const { return h
 
 inline bool AbstractGraph::has_edge(const VLB &X, const VLB &Y) const { return has_edge(get_vid(X), get_vid(Y)); }
 
-inline void AbstractGraph::add_edge(const VID &X, const VID &Y) { add_edge(EID(X, Y)); }
+inline EID AbstractGraph::add_edge(const VID &X, const VID &Y) { return add_edge(EID(X, Y)); }
 
-inline void AbstractGraph::add_edge(const VLB &X, const VLB &Y) { add_edge(get_vid(X), get_vid(Y)); }
+inline EID AbstractGraph::add_edge(const VLB &X, const VLB &Y) { return add_edge(get_vid(X), get_vid(Y)); }
 
-inline void AbstractGraph::del_edge(const ELB &X) { del_edge(get_eid(X)); }
+inline EID AbstractGraph::del_edge(const ELB &X) { return del_edge(get_eid(X)); }
 
-inline void AbstractGraph::del_edge(const VID &X, const VID &Y) { del_edge(EID(X, Y)); }
+inline EID AbstractGraph::del_edge(const VID &X, const VID &Y) { return del_edge(EID(X, Y)); }
 
-inline void AbstractGraph::del_edge(const VLB &X, const VLB &Y) { del_edge(get_vid(X), get_vid(Y)); }
+inline EID AbstractGraph::del_edge(const VLB &X, const VLB &Y) { return del_edge(get_vid(X), get_vid(Y)); }

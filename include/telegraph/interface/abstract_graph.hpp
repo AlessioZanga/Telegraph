@@ -134,15 +134,19 @@ class AbstractGraph : public IGraph {
      * @brief Add a vertex id to the graph.
      *
      * @param X Given vertex id.
+     *
+     * @return VID The vertex id.
      */
-    inline virtual void add_vertex(const VID &X) = 0;
+    inline virtual VID add_vertex(const VID &X) = 0;
 
     /**
      * @brief Delete a vertex id from the graph.
      *
      * @param X Given vertex id.
+     *
+     * @return VID The vertex id.
      */
-    inline virtual void del_vertex(const VID &X) = 0;
+    inline virtual VID del_vertex(const VID &X) = 0;
 
     /**
      * @brief Get the vertex id.
@@ -300,8 +304,9 @@ class AbstractGraph : public IGraph {
      * @brief Delete a vertex from the graph.
      *
      * @param X Given vertex label.
+     * @return VID Added vertex id.
      */
-    inline virtual void del_vertex(const VLB &X);
+    inline virtual VID del_vertex(const VLB &X);
 
     /** @}*/
 
@@ -322,15 +327,19 @@ class AbstractGraph : public IGraph {
      * @brief Add an edge to the graph.
      *
      * @param X Given edge id.
+     *
+     * @return EID The edge id.
      */
-    inline virtual void add_edge(const EID &X) = 0;
+    inline virtual EID add_edge(const EID &X) = 0;
 
     /**
      * @brief Delete an edge from the graph.
      *
      * @param X Given edge id.
+     *
+     * @return EID The edge id.
      */
-    inline virtual void del_edge(const EID &X) = 0;
+    inline virtual EID del_edge(const EID &X) = 0;
 
     /**
      * @brief Get the edge id.
@@ -661,39 +670,49 @@ class AbstractGraph : public IGraph {
      *
      * @param X First edge vertex id.
      * @param Y Second edge vertex id.
+     *
+     * @return EID The edge id.
      */
-    inline virtual void add_edge(const VID &X, const VID &Y);
+    inline virtual EID add_edge(const VID &X, const VID &Y);
 
     /**
      * @brief Add an edge to the graph.
      *
      * @param X First edge vertex label.
      * @param Y Second edge vertex label.
+     *
+     * @return EID The edge id.
      */
-    inline virtual void add_edge(const VLB &X, const VLB &Y);
+    inline virtual EID add_edge(const VLB &X, const VLB &Y);
 
     /**
      * @brief Delete an edge from the graph.
      *
      * @param X Given edge label.
+     *
+     * @return EID The edge id.
      */
-    inline virtual void del_edge(const ELB &X);
+    inline virtual EID del_edge(const ELB &X);
 
     /**
      * @brief Delete an edge from the graph.
      *
      * @param X First edge vertex id.
      * @param Y Second edge vertex id.
+     *
+     * @return EID The edge id.
      */
-    inline virtual void del_edge(const VID &X, const VID &Y);
+    inline virtual EID del_edge(const VID &X, const VID &Y);
 
     /**
      * @brief Delete an edge from the graph.
      *
      * @param X First edge vertex label.
      * @param Y Second edge vertex label.
+     *
+     * @return EID The edge id.
      */
-    inline virtual void del_edge(const VLB &X, const VLB &Y);
+    inline virtual EID del_edge(const VLB &X, const VLB &Y);
 
     /** @}*/
 };

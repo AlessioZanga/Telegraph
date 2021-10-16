@@ -125,15 +125,19 @@ class IGraph {
      * @brief Add a vertex id to the graph.
      *
      * @param X Given vertex id.
+     * 
+     * @return VID The vertex id.
      */
-    inline virtual void add_vertex(const VID &X) = 0;
+    inline virtual VID add_vertex(const VID &X) = 0;
 
     /**
      * @brief Delete a vertex id from the graph.
      *
      * @param X Given vertex id.
+     * 
+     * @return VID The vertex id.
      */
-    inline virtual void del_vertex(const VID &X) = 0;
+    inline virtual VID del_vertex(const VID &X) = 0;
 
     /** @}*/
 
@@ -154,15 +158,19 @@ class IGraph {
      * @brief Add an edge to the graph.
      *
      * @param X Given edge id.
+     * 
+     * @return EID The edge id.
      */
-    inline virtual void add_edge(const EID &X) = 0;
+    inline virtual EID add_edge(const EID &X) = 0;
 
     /**
      * @brief Delete an edge from the graph.
      *
      * @param X Given edge id.
+     * 
+     * @return EID The edge id.
      */
-    inline virtual void del_edge(const EID &X) = 0;
+    inline virtual EID del_edge(const EID &X) = 0;
 
     /** @}*/
 
