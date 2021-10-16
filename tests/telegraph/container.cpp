@@ -25,8 +25,8 @@ TYPED_TEST(ContainerTest, CopyConstructor) {
 }
 
 TYPED_TEST(ContainerTest, AssignmentOperator) {
-    TypeParam G;
-    TypeParam H = G;
+    TypeParam G, H;
+    H = G;
 }
 
 TYPED_TEST(ContainerTest, Destructor) {
