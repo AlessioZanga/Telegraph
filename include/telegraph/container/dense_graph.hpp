@@ -94,5 +94,5 @@ class DenseGraph : public AbstractGraph {
    private:
     inline virtual std::size_t hash() const;
 
-    virtual void print(std::ostream &out) const;
+    virtual void to_stream(std::ostream &out) const;
 };

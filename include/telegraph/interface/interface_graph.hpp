@@ -183,9 +183,9 @@ class IGraph {
     inline virtual std::size_t hash() const = 0;
 
     /**
-     * @brief Print utility function.
+     * @brief Incrementally write text representation of the graph to output stream.
      *
      * @param out Output stream reference.
      */
-    virtual void print(std::ostream &out) const = 0;
+    virtual void to_stream(std::ostream &out) const = 0;
 };

@@ -226,7 +226,7 @@ inline std::size_t DenseGraph::hash() const {
     return seed;
 }
 
-void DenseGraph::print(std::ostream &out) const {
+void DenseGraph::to_stream(std::ostream &out) const {
     // Get current matrix size.
     std::size_t n = order();
 
