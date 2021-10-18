@@ -12,7 +12,7 @@ inline bool IGraph::is_complete() const { return order() * (order() - 1) / 2 == 
 
 //! Output stream operator adapter.
 std::ostream &operator<<(std::ostream &out, const IGraph &G) {
-    out << G.to_string() << std::endl;
+    G.print(out);
     return out;
 }
 
