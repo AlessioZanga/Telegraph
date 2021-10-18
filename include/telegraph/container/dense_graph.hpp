@@ -7,6 +7,14 @@ class DenseGraph : public AbstractGraph {
     AdjacencyMatrix A;
 
    public:
+    //! Enforce superclass namespace resolution to avoid name hiding with overloading.
+    using AbstractGraph::add_edge;
+    using AbstractGraph::add_vertex;
+    using AbstractGraph::del_edge;
+    using AbstractGraph::del_vertex;
+    using AbstractGraph::has_edge;
+    using AbstractGraph::has_vertex;
+
     DenseGraph();
 
     DenseGraph(const DenseGraph &other);
@@ -69,29 +77,17 @@ class DenseGraph : public AbstractGraph {
 
     inline virtual std::size_t size() const;
 
-    using AbstractGraph::has_vertex;
-
     inline virtual bool has_vertex(const VID &X) const;
-
-    using AbstractGraph::add_vertex;
 
     inline virtual VID add_vertex();
 
     inline virtual VID add_vertex(const VID &X);
 
-    using AbstractGraph::del_vertex;
-
     inline virtual VID del_vertex(const VID &X);
-
-    using AbstractGraph::has_edge;
 
     inline virtual bool has_edge(const EID &X) const;
 
-    using AbstractGraph::add_edge;
-
     inline virtual EID add_edge(const EID &X);
-
-    using AbstractGraph::del_edge;
 
     inline virtual EID del_edge(const EID &X);
 

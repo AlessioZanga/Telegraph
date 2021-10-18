@@ -38,6 +38,14 @@ class AbstractGraph : public IGraph {
     std::map<EID, std::map<std::string, std::any>> eattrs;
 
    public:
+    //! Enforce superclass namespace resolution to avoid name hiding with overloading.
+    using IGraph::add_edge;
+    using IGraph::add_vertex;
+    using IGraph::del_edge;
+    using IGraph::del_vertex;
+    using IGraph::has_edge;
+    using IGraph::has_vertex;
+
     //! Default constructor for a new Abstract Graph object
     AbstractGraph();
 
@@ -258,8 +266,6 @@ class AbstractGraph : public IGraph {
      */
     inline void del_attr(const VLB &X, const std::string &key);
 
-    using IGraph::has_vertex;
-
     /**
      * @brief Whether a vertex exists or not.
      *
@@ -269,8 +275,6 @@ class AbstractGraph : public IGraph {
      */
     inline virtual bool has_vertex(const VLB &X) const;
 
-    using IGraph::add_vertex;
-
     /**
      * @brief Add a vertex to the graph.
      *
@@ -278,8 +282,6 @@ class AbstractGraph : public IGraph {
      * @return VID Added vertex id.
      */
     inline virtual VID add_vertex(const VLB &label);
-
-    using IGraph::del_vertex;
 
     /**
      * @brief Delete a vertex from the graph.
@@ -599,8 +601,6 @@ class AbstractGraph : public IGraph {
      */
     inline void del_attr(const VLB &X, const VLB &Y, const std::string &key);
 
-    using IGraph::has_edge;
-
     /**
      * @brief Whether an edge exists or not.
      *
@@ -630,8 +630,6 @@ class AbstractGraph : public IGraph {
      */
     inline virtual bool has_edge(const VLB &X, const VLB &Y) const;
 
-    using IGraph::add_edge;
-
     /**
      * @brief Add an edge to the graph.
      *
@@ -651,8 +649,6 @@ class AbstractGraph : public IGraph {
      * @return EID The edge id.
      */
     inline virtual EID add_edge(const VLB &X, const VLB &Y);
-
-    using IGraph::del_edge;
 
     /**
      * @brief Delete an edge from the graph.
