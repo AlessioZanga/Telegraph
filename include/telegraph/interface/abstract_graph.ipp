@@ -166,7 +166,7 @@ inline bool AbstractGraph::has_label(const ELB &X) const { return has_edge(X); }
 inline bool AbstractGraph::has_label(const VID &X, const VID &Y) const { return has_label(EID(X, Y)); }
 
 inline bool AbstractGraph::has_label(const VLB &X, const VLB &Y) const {
-    return has_label(std::make_pair(get_vid(X), get_vid(Y)));
+    return has_label(EID(get_vid(X), get_vid(Y)));
 }
 
 inline ELB AbstractGraph::get_label(const EID &X) const {
