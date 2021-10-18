@@ -478,7 +478,7 @@ TYPED_TEST(ContainerTest, HasLabelELB) {
     ASSERT_FALSE(G.has_label(ELB("1 -- 1")));
 }
 
-TYPED_TEST(ContainerTest, HasLabelVIDVIB) {
+TYPED_TEST(ContainerTest, HasLabelVIDVID) {
     TypeParam G(3);
     G.add_edge(0, 1);
     G.set_label(0, 1, ELB("0 -- 1"));
