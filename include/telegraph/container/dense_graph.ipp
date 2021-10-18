@@ -203,30 +203,10 @@ inline EID DenseGraph::del_edge(const EID &X) {
     return X;
 }
 
-inline std::size_t DenseGraph::hash() const {
-    // Initialize seed hash.
-    std::size_t seed = 0;
-    // Get current matrix size.
-    std::size_t n = order();
-    // Hash VIDs.
-    for (VID i = 0; i < n; i++) boost::hash_combine(seed, i);
-    // Hash EIDs.
-    for (VID i = 0; i < n; i++) {
-        for (VID j = 0; j < n; j++) {
-            if (A(i, j) != 0) boost::hash_combine(seed, EID(i, j));
-        }
-    }
-    // Hash GLB.
-    if (has_label()) boost::hash_combine(seed, glb);
-    // Hash VLBs.
-    boost::hash_combine(seed, boost::hash_range(vlbs.begin(), vlbs.end()));
-    // Hash ELBs.
-    boost::hash_combine(seed, boost::hash_range(elbs.begin(), elbs.end()));
-    // Return hash
-    return seed;
-}
+std::string DenseGraph::to_string() const {
+    // Init return result.
+    std::stringstream out;
 
-void DenseGraph::print(std::ostream &out) const {
     // Get current matrix size.
     std::size_t n = order();
 
@@ -253,5 +233,31 @@ void DenseGraph::print(std::ostream &out) const {
     out << " )";
 
     // Close graph class.
-    out << " )" << std::endl;
+    out << " )";
+
+    // Return result.
+    return out.str();
+}
+
+inline std::size_t DenseGraph::hash() const {
+    // Initialize seed hash.
+    std::size_t seed = 0;
+    // Get current matrix size.
+    std::size_t n = order();
+    // Hash VIDs.
+    for (VID i = 0; i < n; i++) boost::hash_combine(seed, i);
+    // Hash EIDs.
+    for (VID i = 0; i < n; i++) {
+        for (VID j = 0; j < n; j++) {
+            if (A(i, j) != 0) boost::hash_combine(seed, EID(i, j));
+        }
+    }
+    // Hash GLB.
+    if (has_label()) boost::hash_combine(seed, glb);
+    // Hash VLBs.
+    boost::hash_combine(seed, boost::hash_range(vlbs.begin(), vlbs.end()));
+    // Hash ELBs.
+    boost::hash_combine(seed, boost::hash_range(elbs.begin(), elbs.end()));
+    // Return hash
+    return seed;
 }

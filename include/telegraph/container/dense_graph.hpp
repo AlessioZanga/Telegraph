@@ -91,8 +91,8 @@ class DenseGraph : public AbstractGraph {
 
     inline virtual EID del_edge(const EID &X);
 
+    virtual std::string to_string() const;
+
    private:
     inline virtual std::size_t hash() const;
-
-    virtual void print(std::ostream &out) const;
 };

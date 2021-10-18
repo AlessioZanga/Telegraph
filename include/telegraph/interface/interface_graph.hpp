@@ -8,7 +8,8 @@
 #include <set>
 #include <utility>
 
-#define require_iter_value_type(I, T) typename std::enable_if<std::is_same<typename std::iterator_traits<I>::value_type, T>::value, int>::type
+#define require_iter_value_type(I, T) \
+    typename std::enable_if<std::is_same<typename std::iterator_traits<I>::value_type, T>::value, int>::type
 
 //! Vertex identifier.
 using VID = uintmax_t;
@@ -125,7 +126,7 @@ class IGraph {
      * @brief Add a vertex id to the graph.
      *
      * @param X Given vertex id.
-     * 
+     *
      * @return VID The vertex id.
      */
     inline virtual VID add_vertex(const VID &X) = 0;
@@ -134,7 +135,7 @@ class IGraph {
      * @brief Delete a vertex id from the graph.
      *
      * @param X Given vertex id.
-     * 
+     *
      * @return VID The vertex id.
      */
     inline virtual VID del_vertex(const VID &X) = 0;
@@ -158,7 +159,7 @@ class IGraph {
      * @brief Add an edge to the graph.
      *
      * @param X Given edge id.
-     * 
+     *
      * @return EID The edge id.
      */
     inline virtual EID add_edge(const EID &X) = 0;
@@ -167,12 +168,19 @@ class IGraph {
      * @brief Delete an edge from the graph.
      *
      * @param X Given edge id.
-     * 
+     *
      * @return EID The edge id.
      */
     inline virtual EID del_edge(const EID &X) = 0;
 
     /** @}*/
+
+    /**
+     * @brief To string utility function.
+     *
+     * @return Output string representation.
+     */
+    virtual std::string to_string() const = 0;
 
    protected:
     /**
@@ -181,11 +189,4 @@ class IGraph {
      * @return std::size_t Hash of a graph.
      */
     inline virtual std::size_t hash() const = 0;
-
-    /**
-     * @brief Print utility function.
-     *
-     * @param out Output stream reference.
-     */
-    virtual void print(std::ostream &out) const = 0;
 };
