@@ -311,8 +311,13 @@ TYPED_TEST(ContainerTest, DelVertexVID) {
     TypeParam G;
 
     VID i = G.add_vertex();
-    ASSERT_EQ(G.del_vertex(i), i);                     // Valid argument.
-    ASSERT_THROW(G.del_vertex(i), std::out_of_range);  // Invalid argument.
+    VLB l = std::to_string(i);
+    G.set_label(i, l);
+    G.set_attr(i, "key", 1);
+    ASSERT_EQ(G.del_vertex(i), i);                          // Valid argument.
+    ASSERT_THROW(G.del_vertex(i), std::out_of_range);       // Invalid argument.
+    ASSERT_THROW(G.has_label(i), std::out_of_range);        // Invalid argument.
+    ASSERT_THROW(G.has_attr(i, "key"), std::out_of_range);  // Invalid argument.
 }
 
 TYPED_TEST(ContainerTest, DelVertexVLB) {
@@ -320,8 +325,11 @@ TYPED_TEST(ContainerTest, DelVertexVLB) {
 
     VLB l = "0";
     VID i = G.add_vertex(l);
-    ASSERT_EQ(G.del_vertex(l), i);                     // Valid argument.
-    ASSERT_THROW(G.del_vertex(l), std::out_of_range);  // Invalid argument.
+    G.set_attr(i, "key", 1);
+    ASSERT_EQ(G.del_vertex(l), i);                          // Valid argument.
+    ASSERT_THROW(G.del_vertex(l), std::out_of_range);       // Invalid argument.
+    ASSERT_THROW(G.has_label(i), std::out_of_range);        // Invalid argument.
+    ASSERT_THROW(G.has_attr(i, "key"), std::out_of_range);  // Invalid argument.
 }
 
 TYPED_TEST(ContainerTest, GetEdgeID) {
@@ -391,19 +399,26 @@ TYPED_TEST(ContainerTest, AddEdgeVLBVLB) {
 
 TYPED_TEST(ContainerTest, DelEdgeEID) {
     TypeParam G(2);
-    G.add_edge(EID(0, 1));
-    ASSERT_EQ(G.del_edge(EID(0, 1)), EID(0, 1));             // Valid argument.
+    EID e = G.add_edge(EID(0, 1));
+    G.set_label(e, ELB("0 -- 1"));
+    G.set_attr(e, "key", 1);
+    ASSERT_EQ(G.del_edge(e), e);                             // Valid argument.
     ASSERT_THROW(G.del_edge(EID(0, 1)), std::out_of_range);  // Invalid argument.
     ASSERT_THROW(G.del_edge(EID(0, 2)), std::out_of_range);  // Invalid argument.
+    ASSERT_THROW(G.has_label(e), std::out_of_range);         // Invalid argument.
+    ASSERT_THROW(G.has_attr(e, "key"), std::out_of_range);   // Invalid argument.
 }
 
 TYPED_TEST(ContainerTest, DelEdgeELB) {
     TypeParam G(2);
-    G.add_edge(0, 1);
+    EID e = G.add_edge(0, 1);
     G.set_label(0, 1, ELB("0 -- 1"));
+    G.set_attr(e, "key", 1);
     ASSERT_EQ(G.del_edge(ELB("0 -- 1")), EID(0, 1));             // Valid argument.
     ASSERT_THROW(G.del_edge(ELB("0 -- 1")), std::out_of_range);  // Invalid argument.
     ASSERT_THROW(G.del_edge(ELB("0 -- 2")), std::out_of_range);  // Invalid argument.
+    ASSERT_THROW(G.has_label(e), std::out_of_range);             // Invalid argument.
+    ASSERT_THROW(G.has_attr(e, "key"), std::out_of_range);       // Invalid argument.
 }
 
 TYPED_TEST(ContainerTest, DelEdgeVIDVID) {

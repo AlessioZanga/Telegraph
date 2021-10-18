@@ -43,7 +43,7 @@ inline T AbstractGraph::get_attr(const std::string &key) const {
 
 template <typename T>
 inline void AbstractGraph::set_attr(const std::string &key, const T &value) {
-    gattrs[key] = std::make_any(value);
+    gattrs[key] = std::make_any<T>(value);
 }
 
 inline void AbstractGraph::del_attr(const std::string &key) {
@@ -123,7 +123,7 @@ inline T AbstractGraph::get_attr(const VLB &X, const std::string &key) const {
 template <typename T>
 inline void AbstractGraph::set_attr(const VID &X, const std::string &key, const T &value) {
     if (!has_vertex(X)) throw NOT_DEFINED(X);  // Check if X is a valid vertex.
-    vattrs[X][key] = std::make_any(value);
+    vattrs[X][key] = std::make_any<T>(value);
 }
 
 template <typename T>
@@ -258,7 +258,7 @@ inline T AbstractGraph::get_attr(const VLB &X, const VLB &Y, const std::string &
 template <typename T>
 inline void AbstractGraph::set_attr(const EID &X, const std::string &key, const T &value) {
     if (!has_edge(X)) throw NOT_DEFINED(X.first, X.second);  // Check if X is a valid vertex.
-    eattrs[X][key] = std::make_any(value);
+    eattrs[X][key] = std::make_any<T>(value);
 }
 
 template <typename T>
