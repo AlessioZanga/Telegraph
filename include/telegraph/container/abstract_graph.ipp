@@ -27,6 +27,7 @@ inline void AbstractGraph::set_label(const GLB &label) {
 }
 
 inline void AbstractGraph::del_label() {
+    if (!has_label()) throw NO_LABEL();
     glb.clear();          // Remove the label characters.
     glb.shrink_to_fit();  // Deallocate the unused memory.
 }

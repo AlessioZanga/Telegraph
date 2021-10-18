@@ -263,7 +263,7 @@ TYPED_TEST(ContainerTest, Size) {
     ASSERT_EQ(J.size(), count);
 }
 
-TYPED_TEST(ContainerTest, GetVertexID) {
+TYPED_TEST(ContainerTest, GetVID) {
     TypeParam G(1);
     G.set_label(0, "0");
     ASSERT_EQ(G.get_id("0"), 0);                     // Valid argument.
@@ -332,7 +332,7 @@ TYPED_TEST(ContainerTest, DelVertexVLB) {
     ASSERT_THROW(G.has_attr(i, "key"), std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, GetEdgeID) {
+TYPED_TEST(ContainerTest, GetEID) {
     TypeParam G(2);
     EID e = G.add_edge(0, 1);
     G.set_label(0, 1, ELB("0 --- 1"));
@@ -657,75 +657,131 @@ TYPED_TEST(ContainerTest, SetLabelVLBVLBELB) {
     ASSERT_THROW(G.set_label("0", "3", ELB("0 --- 3")), std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, DISABLED_DelLabel0) {}
+TYPED_TEST(ContainerTest, DelLabelVOID) {
+    TypeParam G;
+    G.set_label("G");
+    G.del_label();
+    ASSERT_FALSE(G.has_label());
+    ASSERT_THROW(G.del_label(), std::out_of_range);  // Invalid argument: graph label not defined.
+}
 
-TYPED_TEST(ContainerTest, DISABLED_DelLabel1) {}
+TYPED_TEST(ContainerTest, DelLabelVID) {
+    TypeParam G(1);
+    G.set_label(0, "0");
+    G.del_label(0);
+    ASSERT_FALSE(G.has_label(0));
+    ASSERT_THROW(G.del_label(0), std::out_of_range);  // Invalid argument: vertex label not defined.
+    ASSERT_THROW(G.del_label(1), std::out_of_range);  // Invalid argument: vertex not defined.
+}
 
-TYPED_TEST(ContainerTest, DISABLED_DelLabel2) {}
+TYPED_TEST(ContainerTest, DelLabelVLB) {
+    TypeParam G(1);
+    G.set_label(0, "0");
+    G.del_label("0");
+    ASSERT_FALSE(G.has_label("0"));
+    ASSERT_THROW(G.del_label("0"), std::out_of_range);  // Invalid argument: vertex label not defined.
+    ASSERT_THROW(G.del_label("1"), std::out_of_range);  // Invalid argument: vertex not defined.
+}
 
-TYPED_TEST(ContainerTest, DISABLED_DelLabel3) {}
+TYPED_TEST(ContainerTest, DelLabelEID) {
+    TypeParam G(2);
+    EID i = G.add_edge(0, 1);
+    G.set_label(i, ELB("0 -- 1"));
+    G.del_label(i);
+    ASSERT_FALSE(G.has_label(i));
+    ASSERT_THROW(G.del_label(i), std::out_of_range);          // Invalid argument: vertex label not defined.
+    ASSERT_THROW(G.del_label(EID(1, 1)), std::out_of_range);  // Invalid argument: edge not defined.
+    ASSERT_THROW(G.del_label(EID(1, 2)), std::out_of_range);  // Invalid argument: vertex not defined.
+}
 
-TYPED_TEST(ContainerTest, DISABLED_DelLabel4) {}
+TYPED_TEST(ContainerTest, DelLabelELB) {
+    TypeParam G(2);
+    G.add_edge(0, 1);
+    G.set_label(0, 1, ELB("0 -- 1"));
+    G.del_label(ELB("0 -- 1"));
+    ASSERT_FALSE(G.has_label(ELB("0 -- 1")));
+    ASSERT_THROW(G.del_label(ELB("0 -- 1")), std::out_of_range);  // Invalid argument: edge label not defined.
+}
 
-TYPED_TEST(ContainerTest, DISABLED_DelLabel5) {}
+TYPED_TEST(ContainerTest, DelLabelVIDVID) {
+    TypeParam G(2);
+    G.add_edge(0, 1);
+    G.set_label(0, 1, ELB("0 -- 1"));
+    G.del_label(0, 1);
+    ASSERT_FALSE(G.has_label(0, 1));
+    ASSERT_THROW(G.del_label(0, 1), std::out_of_range);  // Invalid argument: vertex label not defined.
+    ASSERT_THROW(G.del_label(1, 1), std::out_of_range);  // Invalid argument: edge not defined.
+    ASSERT_THROW(G.del_label(1, 2), std::out_of_range);  // Invalid argument: vertex not defined.
+}
 
-TYPED_TEST(ContainerTest, DISABLED_DelLabel6) {}
+TYPED_TEST(ContainerTest, DelLabelVLBVLB) {
+    TypeParam G(2);
+    G.set_label(0, "0");
+    G.set_label(1, "1");
+    G.add_edge("0", "1");
+    G.set_label("0", "1", ELB("0 -- 1"));
+    G.del_label("0", "1");
+    ASSERT_FALSE(G.has_label("0", "1"));
+    ASSERT_THROW(G.del_label("0", "1"), std::out_of_range);  // Invalid argument: vertex label not defined.
+    ASSERT_THROW(G.del_label("1", "1"), std::out_of_range);  // Invalid argument: edge not defined.
+    ASSERT_THROW(G.del_label("1", "2"), std::out_of_range);  // Invalid argument: vertex not defined.
+}
 
-TYPED_TEST(ContainerTest, DISABLED_HasAttr0) {}
+TYPED_TEST(ContainerTest, DISABLED_HasAttrVOID) {}
 
-TYPED_TEST(ContainerTest, DISABLED_HasAttr1) {}
+TYPED_TEST(ContainerTest, DISABLED_HasAttrVID) {}
 
-TYPED_TEST(ContainerTest, DISABLED_HasAttr2) {}
+TYPED_TEST(ContainerTest, DISABLED_HasAttrVLB) {}
 
-TYPED_TEST(ContainerTest, DISABLED_HasAttr3) {}
+TYPED_TEST(ContainerTest, DISABLED_HasAttrEID) {}
 
-TYPED_TEST(ContainerTest, DISABLED_HasAttr4) {}
+TYPED_TEST(ContainerTest, DISABLED_HasAttrELB) {}
 
-TYPED_TEST(ContainerTest, DISABLED_HasAttr5) {}
+TYPED_TEST(ContainerTest, DISABLED_HasAttrVIDVID) {}
 
-TYPED_TEST(ContainerTest, DISABLED_HasAttr6) {}
+TYPED_TEST(ContainerTest, DISABLED_HasAttrVLBVLB) {}
 
-TYPED_TEST(ContainerTest, DISABLED_GetAttr0) {}
+TYPED_TEST(ContainerTest, DISABLED_GetAttrVOID) {}
 
-TYPED_TEST(ContainerTest, DISABLED_GetAttr1) {}
+TYPED_TEST(ContainerTest, DISABLED_GetAttrVID) {}
 
-TYPED_TEST(ContainerTest, DISABLED_GetAttr2) {}
+TYPED_TEST(ContainerTest, DISABLED_GetAttrVLB) {}
 
-TYPED_TEST(ContainerTest, DISABLED_GetAttr3) {}
+TYPED_TEST(ContainerTest, DISABLED_GetAttrEID) {}
 
-TYPED_TEST(ContainerTest, DISABLED_GetAttr4) {}
+TYPED_TEST(ContainerTest, DISABLED_GetAttrELB) {}
 
-TYPED_TEST(ContainerTest, DISABLED_GetAttr5) {}
+TYPED_TEST(ContainerTest, DISABLED_GetAttrVIDVID) {}
 
-TYPED_TEST(ContainerTest, DISABLED_GetAttr6) {}
+TYPED_TEST(ContainerTest, DISABLED_GetAttrVLBVLB) {}
 
-TYPED_TEST(ContainerTest, DISABLED_SetAttr0) {}
+TYPED_TEST(ContainerTest, DISABLED_SetAttrVOID) {}
 
-TYPED_TEST(ContainerTest, DISABLED_SetAttr1) {}
+TYPED_TEST(ContainerTest, DISABLED_SetAttrVID) {}
 
-TYPED_TEST(ContainerTest, DISABLED_SetAttr2) {}
+TYPED_TEST(ContainerTest, DISABLED_SetAttrVLB) {}
 
-TYPED_TEST(ContainerTest, DISABLED_SetAttr3) {}
+TYPED_TEST(ContainerTest, DISABLED_SetAttrEID) {}
 
-TYPED_TEST(ContainerTest, DISABLED_SetAttr4) {}
+TYPED_TEST(ContainerTest, DISABLED_SetAttrELB) {}
 
-TYPED_TEST(ContainerTest, DISABLED_SetAttr5) {}
+TYPED_TEST(ContainerTest, DISABLED_SetAttrVIDVID) {}
 
-TYPED_TEST(ContainerTest, DISABLED_SetAttr6) {}
+TYPED_TEST(ContainerTest, DISABLED_SetAttrVLBVLB) {}
 
-TYPED_TEST(ContainerTest, DISABLED_DelAttr0) {}
+TYPED_TEST(ContainerTest, DISABLED_DelAttrVOID) {}
 
-TYPED_TEST(ContainerTest, DISABLED_DelAttr1) {}
+TYPED_TEST(ContainerTest, DISABLED_DelAttrVID) {}
 
-TYPED_TEST(ContainerTest, DISABLED_DelAttr2) {}
+TYPED_TEST(ContainerTest, DISABLED_DelAttrVLB) {}
 
-TYPED_TEST(ContainerTest, DISABLED_DelAttr3) {}
+TYPED_TEST(ContainerTest, DISABLED_DelAttrEID) {}
 
-TYPED_TEST(ContainerTest, DISABLED_DelAttr4) {}
+TYPED_TEST(ContainerTest, DISABLED_DelAttrELB) {}
 
-TYPED_TEST(ContainerTest, DISABLED_DelAttr5) {}
+TYPED_TEST(ContainerTest, DISABLED_DelAttrVIDVID) {}
 
-TYPED_TEST(ContainerTest, DISABLED_DelAttr6) {}
+TYPED_TEST(ContainerTest, DISABLED_DelAttrVLBVLB) {}
 
 TYPED_TEST(ContainerTest, DISABLED_IsNull) {}
 
