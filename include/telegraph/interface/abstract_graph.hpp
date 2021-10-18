@@ -115,40 +115,6 @@ class AbstractGraph : public IGraph {
      */
 
     /**
-     * @brief Whether a vertex id exists or not.
-     *
-     * @param X Given vertex id.
-     * @return true If the vertex id exists,
-     * @return false Otherwise.
-     */
-    inline virtual bool has_vertex(const VID &X) const = 0;
-
-    /**
-     * @brief Add a vertex to the graph.
-     *
-     * @return VID The vertex id.
-     */
-    inline virtual VID add_vertex() = 0;
-
-    /**
-     * @brief Add a vertex id to the graph.
-     *
-     * @param X Given vertex id.
-     *
-     * @return VID The vertex id.
-     */
-    inline virtual VID add_vertex(const VID &X) = 0;
-
-    /**
-     * @brief Delete a vertex id from the graph.
-     *
-     * @param X Given vertex id.
-     *
-     * @return VID The vertex id.
-     */
-    inline virtual VID del_vertex(const VID &X) = 0;
-
-    /**
      * @brief Get the vertex id.
      *
      * @param X Given vertex label.
@@ -292,6 +258,8 @@ class AbstractGraph : public IGraph {
      */
     inline void del_attr(const VLB &X, const std::string &key);
 
+    using IGraph::has_vertex;
+
     /**
      * @brief Whether a vertex exists or not.
      *
@@ -301,6 +269,8 @@ class AbstractGraph : public IGraph {
      */
     inline virtual bool has_vertex(const VLB &X) const;
 
+    using IGraph::add_vertex;
+
     /**
      * @brief Add a vertex to the graph.
      *
@@ -308,6 +278,8 @@ class AbstractGraph : public IGraph {
      * @return VID Added vertex id.
      */
     inline virtual VID add_vertex(const VLB &label);
+
+    using IGraph::del_vertex;
 
     /**
      * @brief Delete a vertex from the graph.
@@ -322,33 +294,6 @@ class AbstractGraph : public IGraph {
     /** \addtogroup edges
      *  @{
      */
-
-    /**
-     * @brief Whether an edge exists or not.
-     *
-     * @param X Given edge id.
-     * @return true If the edge exists,
-     * @return false Otherwise.
-     */
-    inline virtual bool has_edge(const EID &X) const = 0;
-
-    /**
-     * @brief Add an edge to the graph.
-     *
-     * @param X Given edge id.
-     *
-     * @return EID The edge id.
-     */
-    inline virtual EID add_edge(const EID &X) = 0;
-
-    /**
-     * @brief Delete an edge from the graph.
-     *
-     * @param X Given edge id.
-     *
-     * @return EID The edge id.
-     */
-    inline virtual EID del_edge(const EID &X) = 0;
 
     /**
      * @brief Get the edge id.
@@ -654,6 +599,8 @@ class AbstractGraph : public IGraph {
      */
     inline void del_attr(const VLB &X, const VLB &Y, const std::string &key);
 
+    using IGraph::has_edge;
+
     /**
      * @brief Whether an edge exists or not.
      *
@@ -683,6 +630,8 @@ class AbstractGraph : public IGraph {
      */
     inline virtual bool has_edge(const VLB &X, const VLB &Y) const;
 
+    using IGraph::add_edge;
+
     /**
      * @brief Add an edge to the graph.
      *
@@ -702,6 +651,8 @@ class AbstractGraph : public IGraph {
      * @return EID The edge id.
      */
     inline virtual EID add_edge(const VLB &X, const VLB &Y);
+
+    using IGraph::del_edge;
 
     /**
      * @brief Delete an edge from the graph.
