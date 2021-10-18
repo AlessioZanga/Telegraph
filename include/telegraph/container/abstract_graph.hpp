@@ -1,11 +1,30 @@
 #pragma once
 
+#include <Eigen/Eigen>
 #include <any>
 #include <boost/bimap.hpp>
 #include <boost/bimap/support/lambda.hpp>
 #include <boost/container_hash/hash.hpp>
+#include <cstdint>
+#include <iostream>
+#include <iterator>
+#include <map>
+#include <set>
+#include <utility>
 
-#include "interface_graph.ipp"
+#include "exceptions.hpp"
+
+#define require_iter_value_type(I, T) \
+    typename std::enable_if<std::is_same<typename std::iterator_traits<I>::value_type, T>::value, int>::type
+
+//! Vertex identifier.
+using VID = uintmax_t;
+//! Edge identifier.
+using EID = std::pair<VID, VID>;
+//! Vertex set.
+using VIDs = std::set<VID>;
+//! Edge set.
+using EIDs = std::set<EID>;
 
 //! Graph label.
 using GLB = std::string;
@@ -21,7 +40,14 @@ using VLBs = std::set<VLB>;
 //! Edge labels set.
 using ELBs = std::set<ELB>;
 
-class AbstractGraph : public IGraph {
+//! Adjacency list.
+using AdjacencyList = std::map<VID, VIDs>;
+//! Dense adjacency matrix.
+using AdjacencyMatrix = Eigen::Matrix<int8_t, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>;
+//! Sparse adjacency matrix.
+using SparseAdjacencyMatrix = Eigen::SparseMatrix<int8_t, Eigen::RowMajor>;
+
+class AbstractGraph {
    protected:
     //! Graph label, aka its name.
     GLB glb;
@@ -38,14 +64,6 @@ class AbstractGraph : public IGraph {
     std::map<EID, std::map<std::string, std::any>> eattrs;
 
    public:
-    //! Enforce superclass namespace resolution to avoid name hiding with overloading.
-    using IGraph::add_edge;
-    using IGraph::add_vertex;
-    using IGraph::del_edge;
-    using IGraph::del_vertex;
-    using IGraph::has_edge;
-    using IGraph::has_vertex;
-
     //! Default constructor for a new Abstract Graph object
     AbstractGraph();
 
@@ -54,6 +72,65 @@ class AbstractGraph : public IGraph {
 
     //! Destroy the Abstract Graph object
     inline virtual ~AbstractGraph();
+
+    /**
+     * @brief The adjacency list representation of the graph.
+     *
+     * @return AdjacencyList Adjacency list of the graph.
+     */
+    inline virtual operator AdjacencyList() const = 0;
+
+    /**
+     * @brief The adjacency matrix representation of the graph in a dense format.
+     *
+     * @return AdjacencyMatrix Dense adjacency matrix of the graph.
+     */
+    inline virtual operator AdjacencyMatrix() const = 0;
+
+    /**
+     * @brief The adjacency matrix representation of the graph in a sparse format.
+     *
+     * @return SparseAdjacencyMatrix Sparse adjacency matrix of the graph.
+     */
+    inline virtual operator SparseAdjacencyMatrix() const = 0;
+
+    /**
+     * @brief The number of vertices of a graph is called its order.
+     *
+     * @return std::size_t Number of vertices of the graph.
+     */
+    inline virtual std::size_t order() const = 0;
+
+    /**
+     * @brief The number of edges of a graph is called its size.
+     *
+     * @return std::size_t Number of edges of the graph.
+     */
+    inline virtual std::size_t size() const = 0;
+
+    /**
+     * @brief A graph is null if it has no vertices.
+     *
+     * @return true If the graph is null,
+     * @return false Otherwise.
+     */
+    inline virtual bool is_null() const;
+
+    /**
+     * @brief A graph is trivial if it has one vertex and no edges.
+     *
+     * @return true If the graph is trivial,
+     * @return false Otherwise.
+     */
+    inline virtual bool is_trivial() const;
+
+    /**
+     * @brief A graph is complete if every vertex is connected to all the others.
+     *
+     * @return true If the graph is complete,
+     * @return false Otherwise.
+     */
+    inline virtual bool is_complete() const;
 
     /**
      * @brief Check if the graph has a label.
@@ -123,12 +200,69 @@ class AbstractGraph : public IGraph {
      */
 
     /**
+     * @brief Whether a vertex id exists or not.
+     *
+     * @param X Given vertex id.
+     * @return true If the vertex id exists,
+     * @return false Otherwise.
+     */
+    inline virtual bool has_vertex(const VID &X) const = 0;
+
+    /**
+     * @brief Whether a vertex exists or not.
+     *
+     * @param X Given vertex label.
+     * @return true If the vertex label exists,
+     * @return false Otherwise.
+     */
+    inline virtual bool has_vertex(const VLB &X) const;
+
+    /**
+     * @brief Add a vertex to the graph.
+     *
+     * @return VID The vertex id.
+     */
+    inline virtual VID add_vertex() = 0;
+
+    /**
+     * @brief Add a vertex id to the graph.
+     *
+     * @param X Given vertex id.
+     * @return VID The vertex id.
+     */
+    inline virtual VID add_vertex(const VID &X) = 0;
+
+    /**
+     * @brief Add a vertex to the graph.
+     *
+     * @param X Given vertex label.
+     * @return VID Added vertex id.
+     */
+    inline virtual VID add_vertex(const VLB &label);
+
+    /**
+     * @brief Delete a vertex id from the graph.
+     *
+     * @param X Given vertex id.
+     * @return VID The vertex id.
+     */
+    inline virtual VID del_vertex(const VID &X) = 0;
+
+    /**
+     * @brief Delete a vertex from the graph.
+     *
+     * @param X Given vertex label.
+     * @return VID Added vertex id.
+     */
+    inline virtual VID del_vertex(const VLB &X);
+
+    /**
      * @brief Get the vertex id.
      *
      * @param X Given vertex label.
      * @return VID The vertex id.
      */
-    inline VID get_vid(const VLB &X) const;
+    inline VID get_id(const VLB &X) const;
 
     /**
      * @brief Check if a vertex has a label.
@@ -266,31 +400,6 @@ class AbstractGraph : public IGraph {
      */
     inline void del_attr(const VLB &X, const std::string &key);
 
-    /**
-     * @brief Whether a vertex exists or not.
-     *
-     * @param X Given vertex label.
-     * @return true If the vertex label exists,
-     * @return false Otherwise.
-     */
-    inline virtual bool has_vertex(const VLB &X) const;
-
-    /**
-     * @brief Add a vertex to the graph.
-     *
-     * @param X Given vertex label.
-     * @return VID Added vertex id.
-     */
-    inline virtual VID add_vertex(const VLB &label);
-
-    /**
-     * @brief Delete a vertex from the graph.
-     *
-     * @param X Given vertex label.
-     * @return VID Added vertex id.
-     */
-    inline virtual VID del_vertex(const VLB &X);
-
     /** @}*/
 
     /** \addtogroup edges
@@ -298,12 +407,110 @@ class AbstractGraph : public IGraph {
      */
 
     /**
+     * @brief Whether an edge exists or not.
+     *
+     * @param X Given edge id.
+     * @return true If the edge exists,
+     * @return false Otherwise.
+     */
+    inline virtual bool has_edge(const EID &X) const = 0;
+
+    /**
+     * @brief Whether an edge exists or not.
+     *
+     * @param X Given edge label.
+     * @return true If the edge exists,
+     * @return false Otherwise.
+     */
+    inline virtual bool has_edge(const ELB &X) const;
+
+    /**
+     * @brief Whether an edge exists or not.
+     *
+     * @param X First edge vertex id.
+     * @param Y Second edge vertex id.
+     * @return true If the edge exists,
+     * @return false Otherwise.
+     */
+    inline virtual bool has_edge(const VID &X, const VID &Y) const;
+
+    /**
+     * @brief Whether an edge exists or not.
+     *
+     * @param X First edge vertex label.
+     * @param Y Second edge vertex label.
+     * @return true If the edge exists,
+     * @return false Otherwise.
+     */
+    inline virtual bool has_edge(const VLB &X, const VLB &Y) const;
+
+    /**
+     * @brief Add an edge to the graph.
+     *
+     * @param X Given edge id.
+     * @return EID The edge id.
+     */
+    inline virtual EID add_edge(const EID &X) = 0;
+
+    /**
+     * @brief Add an edge to the graph.
+     *
+     * @param X First edge vertex id.
+     * @param Y Second edge vertex id.
+     * @return EID The edge id.
+     */
+    inline virtual EID add_edge(const VID &X, const VID &Y);
+
+    /**
+     * @brief Add an edge to the graph.
+     *
+     * @param X First edge vertex label.
+     * @param Y Second edge vertex label.
+     * @return EID The edge id.
+     */
+    inline virtual EID add_edge(const VLB &X, const VLB &Y);
+
+    /**
+     * @brief Delete an edge from the graph.
+     *
+     * @param X Given edge id.
+     * @return EID The edge id.
+     */
+    inline virtual EID del_edge(const EID &X) = 0;
+
+    /**
+     * @brief Delete an edge from the graph.
+     *
+     * @param X Given edge label.
+     * @return EID The edge id.
+     */
+    inline virtual EID del_edge(const ELB &X);
+
+    /**
+     * @brief Delete an edge from the graph.
+     *
+     * @param X First edge vertex id.
+     * @param Y Second edge vertex id.
+     * @return EID The edge id.
+     */
+    inline virtual EID del_edge(const VID &X, const VID &Y);
+
+    /**
+     * @brief Delete an edge from the graph.
+     *
+     * @param X First edge vertex label.
+     * @param Y Second edge vertex label.
+     * @return EID The edge id.
+     */
+    inline virtual EID del_edge(const VLB &X, const VLB &Y);
+
+    /**
      * @brief Get the edge id.
      *
      * @param X Given edge label.
      * @return EID The edge id.
      */
-    inline EID get_eid(const ELB &X) const;
+    inline EID get_id(const ELB &X) const;
 
     /**
      * @brief Check if an edge has a label.
@@ -601,83 +808,32 @@ class AbstractGraph : public IGraph {
      */
     inline void del_attr(const VLB &X, const VLB &Y, const std::string &key);
 
-    /**
-     * @brief Whether an edge exists or not.
-     *
-     * @param X Given edge label.
-     * @return true If the edge exists,
-     * @return false Otherwise.
-     */
-    inline virtual bool has_edge(const ELB &X) const;
-
-    /**
-     * @brief Whether an edge exists or not.
-     *
-     * @param X First edge vertex id.
-     * @param Y Second edge vertex id.
-     * @return true If the edge exists,
-     * @return false Otherwise.
-     */
-    inline virtual bool has_edge(const VID &X, const VID &Y) const;
-
-    /**
-     * @brief Whether an edge exists or not.
-     *
-     * @param X First edge vertex label.
-     * @param Y Second edge vertex label.
-     * @return true If the edge exists,
-     * @return false Otherwise.
-     */
-    inline virtual bool has_edge(const VLB &X, const VLB &Y) const;
-
-    /**
-     * @brief Add an edge to the graph.
-     *
-     * @param X First edge vertex id.
-     * @param Y Second edge vertex id.
-     *
-     * @return EID The edge id.
-     */
-    inline virtual EID add_edge(const VID &X, const VID &Y);
-
-    /**
-     * @brief Add an edge to the graph.
-     *
-     * @param X First edge vertex label.
-     * @param Y Second edge vertex label.
-     *
-     * @return EID The edge id.
-     */
-    inline virtual EID add_edge(const VLB &X, const VLB &Y);
-
-    /**
-     * @brief Delete an edge from the graph.
-     *
-     * @param X Given edge label.
-     *
-     * @return EID The edge id.
-     */
-    inline virtual EID del_edge(const ELB &X);
-
-    /**
-     * @brief Delete an edge from the graph.
-     *
-     * @param X First edge vertex id.
-     * @param Y Second edge vertex id.
-     *
-     * @return EID The edge id.
-     */
-    inline virtual EID del_edge(const VID &X, const VID &Y);
-
-    /**
-     * @brief Delete an edge from the graph.
-     *
-     * @param X First edge vertex label.
-     * @param Y Second edge vertex label.
-     *
-     * @return EID The edge id.
-     */
-    inline virtual EID del_edge(const VLB &X, const VLB &Y);
-
     /** @}*/
+
+    /**
+     * @brief Output stream operator.
+     *
+     * @param out Output stream reference.
+     * @param G Given graph reference.
+     * @return std::ostream& Output stream reference.
+     */
+    friend std::ostream &operator<<(std::ostream &out, const AbstractGraph &G);
+
+    //! Standard hash function.
+    friend class std::hash<AbstractGraph>;
+
+   protected:
+    /**
+     * @brief Hash function of a graph.
+     *
+     * @return std::size_t Hash of a graph.
+     */
+    inline virtual std::size_t hash() const = 0;
+
+    /**
+     * @brief Incrementally write text representation of the graph to output stream.
+     *
+     * @param out Output stream reference.
+     */
+    virtual void to_stream(std::ostream &out) const = 0;
 };

@@ -1,9 +1,6 @@
 #pragma once
 
-/** INTERFACES */
-#include "interface/interface_graph.ipp"
-#include "interface/abstract_graph.ipp"
-#include "interface/exceptions.hpp"
-
 /** CONTAINERS */
+#include "container/abstract_graph.ipp"
 #include "container/dense_graph.ipp"
+#include "container/exceptions.hpp"

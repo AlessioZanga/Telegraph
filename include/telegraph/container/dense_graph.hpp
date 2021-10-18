@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../interface/abstract_graph.ipp"
+#include "abstract_graph.ipp"
 
 class DenseGraph : public AbstractGraph {
    protected:

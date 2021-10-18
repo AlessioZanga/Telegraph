@@ -266,8 +266,8 @@ TYPED_TEST(ContainerTest, Size) {
 TYPED_TEST(ContainerTest, GetVertexID) {
     TypeParam G(1);
     G.set_label(0, "0");
-    ASSERT_EQ(G.get_vid("0"), 0);                     // Valid argument.
-    ASSERT_THROW(G.get_vid("1"), std::out_of_range);  // Invalid argument: vertex not defined.
+    ASSERT_EQ(G.get_id("0"), 0);                     // Valid argument.
+    ASSERT_THROW(G.get_id("1"), std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
 TYPED_TEST(ContainerTest, HasVertexVID) {
@@ -336,8 +336,8 @@ TYPED_TEST(ContainerTest, GetEdgeID) {
     TypeParam G(2);
     EID e = G.add_edge(0, 1);
     G.set_label(0, 1, ELB("0 --- 1"));
-    ASSERT_EQ(G.get_eid(ELB("0 --- 1")), e);                     // Valid argument.
-    ASSERT_THROW(G.get_eid(ELB("0 --- 2")), std::out_of_range);  // Invalid argument: edge not defined.
+    ASSERT_EQ(G.get_id(ELB("0 --- 1")), e);                     // Valid argument.
+    ASSERT_THROW(G.get_id(ELB("0 --- 2")), std::out_of_range);  // Invalid argument: edge not defined.
 }
 
 TYPED_TEST(ContainerTest, HasEdgeEID) {
@@ -735,7 +735,7 @@ TYPED_TEST(ContainerTest, DISABLED_IsComplete) {}
 
 TYPED_TEST(ContainerTest, DISABLED_Hash) {}
 
-TYPED_TEST(ContainerTest, DISABLED_Print) {}
+TYPED_TEST(ContainerTest, DISABLED_ToStream) {}
 
 TYPED_TEST(ContainerTest, DISABLED_VerticesIterator) {}
 

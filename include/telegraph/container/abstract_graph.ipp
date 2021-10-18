@@ -1,7 +1,6 @@
 #pragma once
 
 #include "abstract_graph.hpp"
-#include "exceptions.hpp"
 
 AbstractGraph::AbstractGraph() {}
 
@@ -52,7 +51,19 @@ inline void AbstractGraph::del_attr(const std::string &key) {
     gattrs.erase(i);
 }
 
-inline VID AbstractGraph::get_vid(const VLB &X) const {
+inline bool AbstractGraph::has_vertex(const VLB &X) const { return vlbs.right.find(X) != vlbs.right.end(); }
+
+inline VID AbstractGraph::add_vertex(const VLB &label) {
+    if (label.empty()) throw INVALID_LABEL();                                       // Check if label is valid.
+    if (vlbs.right.find(label) != vlbs.right.end()) throw DUPLICATED_LABEL(label);  // Check if label is valid.
+    VID X = add_vertex();
+    set_label(X, label);
+    return X;
+}
+
+inline VID AbstractGraph::del_vertex(const VLB &X) { return del_vertex(get_id(X)); }
+
+inline VID AbstractGraph::get_id(const VLB &X) const {
     auto i = vlbs.right.find(X);
     if (i == vlbs.right.end()) throw NO_LABEL(X);
     return i->second;
@@ -90,7 +101,7 @@ inline void AbstractGraph::set_label(const VID &X, const VLB &label) {
     }
 }
 
-inline void AbstractGraph::set_label(const VLB &X, const VLB &label) { set_label(get_vid(X), label); }
+inline void AbstractGraph::set_label(const VLB &X, const VLB &label) { set_label(get_id(X), label); }
 
 inline void AbstractGraph::del_label(const VID &X) {
     if (!has_vertex(X)) throw NOT_DEFINED(X);  // Check if X is a valid vertex.
@@ -99,7 +110,7 @@ inline void AbstractGraph::del_label(const VID &X) {
     vlbs.left.erase(i);
 }
 
-inline void AbstractGraph::del_label(const VLB &X) { del_label(get_vid(X)); }
+inline void AbstractGraph::del_label(const VLB &X) { del_label(get_id(X)); }
 
 inline bool AbstractGraph::has_attr(const VID &X, const std::string &key) const {
     if (!has_vertex(X)) throw NOT_DEFINED(X);  // Check if X is a valid vertex.
@@ -107,7 +118,7 @@ inline bool AbstractGraph::has_attr(const VID &X, const std::string &key) const 
     return i != vattrs.end() && i->second.find(key) != i->second.end();
 }
 
-inline bool AbstractGraph::has_attr(const VLB &X, const std::string &key) const { return has_attr(get_vid(X), key); }
+inline bool AbstractGraph::has_attr(const VLB &X, const std::string &key) const { return has_attr(get_id(X), key); }
 
 template <typename T>
 inline T AbstractGraph::get_attr(const VID &X, const std::string &key) const {
@@ -117,7 +128,7 @@ inline T AbstractGraph::get_attr(const VID &X, const std::string &key) const {
 
 template <typename T>
 inline T AbstractGraph::get_attr(const VLB &X, const std::string &key) const {
-    return get_attr<T>(get_vid(X), key);
+    return get_attr<T>(get_id(X), key);
 }
 
 template <typename T>
@@ -128,7 +139,7 @@ inline void AbstractGraph::set_attr(const VID &X, const std::string &key, const 
 
 template <typename T>
 inline void AbstractGraph::set_attr(const VLB &X, const std::string &key, const T &value) {
-    set_attr<T>(get_vid(X), key, value);
+    set_attr<T>(get_id(X), key, value);
 }
 
 inline void AbstractGraph::del_attr(const VID &X, const std::string &key) {
@@ -136,21 +147,25 @@ inline void AbstractGraph::del_attr(const VID &X, const std::string &key) {
     vattrs[X].erase(key);
 }
 
-inline void AbstractGraph::del_attr(const VLB &X, const std::string &key) { del_attr(get_vid(X), key); }
+inline void AbstractGraph::del_attr(const VLB &X, const std::string &key) { del_attr(get_id(X), key); }
 
-inline bool AbstractGraph::has_vertex(const VLB &X) const { return vlbs.right.find(X) != vlbs.right.end(); }
+inline bool AbstractGraph::has_edge(const ELB &X) const { return elbs.right.find(X) != elbs.right.end(); }
 
-inline VID AbstractGraph::add_vertex(const VLB &label) {
-    if (label.empty()) throw INVALID_LABEL();                                       // Check if label is valid.
-    if (vlbs.right.find(label) != vlbs.right.end()) throw DUPLICATED_LABEL(label);  // Check if label is valid.
-    VID X = add_vertex();
-    set_label(X, label);
-    return X;
-}
+inline bool AbstractGraph::has_edge(const VID &X, const VID &Y) const { return has_edge(EID(X, Y)); }
 
-inline VID AbstractGraph::del_vertex(const VLB &X) { return del_vertex(get_vid(X)); }
+inline bool AbstractGraph::has_edge(const VLB &X, const VLB &Y) const { return has_edge(get_id(X), get_id(Y)); }
 
-inline EID AbstractGraph::get_eid(const ELB &X) const {
+inline EID AbstractGraph::add_edge(const VID &X, const VID &Y) { return add_edge(EID(X, Y)); }
+
+inline EID AbstractGraph::add_edge(const VLB &X, const VLB &Y) { return add_edge(get_id(X), get_id(Y)); }
+
+inline EID AbstractGraph::del_edge(const ELB &X) { return del_edge(get_id(X)); }
+
+inline EID AbstractGraph::del_edge(const VID &X, const VID &Y) { return del_edge(EID(X, Y)); }
+
+inline EID AbstractGraph::del_edge(const VLB &X, const VLB &Y) { return del_edge(get_id(X), get_id(Y)); }
+
+inline EID AbstractGraph::get_id(const ELB &X) const {
     auto i = elbs.right.find(X);
     if (i == elbs.right.end()) throw NO_LABEL(X, "\b\b");  // Use backspaces to patch NO_LABEL argument.
     return i->second;
@@ -165,9 +180,7 @@ inline bool AbstractGraph::has_label(const ELB &X) const { return has_edge(X); }
 
 inline bool AbstractGraph::has_label(const VID &X, const VID &Y) const { return has_label(EID(X, Y)); }
 
-inline bool AbstractGraph::has_label(const VLB &X, const VLB &Y) const {
-    return has_label(EID(get_vid(X), get_vid(Y)));
-}
+inline bool AbstractGraph::has_label(const VLB &X, const VLB &Y) const { return has_label(EID(get_id(X), get_id(Y))); }
 
 inline ELB AbstractGraph::get_label(const EID &X) const {
     auto i = elbs.left.find(X);
@@ -177,7 +190,7 @@ inline ELB AbstractGraph::get_label(const EID &X) const {
 
 inline ELB AbstractGraph::get_label(const VID &X, const VID &Y) const { return get_label(EID(X, Y)); }
 
-inline ELB AbstractGraph::get_label(const VLB &X, const VLB &Y) const { return get_label(get_vid(X), get_vid(Y)); }
+inline ELB AbstractGraph::get_label(const VLB &X, const VLB &Y) const { return get_label(get_id(X), get_id(Y)); }
 
 inline void AbstractGraph::set_label(const EID &X, const ELB &label) {
     if (label.empty()) throw INVALID_LABEL();                // Check if label is valid.
@@ -197,12 +210,12 @@ inline void AbstractGraph::set_label(const EID &X, const ELB &label) {
     }
 }
 
-inline void AbstractGraph::set_label(const ELB &X, const ELB &label) { set_label(get_eid(X), label); }
+inline void AbstractGraph::set_label(const ELB &X, const ELB &label) { set_label(get_id(X), label); }
 
 inline void AbstractGraph::set_label(const VID &X, const VID &Y, const ELB &label) { set_label(EID(X, Y), label); }
 
 inline void AbstractGraph::set_label(const VLB &X, const VLB &Y, const ELB &label) {
-    set_label(get_vid(X), get_vid(Y), label);
+    set_label(get_id(X), get_id(Y), label);
 }
 
 inline void AbstractGraph::del_label(const EID &X) {
@@ -212,11 +225,11 @@ inline void AbstractGraph::del_label(const EID &X) {
     elbs.left.erase(i);
 }
 
-inline void AbstractGraph::del_label(const ELB &X) { del_label(get_eid(X)); }
+inline void AbstractGraph::del_label(const ELB &X) { del_label(get_id(X)); }
 
 inline void AbstractGraph::del_label(const VID &X, const VID &Y) { del_label(EID(X, Y)); }
 
-inline void AbstractGraph::del_label(const VLB &X, const VLB &Y) { del_label(get_vid(X), get_vid(Y)); }
+inline void AbstractGraph::del_label(const VLB &X, const VLB &Y) { del_label(get_id(X), get_id(Y)); }
 
 inline bool AbstractGraph::has_attr(const EID &X, const std::string &key) const {
     if (!has_edge(X)) throw NOT_DEFINED(X.first, X.second);  // Check if X is a valid edge.
@@ -224,14 +237,14 @@ inline bool AbstractGraph::has_attr(const EID &X, const std::string &key) const 
     return i != eattrs.end() && i->second.find(key) != i->second.end();
 }
 
-inline bool AbstractGraph::has_attr(const ELB &X, const std::string &key) const { return has_attr(get_eid(X), key); }
+inline bool AbstractGraph::has_attr(const ELB &X, const std::string &key) const { return has_attr(get_id(X), key); }
 
 inline bool AbstractGraph::has_attr(const VID &X, const VID &Y, const std::string &key) const {
     return has_attr(EID(X, Y), key);
 }
 
 inline bool AbstractGraph::has_attr(const VLB &X, const VLB &Y, const std::string &key) const {
-    return has_attr(get_vid(X), get_vid(Y), key);
+    return has_attr(get_id(X), get_id(Y), key);
 }
 
 template <typename T>
@@ -242,7 +255,7 @@ inline T AbstractGraph::get_attr(const EID &X, const std::string &key) const {
 
 template <typename T>
 inline T AbstractGraph::get_attr(const ELB &X, const std::string &key) const {
-    return get_attr<T>(get_eid(X), key);
+    return get_attr<T>(get_id(X), key);
 }
 
 template <typename T>
@@ -252,7 +265,7 @@ inline T AbstractGraph::get_attr(const VID &X, const VID &Y, const std::string &
 
 template <typename T>
 inline T AbstractGraph::get_attr(const VLB &X, const VLB &Y, const std::string &key) const {
-    return get_attr<T>(get_vid(X), get_vid(Y), key);
+    return get_attr<T>(get_id(X), get_id(Y), key);
 }
 
 template <typename T>
@@ -263,7 +276,7 @@ inline void AbstractGraph::set_attr(const EID &X, const std::string &key, const 
 
 template <typename T>
 inline void AbstractGraph::set_attr(const ELB &X, const std::string &key, const T &value) {
-    set_attr<T>(get_eid(X), key, value);
+    set_attr<T>(get_id(X), key, value);
 }
 
 template <typename T>
@@ -273,7 +286,7 @@ inline void AbstractGraph::set_attr(const VID &X, const VID &Y, const std::strin
 
 template <typename T>
 inline void AbstractGraph::set_attr(const VLB &X, const VLB &Y, const std::string &key, const T &value) {
-    set_attr<T>(get_vid(X), get_vid(Y), key, value);
+    set_attr<T>(get_id(X), get_id(Y), key, value);
 }
 
 inline void AbstractGraph::del_attr(const EID &X, const std::string &key) {
@@ -281,26 +294,32 @@ inline void AbstractGraph::del_attr(const EID &X, const std::string &key) {
     eattrs[X].erase(key);
 }
 
-inline void AbstractGraph::del_attr(const ELB &X, const std::string &key) { del_attr(get_eid(X), key); }
+inline void AbstractGraph::del_attr(const ELB &X, const std::string &key) { del_attr(get_id(X), key); }
 
 inline void AbstractGraph::del_attr(const VID &X, const VID &Y, const std::string &key) { del_attr(EID(X, Y), key); }
 
 inline void AbstractGraph::del_attr(const VLB &X, const VLB &Y, const std::string &key) {
-    del_attr(get_vid(X), get_vid(Y), key);
+    del_attr(get_id(X), get_id(Y), key);
 }
 
-inline bool AbstractGraph::has_edge(const ELB &X) const { return elbs.right.find(X) != elbs.right.end(); }
+inline bool AbstractGraph::is_null() const { return order() == 0; }
 
-inline bool AbstractGraph::has_edge(const VID &X, const VID &Y) const { return has_edge(EID(X, Y)); }
+inline bool AbstractGraph::is_trivial() const { return order() == 1 && size() == 0; }
 
-inline bool AbstractGraph::has_edge(const VLB &X, const VLB &Y) const { return has_edge(get_vid(X), get_vid(Y)); }
+inline bool AbstractGraph::is_complete() const { return order() * (order() - 1) / 2 == size(); }
 
-inline EID AbstractGraph::add_edge(const VID &X, const VID &Y) { return add_edge(EID(X, Y)); }
+//! Output stream operator adapter.
+std::ostream &operator<<(std::ostream &out, const AbstractGraph &G) {
+    G.to_stream(out);
+    return out;
+}
 
-inline EID AbstractGraph::add_edge(const VLB &X, const VLB &Y) { return add_edge(get_vid(X), get_vid(Y)); }
+namespace std {
 
-inline EID AbstractGraph::del_edge(const ELB &X) { return del_edge(get_eid(X)); }
+template <>
+struct hash<AbstractGraph> {
+    //! Hash function adapter.
+    std::size_t operator()(const AbstractGraph &G) const { return G.hash(); }
+};
 
-inline EID AbstractGraph::del_edge(const VID &X, const VID &Y) { return del_edge(EID(X, Y)); }
-
-inline EID AbstractGraph::del_edge(const VLB &X, const VLB &Y) { return del_edge(get_vid(X), get_vid(Y)); }
+}  // namespace std
