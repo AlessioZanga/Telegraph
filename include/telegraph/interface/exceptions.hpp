@@ -56,6 +56,6 @@ class NO_LABEL : public std::out_of_range {
     NO_LABEL &operator=(NO_LABEL &&) = default;
 };
 
-#define INVALID_LABEL std::invalid_argument("Label cannot be empty string.")
+#define INVALID_LABEL() std::invalid_argument("Label cannot be empty string.")
 #define DUPLICATED_LABEL(X) std::invalid_argument("Label '" + std::to_string(X) + "' already defined.")
 #define NO_KEY(X) std::out_of_range("Key " + std::to_string(X) + " is not defined.")

@@ -23,7 +23,7 @@ inline GLB AbstractGraph::get_label() const {
 }
 
 inline void AbstractGraph::set_label(const GLB &label) {
-    if (label.empty()) throw INVALID_LABEL;  // Check if label is valid.
+    if (label.empty()) throw INVALID_LABEL();  // Check if label is valid.
     glb = label;
 }
 
@@ -73,7 +73,7 @@ inline VLB AbstractGraph::get_label(const VID &X) const {
 }
 
 inline void AbstractGraph::set_label(const VID &X, const VLB &label) {
-    if (label.empty()) throw INVALID_LABEL;    // Check if label is valid.
+    if (label.empty()) throw INVALID_LABEL();  // Check if label is valid.
     if (!has_vertex(X)) throw NOT_DEFINED(X);  // Check if X is a valid vertex.
     // Check if the label as already been defined.
     auto i = vlbs.right.find(label);
@@ -141,7 +141,7 @@ inline void AbstractGraph::del_attr(const VLB &X, const std::string &key) { del_
 inline bool AbstractGraph::has_vertex(const VLB &X) const { return vlbs.right.find(X) != vlbs.right.end(); }
 
 inline VID AbstractGraph::add_vertex(const VLB &label) {
-    if (label.empty()) throw INVALID_LABEL;                                         // Check if label is valid.
+    if (label.empty()) throw INVALID_LABEL();                                       // Check if label is valid.
     if (vlbs.right.find(label) != vlbs.right.end()) throw DUPLICATED_LABEL(label);  // Check if label is valid.
     VID X = add_vertex();
     set_label(X, label);
@@ -180,7 +180,7 @@ inline ELB AbstractGraph::get_label(const VID &X, const VID &Y) const { return g
 inline ELB AbstractGraph::get_label(const VLB &X, const VLB &Y) const { return get_label(get_vid(X), get_vid(Y)); }
 
 inline void AbstractGraph::set_label(const EID &X, const ELB &label) {
-    if (label.empty()) throw INVALID_LABEL;                  // Check if label is valid.
+    if (label.empty()) throw INVALID_LABEL();                // Check if label is valid.
     if (!has_edge(X)) throw NOT_DEFINED(X.first, X.second);  // Check if X is a valid edge.
     // Check if the label as already been defined.
     auto i = elbs.right.find(label);
