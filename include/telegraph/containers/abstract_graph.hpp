@@ -10,10 +10,9 @@
 #include <iterator>
 #include <map>
 #include <set>
-#include <utility>
-
 #include <telegraph/exceptions.hpp>
 #include <telegraph/requires.hpp>
+#include <utility>
 
 //! Vertex identifier.
 using VID = uintmax_t;

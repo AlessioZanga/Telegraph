@@ -600,10 +600,13 @@ TYPED_TEST(ContainerTest, SetLabelEIDELB) {
     ASSERT_EQ(G.get_label(e), ELB("0 -*- 1"));
 
     EID f = G.add_edge(EID(0, 2));
-    ASSERT_THROW(G.set_label(e, ELB("")), std::invalid_argument);             // Invalid argument: empty label.
-    ASSERT_THROW(G.set_label(f, ELB("0 -*- 1")), std::invalid_argument);      // Invalid argument: duplicated label.
-    ASSERT_THROW(G.set_label(EID(1, 2), ELB("1 --- 2")), std::out_of_range);  // Invalid argument: edge not defined.
-    ASSERT_THROW(G.set_label(EID(0, 3), ELB("0 --- 3")), std::out_of_range);  // Invalid argument: vertex not defined.
+    ASSERT_THROW(G.set_label(e, ELB("")), std::invalid_argument);  // Invalid argument: empty label.
+    ASSERT_THROW(G.set_label(f, ELB("0 -*- 1")),
+                 std::invalid_argument);  // Invalid argument: duplicated label.
+    ASSERT_THROW(G.set_label(EID(1, 2), ELB("1 --- 2")),
+                 std::out_of_range);  // Invalid argument: edge not defined.
+    ASSERT_THROW(G.set_label(EID(0, 3), ELB("0 --- 3")),
+                 std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
 TYPED_TEST(ContainerTest, SetLabelELBELB) {
@@ -616,10 +619,13 @@ TYPED_TEST(ContainerTest, SetLabelELBELB) {
     ASSERT_EQ(G.get_label(e), ELB("0 -*- 1"));
 
     EID f = G.add_edge(EID(0, 2));
-    ASSERT_THROW(G.set_label(e, ELB("")), std::invalid_argument);             // Invalid argument: empty label.
-    ASSERT_THROW(G.set_label(f, ELB("0 -*- 1")), std::invalid_argument);      // Invalid argument: duplicated label.
-    ASSERT_THROW(G.set_label(EID(1, 2), ELB("1 --- 2")), std::out_of_range);  // Invalid argument: edge not defined.
-    ASSERT_THROW(G.set_label(EID(0, 3), ELB("0 --- 3")), std::out_of_range);  // Invalid argument: vertex not defined.
+    ASSERT_THROW(G.set_label(e, ELB("")), std::invalid_argument);  // Invalid argument: empty label.
+    ASSERT_THROW(G.set_label(f, ELB("0 -*- 1")),
+                 std::invalid_argument);  // Invalid argument: duplicated label.
+    ASSERT_THROW(G.set_label(EID(1, 2), ELB("1 --- 2")),
+                 std::out_of_range);  // Invalid argument: edge not defined.
+    ASSERT_THROW(G.set_label(EID(0, 3), ELB("0 --- 3")),
+                 std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
 TYPED_TEST(ContainerTest, SetLabelVIDVIDELB) {
@@ -632,10 +638,13 @@ TYPED_TEST(ContainerTest, SetLabelVIDVIDELB) {
     ASSERT_EQ(G.get_label(0, 1), ELB("0 -*- 1"));
 
     G.add_edge(0, 2);
-    ASSERT_THROW(G.set_label(0, 1, ELB("")), std::invalid_argument);         // Invalid argument: empty label.
-    ASSERT_THROW(G.set_label(0, 2, ELB("0 -*- 1")), std::invalid_argument);  // Invalid argument: duplicated label.
-    ASSERT_THROW(G.set_label(1, 2, ELB("1 --- 2")), std::out_of_range);      // Invalid argument: edge not defined.
-    ASSERT_THROW(G.set_label(0, 3, ELB("0 --- 3")), std::out_of_range);      // Invalid argument: vertex not defined.
+    ASSERT_THROW(G.set_label(0, 1, ELB("")), std::invalid_argument);  // Invalid argument: empty label.
+    ASSERT_THROW(G.set_label(0, 2, ELB("0 -*- 1")),
+                 std::invalid_argument);  // Invalid argument: duplicated label.
+    ASSERT_THROW(G.set_label(1, 2, ELB("1 --- 2")),
+                 std::out_of_range);  // Invalid argument: edge not defined.
+    ASSERT_THROW(G.set_label(0, 3, ELB("0 --- 3")),
+                 std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
 TYPED_TEST(ContainerTest, SetLabelVLBVLBELB) {
@@ -651,10 +660,13 @@ TYPED_TEST(ContainerTest, SetLabelVLBVLBELB) {
 
     G.set_label(2, "2");
     G.add_edge("0", "2");
-    ASSERT_THROW(G.set_label("0", "1", ELB("")), std::invalid_argument);         // Invalid argument: empty label.
-    ASSERT_THROW(G.set_label("0", "2", ELB("0 -*- 1")), std::invalid_argument);  // Invalid argument: duplicated label.
-    ASSERT_THROW(G.set_label("1", "2", ELB("1 --- 2")), std::out_of_range);      // Invalid argument: edge not defined.
-    ASSERT_THROW(G.set_label("0", "3", ELB("0 --- 3")), std::out_of_range);  // Invalid argument: vertex not defined.
+    ASSERT_THROW(G.set_label("0", "1", ELB("")), std::invalid_argument);  // Invalid argument: empty label.
+    ASSERT_THROW(G.set_label("0", "2", ELB("0 -*- 1")),
+                 std::invalid_argument);  // Invalid argument: duplicated label.
+    ASSERT_THROW(G.set_label("1", "2", ELB("1 --- 2")),
+                 std::out_of_range);  // Invalid argument: edge not defined.
+    ASSERT_THROW(G.set_label("0", "3", ELB("0 --- 3")),
+                 std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
 TYPED_TEST(ContainerTest, DelLabelVOID) {
@@ -700,7 +712,8 @@ TYPED_TEST(ContainerTest, DelLabelELB) {
     G.set_label(0, 1, ELB("0 --- 1"));
     G.del_label(ELB("0 --- 1"));
     ASSERT_FALSE(G.has_label(ELB("0 --- 1")));
-    ASSERT_THROW(G.del_label(ELB("0 --- 1")), std::out_of_range);  // Invalid argument: edge label not defined.
+    ASSERT_THROW(G.del_label(ELB("0 --- 1")),
+                 std::out_of_range);  // Invalid argument: edge label not defined.
 }
 
 TYPED_TEST(ContainerTest, DelLabelVIDVID) {
@@ -768,7 +781,8 @@ TYPED_TEST(ContainerTest, HasAttrELB) {
     G.set_attr(0, 1, "key", true);
     ASSERT_TRUE(G.has_attr(ELB("0 --- 1"), "key"));
     ASSERT_FALSE(G.has_attr(ELB("0 --- 1"), "ney"));
-    ASSERT_THROW(G.has_attr(ELB("1 --- 1"), "key"), std::out_of_range);  // Invalid argument: edge label not defined.
+    ASSERT_THROW(G.has_attr(ELB("1 --- 1"), "key"),
+                 std::out_of_range);  // Invalid argument: edge label not defined.
 }
 
 TYPED_TEST(ContainerTest, HasAttrVIDVID) {
