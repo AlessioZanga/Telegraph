@@ -1,5 +1,8 @@
 #pragma once
 
+#include <telegraph/containers/abstract_graph.hpp>
+#include <telegraph/requires.hpp>
+
 /**
  * @brief Equality of graphs.
  *
@@ -10,7 +13,7 @@
  * @return true If the graphs are equal,
  * @return false Otherwise.
  */
-template <typename A, typename B>
+template <typename A, typename B, require_base_of(AbstractGraph, A) = 0, require_base_of(AbstractGraph, B) = 0>
 bool operator==(const A &X, const B &Y);
 
 /**
@@ -23,7 +26,7 @@ bool operator==(const A &X, const B &Y);
  * @return true If the graphs are *not* equal,
  * @return false Otherwise.
  */
-template <typename A, typename B>
+template <typename A, typename B, require_base_of(AbstractGraph, A) = 0, require_base_of(AbstractGraph, B) = 0>
 bool operator!=(const A &X, const B &Y);
 
 /**
@@ -34,7 +37,7 @@ bool operator!=(const A &X, const B &Y);
  * @param X Given graph.
  * @return C Return graph.
  */
-template <typename A, typename B = A>
+template <typename A, typename B = A, require_base_of(AbstractGraph, A) = 0, require_base_of(AbstractGraph, B) = 0>
 B operator~(const A &X);
 
 /**
@@ -47,7 +50,8 @@ B operator~(const A &X);
  * @param Y Second graph.
  * @return C Return graph.
  */
-template <typename A, typename B, typename C = A>
+template <typename A, typename B, typename C = A, require_base_of(AbstractGraph, A) = 0,
+          require_base_of(AbstractGraph, B) = 0, require_base_of(AbstractGraph, C) = 0>
 C operator&(const A &X, const B &Y);
 
 /**
@@ -60,7 +64,8 @@ C operator&(const A &X, const B &Y);
  * @param Y Second graph.
  * @return C Return graph.
  */
-template <typename A, typename B, typename C = A>
+template <typename A, typename B, typename C = A, require_base_of(AbstractGraph, A) = 0,
+          require_base_of(AbstractGraph, B) = 0, require_base_of(AbstractGraph, C) = 0>
 C operator|(const A &X, const B &Y);
 
 /**
@@ -73,7 +78,8 @@ C operator|(const A &X, const B &Y);
  * @param Y Second graph.
  * @return C Return graph.
  */
-template <typename A, typename B, typename C = A>
+template <typename A, typename B, typename C = A, require_base_of(AbstractGraph, A) = 0,
+          require_base_of(AbstractGraph, B) = 0, require_base_of(AbstractGraph, C) = 0>
 C operator/(const A &X, const B &Y);
 
 /**
@@ -86,7 +92,8 @@ C operator/(const A &X, const B &Y);
  * @param Y Second graph.
  * @return C Return graph.
  */
-template <typename A, typename B, typename C = A>
+template <typename A, typename B, typename C = A, require_base_of(AbstractGraph, A) = 0,
+          require_base_of(AbstractGraph, B) = 0, require_base_of(AbstractGraph, C) = 0>
 C operator*(const A &X, const B &Y);
 
 /**
@@ -99,5 +106,6 @@ C operator*(const A &X, const B &Y);
  * @param Y Second graph.
  * @return C Return graph.
  */
-template <typename A, typename B, typename C = A>
+template <typename A, typename B, typename C = A, require_base_of(AbstractGraph, A) = 0,
+          require_base_of(AbstractGraph, B) = 0, require_base_of(AbstractGraph, C) = 0>
 C operator%(const A &X, const B &Y);

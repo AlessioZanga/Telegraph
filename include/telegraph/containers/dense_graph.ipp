@@ -1,6 +1,6 @@
 #pragma once
 
-#include <telegraph/container/dense_graph.hpp>
+#include <telegraph/containers/dense_graph.hpp>
 
 DenseGraph::DenseGraph() {}
 

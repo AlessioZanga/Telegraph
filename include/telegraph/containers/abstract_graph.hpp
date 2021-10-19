@@ -13,9 +13,7 @@
 #include <utility>
 
 #include <telegraph/exceptions.hpp>
-
-#define require_iter_value_type(I, T) \
-    typename std::enable_if<std::is_same<typename std::iterator_traits<I>::value_type, T>::value, int>::type
+#include <telegraph/requires.hpp>
 
 //! Vertex identifier.
 using VID = uintmax_t;

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <telegraph/container/abstract_graph.hpp>
+#include <telegraph/containers/abstract_graph.hpp>
 
 AbstractGraph::AbstractGraph() {}
 

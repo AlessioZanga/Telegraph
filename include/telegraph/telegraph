@@ -1,7 +1,11 @@
 #pragma once
 
 #include <telegraph/exceptions.hpp>
+#include <telegraph/requires.hpp>
 
 /** CONTAINERS */
-#include <telegraph/container/abstract_graph.ipp>
-#include <telegraph/container/dense_graph.ipp>
+#include <telegraph/containers/abstract_graph.ipp>
+#include <telegraph/containers/dense_graph.ipp>
+
+/** OPERATORS */
+#include <telegraph/operators/operators.ipp>
