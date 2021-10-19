@@ -9,32 +9,32 @@
 
 // Define fixture class template
 template <typename T>
-class ContainerTest : public ::testing::Test {};
+class ContainersTest : public ::testing::Test {};
 
 // Define list of types
 using GraphTypes = ::testing::Types<DenseGraph>;
 
 // Create typed test suite
-TYPED_TEST_SUITE(ContainerTest, GraphTypes);
+TYPED_TEST_SUITE(ContainersTest, GraphTypes);
 
-TYPED_TEST(ContainerTest, DefaultContructor) { TypeParam G; }
+TYPED_TEST(ContainersTest, DefaultContructor) { TypeParam G; }
 
-TYPED_TEST(ContainerTest, CopyConstructor) {
+TYPED_TEST(ContainersTest, CopyConstructor) {
     TypeParam G;
     TypeParam H(G);
 }
 
-TYPED_TEST(ContainerTest, AssignmentOperator) {
+TYPED_TEST(ContainersTest, AssignmentOperator) {
     TypeParam G, H;
     H = G;
 }
 
-TYPED_TEST(ContainerTest, Destructor) {
+TYPED_TEST(ContainersTest, Destructor) {
     TypeParam *G = new TypeParam();
     delete G;
 }
 
-TYPED_TEST(ContainerTest, SizedConstructor) {
+TYPED_TEST(ContainersTest, SizedConstructor) {
     TypeParam G(0);  // Zero lower bound.
     ASSERT_EQ(G.order(), 0);
 
@@ -50,7 +50,7 @@ TYPED_TEST(ContainerTest, SizedConstructor) {
     ASSERT_EQ(K.order(), MAX);
 }
 
-TYPED_TEST(ContainerTest, VertexIteratorConstructor) {
+TYPED_TEST(ContainersTest, VertexIteratorConstructor) {
     std::vector<VID> V = {};  // Empty sequence.
     TypeParam G(V.begin(), V.end());
     ASSERT_EQ(G.order(), V.size());
@@ -78,7 +78,7 @@ TYPED_TEST(ContainerTest, VertexIteratorConstructor) {
     ASSERT_EQ(M.order(), N.size());
 }
 
-TYPED_TEST(ContainerTest, EdgeIteratorConstructor) {
+TYPED_TEST(ContainersTest, EdgeIteratorConstructor) {
     std::vector<EID> E = {};  // Empty sequence.
     TypeParam G(E.begin(), E.end());
     ASSERT_EQ(G.size(), E.size());
@@ -114,7 +114,7 @@ TYPED_TEST(ContainerTest, EdgeIteratorConstructor) {
     ASSERT_EQ(M.size(), M.size());
 }
 
-TYPED_TEST(ContainerTest, AdjacencyListConstructor) {
+TYPED_TEST(ContainersTest, AdjacencyListConstructor) {
     AdjacencyList A;  // Empty sequence.
     TypeParam G(A);
     ASSERT_EQ(G.order(), 0);
@@ -137,7 +137,7 @@ TYPED_TEST(ContainerTest, AdjacencyListConstructor) {
     ASSERT_THROW({ TypeParam L(E); }, std::invalid_argument);
 }
 
-TYPED_TEST(ContainerTest, AdjacencyMatrixConstructor) {
+TYPED_TEST(ContainersTest, AdjacencyMatrixConstructor) {
     AdjacencyMatrix A;  // Empty sequence.
     TypeParam G(A);
     ASSERT_EQ(G.order(), 0);
@@ -165,7 +165,7 @@ TYPED_TEST(ContainerTest, AdjacencyMatrixConstructor) {
     ASSERT_THROW({ TypeParam L(E); }, std::invalid_argument);
 }
 
-TYPED_TEST(ContainerTest, SparseAdjacencyMatrixConstructor) {
+TYPED_TEST(ContainersTest, SparseAdjacencyMatrixConstructor) {
     SparseAdjacencyMatrix A;  // Empty sequence.
     TypeParam G(A);
     ASSERT_EQ(G.order(), 0);
@@ -195,7 +195,7 @@ TYPED_TEST(ContainerTest, SparseAdjacencyMatrixConstructor) {
     ASSERT_THROW({ TypeParam L(E); }, std::invalid_argument);
 }
 
-TYPED_TEST(ContainerTest, AdjacencyListOperator) {
+TYPED_TEST(ContainersTest, AdjacencyListOperator) {
     AdjacencyList A;
     TypeParam G;
     ASSERT_EQ(((AdjacencyList)G), A);
@@ -205,7 +205,7 @@ TYPED_TEST(ContainerTest, AdjacencyListOperator) {
     ASSERT_EQ(((AdjacencyList)H), B);
 }
 
-TYPED_TEST(ContainerTest, AdjacencyMatrixOperator) {
+TYPED_TEST(ContainersTest, AdjacencyMatrixOperator) {
     AdjacencyMatrix A;
     TypeParam G;
     ASSERT_EQ(((AdjacencyMatrix)G), A);
@@ -216,7 +216,7 @@ TYPED_TEST(ContainerTest, AdjacencyMatrixOperator) {
     ASSERT_EQ(((AdjacencyMatrix)H), B);
 }
 
-TYPED_TEST(ContainerTest, SparseAdjacencyMatrixOperator) {
+TYPED_TEST(ContainersTest, SparseAdjacencyMatrixOperator) {
     SparseAdjacencyMatrix A(1, 1);
     TypeParam G(A);
     ASSERT_TRUE(((SparseAdjacencyMatrix)G).isApprox(A, 0));
@@ -228,7 +228,7 @@ TYPED_TEST(ContainerTest, SparseAdjacencyMatrixOperator) {
     ASSERT_TRUE(((SparseAdjacencyMatrix)H).isApprox(B, 0));
 }
 
-TYPED_TEST(ContainerTest, Order) {
+TYPED_TEST(ContainersTest, Order) {
     TypeParam G;
     ASSERT_EQ(G.order(), 0);
 
@@ -241,7 +241,7 @@ TYPED_TEST(ContainerTest, Order) {
     }
 }
 
-TYPED_TEST(ContainerTest, Size) {
+TYPED_TEST(ContainersTest, Size) {
     TypeParam G;
     ASSERT_EQ(G.size(), 0);
 
@@ -263,41 +263,41 @@ TYPED_TEST(ContainerTest, Size) {
     ASSERT_EQ(J.size(), count);
 }
 
-TYPED_TEST(ContainerTest, GetVID) {
+TYPED_TEST(ContainersTest, GetVID) {
     TypeParam G(1);
     G.set_label(0, "0");
     ASSERT_EQ(G.get_id("0"), 0);                     // Valid argument.
     ASSERT_THROW(G.get_id("1"), std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, HasVertexVID) {
+TYPED_TEST(ContainersTest, HasVertexVID) {
     TypeParam G(1);
     ASSERT_TRUE(G.has_vertex(0));   // Valid argument.
     ASSERT_FALSE(G.has_vertex(1));  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, HasVertexVLB) {
+TYPED_TEST(ContainersTest, HasVertexVLB) {
     TypeParam G(1);
     G.set_label(0, "0");
     ASSERT_TRUE(G.has_vertex("0"));   // Valid argument.
     ASSERT_FALSE(G.has_vertex("1"));  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, AddVertexVOID) {
+TYPED_TEST(ContainersTest, AddVertexVOID) {
     TypeParam G;
 
     ASSERT_EQ(G.add_vertex(), 0);                          // Valid argument.
     ASSERT_THROW(G.add_vertex(0), std::invalid_argument);  // Invalid argument: vertex already defined.
 }
 
-TYPED_TEST(ContainerTest, AddVertexVID) {
+TYPED_TEST(ContainersTest, AddVertexVID) {
     TypeParam G;
 
     ASSERT_EQ(G.add_vertex(0), 0);                         // Valid argument.
     ASSERT_THROW(G.add_vertex(0), std::invalid_argument);  // Invalid argument: vertex already defined.
 }
 
-TYPED_TEST(ContainerTest, AddVertexVLB) {
+TYPED_TEST(ContainersTest, AddVertexVLB) {
     TypeParam G;
 
     VID i = 0;
@@ -307,7 +307,7 @@ TYPED_TEST(ContainerTest, AddVertexVLB) {
     ASSERT_THROW(G.add_vertex(j), std::invalid_argument);  // Invalid argument: vertex already defined.
 }
 
-TYPED_TEST(ContainerTest, DelVertexVID) {
+TYPED_TEST(ContainersTest, DelVertexVID) {
     TypeParam G;
 
     VID i = G.add_vertex();
@@ -320,7 +320,7 @@ TYPED_TEST(ContainerTest, DelVertexVID) {
     ASSERT_THROW(G.has_attr(i, "key"), std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, DelVertexVLB) {
+TYPED_TEST(ContainersTest, DelVertexVLB) {
     TypeParam G;
 
     VLB l = "0";
@@ -332,7 +332,7 @@ TYPED_TEST(ContainerTest, DelVertexVLB) {
     ASSERT_THROW(G.has_attr(i, "key"), std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, GetEID) {
+TYPED_TEST(ContainersTest, GetEID) {
     TypeParam G(2);
     EID e = G.add_edge(0, 1);
     G.set_label(0, 1, ELB("0 --- 1"));
@@ -340,7 +340,7 @@ TYPED_TEST(ContainerTest, GetEID) {
     ASSERT_THROW(G.get_id(ELB("0 --- 2")), std::out_of_range);  // Invalid argument: edge not defined.
 }
 
-TYPED_TEST(ContainerTest, HasEdgeEID) {
+TYPED_TEST(ContainersTest, HasEdgeEID) {
     TypeParam G(2);
     EID e = G.add_edge(0, 1);
     ASSERT_TRUE(G.has_edge(e));                           // Valid argument.
@@ -348,7 +348,7 @@ TYPED_TEST(ContainerTest, HasEdgeEID) {
     ASSERT_THROW(G.has_edge({1, 2}), std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, HasEdgeELB) {
+TYPED_TEST(ContainersTest, HasEdgeELB) {
     TypeParam G(2);
     EID e = G.add_edge(0, 1);
     G.set_label(e, ELB("0 --- 1"));
@@ -356,7 +356,7 @@ TYPED_TEST(ContainerTest, HasEdgeELB) {
     ASSERT_FALSE(G.has_edge(ELB("1 --- 1")));  // Valid argument.
 }
 
-TYPED_TEST(ContainerTest, HasEdgeVIDVID) {
+TYPED_TEST(ContainersTest, HasEdgeVIDVID) {
     TypeParam G(2);
     EID e = G.add_edge(0, 1);
     ASSERT_TRUE(G.has_edge(e.first, e.second));         // Valid argument.
@@ -364,7 +364,7 @@ TYPED_TEST(ContainerTest, HasEdgeVIDVID) {
     ASSERT_THROW(G.has_edge(1, 2), std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, HasEdgeVLBVLB) {
+TYPED_TEST(ContainersTest, HasEdgeVLBVLB) {
     TypeParam G(2);
     G.set_label(0, "0");
     G.set_label(1, "1");
@@ -374,21 +374,21 @@ TYPED_TEST(ContainerTest, HasEdgeVLBVLB) {
     ASSERT_THROW(G.has_edge("1", "2"), std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, AddEdgeEID) {
+TYPED_TEST(ContainersTest, AddEdgeEID) {
     TypeParam G(2);
     ASSERT_EQ(G.add_edge(EID(0, 1)), EID(0, 1));                 // Valid argument.
     ASSERT_THROW(G.add_edge(EID(0, 1)), std::invalid_argument);  // Invalid argument: edge already defined.
     ASSERT_THROW(G.add_edge(EID(0, 2)), std::out_of_range);      // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, AddEdgeVIDVID) {
+TYPED_TEST(ContainersTest, AddEdgeVIDVID) {
     TypeParam G(2);
     ASSERT_EQ(G.add_edge(0, 1), EID(0, 1));                 // Valid argument.
     ASSERT_THROW(G.add_edge(0, 1), std::invalid_argument);  // Invalid argument: edge already defined.
     ASSERT_THROW(G.add_edge(0, 2), std::out_of_range);      // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, AddEdgeVLBVLB) {
+TYPED_TEST(ContainersTest, AddEdgeVLBVLB) {
     TypeParam G(2);
     G.set_label(0, "0");
     G.set_label(1, "1");
@@ -397,7 +397,7 @@ TYPED_TEST(ContainerTest, AddEdgeVLBVLB) {
     ASSERT_THROW(G.add_edge("0", "2"), std::out_of_range);      // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, DelEdgeEID) {
+TYPED_TEST(ContainersTest, DelEdgeEID) {
     TypeParam G(2);
     EID e = G.add_edge(EID(0, 1));
     G.set_label(e, ELB("0 --- 1"));
@@ -409,7 +409,7 @@ TYPED_TEST(ContainerTest, DelEdgeEID) {
     ASSERT_THROW(G.has_attr(e, "key"), std::out_of_range);   // Invalid argument: edge not defined.
 }
 
-TYPED_TEST(ContainerTest, DelEdgeELB) {
+TYPED_TEST(ContainersTest, DelEdgeELB) {
     TypeParam G(2);
     EID e = G.add_edge(0, 1);
     G.set_label(0, 1, ELB("0 --- 1"));
@@ -421,7 +421,7 @@ TYPED_TEST(ContainerTest, DelEdgeELB) {
     ASSERT_THROW(G.has_attr(e, "key"), std::out_of_range);        // Invalid argument: edge not defined.
 }
 
-TYPED_TEST(ContainerTest, DelEdgeVIDVID) {
+TYPED_TEST(ContainersTest, DelEdgeVIDVID) {
     TypeParam G(2);
     G.add_edge(0, 1);
     ASSERT_EQ(G.del_edge(0, 1), EID(0, 1));             // Valid argument.
@@ -429,7 +429,7 @@ TYPED_TEST(ContainerTest, DelEdgeVIDVID) {
     ASSERT_THROW(G.del_edge(0, 2), std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, DelEdgeVLBVLB) {
+TYPED_TEST(ContainersTest, DelEdgeVLBVLB) {
     TypeParam G(2);
     G.add_edge(0, 1);
     G.set_label(0, "0");
@@ -439,14 +439,14 @@ TYPED_TEST(ContainerTest, DelEdgeVLBVLB) {
     ASSERT_THROW(G.del_edge("0", "2"), std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, HasLabelGLB) {
+TYPED_TEST(ContainersTest, HasLabelGLB) {
     TypeParam G;
     ASSERT_FALSE(G.has_label());
     G.set_label("G");
     ASSERT_TRUE(G.has_label());
 }
 
-TYPED_TEST(ContainerTest, HasLabelVID) {
+TYPED_TEST(ContainersTest, HasLabelVID) {
     TypeParam G(2);
     G.set_label(0, "0");
     ASSERT_TRUE(G.has_label(0));
@@ -454,14 +454,14 @@ TYPED_TEST(ContainerTest, HasLabelVID) {
     ASSERT_THROW(G.has_label(2), std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, HasLabelVLB) {
+TYPED_TEST(ContainersTest, HasLabelVLB) {
     TypeParam G(2);
     G.set_label(0, "0");
     ASSERT_TRUE(G.has_label("0"));
     ASSERT_FALSE(G.has_label("1"));
 }
 
-TYPED_TEST(ContainerTest, HasLabelEID) {
+TYPED_TEST(ContainersTest, HasLabelEID) {
     TypeParam G(3);
     G.add_edge(0, 1);
     G.set_label(0, 1, ELB("0 --- 1"));
@@ -470,7 +470,7 @@ TYPED_TEST(ContainerTest, HasLabelEID) {
     ASSERT_THROW(G.has_label(EID(1, 3)), std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, HasLabelELB) {
+TYPED_TEST(ContainersTest, HasLabelELB) {
     TypeParam G(3);
     G.add_edge(0, 1);
     G.set_label(0, 1, ELB("0 --- 1"));
@@ -478,7 +478,7 @@ TYPED_TEST(ContainerTest, HasLabelELB) {
     ASSERT_FALSE(G.has_label(ELB("1 --- 1")));
 }
 
-TYPED_TEST(ContainerTest, HasLabelVIDVID) {
+TYPED_TEST(ContainersTest, HasLabelVIDVID) {
     TypeParam G(3);
     G.add_edge(0, 1);
     G.set_label(0, 1, ELB("0 --- 1"));
@@ -487,7 +487,7 @@ TYPED_TEST(ContainerTest, HasLabelVIDVID) {
     ASSERT_THROW(G.has_label(1, 3), std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, HasLabelVLBVLB) {
+TYPED_TEST(ContainersTest, HasLabelVLBVLB) {
     TypeParam G(3);
     G.add_edge(0, 1);
     G.set_label(0, "0");
@@ -499,7 +499,7 @@ TYPED_TEST(ContainerTest, HasLabelVLBVLB) {
     ASSERT_THROW(G.has_label("1", "3"), std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, GetLabelGLB) {
+TYPED_TEST(ContainersTest, GetLabelGLB) {
     TypeParam G;
     ASSERT_THROW(G.get_label(), std::out_of_range);  // Invalid argument: graph not defined.
 
@@ -507,7 +507,7 @@ TYPED_TEST(ContainerTest, GetLabelGLB) {
     ASSERT_EQ(G.get_label(), "G");  // Valid argument.
 }
 
-TYPED_TEST(ContainerTest, GetLabelVID) {
+TYPED_TEST(ContainersTest, GetLabelVID) {
     TypeParam G(1);
     ASSERT_THROW(G.get_label(0), std::out_of_range);  // Invalid argument: vertex label not defined.
     ASSERT_THROW(G.get_label(1), std::out_of_range);  // Invalid argument: vertex not defined.
@@ -516,7 +516,7 @@ TYPED_TEST(ContainerTest, GetLabelVID) {
     ASSERT_EQ(G.get_label(0), "0");  // Valid argument.
 }
 
-TYPED_TEST(ContainerTest, GetLabelEID) {
+TYPED_TEST(ContainersTest, GetLabelEID) {
     TypeParam G(2);
     ASSERT_THROW(G.get_label(EID(0, 1)), std::out_of_range);  // Invalid argument: edge not defined.
 
@@ -527,7 +527,7 @@ TYPED_TEST(ContainerTest, GetLabelEID) {
     ASSERT_EQ(G.get_label(EID(0, 1)), ELB("0 --- 1"));  // Valid argument.
 }
 
-TYPED_TEST(ContainerTest, GetLabelVIDVID) {
+TYPED_TEST(ContainersTest, GetLabelVIDVID) {
     TypeParam G(2);
     ASSERT_THROW(G.get_label(0, 1), std::out_of_range);  // Invalid argument: edge not defined.
 
@@ -538,7 +538,7 @@ TYPED_TEST(ContainerTest, GetLabelVIDVID) {
     ASSERT_EQ(G.get_label(0, 1), ELB("0 --- 1"));  // Valid argument.
 }
 
-TYPED_TEST(ContainerTest, GetLabelVLBVLB) {
+TYPED_TEST(ContainersTest, GetLabelVLBVLB) {
     TypeParam G(2);
     ASSERT_THROW(G.get_label("0", "1"), std::out_of_range);  // Invalid argument: vertex label not defined.
 
@@ -553,7 +553,7 @@ TYPED_TEST(ContainerTest, GetLabelVLBVLB) {
     ASSERT_EQ(G.get_label("0", "1"), ELB("0 --- 1"));  // Valid argument.
 }
 
-TYPED_TEST(ContainerTest, SetLabelGLB) {
+TYPED_TEST(ContainersTest, SetLabelGLB) {
     TypeParam G;
     ASSERT_THROW(G.set_label(""), std::invalid_argument);  // Invalid argument: empty label.
 
@@ -564,7 +564,7 @@ TYPED_TEST(ContainerTest, SetLabelGLB) {
     ASSERT_EQ(G.get_label(), "G*");  // Valid argument.
 }
 
-TYPED_TEST(ContainerTest, SetLabelVIDVLB) {
+TYPED_TEST(ContainersTest, SetLabelVIDVLB) {
     TypeParam G(2);
     G.set_label(0, "0");  // Valid argument.
     ASSERT_EQ(G.get_label(0), "0");
@@ -577,7 +577,7 @@ TYPED_TEST(ContainerTest, SetLabelVIDVLB) {
     ASSERT_THROW(G.set_label(2, "2"), std::out_of_range);      // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, SetLabelVLBVLB) {
+TYPED_TEST(ContainersTest, SetLabelVLBVLB) {
     TypeParam G(2);
     G.set_label(0, "0");  // Valid argument.
     ASSERT_EQ(G.get_label(0), "0");
@@ -590,7 +590,7 @@ TYPED_TEST(ContainerTest, SetLabelVLBVLB) {
     ASSERT_THROW(G.set_label(2, "2"), std::out_of_range);       // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, SetLabelEIDELB) {
+TYPED_TEST(ContainersTest, SetLabelEIDELB) {
     TypeParam G(3);
     EID e = G.add_edge(EID(0, 1));
     G.set_label(e, ELB("0 --- 1"));  // Valid argument.
@@ -609,7 +609,7 @@ TYPED_TEST(ContainerTest, SetLabelEIDELB) {
                  std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, SetLabelELBELB) {
+TYPED_TEST(ContainersTest, SetLabelELBELB) {
     TypeParam G(3);
     EID e = G.add_edge(EID(0, 1));
     G.set_label(e, ELB("0 --- 1"));  // Valid argument.
@@ -628,7 +628,7 @@ TYPED_TEST(ContainerTest, SetLabelELBELB) {
                  std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, SetLabelVIDVIDELB) {
+TYPED_TEST(ContainersTest, SetLabelVIDVIDELB) {
     TypeParam G(3);
     G.add_edge(0, 1);
     G.set_label(0, 1, ELB("0 --- 1"));  // Valid argument.
@@ -647,7 +647,7 @@ TYPED_TEST(ContainerTest, SetLabelVIDVIDELB) {
                  std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, SetLabelVLBVLBELB) {
+TYPED_TEST(ContainersTest, SetLabelVLBVLBELB) {
     TypeParam G(3);
     G.set_label(0, "0");
     G.set_label(1, "1");
@@ -669,7 +669,7 @@ TYPED_TEST(ContainerTest, SetLabelVLBVLBELB) {
                  std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, DelLabelVOID) {
+TYPED_TEST(ContainersTest, DelLabelVOID) {
     TypeParam G;
     G.set_label("G");
     G.del_label();
@@ -677,7 +677,7 @@ TYPED_TEST(ContainerTest, DelLabelVOID) {
     ASSERT_THROW(G.del_label(), std::out_of_range);  // Invalid argument: graph label not defined.
 }
 
-TYPED_TEST(ContainerTest, DelLabelVID) {
+TYPED_TEST(ContainersTest, DelLabelVID) {
     TypeParam G(1);
     G.set_label(0, "0");
     G.del_label(0);
@@ -686,7 +686,7 @@ TYPED_TEST(ContainerTest, DelLabelVID) {
     ASSERT_THROW(G.del_label(1), std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, DelLabelVLB) {
+TYPED_TEST(ContainersTest, DelLabelVLB) {
     TypeParam G(1);
     G.set_label(0, "0");
     G.del_label("0");
@@ -695,7 +695,7 @@ TYPED_TEST(ContainerTest, DelLabelVLB) {
     ASSERT_THROW(G.del_label("1"), std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, DelLabelEID) {
+TYPED_TEST(ContainersTest, DelLabelEID) {
     TypeParam G(2);
     EID i = G.add_edge(0, 1);
     G.set_label(i, ELB("0 --- 1"));
@@ -706,7 +706,7 @@ TYPED_TEST(ContainerTest, DelLabelEID) {
     ASSERT_THROW(G.del_label(EID(1, 2)), std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, DelLabelELB) {
+TYPED_TEST(ContainersTest, DelLabelELB) {
     TypeParam G(2);
     G.add_edge(0, 1);
     G.set_label(0, 1, ELB("0 --- 1"));
@@ -716,7 +716,7 @@ TYPED_TEST(ContainerTest, DelLabelELB) {
                  std::out_of_range);  // Invalid argument: edge label not defined.
 }
 
-TYPED_TEST(ContainerTest, DelLabelVIDVID) {
+TYPED_TEST(ContainersTest, DelLabelVIDVID) {
     TypeParam G(2);
     G.add_edge(0, 1);
     G.set_label(0, 1, ELB("0 --- 1"));
@@ -727,7 +727,7 @@ TYPED_TEST(ContainerTest, DelLabelVIDVID) {
     ASSERT_THROW(G.del_label(1, 2), std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, DelLabelVLBVLB) {
+TYPED_TEST(ContainersTest, DelLabelVLBVLB) {
     TypeParam G(2);
     G.set_label(0, "0");
     G.set_label(1, "1");
@@ -740,14 +740,14 @@ TYPED_TEST(ContainerTest, DelLabelVLBVLB) {
     ASSERT_THROW(G.del_label("1", "2"), std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, HasAttrVOID) {
+TYPED_TEST(ContainersTest, HasAttrVOID) {
     TypeParam G;
     G.set_attr("key", true);
     ASSERT_TRUE(G.has_attr("key"));
     ASSERT_FALSE(G.has_attr("ney"));
 }
 
-TYPED_TEST(ContainerTest, HasAttrVID) {
+TYPED_TEST(ContainersTest, HasAttrVID) {
     TypeParam G(1);
     G.set_attr(0, "key", true);
     ASSERT_TRUE(G.has_attr(0, "key"));
@@ -755,7 +755,7 @@ TYPED_TEST(ContainerTest, HasAttrVID) {
     ASSERT_THROW(G.has_attr(1, "key"), std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, HasAttrVLB) {
+TYPED_TEST(ContainersTest, HasAttrVLB) {
     TypeParam G(1);
     G.set_label(0, "0");
     G.set_attr("0", "key", true);
@@ -764,7 +764,7 @@ TYPED_TEST(ContainerTest, HasAttrVLB) {
     ASSERT_THROW(G.has_attr("1", "key"), std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, HasAttrEID) {
+TYPED_TEST(ContainersTest, HasAttrEID) {
     TypeParam G(2);
     EID e = G.add_edge(EID(0, 1));
     G.set_attr(e, "key", true);
@@ -774,7 +774,7 @@ TYPED_TEST(ContainerTest, HasAttrEID) {
     ASSERT_THROW(G.has_attr(EID(1, 2), "key"), std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, HasAttrELB) {
+TYPED_TEST(ContainersTest, HasAttrELB) {
     TypeParam G(2);
     G.add_edge(0, 1);
     G.set_label(0, 1, ELB("0 --- 1"));
@@ -785,7 +785,7 @@ TYPED_TEST(ContainerTest, HasAttrELB) {
                  std::out_of_range);  // Invalid argument: edge label not defined.
 }
 
-TYPED_TEST(ContainerTest, HasAttrVIDVID) {
+TYPED_TEST(ContainersTest, HasAttrVIDVID) {
     TypeParam G(2);
     G.add_edge(0, 1);
     G.set_attr(0, 1, "key", true);
@@ -795,7 +795,7 @@ TYPED_TEST(ContainerTest, HasAttrVIDVID) {
     ASSERT_THROW(G.has_attr(1, 2, "key"), std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, HasAttrVLBVLB) {
+TYPED_TEST(ContainersTest, HasAttrVLBVLB) {
     TypeParam G(2);
     G.set_label(0, "0");
     G.set_label(1, "1");
@@ -807,7 +807,7 @@ TYPED_TEST(ContainerTest, HasAttrVLBVLB) {
     ASSERT_THROW(G.has_attr("1", "2", "key"), std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, GetAttrVOID) {
+TYPED_TEST(ContainersTest, GetAttrVOID) {
     TypeParam G;
     G.set_attr("key", true);
     auto f0 = [&G]() { return G.template get_attr<bool>("key"); };
@@ -820,7 +820,7 @@ TYPED_TEST(ContainerTest, GetAttrVOID) {
     ASSERT_THROW(f2(), std::out_of_range);  // Invalid argument: key not defined.
 }
 
-TYPED_TEST(ContainerTest, GetAttrVID) {
+TYPED_TEST(ContainersTest, GetAttrVID) {
     TypeParam G(1);
     G.set_attr(0, "key", true);
     auto f0 = [&G]() { return G.template get_attr<bool>(0, "key"); };
@@ -836,7 +836,7 @@ TYPED_TEST(ContainerTest, GetAttrVID) {
     ASSERT_THROW(f3(), std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, GetAttrVLB) {
+TYPED_TEST(ContainersTest, GetAttrVLB) {
     TypeParam G(1);
     G.set_label(0, "0");
     G.set_attr("0", "key", true);
@@ -853,7 +853,7 @@ TYPED_TEST(ContainerTest, GetAttrVLB) {
     ASSERT_THROW(f3(), std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, GetAttrEID) {
+TYPED_TEST(ContainersTest, GetAttrEID) {
     TypeParam G(2);
     G.add_edge(EID(0, 1));
     G.set_attr(EID(0, 1), "key", true);
@@ -873,7 +873,7 @@ TYPED_TEST(ContainerTest, GetAttrEID) {
     ASSERT_THROW(f4(), std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, GetAttrELB) {
+TYPED_TEST(ContainersTest, GetAttrELB) {
     TypeParam G(2);
     G.add_edge(EID(0, 1));
     G.set_label(EID(0, 1), ELB("0 --- 1"));
@@ -891,7 +891,7 @@ TYPED_TEST(ContainerTest, GetAttrELB) {
     ASSERT_THROW(f3(), std::out_of_range);  // Invalid argument: edge not defined.
 }
 
-TYPED_TEST(ContainerTest, GetAttrVIDVID) {
+TYPED_TEST(ContainersTest, GetAttrVIDVID) {
     TypeParam G(2);
     G.add_edge(0, 1);
     G.set_attr(0, 1, "key", true);
@@ -911,7 +911,7 @@ TYPED_TEST(ContainerTest, GetAttrVIDVID) {
     ASSERT_THROW(f4(), std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, GetAttrVLBVLB) {
+TYPED_TEST(ContainersTest, GetAttrVLBVLB) {
     TypeParam G(2);
     G.set_label(0, "0");
     G.set_label(1, "1");
@@ -933,7 +933,7 @@ TYPED_TEST(ContainerTest, GetAttrVLBVLB) {
     ASSERT_THROW(f4(), std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, SetAttrVOID) {
+TYPED_TEST(ContainersTest, SetAttrVOID) {
     TypeParam G;
 
     auto f0 = [&G]() { G.set_attr("key", true); };
@@ -946,7 +946,7 @@ TYPED_TEST(ContainerTest, SetAttrVOID) {
     ASSERT_NO_THROW(f2());
 }
 
-TYPED_TEST(ContainerTest, SetAttrVID) {
+TYPED_TEST(ContainersTest, SetAttrVID) {
     TypeParam G(1);
 
     auto f0 = [&G]() { G.set_attr(0, "key", true); };
@@ -962,7 +962,7 @@ TYPED_TEST(ContainerTest, SetAttrVID) {
     ASSERT_THROW(f3(), std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, SetAttrVLB) {
+TYPED_TEST(ContainersTest, SetAttrVLB) {
     TypeParam G(1);
     G.set_label(0, "0");
 
@@ -979,7 +979,7 @@ TYPED_TEST(ContainerTest, SetAttrVLB) {
     ASSERT_THROW(f3(), std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, SetAttrEID) {
+TYPED_TEST(ContainersTest, SetAttrEID) {
     TypeParam G(2);
     G.add_edge(EID(0, 1));
 
@@ -999,7 +999,7 @@ TYPED_TEST(ContainerTest, SetAttrEID) {
     ASSERT_THROW(f4(), std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, SetAttrELB) {
+TYPED_TEST(ContainersTest, SetAttrELB) {
     TypeParam G(2);
     G.add_edge(0, 1);
     G.set_label(0, 1, ELB("0 --- 1"));
@@ -1017,7 +1017,7 @@ TYPED_TEST(ContainerTest, SetAttrELB) {
     ASSERT_THROW(f3(), std::out_of_range);  // Invalid argument: edge not defined.
 }
 
-TYPED_TEST(ContainerTest, SetAttrVIDVID) {
+TYPED_TEST(ContainersTest, SetAttrVIDVID) {
     TypeParam G(2);
     G.add_edge(0, 1);
 
@@ -1037,7 +1037,7 @@ TYPED_TEST(ContainerTest, SetAttrVIDVID) {
     ASSERT_THROW(f4(), std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, SetAttrVLBVLB) {
+TYPED_TEST(ContainersTest, SetAttrVLBVLB) {
     TypeParam G(2);
     G.set_label(0, "0");
     G.set_label(1, "1");
@@ -1059,34 +1059,34 @@ TYPED_TEST(ContainerTest, SetAttrVLBVLB) {
     ASSERT_THROW(f4(), std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainerTest, DISABLED_DelAttrVOID) {}
+TYPED_TEST(ContainersTest, DISABLED_DelAttrVOID) {}
 
-TYPED_TEST(ContainerTest, DISABLED_DelAttrVID) {}
+TYPED_TEST(ContainersTest, DISABLED_DelAttrVID) {}
 
-TYPED_TEST(ContainerTest, DISABLED_DelAttrVLB) {}
+TYPED_TEST(ContainersTest, DISABLED_DelAttrVLB) {}
 
-TYPED_TEST(ContainerTest, DISABLED_DelAttrEID) {}
+TYPED_TEST(ContainersTest, DISABLED_DelAttrEID) {}
 
-TYPED_TEST(ContainerTest, DISABLED_DelAttrELB) {}
+TYPED_TEST(ContainersTest, DISABLED_DelAttrELB) {}
 
-TYPED_TEST(ContainerTest, DISABLED_DelAttrVIDVID) {}
+TYPED_TEST(ContainersTest, DISABLED_DelAttrVIDVID) {}
 
-TYPED_TEST(ContainerTest, DISABLED_DelAttrVLBVLB) {}
+TYPED_TEST(ContainersTest, DISABLED_DelAttrVLBVLB) {}
 
-TYPED_TEST(ContainerTest, DISABLED_IsNull) {}
+TYPED_TEST(ContainersTest, DISABLED_IsNull) {}
 
-TYPED_TEST(ContainerTest, DISABLED_IsTrivial) {}
+TYPED_TEST(ContainersTest, DISABLED_IsTrivial) {}
 
-TYPED_TEST(ContainerTest, DISABLED_IsComplete) {}
+TYPED_TEST(ContainersTest, DISABLED_IsComplete) {}
 
-TYPED_TEST(ContainerTest, DISABLED_Hash) {}
+TYPED_TEST(ContainersTest, DISABLED_Hash) {}
 
-TYPED_TEST(ContainerTest, DISABLED_ToStream) {}
+TYPED_TEST(ContainersTest, DISABLED_ToStream) {}
 
-TYPED_TEST(ContainerTest, DISABLED_VerticesIterator) {}
+TYPED_TEST(ContainersTest, DISABLED_VerticesIterator) {}
 
-TYPED_TEST(ContainerTest, DISABLED_VerticesLabelsIterator) {}
+TYPED_TEST(ContainersTest, DISABLED_VerticesLabelsIterator) {}
 
-TYPED_TEST(ContainerTest, DISABLED_EdgesIterator) {}
+TYPED_TEST(ContainersTest, DISABLED_EdgesIterator) {}
 
-TYPED_TEST(ContainerTest, DISABLED_EdgesLabelsIterator) {}
+TYPED_TEST(ContainersTest, DISABLED_EdgesLabelsIterator) {}

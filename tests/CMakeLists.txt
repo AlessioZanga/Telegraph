@@ -37,4 +37,5 @@ macro(package_add_test_with_libraries TESTNAME FILES LIBRARIES TEST_WORKING_DIRE
     set_target_properties(${TESTNAME} PROPERTIES FOLDER tests)
 endmacro()
 
-package_add_test(ContainerTest telegraph/containers.cpp)
+package_add_test(ContainersTest telegraph/containers.cpp)
+package_add_test(OperatorsTest telegraph/operators.cpp)
