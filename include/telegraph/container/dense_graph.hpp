@@ -1,6 +1,6 @@
 #pragma once
 
-#include "abstract_graph.ipp"
+#include <telegraph/container/abstract_graph.ipp>
 
 class DenseGraph : public AbstractGraph {
    protected:

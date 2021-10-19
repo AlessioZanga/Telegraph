@@ -1,6 +1,7 @@
 #pragma once
 
+#include <telegraph/exceptions.hpp>
+
 /** CONTAINERS */
-#include "container/abstract_graph.ipp"
-#include "container/dense_graph.ipp"
-#include "container/exceptions.hpp"
+#include <telegraph/container/abstract_graph.ipp>
+#include <telegraph/container/dense_graph.ipp>
