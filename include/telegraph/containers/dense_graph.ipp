@@ -255,3 +255,66 @@ void DenseGraph::to_stream(std::ostream &out) const {
     // Close graph class.
     out << " )" << std::endl;
 }
+
+#define VTYPE DenseGraph::VIDsIterator
+#define ITYPE VTYPE::const_iterator
+
+VTYPE::VIDsIterator() : order(0) {}
+
+VTYPE::VIDsIterator(const std::size_t &order) : order(order) {}
+
+VTYPE::VIDsIterator(const VIDsIterator &other) : order(other.order) {}
+
+VTYPE &VTYPE::operator=(const VIDsIterator &other) {
+    VTYPE tmp(other);
+    if (this != &other) {
+        std::swap(order, tmp.order);
+    }
+    return *this;
+}
+
+VTYPE::~VIDsIterator() {}
+
+ITYPE::const_iterator() : order(0), current(0) {}
+
+ITYPE::const_iterator(const std::size_t &order, const VID &current) : order(order), current(current) {}
+
+ITYPE::const_iterator(const const_iterator &other) : order(other.order), current(other.current) {}
+
+ITYPE &ITYPE::operator=(const const_iterator &other) {
+    ITYPE tmp(other);
+    if (this != &other) {
+        std::swap(order, tmp.order);
+        std::swap(current, tmp.current);
+    }
+    return *this;
+}
+
+ITYPE::~const_iterator() {}
+
+inline bool ITYPE::operator==(const const_iterator &other) const {
+    return order == other.order && current == other.current;
+}
+
+inline bool ITYPE::operator!=(const const_iterator &other) const { return !(*this == other); }
+
+inline ITYPE::reference ITYPE::operator*() const {}
+
+inline ITYPE::reference ITYPE::operator->() const {}
+
+inline ITYPE &ITYPE::operator++() {}
+
+inline ITYPE ITYPE::operator++(int) {}
+
+inline ITYPE &ITYPE::operator--() {}
+
+inline ITYPE ITYPE::operator--(int) {}
+
+ITYPE VTYPE::begin() const { return ITYPE(order, 0); }
+
+ITYPE VTYPE::end() const { return ITYPE(order, order - 1); }
+
+VTYPE DenseGraph::V() const { return VTYPE(order()); }
+
+#undef ITYPE
+#undef VTYPE

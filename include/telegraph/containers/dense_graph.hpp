@@ -91,6 +91,68 @@ class DenseGraph : public AbstractGraph {
 
     inline virtual EID del_edge(const EID &X);
 
+    class VIDsIterator {
+       private:
+        std::size_t order;
+
+        VIDsIterator(const std::size_t &order);
+
+       public:
+        friend DenseGraph;
+
+        VIDsIterator();
+        VIDsIterator(const VIDsIterator &other);
+        VIDsIterator &operator=(const VIDsIterator &other);
+        ~VIDsIterator();
+
+        class const_iterator {
+           private:
+            std::size_t order;
+            VID current;
+
+            const_iterator(const std::size_t &order, const VID &current);
+
+           public:
+            friend VIDsIterator;
+
+            using difference_type = std::ptrdiff_t;
+            using value_type = VID;
+            using pointer = const VID *;
+            using reference = const VID &;
+            using iterator_category = std::bidirectional_iterator_tag;
+
+            const_iterator();
+            const_iterator(const const_iterator &other);
+            const_iterator &operator=(const const_iterator &other);
+            ~const_iterator();
+
+            inline bool operator==(const const_iterator &other) const;
+            inline bool operator!=(const const_iterator &other) const;
+
+            inline reference operator*() const;
+            inline reference operator->() const;
+
+            inline const_iterator &operator++();
+            inline const_iterator operator++(int);
+
+            inline const_iterator &operator--();
+            inline const_iterator operator--(int);
+        };
+
+        const_iterator begin() const;
+        const_iterator end() const;
+    };
+
+    VIDsIterator V() const;
+
+    /*
+    class VLBsIterator;
+
+    class EIDsIterator;
+
+    class ELBsIterator;
+    */
+
    private:
     inline virtual std::size_t hash() const;
 
