@@ -97,24 +97,6 @@ class DenseGraph : public AbstractGraph {
 
     inline virtual operator SparseAdjacencyMatrix() const;
 
-    inline virtual std::size_t order() const;
-
-    inline virtual std::size_t size() const;
-
-    inline virtual bool has_vertex(const VID &X) const;
-
-    inline virtual VID add_vertex();
-
-    inline virtual VID add_vertex(const VID &X);
-
-    inline virtual VID del_vertex(const VID &X);
-
-    inline virtual bool has_edge(const EID &X) const;
-
-    inline virtual EID add_edge(const EID &X);
-
-    inline virtual EID del_edge(const EID &X);
-
     //! VIDs Iterator proxy class.
     class VIDsIterator {
        private:
@@ -217,6 +199,24 @@ class DenseGraph : public AbstractGraph {
 
     class ELBsIterator;
     */
+
+    inline virtual std::size_t order() const;
+
+    inline virtual std::size_t size() const;
+
+    inline virtual bool has_vertex(const VID &X) const;
+
+    inline virtual VID add_vertex();
+
+    inline virtual VID add_vertex(const VID &X);
+
+    inline virtual VID del_vertex(const VID &X);
+
+    inline virtual bool has_edge(const EID &X) const;
+
+    inline virtual EID add_edge(const EID &X);
+
+    inline virtual EID del_edge(const EID &X);
 
    private:
     inline virtual std::size_t hash() const;

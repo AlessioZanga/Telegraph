@@ -109,6 +109,83 @@ inline DenseGraph::operator AdjacencyMatrix() const { return A; }
 
 inline DenseGraph::operator SparseAdjacencyMatrix() const { return A.sparseView(); }
 
+#define VTYPE DenseGraph::VIDsIterator
+#define ITYPE VTYPE::const_iterator
+
+VTYPE::VIDsIterator() : G(NULL) {}
+
+VTYPE::VIDsIterator(const DenseGraph *G) : G(G) {}
+
+VTYPE::VIDsIterator(const VIDsIterator &other) : G(other.G) {}
+
+VTYPE &VTYPE::operator=(const VIDsIterator &other) {
+    VIDsIterator tmp(other);
+    if (this != &other) {
+        std::swap(G, tmp.G);
+    }
+    return *this;
+}
+
+VTYPE::~VIDsIterator() {}
+
+ITYPE::const_iterator() : G(NULL), current(0) {}
+
+ITYPE::const_iterator(const DenseGraph *G, const VID &current) : G(G), current(current) {}
+
+ITYPE::const_iterator(const const_iterator &other) : G(other.G), current(other.current) {}
+
+ITYPE &ITYPE::operator=(const const_iterator &other) {
+    const_iterator tmp(other);
+    if (this != &other) {
+        std::swap(G, tmp.G);
+        std::swap(current, tmp.current);
+    }
+    return *this;
+}
+
+ITYPE::~const_iterator() {}
+
+inline bool ITYPE::operator==(const const_iterator &other) const { return G == other.G && current == other.current; }
+
+inline bool ITYPE::operator!=(const const_iterator &other) const { return G != other.G || current != other.current; }
+
+inline ITYPE::reference ITYPE::operator*() const { return current; }
+
+inline ITYPE::reference ITYPE::operator->() const { return current; }
+
+inline ITYPE &ITYPE::operator++() {
+    assert(G);  // Assert G is a valid pointer.
+    if (current != G->order()) current++;
+    return *this;
+}
+
+inline ITYPE ITYPE::operator++(int) {
+    const_iterator prev = *this;
+    ++*this;
+    return prev;
+}
+
+inline ITYPE &ITYPE::operator--() {
+    assert(G);  // Assert G is a valid pointer.
+    if (current != 0) current--;
+    return *this;
+}
+
+inline ITYPE ITYPE::operator--(int) {
+    const_iterator prev = *this;
+    --*this;
+    return prev;
+}
+
+ITYPE VTYPE::begin() const { return ITYPE(G, 0); }
+
+ITYPE VTYPE::end() const { return ITYPE(G, G->order()); }
+
+VTYPE DenseGraph::V() const { return VTYPE(this); }
+
+#undef ITYPE
+#undef VTYPE
+
 inline std::size_t DenseGraph::order() const { return A.rows(); }
 
 inline std::size_t DenseGraph::size() const {
@@ -255,78 +332,3 @@ void DenseGraph::to_stream(std::ostream &out) const {
     // Close graph class.
     out << " )" << std::endl;
 }
-
-#define VTYPE DenseGraph::VIDsIterator
-#define ITYPE VTYPE::const_iterator
-
-VTYPE::VIDsIterator() : G(NULL) {}
-
-VTYPE::VIDsIterator(const DenseGraph *G) : G(G) {}
-
-VTYPE::VIDsIterator(const VIDsIterator &other) : G(other.G) {}
-
-VTYPE &VTYPE::operator=(const VIDsIterator &other) {
-    VTYPE tmp(other);
-    if (this != &other) {
-        std::swap(G, tmp.G);
-    }
-    return *this;
-}
-
-VTYPE::~VIDsIterator() {}
-
-ITYPE::const_iterator() : G(NULL), current(0) {}
-
-ITYPE::const_iterator(const DenseGraph *G, const VID &current) : G(G), current(current) {}
-
-ITYPE::const_iterator(const const_iterator &other) : G(other.G), current(other.current) {}
-
-ITYPE &ITYPE::operator=(const const_iterator &other) {
-    ITYPE tmp(other);
-    if (this != &other) {
-        std::swap(G, tmp.G);
-        std::swap(current, tmp.current);
-    }
-    return *this;
-}
-
-ITYPE::~const_iterator() {}
-
-inline bool ITYPE::operator==(const const_iterator &other) const { return G == other.G && current == other.current; }
-
-inline bool ITYPE::operator!=(const const_iterator &other) const { return G != other.G || current != other.current; }
-
-inline ITYPE::reference ITYPE::operator*() const { return current; }
-
-inline ITYPE::reference ITYPE::operator->() const { return current; }
-
-inline ITYPE &ITYPE::operator++() {
-    if (current < G->order()) current++;
-    return *this;
-}
-
-inline ITYPE ITYPE::operator++(int) {
-    auto prev = *this;
-    ++*this;
-    return prev;
-}
-
-inline ITYPE &ITYPE::operator--() {
-    if (current > 0) current--;
-    return *this;
-}
-
-inline ITYPE ITYPE::operator--(int) {
-    auto prev = *this;
-    --*this;
-    return prev;
-}
-
-ITYPE VTYPE::begin() const { return ITYPE(G, 0); }
-
-ITYPE VTYPE::end() const { return ITYPE(G, G->order()); }
-
-VTYPE DenseGraph::V() const { return VTYPE(this); }
-
-#undef ITYPE
-#undef VTYPE

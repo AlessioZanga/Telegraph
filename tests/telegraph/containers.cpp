@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 
+#include <boost/range/adaptor/reversed.hpp>
 #include <cstdlib>
 #include <ctime>
 #include <numeric>
@@ -227,6 +228,42 @@ TYPED_TEST(ContainersTest, SparseAdjacencyMatrixOperator) {
     TypeParam H(B);
     ASSERT_TRUE(((SparseAdjacencyMatrix)H).isApprox(B, 0));
 }
+
+TYPED_TEST(ContainersTest, VerticesIterator) {
+    typename TypeParam::VIDsIterator::const_iterator it, ite;
+    ASSERT_DEATH({ it++; }, ".*");
+
+    TypeParam G;
+    it = V(G).begin();
+    ASSERT_EQ(it, V(G).begin());
+    ASSERT_EQ(V(G).begin(), V(G).end());
+    ASSERT_EQ(std::distance(V(G).begin(), V(G).end()), 0);
+    for (const VID &X : V(G)) ASSERT_EQ(X, -1);
+
+    TypeParam H(1);
+    ASSERT_NE(V(H).begin(), V(H).end());
+    ASSERT_EQ(std::distance(V(H).begin(), V(H).end()), 1);
+    for (const VID &X : V(H)) ASSERT_EQ(X, 0);
+
+    VID i = 0;
+    TypeParam J(MAX);
+    for (const VID &X : V(J)) {
+        ASSERT_EQ(X, i);
+        i++;
+    }
+
+    i = J.order();
+    for (ite = V(J).end(), it = V(J).begin(); ite != it; ite--) {
+        ASSERT_EQ(*ite, i);
+        i--;
+    }
+}
+
+TYPED_TEST(ContainersTest, DISABLED_VerticesLabelsIterator) {}
+
+TYPED_TEST(ContainersTest, DISABLED_EdgesIterator) {}
+
+TYPED_TEST(ContainersTest, DISABLED_EdgesLabelsIterator) {}
 
 TYPED_TEST(ContainersTest, Order) {
     TypeParam G;
@@ -1082,22 +1119,3 @@ TYPED_TEST(ContainersTest, DISABLED_IsComplete) {}
 TYPED_TEST(ContainersTest, DISABLED_Hash) {}
 
 TYPED_TEST(ContainersTest, DISABLED_ToStream) {}
-
-TYPED_TEST(ContainersTest, VerticesIterator) {
-    typename TypeParam::VIDsIterator::const_iterator i;
-    ASSERT_DEATH({i++;}, ".*");
-
-    TypeParam G;
-    ASSERT_EQ(std::distance(V(G).begin(), V(G).end()), 0);
-    for (const VID &X : V(G)) ASSERT_EQ(X, -1);
-
-    TypeParam H(1);
-    ASSERT_EQ(std::distance(V(H).begin(), V(H).end()), 1);
-    for (const VID &X : V(H)) ASSERT_EQ(X, 0);
-}
-
-TYPED_TEST(ContainersTest, DISABLED_VerticesLabelsIterator) {}
-
-TYPED_TEST(ContainersTest, DISABLED_EdgesIterator) {}
-
-TYPED_TEST(ContainersTest, DISABLED_EdgesLabelsIterator) {}
