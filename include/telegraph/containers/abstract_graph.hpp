@@ -6,6 +6,7 @@
 #include <boost/bimap.hpp>
 #include <boost/bimap/support/lambda.hpp>
 #include <boost/container_hash/hash.hpp>
+#include <boost/iterator/transform_iterator.hpp>
 #include <cstdint>
 #include <iostream>
 #include <iterator>

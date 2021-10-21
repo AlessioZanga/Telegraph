@@ -103,7 +103,7 @@ class DenseGraph : public AbstractGraph {
         //! Pointer to the target graph.
         const DenseGraph *G;
 
-        // Construct a new VIDsIterator object from target graph.
+        //! Construct a new VIDsIterator object from target graph.
         VIDsIterator(const DenseGraph *G);
 
        public:
@@ -192,14 +192,17 @@ class DenseGraph : public AbstractGraph {
      */
     VIDsIterator V() const;
 
-        //! VIDs Iterator proxy class.
+    //! VIDs Iterator proxy class.
     class VLBsIterator {
        private:
         //! Pointer to the target graph.
         const DenseGraph *G;
 
-        // Construct a new VLBsIterator object from target graph.
+        //! Construct a new VLBsIterator object from target graph.
         VLBsIterator(const DenseGraph *G);
+
+        //! Get key from pair helper.
+        static inline const VLB &get_key(const boost::bimap<VID, VLB>::value_type &pair) { return pair.right; }
 
        public:
         friend DenseGraph;
@@ -216,62 +219,11 @@ class DenseGraph : public AbstractGraph {
         //! Destroy the VLBs Iterator object.
         ~VLBsIterator();
 
+        //! Get key from pair helper signature.
+        typedef const VLB &(*get_key_t)(const boost::bimap<VID, VLB>::value_type &);
+
         //! VLBs Const Iterator.
-        class const_iterator {
-           private:
-            //! Pointer to the target graph.
-            const DenseGraph *G;
-            //! Value of the current VID.
-            VID curr;
-
-            // Construct a new VLBs Const Iterator object from target graph and initial VLB.
-            const_iterator(const DenseGraph *G, const VID &curr);
-
-           public:
-            friend VLBsIterator;
-
-            using difference_type = std::ptrdiff_t;
-            using value_type = VLB;
-            using pointer = const VLB *;
-            using reference = const VLB &;
-            using iterator_category = std::bidirectional_iterator_tag;
-
-            //! Default constructor for a new VLBs Const Iterator object.
-            const_iterator();
-
-            //! Copy constructor for a new VLBs Const Iterator object.
-            const_iterator(const const_iterator &other);
-
-            //! Assignment constructor for a new VLBs Const Iterator object.
-            const_iterator &operator=(const const_iterator &other);
-
-            //! Destroy the VLBs Const Iterator object.
-            ~const_iterator();
-
-            //! Equality operator.
-            inline bool operator==(const const_iterator &other) const;
-
-            //! Inequality operator.
-            inline bool operator!=(const const_iterator &other) const;
-
-            //! Dereference operator.
-            inline reference operator*() const;
-
-            //! Member access operator.
-            inline reference operator->() const;
-
-            //! Pre-increment operator.
-            inline const_iterator &operator++();
-
-            //! Post-increment operator.
-            inline const_iterator operator++(int);
-
-            //! Pre-decrement operator.
-            inline const_iterator &operator--();
-
-            //! Post-decrement operator.
-            inline const_iterator operator--(int);
-        };
+        using const_iterator = boost::transform_iterator<get_key_t, boost::bimap<VID, VLB>::const_iterator>;
 
         //! Begin iterator.
         const_iterator begin() const;

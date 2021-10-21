@@ -274,9 +274,6 @@ TYPED_TEST(ContainersTest, VerticesLabelsIterator) {
     for (const VLB &X : Vl(G)) ASSERT_EQ(X, "");
 
     TypeParam H(1);
-    it = Vl(H).begin();
-    ASSERT_THROW(*it, std::out_of_range);
-
     H.set_label(0, "0");
     ASSERT_NE(Vl(H).begin(), Vl(H).end());
     ASSERT_EQ(std::distance(Vl(H).begin(), Vl(H).end()), 1);
