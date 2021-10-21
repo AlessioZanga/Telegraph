@@ -10,6 +10,8 @@ inline string to_string(const string &__val) { return __val; }
 
 class NOT_DEFINED : public std::out_of_range {
    public:
+    explicit NOT_DEFINED() : std::out_of_range("Graph is not defined.") {}
+
     template <typename T>
     explicit NOT_DEFINED(const T &X) : std::out_of_range("Vertex " + std::to_string(X) + " is not defined.") {}
 

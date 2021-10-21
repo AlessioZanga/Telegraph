@@ -1083,7 +1083,18 @@ TYPED_TEST(ContainersTest, DISABLED_Hash) {}
 
 TYPED_TEST(ContainersTest, DISABLED_ToStream) {}
 
-TYPED_TEST(ContainersTest, DISABLED_VerticesIterator) {}
+TYPED_TEST(ContainersTest, VerticesIterator) {
+    typename TypeParam::VIDsIterator::const_iterator i;
+    ASSERT_DEATH({i++;}, ".*");
+
+    TypeParam G;
+    ASSERT_EQ(std::distance(V(G).begin(), V(G).end()), 0);
+    for (const VID &X : V(G)) ASSERT_EQ(X, -1);
+
+    TypeParam H(1);
+    ASSERT_EQ(std::distance(V(H).begin(), V(H).end()), 1);
+    for (const VID &X : V(H)) ASSERT_EQ(X, 0);
+}
 
 TYPED_TEST(ContainersTest, DISABLED_VerticesLabelsIterator) {}
 

@@ -15,14 +15,23 @@ class DenseGraph : public AbstractGraph {
     using AbstractGraph::has_edge;
     using AbstractGraph::has_vertex;
 
+    //! Default constructor for a new Dense Graph object.
     DenseGraph();
 
+    //! Copy constructor for a new Dense Graph object.
     DenseGraph(const DenseGraph &other);
 
+    //! Assignment constructor for a new Dense Graph object.
     DenseGraph &operator=(const DenseGraph &other);
 
+    //! Destroy the Dense Graph object.
     virtual ~DenseGraph();
 
+    /**
+     * @brief Construct a new Dense Graph object.
+     *
+     * @param n Given order of the new Dense Graph object.
+     */
     explicit DenseGraph(std::size_t n);
 
     /**
@@ -61,10 +70,25 @@ class DenseGraph : public AbstractGraph {
     template <typename I, require_iter_value_type(I, EID) = 0>
     DenseGraph(const I &begin, const I &end);
 
+    /**
+     * @brief Construct a new Dense Graph object from Adjacency List.
+     *
+     * @param other Given Adjacency List.
+     */
     explicit DenseGraph(const AdjacencyList &other);
 
+    /**
+     * @brief Construct a new Dense Graph object from Adjacency Matrix.
+     *
+     * @param other Given Adjacency Matrix.
+     */
     explicit DenseGraph(const AdjacencyMatrix &other);
 
+    /**
+     * @brief Construct a new Dense Graph object from Sparse Adjacency Matrix.
+     *
+     * @param other Given Sparse Adjacency Matrix.
+     */
     explicit DenseGraph(const SparseAdjacencyMatrix &other);
 
     inline virtual operator AdjacencyList() const;
@@ -91,26 +115,40 @@ class DenseGraph : public AbstractGraph {
 
     inline virtual EID del_edge(const EID &X);
 
+    //! VIDs Iterator proxy class.
     class VIDsIterator {
        private:
-        std::size_t order;
+        //! Pointer to the target graph.
+        const DenseGraph *G;
 
-        VIDsIterator(const std::size_t &order);
+        // Construct a new VIDsIterator object from target graph.
+        VIDsIterator(const DenseGraph *G);
 
        public:
         friend DenseGraph;
 
+        //! Default constructor for a new VIDs Iterator object.
         VIDsIterator();
+
+        //! Copy constructor for a new VIDs Iterator object.
         VIDsIterator(const VIDsIterator &other);
+
+        //! Assignment constructor for a new VIDs Iterator object.
         VIDsIterator &operator=(const VIDsIterator &other);
+
+        //! Destroy the VIDs Iterator object.
         ~VIDsIterator();
 
+        //! VIDs Const Iterator.
         class const_iterator {
            private:
-            std::size_t order;
+            //! Pointer to the target graph.
+            const DenseGraph *G;
+            //! Value of the current VID.
             VID current;
 
-            const_iterator(const std::size_t &order, const VID &current);
+            // Construct a new VIDs Const Iterator object from target graph and initial VID.
+            const_iterator(const DenseGraph *G, const VID &current);
 
            public:
             friend VIDsIterator;
@@ -121,28 +159,55 @@ class DenseGraph : public AbstractGraph {
             using reference = const VID &;
             using iterator_category = std::bidirectional_iterator_tag;
 
+            //! Default constructor for a new VIDs Const Iterator object.
             const_iterator();
+
+            //! Copy constructor for a new VIDs Const Iterator object.
             const_iterator(const const_iterator &other);
+
+            //! Assignment constructor for a new VIDs Const Iterator object.
             const_iterator &operator=(const const_iterator &other);
+
+            //! Destroy the VIDs Const Iterator object.
             ~const_iterator();
 
+            //! Equality operator.
             inline bool operator==(const const_iterator &other) const;
+
+            //! Inequality operator.
             inline bool operator!=(const const_iterator &other) const;
 
+            //! Dereference operator.
             inline reference operator*() const;
+
+            //! Member access operator.
             inline reference operator->() const;
 
+            //! Pre-increment operator.
             inline const_iterator &operator++();
+
+            //! Post-increment operator.
             inline const_iterator operator++(int);
 
+            //! Pre-decrement operator.
             inline const_iterator &operator--();
+
+            //! Post-decrement operator.
             inline const_iterator operator--(int);
         };
 
+        //! Begin iterator.
         const_iterator begin() const;
+
+        //! End iterator.
         const_iterator end() const;
     };
 
+    /**
+     * @brief Return the VIDs Iterator proxy class.
+     *
+     * @return VIDsIterator VIDs Iterator proxy class.
+     */
     VIDsIterator V() const;
 
     /*

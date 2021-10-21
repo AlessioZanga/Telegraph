@@ -44,6 +44,12 @@ using AdjacencyMatrix = Eigen::Matrix<int8_t, Eigen::Dynamic, Eigen::Dynamic, Ei
 //! Sparse adjacency matrix.
 using SparseAdjacencyMatrix = Eigen::SparseMatrix<int8_t, Eigen::RowMajor>;
 
+//! Infix vertex set iterator.
+template <typename T>
+static inline auto V(const T &G) {
+    return G.V();
+}
+
 class AbstractGraph {
    protected:
     //! Graph label, aka its name.
@@ -61,13 +67,13 @@ class AbstractGraph {
     std::map<EID, std::map<std::string, std::any>> eattrs;
 
    public:
-    //! Default constructor for a new Abstract Graph object
+    //! Default constructor for a new Abstract Graph object.
     AbstractGraph();
 
-    //! Copy constructor for a new Abstract Graph object
+    //! Copy constructor for a new Abstract Graph object.
     AbstractGraph(const AbstractGraph &other);
 
-    //! Destroy the Abstract Graph object
+    //! Destroy the Abstract Graph object.
     inline virtual ~AbstractGraph();
 
     /**
