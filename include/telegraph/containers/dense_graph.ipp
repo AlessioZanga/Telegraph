@@ -119,7 +119,7 @@ VTYPE::VIDsIterator(const DenseGraph *G) : G(G) {}
 VTYPE::VIDsIterator(const VIDsIterator &other) : G(other.G) {}
 
 VTYPE &VTYPE::operator=(const VIDsIterator &other) {
-    VIDsIterator tmp(other);
+    VTYPE tmp(other);
     if (this != &other) {
         std::swap(G, tmp.G);
     }
@@ -128,51 +128,51 @@ VTYPE &VTYPE::operator=(const VIDsIterator &other) {
 
 VTYPE::~VIDsIterator() {}
 
-ITYPE::const_iterator() : G(NULL), current(0) {}
+ITYPE::const_iterator() : G(NULL), curr(0) {}
 
-ITYPE::const_iterator(const DenseGraph *G, const VID &current) : G(G), current(current) {}
+ITYPE::const_iterator(const DenseGraph *G, const VID &curr) : G(G), curr(curr) {}
 
-ITYPE::const_iterator(const const_iterator &other) : G(other.G), current(other.current) {}
+ITYPE::const_iterator(const const_iterator &other) : G(other.G), curr(other.curr) {}
 
 ITYPE &ITYPE::operator=(const const_iterator &other) {
-    const_iterator tmp(other);
+    ITYPE tmp(other);
     if (this != &other) {
         std::swap(G, tmp.G);
-        std::swap(current, tmp.current);
+        std::swap(curr, tmp.curr);
     }
     return *this;
 }
 
 ITYPE::~const_iterator() {}
 
-inline bool ITYPE::operator==(const const_iterator &other) const { return G == other.G && current == other.current; }
+inline bool ITYPE::operator==(const const_iterator &other) const { return G == other.G && curr == other.curr; }
 
-inline bool ITYPE::operator!=(const const_iterator &other) const { return G != other.G || current != other.current; }
+inline bool ITYPE::operator!=(const const_iterator &other) const { return G != other.G || curr != other.curr; }
 
-inline ITYPE::reference ITYPE::operator*() const { return current; }
+inline ITYPE::reference ITYPE::operator*() const { return curr; }
 
-inline ITYPE::reference ITYPE::operator->() const { return current; }
+inline ITYPE::reference ITYPE::operator->() const { return curr; }
 
 inline ITYPE &ITYPE::operator++() {
     assert(G);  // Assert G is a valid pointer.
-    if (current != G->order()) current++;
+    if (curr != G->order()) curr++;
     return *this;
 }
 
 inline ITYPE ITYPE::operator++(int) {
-    const_iterator prev = *this;
+    ITYPE prev = *this;
     ++*this;
     return prev;
 }
 
 inline ITYPE &ITYPE::operator--() {
     assert(G);  // Assert G is a valid pointer.
-    if (current != 0) current--;
+    if (curr != 0) curr--;
     return *this;
 }
 
 inline ITYPE ITYPE::operator--(int) {
-    const_iterator prev = *this;
+    ITYPE prev = *this;
     --*this;
     return prev;
 }
@@ -182,6 +182,83 @@ ITYPE VTYPE::begin() const { return ITYPE(G, 0); }
 ITYPE VTYPE::end() const { return ITYPE(G, G->order()); }
 
 VTYPE DenseGraph::V() const { return VTYPE(this); }
+
+#undef ITYPE
+#undef VTYPE
+
+#define VTYPE DenseGraph::VLBsIterator
+#define ITYPE VTYPE::const_iterator
+
+VTYPE::VLBsIterator() : G(NULL) {}
+
+VTYPE::VLBsIterator(const DenseGraph *G) : G(G) {}
+
+VTYPE::VLBsIterator(const VLBsIterator &other) : G(other.G) {}
+
+VTYPE &VTYPE::operator=(const VLBsIterator &other) {
+    VTYPE tmp(other);
+    if (this != &other) {
+        std::swap(G, tmp.G);
+    }
+    return *this;
+}
+
+VTYPE::~VLBsIterator() {}
+
+ITYPE::const_iterator() : G(NULL), curr(0) {}
+
+ITYPE::const_iterator(const DenseGraph *G, const VID &curr) : G(G), curr(curr) {}
+
+ITYPE::const_iterator(const const_iterator &other) : G(other.G), curr(other.curr) {}
+
+ITYPE &ITYPE::operator=(const const_iterator &other) {
+    ITYPE tmp(other);
+    if (this != &other) {
+        std::swap(G, tmp.G);
+        std::swap(curr, tmp.curr);
+    }
+    return *this;
+}
+
+ITYPE::~const_iterator() {}
+
+inline bool ITYPE::operator==(const const_iterator &other) const { return G == other.G && curr == other.curr; }
+
+inline bool ITYPE::operator!=(const const_iterator &other) const { return G != other.G || curr != other.curr; }
+
+inline ITYPE::reference ITYPE::operator*() const { return G->get_label(curr); }
+
+inline ITYPE::reference ITYPE::operator->() const { return G->get_label(curr); }
+
+inline ITYPE &ITYPE::operator++() {
+    assert(G);  // Assert G is a valid pointer.
+    if (curr != G->order()) curr++;
+    return *this;
+}
+
+inline ITYPE ITYPE::operator++(int) {
+    ITYPE prev = *this;
+    ++*this;
+    return prev;
+}
+
+inline ITYPE &ITYPE::operator--() {
+    assert(G);  // Assert G is a valid pointer.
+    if (curr != 0) curr--;
+    return *this;
+}
+
+inline ITYPE ITYPE::operator--(int) {
+    ITYPE prev = *this;
+    --*this;
+    return prev;
+}
+
+ITYPE VTYPE::begin() const { return ITYPE(G, 0); }
+
+ITYPE VTYPE::end() const { return ITYPE(G, G->order()); }
+
+VTYPE DenseGraph::Vl() const { return VTYPE(this); }
 
 #undef ITYPE
 #undef VTYPE

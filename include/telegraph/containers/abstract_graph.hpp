@@ -2,6 +2,7 @@
 
 #include <Eigen/Eigen>
 #include <any>
+#include <algorithm>
 #include <boost/bimap.hpp>
 #include <boost/bimap/support/lambda.hpp>
 #include <boost/container_hash/hash.hpp>
@@ -44,10 +45,16 @@ using AdjacencyMatrix = Eigen::Matrix<int8_t, Eigen::Dynamic, Eigen::Dynamic, Ei
 //! Sparse adjacency matrix.
 using SparseAdjacencyMatrix = Eigen::SparseMatrix<int8_t, Eigen::RowMajor>;
 
-//! Infix vertex set iterator.
+//! Infix vertex id set iterator.
 template <typename T>
 static inline auto V(const T &G) {
     return G.V();
+}
+
+//! Infix vertex label set iterator.
+template <typename T>
+static inline auto Vl(const T &G) {
+    return G.Vl();
 }
 
 class AbstractGraph {
@@ -146,9 +153,9 @@ class AbstractGraph {
     /**
      * @brief Get the graph label.
      *
-     * @return GLB The graph label.
+     * @return const GLB& The graph label.
      */
-    inline GLB get_label() const;
+    inline const GLB &get_label() const;
 
     /**
      * @brief Set the graph label.
@@ -289,9 +296,9 @@ class AbstractGraph {
      * @brief Get the vertex label.
      *
      * @param X Given vertex id.
-     * @return VLB The vertex label.
+     * @return const VLB& The vertex label.
      */
-    inline VLB get_label(const VID &X) const;
+    inline const VLB &get_label(const VID &X) const;
 
     /**
      * @brief Set the vertex label.
@@ -557,27 +564,27 @@ class AbstractGraph {
      * @brief Get the edge label.
      *
      * @param X Given edge id.
-     * @return ELB The edge label.
+     * @return const ELB& The edge label.
      */
-    inline ELB get_label(const EID &X) const;
+    inline const ELB &get_label(const EID &X) const;
 
     /**
      * @brief Get the edge label.
      *
      * @param X First edge vertex id.
      * @param Y Second edge vertex id.
-     * @return ELB The edge label.
+     * @return const ELB& The edge label.
      */
-    inline ELB get_label(const VID &X, const VID &Y) const;
+    inline const ELB &get_label(const VID &X, const VID &Y) const;
 
     /**
      * @brief Get the edge label.
      *
      * @param X First edge vertex label.
      * @param Y Second edge vertex label.
-     * @return ELB The edge label.
+     * @return const ELB& The edge label.
      */
-    inline ELB get_label(const VLB &X, const VLB &Y) const;
+    inline const ELB &get_label(const VLB &X, const VLB &Y) const;
 
     /**
      * @brief Set the edge label.

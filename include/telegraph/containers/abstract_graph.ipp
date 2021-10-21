@@ -16,7 +16,7 @@ inline AbstractGraph::~AbstractGraph() {}
 
 inline bool AbstractGraph::has_label() const { return !glb.empty(); }
 
-inline GLB AbstractGraph::get_label() const {
+inline const GLB &AbstractGraph::get_label() const {
     if (!has_label()) throw NO_LABEL();
     return glb;
 }
@@ -77,7 +77,7 @@ inline bool AbstractGraph::has_label(const VID &X) const {
 
 inline bool AbstractGraph::has_label(const VLB &X) const { return has_vertex(X); }
 
-inline VLB AbstractGraph::get_label(const VID &X) const {
+inline const VLB &AbstractGraph::get_label(const VID &X) const {
     if (!has_vertex(X)) throw NOT_DEFINED(X);  // Check if X is a valid vertex.
     auto i = vlbs.left.find(X);
     if (i == vlbs.left.end()) throw NO_LABEL(X);  // Check if X has a defined label.
@@ -183,15 +183,15 @@ inline bool AbstractGraph::has_label(const VID &X, const VID &Y) const { return 
 
 inline bool AbstractGraph::has_label(const VLB &X, const VLB &Y) const { return has_label(EID(get_id(X), get_id(Y))); }
 
-inline ELB AbstractGraph::get_label(const EID &X) const {
+inline const ELB &AbstractGraph::get_label(const EID &X) const {
     auto i = elbs.left.find(X);
     if (i == elbs.left.end()) throw NOT_DEFINED(X.first, X.second);  // Check if X is a valid edge.
     return i->second;
 }
 
-inline ELB AbstractGraph::get_label(const VID &X, const VID &Y) const { return get_label(EID(X, Y)); }
+inline const ELB &AbstractGraph::get_label(const VID &X, const VID &Y) const { return get_label(EID(X, Y)); }
 
-inline ELB AbstractGraph::get_label(const VLB &X, const VLB &Y) const { return get_label(get_id(X), get_id(Y)); }
+inline const ELB &AbstractGraph::get_label(const VLB &X, const VLB &Y) const { return get_label(get_id(X), get_id(Y)); }
 
 inline void AbstractGraph::set_label(const EID &X, const ELB &label) {
     if (label.empty()) throw INVALID_LABEL();                // Check if label is valid.

@@ -127,10 +127,10 @@ class DenseGraph : public AbstractGraph {
             //! Pointer to the target graph.
             const DenseGraph *G;
             //! Value of the current VID.
-            VID current;
+            VID curr;
 
             // Construct a new VIDs Const Iterator object from target graph and initial VID.
-            const_iterator(const DenseGraph *G, const VID &current);
+            const_iterator(const DenseGraph *G, const VID &curr);
 
            public:
             friend VIDsIterator;
@@ -192,9 +192,102 @@ class DenseGraph : public AbstractGraph {
      */
     VIDsIterator V() const;
 
-    /*
-    class VLBsIterator;
+        //! VIDs Iterator proxy class.
+    class VLBsIterator {
+       private:
+        //! Pointer to the target graph.
+        const DenseGraph *G;
 
+        // Construct a new VLBsIterator object from target graph.
+        VLBsIterator(const DenseGraph *G);
+
+       public:
+        friend DenseGraph;
+
+        //! Default constructor for a new VLBs Iterator object.
+        VLBsIterator();
+
+        //! Copy constructor for a new VLBs Iterator object.
+        VLBsIterator(const VLBsIterator &other);
+
+        //! Assignment constructor for a new VLBs Iterator object.
+        VLBsIterator &operator=(const VLBsIterator &other);
+
+        //! Destroy the VLBs Iterator object.
+        ~VLBsIterator();
+
+        //! VLBs Const Iterator.
+        class const_iterator {
+           private:
+            //! Pointer to the target graph.
+            const DenseGraph *G;
+            //! Value of the current VID.
+            VID curr;
+
+            // Construct a new VLBs Const Iterator object from target graph and initial VLB.
+            const_iterator(const DenseGraph *G, const VID &curr);
+
+           public:
+            friend VLBsIterator;
+
+            using difference_type = std::ptrdiff_t;
+            using value_type = VLB;
+            using pointer = const VLB *;
+            using reference = const VLB &;
+            using iterator_category = std::bidirectional_iterator_tag;
+
+            //! Default constructor for a new VLBs Const Iterator object.
+            const_iterator();
+
+            //! Copy constructor for a new VLBs Const Iterator object.
+            const_iterator(const const_iterator &other);
+
+            //! Assignment constructor for a new VLBs Const Iterator object.
+            const_iterator &operator=(const const_iterator &other);
+
+            //! Destroy the VLBs Const Iterator object.
+            ~const_iterator();
+
+            //! Equality operator.
+            inline bool operator==(const const_iterator &other) const;
+
+            //! Inequality operator.
+            inline bool operator!=(const const_iterator &other) const;
+
+            //! Dereference operator.
+            inline reference operator*() const;
+
+            //! Member access operator.
+            inline reference operator->() const;
+
+            //! Pre-increment operator.
+            inline const_iterator &operator++();
+
+            //! Post-increment operator.
+            inline const_iterator operator++(int);
+
+            //! Pre-decrement operator.
+            inline const_iterator &operator--();
+
+            //! Post-decrement operator.
+            inline const_iterator operator--(int);
+        };
+
+        //! Begin iterator.
+        const_iterator begin() const;
+
+        //! End iterator.
+        const_iterator end() const;
+    };
+
+    /**
+     * @brief Return the VLBs Iterator proxy class.
+     *
+     * @return VLBsIterator VLBs Iterator proxy class.
+     */
+    VLBsIterator Vl() const;
+
+    /*
     class EIDsIterator;
 
     class ELBsIterator;

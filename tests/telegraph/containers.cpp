@@ -1,6 +1,5 @@
 #include <gtest/gtest.h>
 
-#include <boost/range/adaptor/reversed.hpp>
 #include <cstdlib>
 #include <ctime>
 #include <numeric>
@@ -248,18 +247,60 @@ TYPED_TEST(ContainersTest, VerticesIterator) {
     VID i = 0;
     TypeParam J(MAX);
     for (const VID &X : V(J)) {
+        ASSERT_TRUE(J.has_vertex(X));
         ASSERT_EQ(X, i);
         i++;
     }
 
-    i = J.order();
-    for (ite = V(J).end(), it = V(J).begin(); ite != it; ite--) {
-        ASSERT_EQ(*ite, i);
+    i = J.order() - 1;
+    it = --V(J).end();
+    ite = V(J).begin();
+    for (; it != ite; it--) {
+        ASSERT_TRUE(J.has_vertex(*it));
+        ASSERT_EQ(*it, i);
         i--;
     }
 }
 
-TYPED_TEST(ContainersTest, DISABLED_VerticesLabelsIterator) {}
+TYPED_TEST(ContainersTest, VerticesLabelsIterator) {
+    typename TypeParam::VLBsIterator::const_iterator it, ite;
+    ASSERT_DEATH({ it++; }, ".*");
+
+    TypeParam G;
+    it = Vl(G).begin();
+    ASSERT_EQ(it, Vl(G).begin());
+    ASSERT_EQ(Vl(G).begin(), Vl(G).end());
+    ASSERT_EQ(std::distance(Vl(G).begin(), Vl(G).end()), 0);
+    for (const VLB &X : Vl(G)) ASSERT_EQ(X, "");
+
+    TypeParam H(1);
+    it = Vl(H).begin();
+    ASSERT_THROW(*it, std::out_of_range);
+
+    H.set_label(0, "0");
+    ASSERT_NE(Vl(H).begin(), Vl(H).end());
+    ASSERT_EQ(std::distance(Vl(H).begin(), Vl(H).end()), 1);
+    for (const VLB &X : Vl(H)) ASSERT_EQ(X, "0");
+
+    VID i = 0;
+    TypeParam J(MAX);
+    for (const VID &X : V(J)) J.set_label(X, std::to_string(X));
+
+    for (const VLB &X : Vl(J)) {
+        ASSERT_TRUE(J.has_vertex(X));
+        ASSERT_EQ(X, std::to_string(i));
+        i++;
+    }
+
+    i = J.order() - 1;
+    it = --Vl(J).end();
+    ite = Vl(J).begin();
+    for (; it != ite; it--) {
+        ASSERT_TRUE(J.has_vertex(*it));
+        ASSERT_EQ(*it, std::to_string(i));
+        i--;
+    }
+}
 
 TYPED_TEST(ContainersTest, DISABLED_EdgesIterator) {}
 
