@@ -14,6 +14,66 @@ AbstractGraph::AbstractGraph(const AbstractGraph &other)
 
 inline AbstractGraph::~AbstractGraph() {}
 
+#define VTYPE AbstractGraph::VLBsIterator
+#define ITYPE VTYPE::const_iterator
+
+VTYPE::VLBsIterator() : G(NULL) {}
+
+VTYPE::VLBsIterator(const AbstractGraph *G) : G(G) {}
+
+VTYPE::VLBsIterator(const VLBsIterator &other) : G(other.G) {}
+
+VTYPE &VTYPE::operator=(const VLBsIterator &other) {
+    VTYPE tmp(other);
+    if (this != &other) {
+        std::swap(G, tmp.G);
+    }
+    return *this;
+}
+
+VTYPE::~VLBsIterator() {}
+
+ITYPE VTYPE::begin() const { return ITYPE(G->vlbs.right.begin(), get_key); }
+
+ITYPE VTYPE::end() const { return ITYPE(G->vlbs.right.end(), get_key); }
+
+std::size_t VTYPE::size() const { return G->vlbs.size(); }
+
+VTYPE AbstractGraph::Vl() const { return VTYPE(this); }
+
+#undef ITYPE
+#undef VTYPE
+
+#define VTYPE AbstractGraph::ELBsIterator
+#define ITYPE VTYPE::const_iterator
+
+VTYPE::ELBsIterator() : G(NULL) {}
+
+VTYPE::ELBsIterator(const AbstractGraph *G) : G(G) {}
+
+VTYPE::ELBsIterator(const ELBsIterator &other) : G(other.G) {}
+
+VTYPE &VTYPE::operator=(const ELBsIterator &other) {
+    VTYPE tmp(other);
+    if (this != &other) {
+        std::swap(G, tmp.G);
+    }
+    return *this;
+}
+
+VTYPE::~ELBsIterator() {}
+
+ITYPE VTYPE::begin() const { return ITYPE(G->elbs.right.begin(), get_key); }
+
+ITYPE VTYPE::end() const { return ITYPE(G->elbs.right.end(), get_key); }
+
+std::size_t VTYPE::size() const { return G->elbs.size(); }
+
+VTYPE AbstractGraph::El() const { return VTYPE(this); }
+
+#undef ITYPE
+#undef VTYPE
+
 inline bool AbstractGraph::has_label() const { return !glb.empty(); }
 
 inline const GLB &AbstractGraph::get_label() const {
