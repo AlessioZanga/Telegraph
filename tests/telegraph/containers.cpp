@@ -370,7 +370,44 @@ TYPED_TEST(ContainersTest, VerticesLabelsIterator) {
     ASSERT_TRUE(std::is_sorted(Vl(J).begin(), Vl(J).end()));
 }
 
-TYPED_TEST(ContainersTest, DISABLED_EdgesLabelsIterator) {}
+TYPED_TEST(ContainersTest, EdgesLabelsIterator) {
+    typename TypeParam::ELBsIterator::const_iterator it, ite;
+    ASSERT_DEATH({ it++; }, ".*");
+
+    TypeParam G;
+    it = El(G).begin();
+    ASSERT_EQ(it, El(G).begin());
+    ASSERT_EQ(El(G).begin(), El(G).end());
+    ASSERT_EQ(std::distance(El(G).begin(), El(G).end()), 0);
+    for (const ELB &X : El(G)) ASSERT_EQ(X, ELB(""));
+
+    TypeParam H(1);
+    ASSERT_EQ(E(H).begin(), E(H).end());
+    ASSERT_EQ(std::distance(E(H).begin(), E(H).end()), 0);
+    for (const ELB &X : El(H)) ASSERT_EQ(X, ELB("0 --- 0"));
+
+    H.add_vertex();
+    H.add_edge(0, 1);
+    H.set_label(0, 1, ELB("0 --- 1"));
+    ASSERT_NE(El(H).begin(), El(H).end());
+    ASSERT_EQ(std::distance(El(H).begin(), El(H).end()), 1);
+    for (const ELB &X : El(H)) ASSERT_EQ(X, ELB("0 --- 1"));
+
+    TypeParam J(AdjacencyMatrix::Ones(MAX, MAX));
+    for (const EID &X : E(J)) J.set_label(X, ELB(std::to_string(X.first) + " --- " + std::to_string(X.second)));
+
+    // Assert size is correct.
+    ASSERT_EQ(std::distance(El(J).begin(), El(J).end()), J.size());
+
+    for (const ELB &X : El(J)) ASSERT_TRUE(J.has_edge(X));
+
+    it = --El(J).end();
+    ite = El(J).begin();
+    for (; it != ite; --it) ASSERT_TRUE(J.has_edge(*it));
+
+    // Assert sequence is always sorted.
+    ASSERT_TRUE(std::is_sorted(El(J).begin(), El(J).end()));
+}
 
 TYPED_TEST(ContainersTest, Order) {
     TypeParam G;

@@ -64,6 +64,12 @@ static inline auto Vl(const T &G) {
     return G.Vl();
 }
 
+//! Infix edge label set iterator.
+template <typename T>
+static inline auto El(const T &G) {
+    return G.El();
+}
+
 class AbstractGraph {
    protected:
     //! Graph label, aka its name.

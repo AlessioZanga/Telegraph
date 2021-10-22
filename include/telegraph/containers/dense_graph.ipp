@@ -328,6 +328,34 @@ VTYPE DenseGraph::Vl() const { return VTYPE(this); }
 #undef ITYPE
 #undef VTYPE
 
+#define VTYPE DenseGraph::ELBsIterator
+#define ITYPE VTYPE::const_iterator
+
+VTYPE::ELBsIterator() : G(NULL) {}
+
+VTYPE::ELBsIterator(const DenseGraph *G) : G(G) {}
+
+VTYPE::ELBsIterator(const ELBsIterator &other) : G(other.G) {}
+
+VTYPE &VTYPE::operator=(const ELBsIterator &other) {
+    VTYPE tmp(other);
+    if (this != &other) {
+        std::swap(G, tmp.G);
+    }
+    return *this;
+}
+
+VTYPE::~ELBsIterator() {}
+
+ITYPE VTYPE::begin() const { return ITYPE(G->elbs.right.begin(), get_key); }
+
+ITYPE VTYPE::end() const { return ITYPE(G->elbs.right.end(), get_key); }
+
+VTYPE DenseGraph::El() const { return VTYPE(this); }
+
+#undef ITYPE
+#undef VTYPE
+
 inline std::size_t DenseGraph::order() const { return A.rows(); }
 
 inline std::size_t DenseGraph::size() const {

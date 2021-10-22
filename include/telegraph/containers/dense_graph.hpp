@@ -287,7 +287,7 @@ class DenseGraph : public AbstractGraph {
      */
     EIDsIterator E() const;
 
-    //! VIDs Iterator proxy class.
+    //! VLBs Iterator proxy class.
     class VLBsIterator {
        private:
         //! Pointer to the target graph.
@@ -297,7 +297,7 @@ class DenseGraph : public AbstractGraph {
         VLBsIterator(const DenseGraph *G);
 
         //! Get key from pair helper.
-        static inline const VLB &get_key(const boost::bimap<VID, VLB>::right_map::value_type &pair) { return pair.first; }
+        static inline const VLB &get_key(const boost::bimap<VID, VLB>::right_value_type &pair) { return pair.first; }
 
        public:
         friend DenseGraph;
@@ -315,10 +315,10 @@ class DenseGraph : public AbstractGraph {
         ~VLBsIterator();
 
         //! Get key from pair helper signature.
-        typedef const VLB &(*get_key_t)(const boost::bimap<VID, VLB>::right_map::value_type &);
+        typedef const VLB &(*get_key_t)(const boost::bimap<VID, VLB>::right_value_type &);
 
         //! VLBs Const Iterator.
-        using const_iterator = boost::transform_iterator<get_key_t, boost::bimap<VID, VLB>::right_map::const_iterator>;
+        using const_iterator = boost::transform_iterator<get_key_t, boost::bimap<VID, VLB>::right_const_iterator>;
 
         //! Begin iterator.
         const_iterator begin() const;
@@ -334,9 +334,52 @@ class DenseGraph : public AbstractGraph {
      */
     VLBsIterator Vl() const;
 
-    /*
-    class ELBsIterator;
-    */
+    //! ELBs Iterator proxy class.
+    class ELBsIterator {
+       private:
+        //! Pointer to the target graph.
+        const DenseGraph *G;
+
+        //! Construct a new ELBsIterator object from target graph.
+        ELBsIterator(const DenseGraph *G);
+
+        //! Get key from pair helper.
+        static inline const ELB &get_key(const boost::bimap<EID, ELB>::right_value_type &pair) { return pair.first; }
+
+       public:
+        friend DenseGraph;
+
+        //! Default constructor for a new ELBs Iterator object.
+        ELBsIterator();
+
+        //! Copy constructor for a new ELBs Iterator object.
+        ELBsIterator(const ELBsIterator &other);
+
+        //! Assignment constructor for a new ELBs Iterator object.
+        ELBsIterator &operator=(const ELBsIterator &other);
+
+        //! Destroy the ELBs Iterator object.
+        ~ELBsIterator();
+
+        //! Get key from pair helper signature.
+        typedef const ELB &(*get_key_t)(const boost::bimap<EID, ELB>::right_value_type &);
+
+        //! ELBs Const Iterator.
+        using const_iterator = boost::transform_iterator<get_key_t, boost::bimap<EID, ELB>::right_const_iterator>;
+
+        //! Begin iterator.
+        const_iterator begin() const;
+
+        //! End iterator.
+        const_iterator end() const;
+    };
+
+    /**
+     * @brief Return the ELBs Iterator proxy class.
+     *
+     * @return ELBsIterator ELBs Iterator proxy class.
+     */
+    ELBsIterator El() const;
 
     inline virtual std::size_t order() const;
 
