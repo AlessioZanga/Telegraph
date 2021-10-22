@@ -92,16 +92,11 @@ DenseGraph::DenseGraph(const SparseAdjacencyMatrix &other) : A(other) {
 inline DenseGraph::operator AdjacencyList() const {
     // Set out parameter.
     AdjacencyList out;
-    // Get current matrix size.
-    std::size_t n = order();
     // Insert VIDs
-    for (std::size_t i = 0; i < n; i++) out[i];
+    for (const VID &X : V()) out[X];
     // Iterate over rows and columns as AdjacencyMatrix is RowMajor.
-    for (std::size_t i = 0; i < n; i++) {
-        for (std::size_t j = 0; j < n; j++) {
-            if (A(i, j)) out[i].insert(j);
-        }
-    }
+    for (const EID &X : E()) out[X.first].insert(X.second);
+    // Return result.
     return out;
 }
 
@@ -453,49 +448,35 @@ inline EID DenseGraph::del_edge(const EID &X) {
 inline std::size_t DenseGraph::hash() const {
     // Initialize seed hash.
     std::size_t seed = 0;
-    // Get current matrix size.
-    std::size_t n = order();
     // Hash VIDs.
-    for (VID i = 0; i < n; i++) boost::hash_combine(seed, i);
+    boost::hash_combine(seed, boost::hash_range(V().begin(), V().end()));
     // Hash EIDs.
-    for (VID i = 0; i < n; i++) {
-        for (VID j = 0; j < n; j++) {
-            if (A(i, j)) boost::hash_combine(seed, EID(i, j));
-        }
-    }
+    boost::hash_combine(seed, boost::hash_range(E().begin(), E().end()));
     // Hash GLB.
     if (has_label()) boost::hash_combine(seed, glb);
     // Hash VLBs.
-    boost::hash_combine(seed, boost::hash_range(vlbs.begin(), vlbs.end()));
+    boost::hash_combine(seed, boost::hash_range(Vl().begin(), Vl().end()));
     // Hash ELBs.
-    boost::hash_combine(seed, boost::hash_range(elbs.begin(), elbs.end()));
+    boost::hash_combine(seed, boost::hash_range(El().begin(), El().end()));
     // Return hash
     return seed;
 }
 
 void DenseGraph::to_stream(std::ostream &out) const {
-    // Get current matrix size.
-    std::size_t n = order();
-
     // Print graph class.
     out << "DenseGraph( ";
 
     // Print vertex set.
     out << "V = ( ";
     // Iterate over vertices.
-    for (VID i = 0; i < n; i++) out << i << ", ";
+    for (const VID &X : V()) out << X << ", ";
     // Close vertex set.
     out << " )";
 
     // Print edge set.
     out << ", E = ( ";
     // Iterate over vertices.
-    for (VID i = 0; i < n; i++) {
-        for (VID j = 0; j < n; j++) {
-            if (A(i, j)) out << "(" << i << ", " << j << "), ";
-        }
-    }
-    for (VID i = 0; i < n - 1; i++) out << i << ", ";
+    for (const EID &X : E()) out << "(" << X.first << ", " << X.second << "), ";
     // Close edge set.
     out << " )";
 
