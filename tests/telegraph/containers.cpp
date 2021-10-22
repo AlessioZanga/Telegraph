@@ -259,7 +259,7 @@ TYPED_TEST(ContainersTest, VerticesIterator) {
     i = J.order() - 1;
     it = --V(J).end();
     ite = V(J).begin();
-    for (; it != ite; --it) {
+    for (; it != ite; it--) {
         ASSERT_TRUE(J.has_vertex(*it));
         ASSERT_EQ(*it, i);
         i--;
@@ -314,7 +314,7 @@ TYPED_TEST(ContainersTest, EdgesIterator) {
     n = (n * n) - 1;
     it = --E(J).end();
     ite = E(J).begin();
-    for (; it != ite; --it) {
+    for (; it != ite; it--) {
         ASSERT_TRUE(J.has_edge(*it));
         ASSERT_EQ(*it, EID(i, j));
         n--;
@@ -365,7 +365,7 @@ TYPED_TEST(ContainersTest, VerticesLabelsIterator) {
 
     it = --Vl(J).end();
     ite = Vl(J).begin();
-    for (; it != ite; --it) ASSERT_TRUE(J.has_vertex(*it));
+    for (; it != ite; it--) ASSERT_TRUE(J.has_vertex(*it));
 
     // Assert sequence is always sorted.
     ASSERT_TRUE(std::is_sorted(Vl(J).begin(), Vl(J).end()));
@@ -404,7 +404,7 @@ TYPED_TEST(ContainersTest, EdgesLabelsIterator) {
 
     it = --El(J).end();
     ite = El(J).begin();
-    for (; it != ite; --it) ASSERT_TRUE(J.has_edge(*it));
+    for (; it != ite; it--) ASSERT_TRUE(J.has_edge(*it));
 
     // Assert sequence is always sorted.
     ASSERT_TRUE(std::is_sorted(El(J).begin(), El(J).end()));
@@ -500,6 +500,13 @@ TYPED_TEST(ContainersTest, DelVertexVID) {
     ASSERT_THROW(G.del_vertex(i), std::out_of_range);       // Invalid argument: vertex not defined.
     ASSERT_THROW(G.has_label(i), std::out_of_range);        // Invalid argument: vertex not defined.
     ASSERT_THROW(G.has_attr(i, "key"), std::out_of_range);  // Invalid argument: vertex not defined.
+
+    TypeParam H(MAX);
+    i = MAX / 2;
+    l = std::to_string(i);
+    H.set_label(i, l);
+    H.set_attr(i, "key", true);
+    ASSERT_EQ(H.del_vertex(i), i);                          // Valid argument.
 }
 
 TYPED_TEST(ContainersTest, DelVertexVLB) {
