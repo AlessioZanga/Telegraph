@@ -329,7 +329,7 @@ TYPED_TEST(ContainersTest, EdgesIterator) {
     std::srand(std::time(0));
     for (std::size_t l = 0; l < MAX; l++) {
         EID e = EID(std::rand() % MAX, std::rand() % MAX);
-        K.add_edge(e);
+        if (!K.has_edge(e)) K.add_edge(e);
         F.insert(e);
     }
 
