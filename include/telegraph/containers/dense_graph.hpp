@@ -183,6 +183,9 @@ class DenseGraph : public AbstractGraph {
 
         //! End iterator.
         const_iterator end() const;
+
+        //! Size operator.
+        std::size_t size() const;
     };
 
     /**
@@ -278,6 +281,9 @@ class DenseGraph : public AbstractGraph {
 
         //! End iterator.
         const_iterator end() const;
+
+        //! Size operator.
+        std::size_t size() const;
     };
 
     /**
@@ -325,6 +331,9 @@ class DenseGraph : public AbstractGraph {
 
         //! End iterator.
         const_iterator end() const;
+
+        //! Size operator.
+        std::size_t size() const;
     };
 
     /**
@@ -372,6 +381,9 @@ class DenseGraph : public AbstractGraph {
 
         //! End iterator.
         const_iterator end() const;
+
+        //! Size operator.
+        std::size_t size() const;
     };
 
     /**

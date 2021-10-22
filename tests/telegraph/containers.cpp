@@ -1254,12 +1254,63 @@ TYPED_TEST(ContainersTest, DISABLED_DelAttrVIDVID) {}
 
 TYPED_TEST(ContainersTest, DISABLED_DelAttrVLBVLB) {}
 
-TYPED_TEST(ContainersTest, DISABLED_IsNull) {}
+TYPED_TEST(ContainersTest, IsNull) {
+    TypeParam G;
+    ASSERT_TRUE(G.is_null());
+    G.add_vertex();
+    ASSERT_FALSE(G.is_null());
+}
 
-TYPED_TEST(ContainersTest, DISABLED_IsTrivial) {}
+TYPED_TEST(ContainersTest, IsTrivial) {
+    TypeParam G;
+    ASSERT_FALSE(G.is_trivial());
+    G.add_vertex();
+    ASSERT_TRUE(G.is_trivial());
+}
 
-TYPED_TEST(ContainersTest, DISABLED_IsComplete) {}
+TYPED_TEST(ContainersTest, IsComplete) {
+    TypeParam G;
+    ASSERT_TRUE(G.is_complete());
+    G.add_vertex();
+    ASSERT_TRUE(G.is_complete());
+    G.add_vertex();
+    ASSERT_FALSE(G.is_complete());
+    G.add_edge(0, 1);
+    ASSERT_TRUE(G.is_complete());
+}
 
-TYPED_TEST(ContainersTest, DISABLED_Hash) {}
+TYPED_TEST(ContainersTest, Hash) {
+    TypeParam G, H;
+    ASSERT_EQ(std::hash<AbstractGraph>{}(G), 0);
+    ASSERT_EQ(std::hash<AbstractGraph>{}(G), std::hash<AbstractGraph>{}(H));
+
+    G.add_vertex();
+    ASSERT_NE(std::hash<AbstractGraph>{}(G), std::hash<AbstractGraph>{}(H));
+    H.add_vertex();
+    ASSERT_EQ(std::hash<AbstractGraph>{}(G), std::hash<AbstractGraph>{}(H));
+
+    G.add_vertex();
+    H.add_vertex();
+
+    G.add_edge(0, 1);
+    ASSERT_NE(std::hash<AbstractGraph>{}(G), std::hash<AbstractGraph>{}(H));
+    H.add_edge(0, 1);
+    ASSERT_EQ(std::hash<AbstractGraph>{}(G), std::hash<AbstractGraph>{}(H));
+
+    G.set_label("HASH");
+    ASSERT_NE(std::hash<AbstractGraph>{}(G), std::hash<AbstractGraph>{}(H));
+    H.set_label("HASH");
+    ASSERT_EQ(std::hash<AbstractGraph>{}(G), std::hash<AbstractGraph>{}(H));
+
+    G.set_label(0, "0");
+    ASSERT_NE(std::hash<AbstractGraph>{}(G), std::hash<AbstractGraph>{}(H));
+    H.set_label(0, "0");
+    ASSERT_EQ(std::hash<AbstractGraph>{}(G), std::hash<AbstractGraph>{}(H));
+
+    G.set_label(0, 1, ELB("0 --- 1"));
+    ASSERT_NE(std::hash<AbstractGraph>{}(G), std::hash<AbstractGraph>{}(H));
+    H.set_label(0, 1, ELB("0 --- 1"));
+    ASSERT_EQ(std::hash<AbstractGraph>{}(G), std::hash<AbstractGraph>{}(H));
+}
 
 TYPED_TEST(ContainersTest, DISABLED_ToStream) {}

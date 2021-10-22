@@ -176,6 +176,8 @@ ITYPE VTYPE::begin() const { return ITYPE(G, 0); }
 
 ITYPE VTYPE::end() const { return ITYPE(G, G->order()); }
 
+std::size_t VTYPE::size() const { return G->order(); }
+
 VTYPE DenseGraph::V() const { return VTYPE(this); }
 
 #undef ITYPE
@@ -290,6 +292,8 @@ ITYPE VTYPE::begin() const {
 
 ITYPE VTYPE::end() const { return ITYPE(G, EID(G->order() - 1, G->order())); }
 
+std::size_t VTYPE::size() const { return G->size(); }
+
 VTYPE DenseGraph::E() const { return VTYPE(this); }
 
 #undef ITYPE
@@ -318,6 +322,8 @@ ITYPE VTYPE::begin() const { return ITYPE(G->vlbs.right.begin(), get_key); }
 
 ITYPE VTYPE::end() const { return ITYPE(G->vlbs.right.end(), get_key); }
 
+std::size_t VTYPE::size() const { return G->vlbs.size(); }
+
 VTYPE DenseGraph::Vl() const { return VTYPE(this); }
 
 #undef ITYPE
@@ -345,6 +351,8 @@ VTYPE::~ELBsIterator() {}
 ITYPE VTYPE::begin() const { return ITYPE(G->elbs.right.begin(), get_key); }
 
 ITYPE VTYPE::end() const { return ITYPE(G->elbs.right.end(), get_key); }
+
+std::size_t VTYPE::size() const { return G->elbs.size(); }
 
 VTYPE DenseGraph::El() const { return VTYPE(this); }
 
@@ -449,15 +457,15 @@ inline std::size_t DenseGraph::hash() const {
     // Initialize seed hash.
     std::size_t seed = 0;
     // Hash VIDs.
-    boost::hash_combine(seed, boost::hash_range(V().begin(), V().end()));
+    if (std::size(V())) boost::hash_combine(seed, boost::hash_range(V().begin(), V().end()));
     // Hash EIDs.
-    boost::hash_combine(seed, boost::hash_range(E().begin(), E().end()));
+    if (std::size(E())) boost::hash_combine(seed, boost::hash_range(E().begin(), E().end()));
     // Hash GLB.
     if (has_label()) boost::hash_combine(seed, glb);
     // Hash VLBs.
-    boost::hash_combine(seed, boost::hash_range(Vl().begin(), Vl().end()));
+    if (std::size(Vl())) boost::hash_combine(seed, boost::hash_range(Vl().begin(), Vl().end()));
     // Hash ELBs.
-    boost::hash_combine(seed, boost::hash_range(El().begin(), El().end()));
+    if (std::size(El())) boost::hash_combine(seed, boost::hash_range(El().begin(), El().end()));
     // Return hash
     return seed;
 }
