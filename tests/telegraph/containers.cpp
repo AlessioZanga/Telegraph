@@ -1,3 +1,4 @@
+#include <cxxabi.h>
 #include <gtest/gtest.h>
 
 #include <cstdlib>
@@ -1240,19 +1241,215 @@ TYPED_TEST(ContainersTest, SetAttrVLBVLB) {
     ASSERT_THROW(f4(), std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
-TYPED_TEST(ContainersTest, DISABLED_DelAttrVOID) {}
+TYPED_TEST(ContainersTest, DelAttrVOID) {
+    TypeParam G;
 
-TYPED_TEST(ContainersTest, DISABLED_DelAttrVID) {}
+    auto f0 = [&G]() {
+        G.set_attr("key", true);
+        G.del_attr("key");
+    };
+    ASSERT_NO_THROW(f0());
 
-TYPED_TEST(ContainersTest, DISABLED_DelAttrVLB) {}
+    auto f1 = [&G]() {
+        G.set_attr("key", 1.23);
+        G.del_attr("key");
+    };
+    ASSERT_NO_THROW(f1());
 
-TYPED_TEST(ContainersTest, DISABLED_DelAttrEID) {}
+    auto f2 = [&G]() {
+        G.template set_attr<std::string>("key", "value");
+        G.del_attr("key");
+    };
+    ASSERT_NO_THROW(f2());
 
-TYPED_TEST(ContainersTest, DISABLED_DelAttrELB) {}
+    auto f3 = [&G]() { G.del_attr("key"); };
+    ASSERT_THROW(f3(), std::out_of_range);  // Invalid argument: key not defined.
+}
 
-TYPED_TEST(ContainersTest, DISABLED_DelAttrVIDVID) {}
+TYPED_TEST(ContainersTest, DelAttrVID) {
+    TypeParam G(1);
 
-TYPED_TEST(ContainersTest, DISABLED_DelAttrVLBVLB) {}
+    auto f0 = [&G]() {
+        G.set_attr(0, "key", true);
+        G.del_attr(0, "key");
+    };
+    ASSERT_NO_THROW(f0());
+
+    auto f1 = [&G]() {
+        G.set_attr(0, "key", 1.23);
+        G.del_attr(0, "key");
+    };
+    ASSERT_NO_THROW(f1());
+
+    auto f2 = [&G]() {
+        G.template set_attr<std::string>(0, "key", "value");
+        G.del_attr(0, "key");
+    };
+    ASSERT_NO_THROW(f2());
+
+    auto f3 = [&G]() { G.del_attr(1, "key"); };
+    ASSERT_THROW(f3(), std::out_of_range);  // Invalid argument: vertex not defined.
+
+    auto f4 = [&G]() { G.del_attr(0, "key"); };
+    ASSERT_THROW(f4(), std::out_of_range);  // Invalid argument: key not defined.
+}
+
+TYPED_TEST(ContainersTest, DelAttrVLB) {
+    TypeParam G(1);
+    G.set_label(0, "0");
+
+    auto f0 = [&G]() {
+        G.set_attr("0", "key", true);
+        G.del_attr("0", "key");
+    };
+    ASSERT_NO_THROW(f0());
+
+    auto f1 = [&G]() {
+        G.set_attr("0", "key", 1.23);
+        G.del_attr("0", "key");
+    };
+    ASSERT_NO_THROW(f1());
+
+    auto f2 = [&G]() {
+        G.template set_attr<std::string>("0", "key", "value");
+        G.del_attr("0", "key");
+    };
+    ASSERT_NO_THROW(f2());
+
+    auto f3 = [&G]() { G.del_attr("1", "key"); };
+    ASSERT_THROW(f3(), std::out_of_range);  // Invalid argument: vertex not defined.
+
+    auto f4 = [&G]() { G.del_attr("0", "key"); };
+    ASSERT_THROW(f4(), std::out_of_range);  // Invalid argument: key not defined.
+}
+
+TYPED_TEST(ContainersTest, DelAttrEID) {
+    TypeParam G(2);
+    G.add_edge(EID(0, 1));
+
+    auto f0 = [&G]() {
+        G.set_attr(EID(0, 1), "key", true);
+        G.del_attr(EID(0, 1), "key");
+    };
+    ASSERT_NO_THROW(f0());
+
+    auto f1 = [&G]() {
+        G.set_attr(EID(0, 1), "key", 1.23);
+        G.del_attr(EID(0, 1), "key");
+    };
+    ASSERT_NO_THROW(f1());
+
+    auto f2 = [&G]() {
+        G.template set_attr<std::string>(EID(0, 1), "key", "value");
+        G.del_attr(EID(0, 1), "key");
+    };
+    ASSERT_NO_THROW(f2());
+
+    auto f3 = [&G]() { G.del_attr(EID(1, 1), "key"); };
+    ASSERT_THROW(f3(), std::out_of_range);  // Invalid argument: edge not defined.
+
+    auto f4 = [&G]() { G.del_attr(EID(1, 2), "key"); };
+    ASSERT_THROW(f4(), std::out_of_range);  // Invalid argument: vertex not defined.
+
+    auto f5 = [&G]() { G.del_attr(EID(0, 1), "key"); };
+    ASSERT_THROW(f5(), std::out_of_range);  // Invalid argument: key not defined.
+}
+
+TYPED_TEST(ContainersTest, DelAttrELB) {
+    TypeParam G(2);
+    G.add_edge(0, 1);
+    G.set_label(0, 1, ELB("0 --- 1"));
+
+    auto f0 = [&G]() {
+        G.set_attr(ELB("0 --- 1"), "key", true);
+        G.del_attr(ELB("0 --- 1"), "key");
+    };
+    ASSERT_NO_THROW(f0());
+
+    auto f1 = [&G]() {
+        G.set_attr(ELB("0 --- 1"), "key", 1.23);
+        G.del_attr(ELB("0 --- 1"), "key");
+    };
+    ASSERT_NO_THROW(f1());
+
+    auto f2 = [&G]() {
+        G.template set_attr<std::string>(ELB("0 --- 1"), "key", "value");
+        G.del_attr(ELB("0 --- 1"), "key");
+    };
+    ASSERT_NO_THROW(f2());
+
+    auto f3 = [&G]() { G.del_attr(ELB("1 --- 1"), "key"); };
+    ASSERT_THROW(f3(), std::out_of_range);  // Invalid argument: edge not defined.
+
+    auto f4 = [&G]() { G.del_attr(ELB("0 --- 1"), "key"); };
+    ASSERT_THROW(f4(), std::out_of_range);  // Invalid argument: key not defined.
+}
+
+TYPED_TEST(ContainersTest, DelAttrVIDVID) {
+    TypeParam G(2);
+    G.add_edge(0, 1);
+
+    auto f0 = [&G]() {
+        G.set_attr(0, 1, "key", true);
+        G.del_attr(0, 1, "key");
+    };
+    ASSERT_NO_THROW(f0());
+
+    auto f1 = [&G]() {
+        G.set_attr(0, 1, "key", 1.23);
+        G.del_attr(0, 1, "key");
+    };
+    ASSERT_NO_THROW(f1());
+
+    auto f2 = [&G]() {
+        G.template set_attr<std::string>(0, 1, "key", "value");
+        G.del_attr(0, 1, "key");
+    };
+    ASSERT_NO_THROW(f2());
+
+    auto f3 = [&G]() { G.del_attr(1, 1, "key"); };
+    ASSERT_THROW(f3(), std::out_of_range);  // Invalid argument: edge not defined.
+
+    auto f4 = [&G]() { G.del_attr(1, 2, "key"); };
+    ASSERT_THROW(f4(), std::out_of_range);  // Invalid argument: vertex not defined.
+
+    auto f5 = [&G]() { G.del_attr(0, 1, "key"); };
+    ASSERT_THROW(f5(), std::out_of_range);  // Invalid argument: key not defined.
+}
+
+TYPED_TEST(ContainersTest, DelAttrVLBVLB) {
+    TypeParam G(2);
+    G.set_label(0, "0");
+    G.set_label(1, "1");
+    G.add_edge("0", "1");
+
+    auto f0 = [&G]() {
+        G.set_attr("0", "1", "key", true);
+        G.del_attr("0", "1", "key");
+    };
+    ASSERT_NO_THROW(f0());
+
+    auto f1 = [&G]() {
+        G.set_attr("0", "1", "key", 1.23);
+        G.del_attr("0", "1", "key");
+    };
+    ASSERT_NO_THROW(f1());
+
+    auto f2 = [&G]() {
+        G.template set_attr<std::string>("0", "1", "key", "value");
+        G.del_attr("0", "1", "key");
+    };
+    ASSERT_NO_THROW(f2());
+
+    auto f3 = [&G]() { G.del_attr("1", "1", "key"); };
+    ASSERT_THROW(f3(), std::out_of_range);  // Invalid argument: edge not defined.
+
+    auto f4 = [&G]() { G.del_attr("1", "2", "key"); };
+    ASSERT_THROW(f4(), std::out_of_range);  // Invalid argument: vertex not defined.
+
+    auto f5 = [&G]() { G.del_attr("0", "1", "key"); };
+    ASSERT_THROW(f5(), std::out_of_range);  // Invalid argument: key not defined.
+}
 
 TYPED_TEST(ContainersTest, IsNull) {
     TypeParam G;
@@ -1313,4 +1510,12 @@ TYPED_TEST(ContainersTest, Hash) {
     ASSERT_EQ(std::hash<AbstractGraph>{}(G), std::hash<AbstractGraph>{}(H));
 }
 
-TYPED_TEST(ContainersTest, DISABLED_ToStream) {}
+TYPED_TEST(ContainersTest, ToStream) {
+    int status;
+    std::string classname = abi::__cxa_demangle(typeid(TypeParam).name(), 0, 0, &status);
+    std::ostringstream out;
+
+    TypeParam G;
+    out << G;
+    ASSERT_EQ(out.str(), (classname + "(V = (), E = (), Vl = (), El = ())"));
+}

@@ -412,22 +412,36 @@ inline std::size_t DenseGraph::hash() const {
 
 void DenseGraph::to_stream(std::ostream &out) const {
     // Print graph class.
-    out << "DenseGraph( ";
+    out << "DenseGraph(";
 
     // Print vertex set.
-    out << "V = ( ";
+    out << "V = (";
     // Iterate over vertices.
     for (const VID &X : V()) out << X << ", ";
     // Close vertex set.
-    out << " )";
+    out << ")";
 
     // Print edge set.
-    out << ", E = ( ";
+    out << ", E = (";
     // Iterate over vertices.
     for (const EID &X : E()) out << "(" << X.first << ", " << X.second << "), ";
     // Close edge set.
-    out << " )";
+    out << ")";
+
+    // Print vertex set.
+    out << ", Vl = (";
+    // Iterate over vertices.
+    for (const VLB &X : Vl()) out << X << ", ";
+    // Close vertex set.
+    out << ")";
+
+    // Print edge set.
+    out << ", El = (";
+    // Iterate over vertices.
+    for (const ELB &X : El()) out << "(" << X << "), ";
+    // Close edge set.
+    out << ")";
 
     // Close graph class.
-    out << " )" << std::endl;
+    out << ")";
 }
