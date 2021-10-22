@@ -92,11 +92,61 @@ using GraphTypes = typename TestTypes<Product<Types<DenseGraph>>>::type;
 // Create typed test suite
 TYPED_TEST_SUITE(OperatorsTest, GraphTypes);
 
-TYPED_TEST(OperatorsTest, DISABLED_EqualityOperator) {}
+TYPED_TEST(OperatorsTest, Equality_InequalityOperator) {
+    typename TypeParam::first_type G;
+    typename TypeParam::second_type H;
+    ASSERT_EQ(G, H);
 
-TYPED_TEST(OperatorsTest, DISABLED_InequalityOperator) {}
+    G.add_vertex();
+    ASSERT_NE(G, H);
+    H.add_vertex();
+    ASSERT_EQ(G, H);
 
-TYPED_TEST(OperatorsTest, DISABLED_ComplementOperator) {}
+    G.add_vertex();
+    H.add_vertex();
+
+    G.add_edge(0, 1);
+    ASSERT_NE(G, H);
+    H.add_edge(0, 1);
+    ASSERT_EQ(G, H);
+
+    G.set_label(0, "0");
+    ASSERT_NE(G, H);
+    H.set_label(0, "0");
+    ASSERT_EQ(G, H);
+
+    G.set_label(0, 1, ELB("0 --- 1"));
+    ASSERT_NE(G, H);
+    H.set_label(0, 1, ELB("0 --- 1"));
+    ASSERT_EQ(G, H);
+}
+
+TYPED_TEST(OperatorsTest, ComplementOperator) {
+    typename TypeParam::first_type G;
+    typename TypeParam::second_type H;
+
+    H = ~G;
+    ASSERT_EQ(G, H);
+
+    G.add_vertex();
+    H = ~G;
+    ASSERT_NE(G, H);
+    ASSERT_EQ(G.order(), H.order());
+    ASSERT_NE(G.size(), H.size());
+
+    EIDs X, Y, Z;
+    X= {{0, 1}, {1, 0}};
+    G = typename TypeParam::first_type(X.begin(), X.end());
+    H = ~G;
+    
+    Y = EIDs(E(H).begin(), E(H).end());
+    ASSERT_EQ(Y, EIDs({{0, 0}, {1, 1}}));
+    
+    std::set_intersection(X.begin(), X.end(), Y.begin(), Y.end(), std::inserter(Z, Z.begin()));
+    ASSERT_EQ(Z.size(), 0);
+    std::set_union(X.begin(), X.end(), Y.begin(), Y.end(), std::inserter(Z, Z.begin()));
+    ASSERT_EQ(Z.size(), (G.order() * G.order()));
+}
 
 TYPED_TEST(OperatorsTest, DISABLED_IntersectionOperator) {}
 

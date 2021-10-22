@@ -46,6 +46,18 @@ using AdjacencyMatrix = Eigen::Matrix<int8_t, Eigen::Dynamic, Eigen::Dynamic, Ei
 //! Sparse adjacency matrix.
 using SparseAdjacencyMatrix = Eigen::SparseMatrix<int8_t, Eigen::RowMajor>;
 
+//! Bidirectional VID-VLB map.
+using VIDmVLB = boost::bimap<VID, VLB>;
+//! Bidirectional EID-ELB map.
+using EIDmELB = boost::bimap<EID, ELB>;
+
+//! Graph attributes.
+using GAttrs = std::map<const std::string, std::any>;
+//! Vertex attributes.
+using VAttrs = std::map<VID, std::map<const std::string, std::any>>;
+//! Edge attributes.
+using EAttrs = std::map<EID, std::map<const std::string, std::any>>;
+
 //! Infix vertex id set iterator.
 template <typename T>
 static inline auto V(const T &G) {
@@ -75,16 +87,16 @@ class AbstractGraph {
     //! Graph label, aka its name.
     GLB glb;
     //! Bidirectional mapping for vertex ids and labels.
-    boost::bimap<VID, VLB> vlbs;
+    VIDmVLB vlbs;
     //! Bidirectional mapping for edge ids and labels.
-    boost::bimap<EID, ELB> elbs;
+    EIDmELB elbs;
 
     //! Graph attributes.
-    std::map<std::string, std::any> gattrs;
+    GAttrs gattrs;
     //! Vertices attributes.
-    std::map<VID, std::map<std::string, std::any>> vattrs;
+    VAttrs vattrs;
     //! Edges attributes.
-    std::map<EID, std::map<std::string, std::any>> eattrs;
+    EAttrs eattrs;
 
    public:
     //! Default constructor for a new Abstract Graph object.
@@ -127,7 +139,7 @@ class AbstractGraph {
         VLBsIterator(const AbstractGraph *G);
 
         //! Get key from pair helper.
-        static inline const VLB &get_key(const boost::bimap<VID, VLB>::right_value_type &pair) { return pair.first; }
+        static inline const VLB &get_key(const VIDmVLB::right_value_type &pair) { return pair.first; }
 
        public:
         friend AbstractGraph;
@@ -145,10 +157,10 @@ class AbstractGraph {
         ~VLBsIterator();
 
         //! Get key from pair helper signature.
-        typedef const VLB &(*get_key_t)(const boost::bimap<VID, VLB>::right_value_type &);
+        typedef const VLB &(*get_key_t)(const VIDmVLB::right_value_type &);
 
         //! VLBs Const Iterator.
-        using const_iterator = boost::transform_iterator<get_key_t, boost::bimap<VID, VLB>::right_const_iterator>;
+        using const_iterator = boost::transform_iterator<get_key_t, VIDmVLB::right_const_iterator>;
 
         //! Begin iterator.
         const_iterator begin() const;
@@ -177,7 +189,7 @@ class AbstractGraph {
         ELBsIterator(const AbstractGraph *G);
 
         //! Get key from pair helper.
-        static inline const ELB &get_key(const boost::bimap<EID, ELB>::right_value_type &pair) { return pair.first; }
+        static inline const ELB &get_key(const EIDmELB::right_value_type &pair) { return pair.first; }
 
        public:
         friend AbstractGraph;
@@ -195,10 +207,10 @@ class AbstractGraph {
         ~ELBsIterator();
 
         //! Get key from pair helper signature.
-        typedef const ELB &(*get_key_t)(const boost::bimap<EID, ELB>::right_value_type &);
+        typedef const ELB &(*get_key_t)(const EIDmELB::right_value_type &);
 
         //! ELBs Const Iterator.
-        using const_iterator = boost::transform_iterator<get_key_t, boost::bimap<EID, ELB>::right_const_iterator>;
+        using const_iterator = boost::transform_iterator<get_key_t, EIDmELB::right_const_iterator>;
 
         //! Begin iterator.
         const_iterator begin() const;
