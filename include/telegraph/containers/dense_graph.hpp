@@ -133,7 +133,7 @@ class DenseGraph : public AbstractGraph {
             const_iterator(const DenseGraph *G, const VID &curr);
 
            public:
-            friend VIDsIterator;
+            friend DenseGraph;
 
             using difference_type = std::ptrdiff_t;
             using value_type = VID;
@@ -192,6 +192,101 @@ class DenseGraph : public AbstractGraph {
      */
     VIDsIterator V() const;
 
+    //! EIDs Iterator proxy class.
+    class EIDsIterator {
+       private:
+        //! Pointer to the target graph.
+        const DenseGraph *G;
+
+        //! Construct a new EIDs Iterator object from target graph.
+        EIDsIterator(const DenseGraph *G);
+
+       public:
+        friend DenseGraph;
+
+        //! Default constructor for a new EIDs Iterator object.
+        EIDsIterator();
+
+        //! Copy constructor for a new EIDs Iterator object.
+        EIDsIterator(const EIDsIterator &other);
+
+        //! Assignment constructor for a new EIDs Iterator object.
+        EIDsIterator &operator=(const EIDsIterator &other);
+
+        //! Destroy the EIDs Iterator object.
+        ~EIDsIterator();
+
+        //! EIDs Const Iterator.
+        class const_iterator {
+           private:
+            //! Pointer to the target graph.
+            const DenseGraph *G;
+            //! Value of the current EID.
+            EID curr;
+
+            // Construct a new EIDs Const Iterator object from target graph and initial EID.
+            const_iterator(const DenseGraph *G, const EID &curr);
+
+           public:
+            friend DenseGraph;
+
+            using difference_type = std::ptrdiff_t;
+            using value_type = EID;
+            using pointer = const EID *;
+            using reference = const EID &;
+            using iterator_category = std::bidirectional_iterator_tag;
+
+            //! Default constructor for a new EIDs Const Iterator object.
+            const_iterator();
+
+            //! Copy constructor for a new EIDs Const Iterator object.
+            const_iterator(const const_iterator &other);
+
+            //! Assignment constructor for a new EIDs Const Iterator object.
+            const_iterator &operator=(const const_iterator &other);
+
+            //! Destroy the EIDs Const Iterator object.
+            ~const_iterator();
+
+            //! Equality operator.
+            inline bool operator==(const const_iterator &other) const;
+
+            //! Inequality operator.
+            inline bool operator!=(const const_iterator &other) const;
+
+            //! Dereference operator.
+            inline reference operator*() const;
+
+            //! Member access operator.
+            inline reference operator->() const;
+
+            //! Pre-increment operator.
+            inline const_iterator &operator++();
+
+            //! Post-increment operator.
+            inline const_iterator operator++(int);
+
+            //! Pre-decrement operator.
+            inline const_iterator &operator--();
+
+            //! Post-decrement operator.
+            inline const_iterator operator--(int);
+        };
+
+        //! Begin iterator.
+        const_iterator begin() const;
+
+        //! End iterator.
+        const_iterator end() const;
+    };
+
+    /**
+     * @brief Return the EIDs Iterator proxy class.
+     *
+     * @return EIDsIterator EIDs Iterator proxy class.
+     */
+    EIDsIterator E() const;
+
     //! VIDs Iterator proxy class.
     class VLBsIterator {
        private:
@@ -202,7 +297,7 @@ class DenseGraph : public AbstractGraph {
         VLBsIterator(const DenseGraph *G);
 
         //! Get key from pair helper.
-        static inline const VLB &get_key(const boost::bimap<VID, VLB>::value_type &pair) { return pair.right; }
+        static inline const VLB &get_key(const boost::bimap<VID, VLB>::right_map::value_type &pair) { return pair.first; }
 
        public:
         friend DenseGraph;
@@ -220,10 +315,10 @@ class DenseGraph : public AbstractGraph {
         ~VLBsIterator();
 
         //! Get key from pair helper signature.
-        typedef const VLB &(*get_key_t)(const boost::bimap<VID, VLB>::value_type &);
+        typedef const VLB &(*get_key_t)(const boost::bimap<VID, VLB>::right_map::value_type &);
 
         //! VLBs Const Iterator.
-        using const_iterator = boost::transform_iterator<get_key_t, boost::bimap<VID, VLB>::const_iterator>;
+        using const_iterator = boost::transform_iterator<get_key_t, boost::bimap<VID, VLB>::right_map::const_iterator>;
 
         //! Begin iterator.
         const_iterator begin() const;
@@ -240,8 +335,6 @@ class DenseGraph : public AbstractGraph {
     VLBsIterator Vl() const;
 
     /*
-    class EIDsIterator;
-
     class ELBsIterator;
     */
 

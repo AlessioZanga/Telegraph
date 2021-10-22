@@ -252,14 +252,89 @@ TYPED_TEST(ContainersTest, VerticesIterator) {
         i++;
     }
 
+    // Assert size is correct.
+    ASSERT_EQ(std::distance(V(J).begin(), V(J).end()), J.order());
+
     i = J.order() - 1;
     it = --V(J).end();
     ite = V(J).begin();
-    for (; it != ite; it--) {
+    for (; it != ite; --it) {
         ASSERT_TRUE(J.has_vertex(*it));
         ASSERT_EQ(*it, i);
         i--;
     }
+
+    // Assert sequence is always sorted.
+    ASSERT_TRUE(std::is_sorted(V(J).begin(), V(J).end()));
+}
+
+TYPED_TEST(ContainersTest, EdgesIterator) {
+    typename TypeParam::EIDsIterator::const_iterator it, ite;
+    ASSERT_DEATH({ it++; }, ".*");
+
+    TypeParam G;
+    it = E(G).begin();
+    ASSERT_EQ(it, E(G).begin());
+    ASSERT_EQ(E(G).begin(), E(G).end());
+    ASSERT_EQ(std::distance(E(G).begin(), E(G).end()), 0);
+    for (const EID &X : E(G)) ASSERT_EQ(X, EID(-1, -1));
+
+    TypeParam H(1);
+    ASSERT_EQ(E(H).begin(), E(H).end());
+    ASSERT_EQ(std::distance(E(H).begin(), E(H).end()), 0);
+    for (const EID &X : E(H)) ASSERT_EQ(X, EID(0, 0));
+
+    H.add_vertex();
+    H.add_edge(0, 1);
+    ASSERT_NE(E(H).begin(), E(H).end());
+    ASSERT_EQ(std::distance(E(H).begin(), E(H).end()), 1);
+    for (const EID &X : E(H)) ASSERT_EQ(X, EID(0, 1));
+
+    VID i = 0, j = 0;
+    TypeParam J(AdjacencyMatrix::Ones(MAX, MAX));
+
+    // Assert size is correct.
+    ASSERT_EQ(std::distance(E(J).begin(), E(J).end()), J.size());
+
+    i = 0;
+    j = 0;
+    std::size_t n = 0;
+    for (const EID &X : E(J)) {
+        ASSERT_TRUE(J.has_edge(X));
+        ASSERT_EQ(X, EID(i, j));
+        n++;
+        i = n / MAX;
+        j = n % MAX;
+    }
+
+    n = J.order();
+    i = n - 1;
+    j = n - 1;
+    n = (n * n) - 1;
+    it = --E(J).end();
+    ite = E(J).begin();
+    for (; it != ite; --it) {
+        ASSERT_TRUE(J.has_edge(*it));
+        ASSERT_EQ(*it, EID(i, j));
+        n--;
+        i = n / MAX;
+        j = n % MAX;
+    }
+
+    // Assert sequence is always sorted.
+    ASSERT_TRUE(std::is_sorted(E(J).begin(), E(J).end()));
+
+    EIDs F;
+    TypeParam K(MAX);
+    std::srand(std::time(0));
+    for (std::size_t l = 0; l < MAX; l++) {
+        EID e = EID(std::rand() % MAX, std::rand() % MAX);
+        K.add_edge(e);
+        F.insert(e);
+    }
+
+    ASSERT_TRUE(std::is_sorted(E(K).begin(), E(K).end()));
+    ASSERT_TRUE(std::equal(E(K).begin(), E(K).end(), F.begin()));
 }
 
 TYPED_TEST(ContainersTest, VerticesLabelsIterator) {
@@ -279,27 +354,21 @@ TYPED_TEST(ContainersTest, VerticesLabelsIterator) {
     ASSERT_EQ(std::distance(Vl(H).begin(), Vl(H).end()), 1);
     for (const VLB &X : Vl(H)) ASSERT_EQ(X, "0");
 
-    VID i = 0;
     TypeParam J(MAX);
     for (const VID &X : V(J)) J.set_label(X, std::to_string(X));
 
-    for (const VLB &X : Vl(J)) {
-        ASSERT_TRUE(J.has_vertex(X));
-        ASSERT_EQ(X, std::to_string(i));
-        i++;
-    }
+    // Assert size is correct.
+    ASSERT_EQ(std::distance(Vl(J).begin(), Vl(J).end()), J.order());
 
-    i = J.order() - 1;
+    for (const VLB &X : Vl(J)) ASSERT_TRUE(J.has_vertex(X));
+
     it = --Vl(J).end();
     ite = Vl(J).begin();
-    for (; it != ite; it--) {
-        ASSERT_TRUE(J.has_vertex(*it));
-        ASSERT_EQ(*it, std::to_string(i));
-        i--;
-    }
-}
+    for (; it != ite; --it) ASSERT_TRUE(J.has_vertex(*it));
 
-TYPED_TEST(ContainersTest, DISABLED_EdgesIterator) {}
+    // Assert sequence is always sorted.
+    ASSERT_TRUE(std::is_sorted(Vl(J).begin(), Vl(J).end()));
+}
 
 TYPED_TEST(ContainersTest, DISABLED_EdgesLabelsIterator) {}
 

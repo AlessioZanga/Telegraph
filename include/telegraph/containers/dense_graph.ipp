@@ -99,7 +99,7 @@ inline DenseGraph::operator AdjacencyList() const {
     // Iterate over rows and columns as AdjacencyMatrix is RowMajor.
     for (std::size_t i = 0; i < n; i++) {
         for (std::size_t j = 0; j < n; j++) {
-            if (A(i, j) != 0) out[i].insert(j);
+            if (A(i, j)) out[i].insert(j);
         }
     }
     return out;
@@ -186,6 +186,120 @@ VTYPE DenseGraph::V() const { return VTYPE(this); }
 #undef ITYPE
 #undef VTYPE
 
+#define VTYPE DenseGraph::EIDsIterator
+#define ITYPE VTYPE::const_iterator
+
+VTYPE::EIDsIterator() : G(NULL) {}
+
+VTYPE::EIDsIterator(const DenseGraph *G) : G(G) {}
+
+VTYPE::EIDsIterator(const EIDsIterator &other) : G(other.G) {}
+
+VTYPE &VTYPE::operator=(const EIDsIterator &other) {
+    VTYPE tmp(other);
+    if (this != &other) {
+        std::swap(G, tmp.G);
+    }
+    return *this;
+}
+
+VTYPE::~EIDsIterator() {}
+
+ITYPE::const_iterator() : G(NULL), curr(0, 0) {}
+
+ITYPE::const_iterator(const DenseGraph *G, const EID &curr) : G(G), curr(curr) {}
+
+ITYPE::const_iterator(const const_iterator &other) : G(other.G), curr(other.curr) {}
+
+ITYPE &ITYPE::operator=(const const_iterator &other) {
+    ITYPE tmp(other);
+    if (this != &other) {
+        std::swap(G, tmp.G);
+        std::swap(curr, tmp.curr);
+    }
+    return *this;
+}
+
+ITYPE::~const_iterator() {}
+
+inline bool ITYPE::operator==(const const_iterator &other) const { return G == other.G && curr == other.curr; }
+
+inline bool ITYPE::operator!=(const const_iterator &other) const { return G != other.G || curr != other.curr; }
+
+inline ITYPE::reference ITYPE::operator*() const { return curr; }
+
+inline ITYPE::reference ITYPE::operator->() const { return curr; }
+
+inline ITYPE &ITYPE::operator++() {
+    assert(G);  // Assert G is a valid pointer.
+    // Get current matrix size.
+    const std::size_t n = G->order();
+    // Compute next 1D index.
+    std::size_t i = (curr.first * n + curr.second) + 1;
+    // Interate over matrix.
+    for (; i < (n * n); i++) {
+        // Check if current index is valid.
+        if (G->A(i)) {
+            // Compute current 2D index.
+            curr = EID(i / n, i % n);
+            return *this;
+        }
+    }
+    // If end of matrix is reached, set end sentinel value.
+    curr = EID(n - 1, n);
+    return *this;
+}
+
+inline ITYPE ITYPE::operator++(int) {
+    ITYPE prev = *this;
+    ++*this;
+    return prev;
+}
+
+inline ITYPE &ITYPE::operator--() {
+    assert(G);  // Assert G is a valid pointer.
+    // Get current matrix size.
+    const std::size_t n = G->order();
+    // Compute prev 1D index.
+    std::size_t i = (curr.first * n + curr.second) - 1;
+    // Interate over matrix.
+    for (; i != std::size_t(-1); i--) {
+        // Check if current index is valid.
+        if (G->A(i)) {
+            // Update current 2D index.
+            curr = EID(i / n, i % n);
+            return *this;
+        }
+    }
+    // If end of matrix is reached, set end sentinel value.
+    curr = EID(n - 1, n);
+    return *this;
+}
+
+inline ITYPE ITYPE::operator--(int) {
+    ITYPE prev = *this;
+    --*this;
+    return prev;
+}
+
+ITYPE VTYPE::begin() const {
+    // Get current matrix size.
+    const std::size_t n = G->order();
+    // Interate over matrix.
+    for (std::size_t i = 0; i < n * n; i++) {
+        // Check if current index is valid and return current 2D index.
+        if (G->A(i)) return ITYPE(G, EID(i / n, i % n));
+    }
+    return ITYPE(G, EID(n - 1, n));
+}
+
+ITYPE VTYPE::end() const { return ITYPE(G, EID(G->order() - 1, G->order())); }
+
+VTYPE DenseGraph::E() const { return VTYPE(this); }
+
+#undef ITYPE
+#undef VTYPE
+
 #define VTYPE DenseGraph::VLBsIterator
 #define ITYPE VTYPE::const_iterator
 
@@ -205,9 +319,9 @@ VTYPE &VTYPE::operator=(const VLBsIterator &other) {
 
 VTYPE::~VLBsIterator() {}
 
-ITYPE VTYPE::begin() const { return ITYPE(G->vlbs.begin(), get_key); }
+ITYPE VTYPE::begin() const { return ITYPE(G->vlbs.right.begin(), get_key); }
 
-ITYPE VTYPE::end() const { return ITYPE(G->vlbs.end(), get_key); }
+ITYPE VTYPE::end() const { return ITYPE(G->vlbs.right.end(), get_key); }
 
 VTYPE DenseGraph::Vl() const { return VTYPE(this); }
 
@@ -318,7 +432,7 @@ inline std::size_t DenseGraph::hash() const {
     // Hash EIDs.
     for (VID i = 0; i < n; i++) {
         for (VID j = 0; j < n; j++) {
-            if (A(i, j) != 0) boost::hash_combine(seed, EID(i, j));
+            if (A(i, j)) boost::hash_combine(seed, EID(i, j));
         }
     }
     // Hash GLB.
@@ -350,7 +464,7 @@ void DenseGraph::to_stream(std::ostream &out) const {
     // Iterate over vertices.
     for (VID i = 0; i < n; i++) {
         for (VID j = 0; j < n; j++) {
-            if (A(i, j) != 0) out << "(" << i << ", " << j << "), ";
+            if (A(i, j)) out << "(" << i << ", " << j << "), ";
         }
     }
     for (VID i = 0; i < n - 1; i++) out << i << ", ";

@@ -52,6 +52,12 @@ static inline auto V(const T &G) {
     return G.V();
 }
 
+//! Infix edge id set iterator.
+template <typename T>
+static inline auto E(const T &G) {
+    return G.E();
+}
+
 //! Infix vertex label set iterator.
 template <typename T>
 static inline auto Vl(const T &G) {
