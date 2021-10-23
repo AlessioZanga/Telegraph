@@ -2,6 +2,7 @@
 
 #include <telegraph/exceptions.hpp>
 #include <telegraph/requires.hpp>
+#include <telegraph/types.hpp>
 
 /** CONTAINERS */
 #include <telegraph/containers/abstract_graph.ipp>
