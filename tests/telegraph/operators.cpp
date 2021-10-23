@@ -110,6 +110,11 @@ TYPED_TEST(OperatorsTest, Equality_InequalityOperator) {
     H.add_edge(0, 1);
     ASSERT_EQ(G, H);
 
+    G.set_label("G");
+    ASSERT_NE(G, H);
+    H.set_label("G");
+    ASSERT_EQ(G, H);
+
     G.set_label(0, "0");
     ASSERT_NE(G, H);
     H.set_label(0, "0");
@@ -121,27 +126,89 @@ TYPED_TEST(OperatorsTest, Equality_InequalityOperator) {
     ASSERT_EQ(G, H);
 }
 
+TYPED_TEST(OperatorsTest, Less_GreaterOperator) {
+    typename TypeParam::first_type G;
+    typename TypeParam::second_type H;
+    ASSERT_FALSE(H < G);
+    ASSERT_FALSE(G > H);
+    ASSERT_EQ(G, H);
+
+    G.add_vertex();
+    ASSERT_LT(H, G);
+    ASSERT_GT(G, H);
+
+    G.add_vertex();
+    G.add_edge(0, 1);
+    ASSERT_LT(H, G);
+    ASSERT_GT(G, H);
+
+    H.add_vertex();
+    ASSERT_LT(H, G);
+    ASSERT_GT(G, H);
+
+    H.add_vertex();
+    ASSERT_LT(H, G);
+    ASSERT_GT(G, H);
+
+    H.add_edge(0, 1);
+    ASSERT_FALSE(H < G);
+    ASSERT_FALSE(G > H);
+    ASSERT_EQ(G, H);
+
+    G.add_edge(1, 1);
+    ASSERT_LT(H, G);
+    ASSERT_GT(G, H);
+
+    H.add_edge(1, 1);
+    ASSERT_FALSE(H < G);
+    ASSERT_FALSE(G > H);
+    ASSERT_EQ(G, H);
+
+    G.set_label("G");  // Check for labels copy.
+    ASSERT_LT(H, G);
+    ASSERT_GT(G, H);
+
+    H.set_label("G");
+    ASSERT_FALSE(H < G);
+    ASSERT_FALSE(G > H);
+    ASSERT_EQ(G, H);
+    
+    G.set_label(0, "0");  // Check for labels copy.
+    ASSERT_LT(H, G);
+    ASSERT_GT(G, H);
+
+    H.set_label(0, "0");
+    ASSERT_FALSE(H < G);
+    ASSERT_FALSE(G > H);
+    ASSERT_EQ(G, H);
+}
+
 TYPED_TEST(OperatorsTest, ComplementOperator) {
     typename TypeParam::first_type G;
     typename TypeParam::second_type H;
+
+    G.set_label("G");  // Check for labels copy.
 
     H = ~G;
     ASSERT_EQ(G, H);
 
     G.add_vertex();
+    G.set_label(0, "0");  // Check for labels copy.
     H = ~G;
     ASSERT_NE(G, H);
     ASSERT_EQ(G.order(), H.order());
     ASSERT_NE(G.size(), H.size());
+    ASSERT_TRUE(std::equal(V(G).begin(), V(G).end(), V(H).begin()));
+    ASSERT_TRUE(std::equal(Vl(G).begin(), Vl(G).end(), Vl(H).begin()));
 
     EIDs X, Y, Z;
-    X= {{0, 1}, {1, 0}};
+    X = {{0, 1}, {1, 0}};
     G = typename TypeParam::first_type(X.begin(), X.end());
     H = ~G;
-    
+
     Y = EIDs(E(H).begin(), E(H).end());
     ASSERT_EQ(Y, EIDs({{0, 0}, {1, 1}}));
-    
+
     std::set_intersection(X.begin(), X.end(), Y.begin(), Y.end(), std::inserter(Z, Z.begin()));
     ASSERT_EQ(Z.size(), 0);
     std::set_union(X.begin(), X.end(), Y.begin(), Y.end(), std::inserter(Z, Z.begin()));

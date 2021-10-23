@@ -30,6 +30,32 @@ template <typename A, typename B, require_base_of(AbstractGraph, A) = 0, require
 bool operator!=(const A &G, const B &H);
 
 /**
+ * @brief Subgraph of graphs.
+ *
+ * @tparam A First graph type.
+ * @tparam B Second graph type.
+ * @param G First graph.
+ * @param H Second graph.
+ * @return true If the first graph a subgraph of the second one,
+ * @return false Otherwise.
+ */
+template <typename A, typename B, require_base_of(AbstractGraph, A) = 0, require_base_of(AbstractGraph, B) = 0>
+bool operator<(const A &G, const B &H);
+
+/**
+ * @brief Supergraph of graphs.
+ *
+ * @tparam A First graph type.
+ * @tparam B Second graph type.
+ * @param G First graph.
+ * @param H Second graph.
+ * @return true If the first graph a supergraph of the second one,
+ * @return false Otherwise.
+ */
+template <typename A, typename B, require_base_of(AbstractGraph, A) = 0, require_base_of(AbstractGraph, B) = 0>
+bool operator>(const A &G, const B &H);
+
+/**
  * @brief Complement of graph.
  *
  * @tparam A Graph type.
