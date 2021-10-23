@@ -414,6 +414,9 @@ void DenseGraph::to_stream(std::ostream &out) const {
     // Print graph class.
     out << "DenseGraph(";
 
+    // Print graph label.
+    out << "label = '" << (has_label() ? get_label() : "") << "', ";
+
     // Print vertex set.
     out << "V = (";
     // Iterate over vertices.
