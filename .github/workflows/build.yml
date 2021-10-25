@@ -26,5 +26,5 @@ jobs:
       - name: Benchmarks
         run: |
           mkdir -p build && cd build
-          cmake -DCMAKE_BUILD_TYPE=Release -DTELEGRAPH_ENABLE_BENCHMARKS=ON ..
+          cmake -DCMAKE_BUILD_TYPE=Release -DTELEGRAPH_ENABLE_TESTS=OFF -DTELEGRAPH_ENABLE_BENCHMARKS=ON ..
           make && ./benchmarks/benchmarks | tee output.txt

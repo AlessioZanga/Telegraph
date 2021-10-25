@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.14)
 
 project(Telegraph
     VERSION 0.0.1
@@ -16,6 +16,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Release")
     add_compile_options(-O3 -march=native -shared -fPIC)
 endif()
 
+include(FetchContent)
 include_directories(include)
 add_subdirectory(src)
 
@@ -39,9 +40,17 @@ find_package(Boost REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
 
 # Add Eigen library.
-include_directories(extern/eigen)
+message(STATUS "Fetching Eigen")
+FetchContent_Declare(
+    Eigen
+    GIT_REPOSITORY https://gitlab.com/libeigen/eigen.git
+    GIT_TAG 3.4.0
+    GIT_SHALLOW TRUE
+    GIT_PROGRESS TRUE
+)
+FetchContent_Populate(Eigen)
+include_directories(${eigen_SOURCE_DIR})
 
-include(FetchContent)
 option (TELEGRAPH_ENABLE_TESTS "Build tests cases.")
 option (TELEGRAPH_ENABLE_BENCHMARKS "Build benchmarks.")
 
