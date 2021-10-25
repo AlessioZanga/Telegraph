@@ -34,16 +34,43 @@ if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
     endif()
 endif()
 
+# Find Boost library.
 find_package(Boost REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
 
+# Add Eigen library.
 include_directories(extern/eigen)
 
-option (BUILD_TESTS "Build tests cases." OFF)
-if (BUILD_TESTS AND (PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR))
+option (TELEGRAPH_ENABLE_TESTS "Build tests cases.")
+option (TELEGRAPH_ENABLE_BENCHMARKS "Build benchmarks.")
+
+if (TELEGRAPH_ENABLE_TESTS OR TELEGRAPH_ENABLE_BENCHMARKS)
+    # Add GoogleTest library for tests and benchmarks.
+    include(GoogleTest)
+    add_subdirectory(extern/googletest)
+    set(BENCHMARK_ENABLE_GTEST_TESTS OFF)
+
+    # Add GoogleTest to make clean support.
+    mark_as_advanced(
+        BUILD_GMOCK BUILD_GTEST BUILD_SHARED_LIBS
+        gmock_build_tests gtest_build_samples gtest_build_tests
+        gtest_disable_pthreads gtest_force_shared_crt gtest_hide_internal_symbols
+    )
+
+    set_target_properties(gtest PROPERTIES FOLDER extern)
+    set_target_properties(gtest_main PROPERTIES FOLDER extern)
+    set_target_properties(gmock PROPERTIES FOLDER extern)
+    set_target_properties(gmock_main PROPERTIES FOLDER extern)
+endif()
+
+if (TELEGRAPH_ENABLE_TESTS AND (PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR))
+    enable_testing()
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -g --coverage")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lgcov")
-    enable_testing()
-    include(GoogleTest)
     add_subdirectory(tests)
+endif()
+
+if (TELEGRAPH_ENABLE_BENCHMARKS AND (PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR))
+    add_subdirectory(extern/googlebenchmark)
+    add_subdirectory(benchmarks)
 endif()

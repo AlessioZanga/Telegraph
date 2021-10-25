@@ -15,7 +15,7 @@ jobs:
         run: |
           sudo apt-get install -y libboost-all-dev lcov
           mkdir build && cd build
-          cmake -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTS=ON ..
+          cmake -DCMAKE_BUILD_TYPE=Debug -DTELEGRAPH_ENABLE_TESTS=ON ..
           make && make CTEST_OUTPUT_ON_FAILURE=1 test
       - name: Coverage
         run: |
@@ -23,3 +23,7 @@ jobs:
           bash <(curl -s https://codecov.io/bash) -f coverage
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      - name: Benchmarks
+        run: |
+          cmake -DCMAKE_BUILD_TYPE=Release -DTELEGRAPH_ENABLE_BENCHMARKS=ON ..
+          make && ./benchmarks/benchmarks | tee output.txt
