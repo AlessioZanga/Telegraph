@@ -8,8 +8,8 @@ bool operator==(const A &G, const B &H) {
     if ((G.has_label() != H.has_label()) || (G.has_label() && G.get_label() != H.get_label())) return false;
     if (!std::equal(V(G).begin(), V(G).end(), V(H).begin())) return false;
     if (!std::equal(E(G).begin(), E(G).end(), E(H).begin())) return false;
-    if (!std::equal(Vl(G).begin(), Vl(G).end(), Vl(H).begin())) return false;
-    if (!std::equal(El(G).begin(), El(G).end(), El(H).begin())) return false;
+    if (!std::equal(Vp(G).begin(), Vp(G).end(), Vp(H).begin())) return false;
+    if (!std::equal(Ep(G).begin(), Ep(G).end(), Ep(H).begin())) return false;
     return true;
 }
 
@@ -30,8 +30,8 @@ bool operator>(const A &G, const B &H) {
     if (H.has_label() && (!G.has_label() || G.get_label() != H.get_label() )) return false;
     if (!std::includes(V(G).begin(), V(G).end(), V(H).begin(), V(H).end())) return false;
     if (!std::includes(E(G).begin(), E(G).end(), E(H).begin(), E(H).end())) return false;
-    if (!std::includes(Vl(G).begin(), Vl(G).end(), Vl(H).begin(), Vl(H).end())) return false;
-    if (!std::includes(El(G).begin(), El(G).end(), El(H).begin(), El(H).end())) return false;
+    if (!std::includes(Vp(G).begin(), Vp(G).end(), Vp(H).begin(), Vp(H).end())) return false;
+    if (!std::includes(Ep(G).begin(), Ep(G).end(), Ep(H).begin(), Ep(H).end())) return false;
     return true;
 }
 

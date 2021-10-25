@@ -410,6 +410,78 @@ TYPED_TEST(ContainersTest, EdgesLabelsIterator) {
     ASSERT_TRUE(std::is_sorted(El(J).begin(), El(J).end()));
 }
 
+TYPED_TEST(ContainersTest, VerticesPairsIterator) {
+    typename TypeParam::VIDsVLBsIterator::const_iterator it, ite;
+    ASSERT_DEATH({ it++; }, ".*");
+
+    TypeParam G;
+    it = Vp(G).begin();
+    ASSERT_EQ(it, Vp(G).begin());
+    ASSERT_EQ(Vp(G).begin(), Vp(G).end());
+    ASSERT_EQ(std::distance(Vp(G).begin(), Vp(G).end()), 0);
+    for (const auto &[id, lb] : Vp(G)) ASSERT_EQ(lb, "");
+
+    TypeParam H(1);
+    H.set_label(0, "0");
+    ASSERT_NE(Vp(H).begin(), Vp(H).end());
+    ASSERT_EQ(std::distance(Vp(H).begin(), Vp(H).end()), 1);
+    for (const auto &[id, lb] : Vp(H)) ASSERT_EQ(lb, "0");
+
+    TypeParam J(MAX);
+    for (const VID &X : V(J)) J.set_label(X, std::to_string(X));
+
+    // Assert size is correct.
+    ASSERT_EQ(std::distance(Vp(J).begin(), Vp(J).end()), J.order());
+
+    for (const auto &[id, lb] : Vp(J)) ASSERT_TRUE(J.has_vertex(lb));
+
+    it = --Vp(J).end();
+    ite = Vp(J).begin();
+    for (; it != ite; it--) ASSERT_TRUE(J.has_vertex((*it).second));
+
+    // Assert sequence is always sorted.
+    ASSERT_TRUE(std::is_sorted(Vp(J).begin(), Vp(J).end()));
+}
+
+TYPED_TEST(ContainersTest, EdgesPairsIterator) {
+    typename TypeParam::EIDsELBsIterator::const_iterator it, ite;
+    ASSERT_DEATH({ it++; }, ".*");
+
+    TypeParam G;
+    it = Ep(G).begin();
+    ASSERT_EQ(it, Ep(G).begin());
+    ASSERT_EQ(Ep(G).begin(), Ep(G).end());
+    ASSERT_EQ(std::distance(Ep(G).begin(), Ep(G).end()), 0);
+    for (const auto &[id, lb] : Ep(G)) ASSERT_EQ(lb, ELB(""));
+
+    TypeParam H(1);
+    ASSERT_EQ(E(H).begin(), E(H).end());
+    ASSERT_EQ(std::distance(E(H).begin(), E(H).end()), 0);
+    for (const auto &[id, lb] : Ep(H)) ASSERT_EQ(lb, ELB("0 --- 0"));
+
+    H.add_vertex();
+    H.add_edge(0, 1);
+    H.set_label(0, 1, ELB("0 --- 1"));
+    ASSERT_NE(Ep(H).begin(), Ep(H).end());
+    ASSERT_EQ(std::distance(Ep(H).begin(), Ep(H).end()), 1);
+    for (const auto &[id, lb] : Ep(H)) ASSERT_EQ(lb, ELB("0 --- 1"));
+
+    TypeParam J(AdjacencyMatrix::Ones(MAX, MAX));
+    for (const EID &X : E(J)) J.set_label(X, ELB(std::to_string(X.first) + " --- " + std::to_string(X.second)));
+
+    // Assert size is correct.
+    ASSERT_EQ(std::distance(Ep(J).begin(), Ep(J).end()), J.size());
+
+    for (const auto &[id, lb] : Ep(J)) ASSERT_TRUE(J.has_edge(lb));
+
+    it = --Ep(J).end();
+    ite = Ep(J).begin();
+    for (; it != ite; it--) ASSERT_TRUE(J.has_edge((*it).second));
+
+    // Assert sequence is always sorted.
+    ASSERT_TRUE(std::is_sorted(Ep(J).begin(), Ep(J).end()));
+}
+
 TYPED_TEST(ContainersTest, Order) {
     TypeParam G;
     ASSERT_EQ(G.order(), 0);
@@ -1524,5 +1596,15 @@ TYPED_TEST(ContainersTest, ToStream) {
 
     TypeParam G;
     out << G;
-    ASSERT_EQ(out.str(), (classname + "(V = (), E = (), Vl = (), El = ())"));
+    ASSERT_EQ(out.str(), (classname + "(label = '', V = (), E = (), Vp = (), Ep = ())"));
+
+    G.set_label("G");
+    G.add_vertex("0");
+    G.add_vertex("1");
+    G.add_edge("0", "1");
+    G.set_label("0", "1", ELB("0 --- 1"));
+    out.str("");
+    out.clear();
+    out << G;
+    ASSERT_EQ(out.str(), (classname + "(label = 'G', V = (0, 1, ), E = ((0, 1), ), Vp = ((0, '0'), (1, '1'), ), Ep = (((0, 1), '0 --- 1'), ))"));
 }

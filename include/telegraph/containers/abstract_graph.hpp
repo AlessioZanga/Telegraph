@@ -149,6 +149,94 @@ class AbstractGraph {
      */
     ELBsIterator El() const;
 
+    //! VIDsVLBs Iterator proxy class.
+    class VIDsVLBsIterator {
+       private:
+        //! Pointer to the target graph.
+        const AbstractGraph *G;
+
+        //! Construct a new VIDsVLBsIterator object from target graph.
+        VIDsVLBsIterator(const AbstractGraph *G);
+
+       public:
+        friend AbstractGraph;
+
+        //! Default constructor for a new VIDsVLBs Iterator object.
+        VIDsVLBsIterator();
+
+        //! Copy constructor for a new VIDsVLBs Iterator object.
+        VIDsVLBsIterator(const VIDsVLBsIterator &other);
+
+        //! Assignment constructor for a new VIDsVLBs Iterator object.
+        VIDsVLBsIterator &operator=(const VIDsVLBsIterator &other);
+
+        //! Destroy the VIDsVLBs Iterator object.
+        ~VIDsVLBsIterator();
+
+        //! VIDsVLBs Const Iterator.
+        using const_iterator = VIDmVLB::left_const_iterator;
+
+        //! Begin iterator.
+        const_iterator begin() const;
+
+        //! End iterator.
+        const_iterator end() const;
+
+        //! Size operator.
+        std::size_t size() const;
+    };
+
+    /**
+     * @brief Return the VIDsVLBs Iterator proxy class.
+     *
+     * @return VIDsVLBsIterator VIDsVLBs Iterator proxy class.
+     */
+    VIDsVLBsIterator Vp() const;
+
+    //! EIDsELBs Iterator proxy class.
+    class EIDsELBsIterator {
+       private:
+        //! Pointer to the target graph.
+        const AbstractGraph *G;
+
+        //! Construct a new EIDsELBsIterator object from target graph.
+        EIDsELBsIterator(const AbstractGraph *G);
+
+       public:
+        friend AbstractGraph;
+
+        //! Default constructor for a new EIDsELBs Iterator object.
+        EIDsELBsIterator();
+
+        //! Copy constructor for a new EIDsELBs Iterator object.
+        EIDsELBsIterator(const EIDsELBsIterator &other);
+
+        //! Assignment constructor for a new EIDsELBs Iterator object.
+        EIDsELBsIterator &operator=(const EIDsELBsIterator &other);
+
+        //! Destroy the EIDsELBs Iterator object.
+        ~EIDsELBsIterator();
+
+        //! EIDsELBs Const Iterator.
+        using const_iterator = EIDmELB::left_const_iterator;
+
+        //! Begin iterator.
+        const_iterator begin() const;
+
+        //! End iterator.
+        const_iterator end() const;
+
+        //! Size operator.
+        std::size_t size() const;
+    };
+
+    /**
+     * @brief Return the EIDsELBs Iterator proxy class.
+     *
+     * @return EIDsELBsIterator EIDsELBs Iterator proxy class.
+     */
+    EIDsELBsIterator Ep() const;
+
     /**
      * @brief The number of vertices of a graph is called its order.
      *

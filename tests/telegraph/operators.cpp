@@ -7,7 +7,7 @@
 
 #define MAX 256
 
-/** METAPROGRAMMING FOR BINARY OPERATORS */
+/** TEMPLATE PROGRAMMING FOR BINARY OPERATORS */
 
 template <class... Args>
 struct Types {};
@@ -124,6 +124,23 @@ TYPED_TEST(OperatorsTest, Equality_InequalityOperator) {
     ASSERT_NE(G, H);
     H.set_label(0, 1, ELB("0 --- 1"));
     ASSERT_EQ(G, H);
+
+    G.set_label(1, "1");
+    G.add_vertex("2");
+    H.set_label(1, "2");
+    H.add_vertex("1");
+    ASSERT_NE(G, H);
+
+    G.del_label(1);
+    G.del_label(2);
+    H.del_label(1);
+    H.del_label(2);
+
+    G.add_edge(1, 1);
+    G.set_label(1, 1, ELB("1 --- 1"));
+    H.add_edge(2, 2);
+    H.set_label(2, 2, ELB("1 --- 1"));
+    ASSERT_NE(G, H);
 }
 
 TYPED_TEST(OperatorsTest, Less_GreaterOperator) {
@@ -172,12 +189,21 @@ TYPED_TEST(OperatorsTest, Less_GreaterOperator) {
     ASSERT_FALSE(H < G);
     ASSERT_FALSE(G > H);
     ASSERT_EQ(G, H);
-    
-    G.set_label(0, "0");  // Check for labels copy.
+
+    G.set_label(0, "0");
     ASSERT_LT(H, G);
     ASSERT_GT(G, H);
 
     H.set_label(0, "0");
+    ASSERT_FALSE(H < G);
+    ASSERT_FALSE(G > H);
+    ASSERT_EQ(G, H);
+
+    G.set_label(0, 1, ELB("0 --- 1"));
+    ASSERT_LT(H, G);
+    ASSERT_GT(G, H);
+
+    H.set_label(0, 1, ELB("0 --- 1"));
     ASSERT_FALSE(H < G);
     ASSERT_FALSE(G > H);
     ASSERT_EQ(G, H);
@@ -199,7 +225,7 @@ TYPED_TEST(OperatorsTest, ComplementOperator) {
     ASSERT_EQ(G.order(), H.order());
     ASSERT_NE(G.size(), H.size());
     ASSERT_TRUE(std::equal(V(G).begin(), V(G).end(), V(H).begin()));
-    ASSERT_TRUE(std::equal(Vl(G).begin(), Vl(G).end(), Vl(H).begin()));
+    ASSERT_TRUE(std::equal(Vp(G).begin(), Vp(G).end(), Vp(H).begin()));
 
     EIDs X, Y, Z;
     X = {{0, 1}, {1, 0}};

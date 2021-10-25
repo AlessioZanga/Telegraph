@@ -1,11 +1,12 @@
 #pragma once
 
 #include <Eigen/Eigen>
-#include <any>
 #include <algorithm>
+#include <any>
 #include <boost/bimap.hpp>
 #include <boost/bimap/support/lambda.hpp>
 #include <boost/container_hash/hash.hpp>
+#include <boost/iterator/transform_iterator.hpp>
 #include <cstdint>
 #include <iostream>
 #include <iterator>
@@ -78,3 +79,47 @@ template <typename T>
 static inline auto El(const T &G) {
     return G.El();
 }
+
+//! Infix vertex pairs set iterator.
+template <typename T>
+static inline auto Vp(const T &G) {
+    return G.Vp();
+}
+
+//! Infix edge pairs set iterator.
+template <typename T>
+static inline auto Ep(const T &G) {
+    return G.Ep();
+}
+
+namespace boost {
+
+template <>
+struct hash<VIDmVLB::left_value_type> {
+    std::size_t operator()(const VIDmVLB::left_value_type &value) const {
+        // Initialize seed hash.
+        std::size_t seed = 0;
+        // Hash VID.
+        boost::hash_combine(seed, value.first);
+        // Hash VLB.
+        boost::hash_combine(seed, value.second);
+        // Return hash.
+        return seed;
+    }
+};
+
+template <>
+struct hash<EIDmELB::left_value_type> {
+    std::size_t operator()(const EIDmELB::left_value_type &value) const {
+        // Initialize seed hash.
+        std::size_t seed = 0;
+        // Hash EID.
+        boost::hash_combine(seed, value.first);
+        // Hash ELB.
+        boost::hash_combine(seed, value.second);
+        // Return hash.
+        return seed;
+    }
+};
+
+}  // namespace boost

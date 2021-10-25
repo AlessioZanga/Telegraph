@@ -396,16 +396,16 @@ inline EID DenseGraph::del_edge(const EID &X) {
 inline std::size_t DenseGraph::hash() const {
     // Initialize seed hash.
     std::size_t seed = 0;
+    // Hash GLB.
+    if (has_label()) boost::hash_combine(seed, get_label());
     // Hash VIDs.
     if (std::size(V())) boost::hash_combine(seed, boost::hash_range(V().begin(), V().end()));
     // Hash EIDs.
     if (std::size(E())) boost::hash_combine(seed, boost::hash_range(E().begin(), E().end()));
-    // Hash GLB.
-    if (has_label()) boost::hash_combine(seed, glb);
     // Hash VLBs.
-    if (std::size(Vl())) boost::hash_combine(seed, boost::hash_range(Vl().begin(), Vl().end()));
+    if (std::size(Vp())) boost::hash_combine(seed, boost::hash_range(Vl().begin(), Vl().end()));
     // Hash ELBs.
-    if (std::size(El())) boost::hash_combine(seed, boost::hash_range(El().begin(), El().end()));
+    if (std::size(Ep())) boost::hash_combine(seed, boost::hash_range(El().begin(), El().end()));
     // Return hash
     return seed;
 }
@@ -431,17 +431,17 @@ void DenseGraph::to_stream(std::ostream &out) const {
     // Close edge set.
     out << ")";
 
-    // Print vertex set.
-    out << ", Vl = (";
+    // Print vertex pairs set.
+    out << ", Vp = (";
     // Iterate over vertices.
-    for (const VLB &X : Vl()) out << X << ", ";
+    for (const auto &X : Vp()) out << "(" << X.first << ", '" << X.second << "')" << ", ";
     // Close vertex set.
     out << ")";
 
-    // Print edge set.
-    out << ", El = (";
+    // Print edge pairs set.
+    out << ", Ep = (";
     // Iterate over vertices.
-    for (const ELB &X : El()) out << "(" << X << "), ";
+    for (const auto &X : Ep()) out << "((" << X.first.first << ", " << X.first.second << "), '" << X.second << "'), ";
     // Close edge set.
     out << ")";
 
