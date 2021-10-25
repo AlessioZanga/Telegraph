@@ -13,7 +13,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 add_compile_options(-Wall -Wextra -pedantic)
 
 if(CMAKE_BUILD_TYPE STREQUAL "Release")
-    add_compile_options(-O3 -march=native -shared -fPIC)
+    add_compile_options(-O3 -march=native -fomit-frame-pointer -shared -fPIC)
 endif()
 
 include(FetchContent)
@@ -84,7 +84,7 @@ if (TELEGRAPH_ENABLE_BENCHMARKS AND (PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DI
         GIT_SHALLOW TRUE
         GIT_PROGRESS TRUE
     )
-    FetchContent_MakeAvailable(googlebenchmark)
     set(BENCHMARK_ENABLE_GTEST_TESTS OFF)
+    FetchContent_MakeAvailable(googlebenchmark)
     add_subdirectory(benchmarks)
 endif()
