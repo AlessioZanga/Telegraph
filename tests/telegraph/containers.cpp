@@ -131,11 +131,8 @@ TYPED_TEST(ContainersTest, AdjacencyListConstructor) {
     ASSERT_EQ(J.order(), 5);
     ASSERT_EQ(J.size(), 10);
 
-    AdjacencyList D = {{0, {0, 2}}, {2, {0}}};  // Invalid argument: non-increasing sequence.
+    AdjacencyList D = {{0, {3}}, {1, {0}}};  // Invalid argument: vertex not defined.
     ASSERT_THROW({ TypeParam K(D); }, std::invalid_argument);
-
-    AdjacencyList E = {{0, {3}}, {1, {0}}};  // Invalid argument: vertex not defined.
-    ASSERT_THROW({ TypeParam L(E); }, std::invalid_argument);
 }
 
 TYPED_TEST(ContainersTest, AdjacencyMatrixConstructor) {
@@ -149,18 +146,21 @@ TYPED_TEST(ContainersTest, AdjacencyMatrixConstructor) {
     TypeParam H(B);
     ASSERT_EQ(H.order(), 1);
     ASSERT_EQ(H.size(), 0);
+    ASSERT_TRUE(H.has_vertex(0));
 
     AdjacencyMatrix C(3, 3);
     C << 0, 1, 0, 0, 0, 1, 0, 0, 0;  // Multiple sequence.
     TypeParam J(C);
     ASSERT_EQ(J.order(), 3);
     ASSERT_EQ(J.size(), 2);
+    ASSERT_TRUE(J.has_vertex(2));
 
     AdjacencyMatrix D(3, 3);
     D << 0, 1, 0, 0, 0, 3, 0, 0, 0;  // Non-binary sequence.
     TypeParam K(D);
     ASSERT_EQ(K.order(), 3);
     ASSERT_EQ(K.size(), 2);
+    ASSERT_TRUE(K.has_vertex(2));
 
     AdjacencyMatrix E(2, 3);  // Invalid argument: non-squared matrix.
     ASSERT_THROW({ TypeParam L(E); }, std::invalid_argument);
@@ -602,7 +602,10 @@ TYPED_TEST(ContainersTest, DelVertexVID) {
     l = std::to_string(i);
     H.set_label(i, l);
     H.set_attr(i, "key", true);
-    ASSERT_EQ(H.del_vertex(i), i);  // Valid argument.
+    ASSERT_EQ(H.del_vertex(i), i);                          // Valid argument.
+    ASSERT_THROW(H.del_vertex(i), std::out_of_range);       // Invalid argument: vertex not defined.
+    ASSERT_THROW(H.has_label(i), std::out_of_range);        // Invalid argument: vertex not defined.
+    ASSERT_THROW(H.has_attr(i, "key"), std::out_of_range);  // Invalid argument: vertex not defined.
 }
 
 TYPED_TEST(ContainersTest, DelVertexVLB) {

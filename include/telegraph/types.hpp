@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <any>
 #include <boost/bimap.hpp>
+#include <boost/bimap/unordered_set_of.hpp>
 #include <boost/bimap/support/lambda.hpp>
 #include <boost/container_hash/hash.hpp>
 #include <boost/iterator/transform_iterator.hpp>
@@ -48,6 +49,8 @@ using SparseAdjacencyMatrix = Eigen::SparseMatrix<int8_t, Eigen::RowMajor>;
 using VIDmVLB = boost::bimap<VID, VLB>;
 //! Bidirectional EID-ELB map.
 using EIDmELB = boost::bimap<EID, ELB>;
+//! Bidirectional VID-Index map.
+using VIDmIndex = boost::bimap<boost::bimaps::unordered_set_of<VID>, AdjacencyMatrix::Index>;
 
 //! Graph attributes.
 using GAttrs = std::map<const std::string, std::any>;

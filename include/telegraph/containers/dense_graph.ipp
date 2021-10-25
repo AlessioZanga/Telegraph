@@ -4,7 +4,7 @@
 
 DenseGraph::DenseGraph() {}
 
-DenseGraph::DenseGraph(const DenseGraph &other) : AbstractGraph(other), A(other.A) {}
+DenseGraph::DenseGraph(const DenseGraph &other) : AbstractGraph(other), A(other.A), M(other.M) {}
 
 DenseGraph &DenseGraph::operator=(const DenseGraph &other) {
     DenseGraph tmp(other);
@@ -16,43 +16,47 @@ DenseGraph &DenseGraph::operator=(const DenseGraph &other) {
         std::swap(vattrs, tmp.vattrs);
         std::swap(eattrs, tmp.eattrs);
         std::swap(A, tmp.A);
+        std::swap(M, tmp.M);
     }
     return *this;
 }
 
 DenseGraph::~DenseGraph() {}
 
-DenseGraph::DenseGraph(std::size_t n) { A = AdjacencyMatrix::Zero(n, n); }
+DenseGraph::DenseGraph(std::size_t n) {
+    // Initialize VIDs in map.
+    for (std::size_t i = 0; i < n; i++) M.left.insert({i, AdjacencyMatrix::Index(i)});
+    // Allocate a squared zero matrix.
+    A = AdjacencyMatrix::Zero(n, n);
+}
 
 template <typename I, require_iter_value_type(I, VID)>
 DenseGraph::DenseGraph(const I &begin, const I &end) {
-    // Since each VID in V is assumed to be (1) *unique* and (2) *between 0 and n-1*,
-    // it is sufficient to count the number of VIDs between [begin, end).
-    VID n = std::distance(begin, end);
+    // Initialize graph order.
+    std::size_t n = 0;
+    // Iterate over the sequence.
+    for (auto i = begin; i != end; i++, n++) {
+        // Dereference iterator.
+        VID j = *i;
+        // Check if vertex is already into the graph.
+        if (!has_vertex(j)) add_vertex(j);
+    }
     // Allocate a squared zero matrix.
     A = AdjacencyMatrix::Zero(n, n);
 }
 
 template <typename I, require_iter_value_type(I, EID)>
 DenseGraph::DenseGraph(const I &begin, const I &end) {
-    // Each VID in V is assumed to be (1) *unique* and (2) *between 0 and n-1*,
-    // given that the sequence is assumed to be *not* locally stored, it is
+    // Given that the sequence is assumed to be *not* locally stored, it is
     // necessary to *incrementally* resize the matrix when needed.
     for (auto i = begin; i != end; i++) {
-        // Get the current matrix size.
-        VID n = order();
-        // Get the highest VID for the current EID, plus one to align the size.
-        VID v = (i->first > i->second ? i->first : i->second) + 1;
-        // Check if the VID exceeds the matrix size.
-        if (v > n) {
-            // Resize the matrix.
-            A.conservativeResize(v, v);
-            // Initialize the allocated memory to zero.
-            A(Eigen::all, Eigen::seq(n, Eigen::last)) *= 0;
-            A(Eigen::seq(n, Eigen::last), Eigen::all) *= 0;
-        }
+        // Dereference iterator.
+        EID e = *i;
+        // Check if vertices are already into the graph.
+        if (!has_vertex(e.first)) add_vertex(e.first);
+        if (!has_vertex(e.second)) add_vertex(e.second);
         // Set the edge.
-        A(i->first, i->second) = 1;
+        A(M.left.at(e.first), M.left.at(e.second)) = 1;
     }
 }
 
@@ -62,11 +66,10 @@ DenseGraph::DenseGraph(const AdjacencyList &other) {
 
     // Check if the sequence is non-empty.
     if (!other.empty()) {
-        // Get maximum VID in the sorted adjacency list and allign to size.
-        VID n = other.rbegin()->first + 1;
-        // Since the adjacency list is sorted, each VID in V is (1) *unique* by default,
-        // we still need to check if each VID is (2) *between 0 and n-1* or not.
-        if (n != other.size()) throw std::invalid_argument("AdjacencyList must contain VIDs *between 0 and size-1*.");
+        // Initialize graph order.
+        std::size_t n = 0;
+        // Insert VIDs into map.
+        for (auto i = other.begin(); i != other.end(); i++, n++) M.left.insert({i->first, AdjacencyMatrix::Index(n)});
         // Allocate a squared zero matrix.
         A = AdjacencyMatrix::Zero(n, n);
         // Fill the matrix.
@@ -75,7 +78,7 @@ DenseGraph::DenseGraph(const AdjacencyList &other) {
                 // Check EID if is inconsistent with given VIDs.
                 if (other.find(u) == other.end()) throw std::invalid_argument("AdjacencyList ill formed.");
                 // Set the edge.
-                A(v, u) = 1;
+                A(M.left.at(v), M.left.at(u)) = 1;
             }
         }
     }
@@ -83,10 +86,14 @@ DenseGraph::DenseGraph(const AdjacencyList &other) {
 
 DenseGraph::DenseGraph(const AdjacencyMatrix &other) : A(other) {
     if (other.rows() != other.cols()) throw std::invalid_argument("AdjacencyMatrix must be squared.");
+     // Initialize VIDs in map.
+    for (AdjacencyMatrix::Index i = 0; i < other.rows(); i++) M.left.insert({VID(i), i});
 }
 
 DenseGraph::DenseGraph(const SparseAdjacencyMatrix &other) : A(other) {
-    if (other.rows() != other.cols()) throw std::invalid_argument("AdjacencyMatrix must be squared.");
+    if (other.rows() != other.cols()) throw std::invalid_argument("SparseAdjacencyMatrix must be squared.");
+     // Initialize VIDs in map.
+    for (AdjacencyMatrix::Index i = 0; i < other.rows(); i++) M.left.insert({VID(i), i});
 }
 
 inline DenseGraph::operator AdjacencyList() const {
@@ -123,58 +130,9 @@ VTYPE &VTYPE::operator=(const VIDsIterator &other) {
 
 VTYPE::~VIDsIterator() {}
 
-ITYPE::const_iterator() : G(NULL), curr(0) {}
+ITYPE VTYPE::begin() const { return ITYPE(G->M.right.begin(), get_key); }
 
-ITYPE::const_iterator(const DenseGraph *G, const VID &curr) : G(G), curr(curr) {}
-
-ITYPE::const_iterator(const const_iterator &other) : G(other.G), curr(other.curr) {}
-
-ITYPE &ITYPE::operator=(const const_iterator &other) {
-    ITYPE tmp(other);
-    if (this != &other) {
-        std::swap(G, tmp.G);
-        std::swap(curr, tmp.curr);
-    }
-    return *this;
-}
-
-ITYPE::~const_iterator() {}
-
-inline bool ITYPE::operator==(const const_iterator &other) const { return G == other.G && curr == other.curr; }
-
-inline bool ITYPE::operator!=(const const_iterator &other) const { return G != other.G || curr != other.curr; }
-
-inline ITYPE::reference ITYPE::operator*() const { return curr; }
-
-inline ITYPE::reference ITYPE::operator->() const { return curr; }
-
-inline ITYPE &ITYPE::operator++() {
-    assert(G);  // Assert G is a valid pointer.
-    if (curr != G->order()) curr++;
-    return *this;
-}
-
-inline ITYPE ITYPE::operator++(int) {
-    ITYPE prev = *this;
-    ++*this;
-    return prev;
-}
-
-inline ITYPE &ITYPE::operator--() {
-    assert(G);  // Assert G is a valid pointer.
-    if (curr != 0) curr--;
-    return *this;
-}
-
-inline ITYPE ITYPE::operator--(int) {
-    ITYPE prev = *this;
-    --*this;
-    return prev;
-}
-
-ITYPE VTYPE::begin() const { return ITYPE(G, 0); }
-
-ITYPE VTYPE::end() const { return ITYPE(G, G->order()); }
+ITYPE VTYPE::end() const { return ITYPE(G->M.right.end(), get_key); }
 
 std::size_t VTYPE::size() const { return G->order(); }
 
@@ -306,28 +264,31 @@ inline std::size_t DenseGraph::size() const {
     return A.cast<bool>().count();
 }
 
-inline bool DenseGraph::has_vertex(const VID &X) const { return X < order(); }
+inline bool DenseGraph::has_vertex(const VID &X) const { return M.left.find(X) != M.left.end(); }
 
 inline VID DenseGraph::add_vertex() {
+    // Initialize new VID.
+    VID X = 0;
+    // Get highest VID if present.
+    auto i = M.right.rbegin();
+    if (i != M.right.rend()) X = (i->second + 1);
+    // Add vertex
+    return add_vertex(X);
+}
+
+inline VID DenseGraph::add_vertex(const VID &X) {
+    if (has_vertex(X)) throw ALREADY_DEFINED(X);
     // Get current matrix size.
-    VID n = order();
+    std::size_t n = order();
+    // Insert new VID into map.
+    M.left.insert({X, AdjacencyMatrix::Index(n)});
     // Resize the matrix.
     A.conservativeResize(n + 1, n + 1);
     // Initialize the allocated memory to zero.
     A.row(n) *= 0;
     A.col(n) *= 0;
     // Return new VID.
-    return n;
-}
-
-inline VID DenseGraph::add_vertex(const VID &X) {
-    // Get current matrix size.
-    VID n = order();
-    // Check if it is possible to add the requested VID.
-    if (X < n) throw ALREADY_DEFINED(X);
-    if (X > n) throw std::out_of_range("VID " + std::to_string(X) + " out of range.");
-    // Add requested vertex.
-    return add_vertex();
+    return X;
 }
 
 inline VID DenseGraph::del_vertex(const VID &X) {
@@ -338,32 +299,21 @@ inline VID DenseGraph::del_vertex(const VID &X) {
     A.block(X, 0, rows - X - 1, cols) = A.block(X + 1, 0, rows - X - 1, cols);
     A.block(0, X, rows, cols - X - 1) = A.block(0, X + 1, rows, cols - X - 1);
     A.conservativeResize(rows - 1, cols - 1);
-    // Get current matrix size.
-    std::size_t n = order();
+    // Update VIDs map accordingly.
+    auto i = M.left.find(X);
+    auto index = i->second;
+    for (auto it = M.left.begin(); it != M.left.end(); it++) {
+        // Decrease matrix index by one if needed.
+        if (it->second > index) M.left.replace_data(it, (it->second - 1));
+    }
+    // Delete VID.
+    M.left.erase(i);
     // Delete associated label.
-    auto i = vlbs.left.find(X);
-    if (i != vlbs.left.end()) vlbs.left.erase(i);
-    // Update labels keys after X.
-    for (VID k = X; k < n; k++) {
-        // Check if vertex has label.
-        auto p = vlbs.left.find(k);
-        if (p != vlbs.left.end()) {
-            vlbs.left.modify_key(p, boost::bimaps::_key = (k - 1));
-        }
-    }
+    auto j = vlbs.left.find(X);
+    if (j != vlbs.left.end()) vlbs.left.erase(j);
     // Delete associated attributes.
-    auto j = vattrs.find(X);
-    if (j != vattrs.end()) vattrs.erase(j);
-    // Update attributes keys after X.
-    for (VID k = X; k < n; k++) {
-        // Check if vertex has attributes.
-        auto p = vattrs.find(k);
-        if (p != vattrs.end()) {
-            auto pair = vattrs.extract(p);   // Extract pair from map.
-            pair.key() = k - 1;              // Decrease key.
-            vattrs.insert(std::move(pair));  // Move pair back into map.
-        }
-    }
+    auto k = vattrs.find(X);
+    if (k != vattrs.end()) vattrs.erase(k);
     // Return vertex id.
     return X;
 }
@@ -371,18 +321,18 @@ inline VID DenseGraph::del_vertex(const VID &X) {
 inline bool DenseGraph::has_edge(const EID &X) const {
     if (!has_vertex(X.first)) throw NOT_DEFINED(X.first);
     if (!has_vertex(X.second)) throw NOT_DEFINED(X.second);
-    return A(X.first, X.second) != 0;
+    return A(M.left.at(X.first), M.left.at(X.second));
 }
 
 inline EID DenseGraph::add_edge(const EID &X) {
     if (has_edge(X)) throw ALREADY_DEFINED(X.first, X.second);
-    A(X.first, X.second) = 1;
+    A(M.left.at(X.first), M.left.at(X.second)) = 1;
     return X;
 }
 
 inline EID DenseGraph::del_edge(const EID &X) {
     if (!has_edge(X)) throw NOT_DEFINED(X.first, X.second);
-    A(X.first, X.second) = 0;
+    A(M.left.at(X.first), M.left.at(X.second)) = 0;
     // Delete associated label.
     auto i = elbs.left.find(X);
     if (i != elbs.left.end()) elbs.left.erase(i);
@@ -434,7 +384,9 @@ void DenseGraph::to_stream(std::ostream &out) const {
     // Print vertex pairs set.
     out << ", Vp = (";
     // Iterate over vertices.
-    for (const auto &X : Vp()) out << "(" << X.first << ", '" << X.second << "')" << ", ";
+    for (const auto &X : Vp())
+        out << "(" << X.first << ", '" << X.second << "')"
+            << ", ";
     // Close vertex set.
     out << ")";
 

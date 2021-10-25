@@ -5,6 +5,7 @@
 class DenseGraph : public AbstractGraph {
    protected:
     AdjacencyMatrix A;
+    VIDmIndex M;
 
    public:
     //! Enforce superclass namespace resolution to avoid name hiding with overloading.
@@ -37,10 +38,6 @@ class DenseGraph : public AbstractGraph {
     /**
      * @brief Construct a new Dense Graph object from VIDs iterators.
      *
-     * Construct a new Dense Graph object from a pair of VIDs iterators.
-     * Let *n* be the size of the sequence of VIDs V, each VID in V is assumed
-     * to be (1) *unique* and (2) *between 0 and n-1*.
-     *
      * The sequence is *not* required to be ordered, *nor* locally stored.
      *
      * @tparam I Iterator typename.
@@ -53,12 +50,6 @@ class DenseGraph : public AbstractGraph {
 
     /**
      * @brief Construct a new Dense Graph object from EIDs iterators.
-     *
-     * Construct a new Dense Graph object from a pair of EIDs iterators.
-     * Each EID in the sequence of EIDs is assumed to be *unique*.
-     * Let V be the hypothetical sequence of VIDs given the sequence of EIDs.
-     * Let *n* be the size of the sequence of VIDs V, each VID in V is assumed
-     * to be (1) *unique* and (2) *between 0 and n-1*.
      *
      * The sequence is *not* required to be ordered, *nor* locally stored.
      *
@@ -106,6 +97,9 @@ class DenseGraph : public AbstractGraph {
         //! Construct a new VIDsIterator object from target graph.
         VIDsIterator(const DenseGraph *G);
 
+        //! Get key from pair helper.
+        static inline const VID &get_key(const VIDmIndex::right_value_type &pair) { return pair.second; }
+
        public:
         friend DenseGraph;
 
@@ -121,62 +115,11 @@ class DenseGraph : public AbstractGraph {
         //! Destroy the VIDs Iterator object.
         ~VIDsIterator();
 
-        //! VIDs Const Iterator.
-        class const_iterator {
-           private:
-            //! Pointer to the target graph.
-            const DenseGraph *G;
-            //! Value of the current VID.
-            VID curr;
+        //! Get key from pair helper signature.
+        typedef const VID &(*get_key_t)(const VIDmIndex::right_value_type &);
 
-            // Construct a new VIDs Const Iterator object from target graph and initial VID.
-            const_iterator(const DenseGraph *G, const VID &curr);
-
-           public:
-            friend DenseGraph;
-
-            using difference_type = std::ptrdiff_t;
-            using value_type = VID;
-            using pointer = const VID *;
-            using reference = const VID &;
-            using iterator_category = std::bidirectional_iterator_tag;
-
-            //! Default constructor for a new VIDs Const Iterator object.
-            const_iterator();
-
-            //! Copy constructor for a new VIDs Const Iterator object.
-            const_iterator(const const_iterator &other);
-
-            //! Assignment constructor for a new VIDs Const Iterator object.
-            const_iterator &operator=(const const_iterator &other);
-
-            //! Destroy the VIDs Const Iterator object.
-            ~const_iterator();
-
-            //! Equality operator.
-            inline bool operator==(const const_iterator &other) const;
-
-            //! Inequality operator.
-            inline bool operator!=(const const_iterator &other) const;
-
-            //! Dereference operator.
-            inline reference operator*() const;
-
-            //! Member access operator.
-            inline reference operator->() const;
-
-            //! Pre-increment operator.
-            inline const_iterator &operator++();
-
-            //! Post-increment operator.
-            inline const_iterator operator++(int);
-
-            //! Pre-decrement operator.
-            inline const_iterator &operator--();
-
-            //! Post-decrement operator.
-            inline const_iterator operator--(int);
-        };
+        //! ELBs Const Iterator.
+        using const_iterator = boost::transform_iterator<get_key_t, VIDmIndex::right_const_iterator>;
 
         //! Begin iterator.
         const_iterator begin() const;
