@@ -41,26 +41,23 @@ include_directories(${Boost_INCLUDE_DIRS})
 # Add Eigen library.
 include_directories(extern/eigen)
 
+include(FetchContent)
 option (TELEGRAPH_ENABLE_TESTS "Build tests cases.")
 option (TELEGRAPH_ENABLE_BENCHMARKS "Build benchmarks.")
 
 if (TELEGRAPH_ENABLE_TESTS OR TELEGRAPH_ENABLE_BENCHMARKS)
     # Add GoogleTest library for tests and benchmarks.
-    include(GoogleTest)
-    add_subdirectory(extern/googletest)
-    set(BENCHMARK_ENABLE_GTEST_TESTS OFF)
-
-    # Add GoogleTest to make clean support.
-    mark_as_advanced(
-        BUILD_GMOCK BUILD_GTEST BUILD_SHARED_LIBS
-        gmock_build_tests gtest_build_samples gtest_build_tests
-        gtest_disable_pthreads gtest_force_shared_crt gtest_hide_internal_symbols
+    message(STATUS "Fetching GTest")
+    FetchContent_Declare(
+        googletest
+        GIT_REPOSITORY https://github.com/google/googletest.git
+        GIT_TAG release-1.11.0
+        GIT_SHALLOW TRUE
+        GIT_PROGRESS TRUE
     )
-
-    set_target_properties(gtest PROPERTIES FOLDER extern)
-    set_target_properties(gtest_main PROPERTIES FOLDER extern)
-    set_target_properties(gmock PROPERTIES FOLDER extern)
-    set_target_properties(gmock_main PROPERTIES FOLDER extern)
+    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+    FetchContent_MakeAvailable(googletest)
+    include(GoogleTest)
 endif()
 
 if (TELEGRAPH_ENABLE_TESTS AND (PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR))
@@ -71,6 +68,14 @@ if (TELEGRAPH_ENABLE_TESTS AND (PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR))
 endif()
 
 if (TELEGRAPH_ENABLE_BENCHMARKS AND (PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR))
-    add_subdirectory(extern/googlebenchmark)
+    message(STATUS "Fetching GBenchmark")
+    FetchContent_Declare(googlebenchmark
+        GIT_REPOSITORY https://github.com/google/benchmark.git
+        GIT_TAG main
+        GIT_SHALLOW TRUE
+        GIT_PROGRESS TRUE
+    )
+    FetchContent_MakeAvailable(googlebenchmark)
+    set(BENCHMARK_ENABLE_GTEST_TESTS OFF)
     add_subdirectory(benchmarks)
 endif()

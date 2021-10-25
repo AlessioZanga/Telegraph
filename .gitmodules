@@ -1,12 +1,6 @@
-[submodule "extern/googletest"]
-	path = extern/googletest
-	url = https://github.com/google/googletest.git
 [submodule "extern/eigen"]
 	path = extern/eigen
 	url = https://gitlab.com/libeigen/eigen.git
 [submodule "extern/doxygen-theme"]
 	path = extern/doxygen-theme
 	url = https://github.com/jothepro/doxygen-awesome-css.git
-[submodule "extern/googlebenchmark"]
-	path = extern/googlebenchmark
-	url = https://github.com/google/benchmark
