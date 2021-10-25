@@ -143,70 +143,107 @@ TYPED_TEST(OperatorsTest, Equality_InequalityOperator) {
     ASSERT_NE(G, H);
 }
 
-TYPED_TEST(OperatorsTest, Less_GreaterOperator) {
+TYPED_TEST(OperatorsTest, LT_GT_LE_GE_Operator) {
     typename TypeParam::first_type G;
     typename TypeParam::second_type H;
     ASSERT_FALSE(H < G);
     ASSERT_FALSE(G > H);
+    ASSERT_LE(H, G);
+    ASSERT_GE(G, H);
     ASSERT_EQ(G, H);
 
     G.add_vertex();
     ASSERT_LT(H, G);
     ASSERT_GT(G, H);
+    ASSERT_LE(H, G);
+    ASSERT_GE(G, H);
 
     G.add_vertex();
     G.add_edge(0, 1);
     ASSERT_LT(H, G);
     ASSERT_GT(G, H);
+    ASSERT_LE(H, G);
+    ASSERT_GE(G, H);
 
     H.add_vertex();
     ASSERT_LT(H, G);
     ASSERT_GT(G, H);
+    ASSERT_LE(H, G);
+    ASSERT_GE(G, H);
 
     H.add_vertex();
     ASSERT_LT(H, G);
     ASSERT_GT(G, H);
+    ASSERT_LE(H, G);
+    ASSERT_GE(G, H);
 
     H.add_edge(0, 1);
     ASSERT_FALSE(H < G);
     ASSERT_FALSE(G > H);
+    ASSERT_LE(H, G);
+    ASSERT_GE(G, H);
     ASSERT_EQ(G, H);
 
     G.add_edge(1, 1);
     ASSERT_LT(H, G);
     ASSERT_GT(G, H);
+    ASSERT_LE(H, G);
+    ASSERT_GE(G, H);
 
     H.add_edge(1, 1);
     ASSERT_FALSE(H < G);
     ASSERT_FALSE(G > H);
+    ASSERT_LE(H, G);
+    ASSERT_GE(G, H);
     ASSERT_EQ(G, H);
 
     G.set_label("G");  // Check for labels copy.
     ASSERT_LT(H, G);
     ASSERT_GT(G, H);
+    ASSERT_LE(H, G);
+    ASSERT_GE(G, H);
 
     H.set_label("G");
     ASSERT_FALSE(H < G);
     ASSERT_FALSE(G > H);
+    ASSERT_LE(H, G);
+    ASSERT_GE(G, H);
     ASSERT_EQ(G, H);
 
     G.set_label(0, "0");
     ASSERT_LT(H, G);
     ASSERT_GT(G, H);
+    ASSERT_LE(H, G);
+    ASSERT_GE(G, H);
 
     H.set_label(0, "0");
     ASSERT_FALSE(H < G);
     ASSERT_FALSE(G > H);
+    ASSERT_LE(H, G);
+    ASSERT_GE(G, H);
     ASSERT_EQ(G, H);
 
     G.set_label(0, 1, ELB("0 --- 1"));
     ASSERT_LT(H, G);
     ASSERT_GT(G, H);
+    ASSERT_LE(H, G);
+    ASSERT_GE(G, H);
 
     H.set_label(0, 1, ELB("0 --- 1"));
     ASSERT_FALSE(H < G);
     ASSERT_FALSE(G > H);
+    ASSERT_LE(H, G);
+    ASSERT_GE(G, H);
     ASSERT_EQ(G, H);
+
+    // Assert partial ordering.
+    H.set_label(0, 1, ELB("0 -*- 1"));
+    ASSERT_FALSE(G < H);
+    ASSERT_FALSE(G > H);
+    ASSERT_FALSE(G <= H);
+    ASSERT_FALSE(G >= H);
+    ASSERT_FALSE(G == H);
+    ASSERT_NE(G, H);
 }
 
 TYPED_TEST(OperatorsTest, ComplementOperator) {
