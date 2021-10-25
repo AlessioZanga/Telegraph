@@ -230,10 +230,14 @@ TYPED_TEST(ContainersTest, SparseAdjacencyMatrixOperator) {
 }
 
 TYPED_TEST(ContainersTest, VerticesIterator) {
+    TypeParam G;
+
+    typename TypeParam::VIDsIterator v, w(v);
+    ASSERT_NO_THROW({ w = v; });
+
     typename TypeParam::VIDsIterator::const_iterator it, ite;
     ASSERT_DEATH({ it++; }, ".*");
 
-    TypeParam G;
     it = V(G).begin();
     ASSERT_EQ(it, V(G).begin());
     ASSERT_EQ(V(G).begin(), V(G).end());
@@ -270,10 +274,14 @@ TYPED_TEST(ContainersTest, VerticesIterator) {
 }
 
 TYPED_TEST(ContainersTest, EdgesIterator) {
+    TypeParam G;
+
+    typename TypeParam::EIDsIterator v, w(v);
+    ASSERT_NO_THROW({ w = v; });
+
     typename TypeParam::EIDsIterator::const_iterator it, ite;
     ASSERT_DEATH({ it++; }, ".*");
 
-    TypeParam G;
     it = E(G).begin();
     ASSERT_EQ(it, E(G).begin());
     ASSERT_EQ(E(G).begin(), E(G).end());
@@ -339,10 +347,14 @@ TYPED_TEST(ContainersTest, EdgesIterator) {
 }
 
 TYPED_TEST(ContainersTest, VerticesLabelsIterator) {
+    TypeParam G;
+
+    typename TypeParam::VLBsIterator v, w(v);
+    ASSERT_NO_THROW({ w = v; });
+
     typename TypeParam::VLBsIterator::const_iterator it, ite;
     ASSERT_DEATH({ it++; }, ".*");
 
-    TypeParam G;
     it = Vl(G).begin();
     ASSERT_EQ(it, Vl(G).begin());
     ASSERT_EQ(Vl(G).begin(), Vl(G).end());
@@ -372,10 +384,14 @@ TYPED_TEST(ContainersTest, VerticesLabelsIterator) {
 }
 
 TYPED_TEST(ContainersTest, EdgesLabelsIterator) {
+    TypeParam G;
+
+    typename TypeParam::ELBsIterator v, w(v);
+    ASSERT_NO_THROW({ w = v; });
+
     typename TypeParam::ELBsIterator::const_iterator it, ite;
     ASSERT_DEATH({ it++; }, ".*");
 
-    TypeParam G;
     it = El(G).begin();
     ASSERT_EQ(it, El(G).begin());
     ASSERT_EQ(El(G).begin(), El(G).end());
@@ -411,10 +427,14 @@ TYPED_TEST(ContainersTest, EdgesLabelsIterator) {
 }
 
 TYPED_TEST(ContainersTest, VerticesPairsIterator) {
+    TypeParam G;
+
+    typename TypeParam::VIDsVLBsIterator v, w(v);
+    ASSERT_NO_THROW({ w = v; });
+
     typename TypeParam::VIDsVLBsIterator::const_iterator it, ite;
     ASSERT_DEATH({ it++; }, ".*");
 
-    TypeParam G;
     it = Vp(G).begin();
     ASSERT_EQ(it, Vp(G).begin());
     ASSERT_EQ(Vp(G).begin(), Vp(G).end());
@@ -444,10 +464,14 @@ TYPED_TEST(ContainersTest, VerticesPairsIterator) {
 }
 
 TYPED_TEST(ContainersTest, EdgesPairsIterator) {
+    TypeParam G;
+
+    typename TypeParam::EIDsELBsIterator v, w(v);
+    ASSERT_NO_THROW({ w = v; });
+
     typename TypeParam::EIDsELBsIterator::const_iterator it, ite;
     ASSERT_DEATH({ it++; }, ".*");
 
-    TypeParam G;
     it = Ep(G).begin();
     ASSERT_EQ(it, Ep(G).begin());
     ASSERT_EQ(Ep(G).begin(), Ep(G).end());
@@ -578,7 +602,7 @@ TYPED_TEST(ContainersTest, DelVertexVID) {
     l = std::to_string(i);
     H.set_label(i, l);
     H.set_attr(i, "key", true);
-    ASSERT_EQ(H.del_vertex(i), i);                          // Valid argument.
+    ASSERT_EQ(H.del_vertex(i), i);  // Valid argument.
 }
 
 TYPED_TEST(ContainersTest, DelVertexVLB) {
