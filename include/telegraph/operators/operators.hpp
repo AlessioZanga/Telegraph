@@ -3,6 +3,10 @@
 #include <telegraph/containers/abstract_graph.hpp>
 #include <telegraph/requires.hpp>
 
+/** \addtogroup operators
+ *  @{
+ */
+
 /**
  * @brief Equality of graphs.
  *
@@ -85,9 +89,9 @@ bool operator>=(const A &G, const B &H);
  * @brief Complement of graph.
  *
  * @tparam A Graph type.
- * @tparam C Return graph type (defaults to given graph type).
+ * @tparam B Return graph type (defaults to given graph type).
  * @param G Given graph.
- * @return C Return graph.
+ * @return B Return graph.
  */
 template <typename A, typename B = A, require_base_of(AbstractGraph, A) = 0, require_base_of(AbstractGraph, B) = 0>
 B operator~(const A &G);
@@ -186,3 +190,5 @@ template <
     require_base_of(AbstractGraph, B) = 0,
     require_base_of(AbstractGraph, C) = 0>
 C operator%(const A &G, const B &H);
+
+/** @} */
