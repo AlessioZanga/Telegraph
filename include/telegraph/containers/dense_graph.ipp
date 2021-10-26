@@ -32,15 +32,13 @@ DenseGraph::DenseGraph(std::size_t n) {
 
 template <typename I, require_iter_value_type(I, VID)>
 DenseGraph::DenseGraph(const I &begin, const I &end) {
+    // Given that the sequence is assumed to be *not* locally stored, it is
+    // necessary to store sequence for duplicate removal and vertex sorting.
+    VIDs V(begin, end);
     // Initialize graph order.
     std::size_t n = 0;
-    // Iterate over the sequence.
-    for (auto i = begin; i != end; i++, n++) {
-        // Dereference iterator.
-        VID j = *i;
-        // Check if vertex is already into the graph.
-        if (!has_vertex(j)) add_vertex(j);
-    }
+    // Insert VIDs into map.
+    for (auto i = V.begin(); i != V.end(); ++i, n++) M.left.insert({*i, AdjacencyMatrix::Index(n)});
     // Allocate a squared zero matrix.
     A = AdjacencyMatrix::Zero(n, n);
 }
@@ -69,7 +67,7 @@ DenseGraph::DenseGraph(const AdjacencyList &other) {
         // Initialize graph order.
         std::size_t n = 0;
         // Insert VIDs into map.
-        for (auto i = other.begin(); i != other.end(); i++, n++) M.left.insert({i->first, AdjacencyMatrix::Index(n)});
+        for (auto i = other.begin(); i != other.end(); ++i, n++) M.left.insert({i->first, AdjacencyMatrix::Index(n)});
         // Allocate a squared zero matrix.
         A = AdjacencyMatrix::Zero(n, n);
         // Fill the matrix.
@@ -86,14 +84,12 @@ DenseGraph::DenseGraph(const AdjacencyList &other) {
 
 DenseGraph::DenseGraph(const AdjacencyMatrix &other) : A(other) {
     if (other.rows() != other.cols()) throw std::invalid_argument("AdjacencyMatrix must be squared.");
-     // Initialize VIDs in map.
-    for (AdjacencyMatrix::Index i = 0; i < other.rows(); i++) M.left.insert({VID(i), i});
+    for (std::size_t i = 0; i < order(); i++) M.left.insert({i, AdjacencyMatrix::Index(i)});  // Insert VIDs in map.
 }
 
 DenseGraph::DenseGraph(const SparseAdjacencyMatrix &other) : A(other) {
     if (other.rows() != other.cols()) throw std::invalid_argument("SparseAdjacencyMatrix must be squared.");
-     // Initialize VIDs in map.
-    for (AdjacencyMatrix::Index i = 0; i < other.rows(); i++) M.left.insert({VID(i), i});
+    for (std::size_t i = 0; i < order(); i++) M.left.insert({i, AdjacencyMatrix::Index(i)});  // Insert VIDs in map.
 }
 
 inline DenseGraph::operator AdjacencyList() const {

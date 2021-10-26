@@ -52,31 +52,37 @@ TYPED_TEST(ContainersTest, SizedConstructor) {
 }
 
 TYPED_TEST(ContainersTest, VertexIteratorConstructor) {
-    std::vector<VID> V = {};  // Empty sequence.
-    TypeParam G(V.begin(), V.end());
-    ASSERT_EQ(G.order(), V.size());
+    std::vector<VID> U = {};  // Empty sequence.
+    TypeParam G(U.begin(), U.end());
+    ASSERT_EQ(G.order(), U.size());
+    ASSERT_TRUE(std::is_sorted(V(G).begin(), V(G).end()));
 
     std::vector<VID> W = {0};  // Single sequence.
     TypeParam H(W.begin(), W.end());
     ASSERT_EQ(H.order(), W.size());
+    ASSERT_TRUE(std::is_sorted(V(H).begin(), V(H).end()));
 
     std::vector<VID> X = {0, 1, 2, 3, 4};  // Ordered sequence.
     TypeParam J(X.begin(), X.end());
     ASSERT_EQ(J.order(), X.size());
+    ASSERT_TRUE(std::is_sorted(V(J).begin(), V(J).end()));
 
     std::vector<VID> Y = {2, 1, 3, 4, 0};  // Unordered sequence.
     TypeParam K(Y.begin(), Y.end());
     ASSERT_EQ(K.order(), Y.size());
+    ASSERT_TRUE(std::is_sorted(V(K).begin(), V(K).end()));
 
     std::vector<VID> Z(MAX);  // Very long sequence.
     std::iota(Z.begin(), Z.end(), 0);
     TypeParam L(Z.begin(), Z.end());
     ASSERT_EQ(L.order(), Z.size());
+    ASSERT_TRUE(std::is_sorted(V(L).begin(), V(L).end()));
 
     std::list<VID> N(MAX);  // Very long sequence with non-contiguous memory.
     std::iota(N.begin(), N.end(), 0);
     TypeParam M(N.begin(), N.end());
     ASSERT_EQ(M.order(), N.size());
+    ASSERT_TRUE(std::is_sorted(V(M).begin(), V(M).end()));
 }
 
 TYPED_TEST(ContainersTest, EdgeIteratorConstructor) {
