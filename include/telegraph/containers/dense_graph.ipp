@@ -31,16 +31,18 @@ DenseGraph::DenseGraph(const I &begin, const I &end) {
 template <typename I, require_iter_value_type(I, EID)>
 DenseGraph::DenseGraph(const I &begin, const I &end) {
     // Given that the sequence is assumed to be *not* locally stored, it is
-    // necessary to *incrementally* resize the matrix when needed.
-    for (auto i = begin; i != end; i++) {
-        // Dereference iterator.
-        EID e = *i;
-        // Check if vertices are already into the graph.
-        if (!has_vertex(e.first)) add_vertex(e.first);
-        if (!has_vertex(e.second)) add_vertex(e.second);
-        // Set the edge.
-        A(M.left.at(e.first), M.left.at(e.second)) = 1;
-    }
+    // necessary to store sequence for duplicate removal and vertex sorting.
+    VIDs V;
+    EIDs E(begin, end);
+    for (const auto &[v, u] : E) V.insert(v), V.insert(u);
+    // Initialize graph order.
+    std::size_t n = 0;
+    // Insert VIDs into map.
+    for (auto i = V.begin(); i != V.end(); ++i, n++) M.left.insert({*i, AdjacencyMatrix::Index(n)});
+    // Allocate a squared zero matrix.
+    A = AdjacencyMatrix::Zero(n, n);
+    // Set edges.
+    for (const auto &[v, u] : E) A(M.left.at(v), M.left.at(u)) = 1;
 }
 
 DenseGraph::DenseGraph(const AdjacencyList &other) {

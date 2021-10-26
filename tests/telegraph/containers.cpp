@@ -88,18 +88,22 @@ TYPED_TEST(ContainersTest, EdgeIteratorConstructor) {
     std::vector<EID> E = {};  // Empty sequence.
     TypeParam G(E.begin(), E.end());
     ASSERT_EQ(G.size(), E.size());
+    ASSERT_TRUE(std::is_sorted(V(G).begin(), V(G).end()));
 
     std::vector<EID> W = {{0, 1}};  // Single sequence.
     TypeParam H(W.begin(), W.end());
     ASSERT_EQ(H.size(), W.size());
+    ASSERT_TRUE(std::is_sorted(V(H).begin(), V(H).end()));
 
     std::vector<EID> X = {{0, 1}, {1, 2}, {2, 3}};  // Ordered sequence.
     TypeParam J(X.begin(), X.end());
     ASSERT_EQ(J.size(), X.size());
+    ASSERT_TRUE(std::is_sorted(V(J).begin(), V(J).end()));
 
     std::vector<EID> Y = {{3, 0}, {2, 1}, {2, 0}};  // Unordered sequence.
     TypeParam K(Y.begin(), Y.end());
     ASSERT_EQ(K.size(), Y.size());
+    ASSERT_TRUE(std::is_sorted(V(K).begin(), V(K).end()));
 
     std::vector<EID> Z;  // Very long sequence.
     for (VID i = 0; i < MAX; i++) {
@@ -109,6 +113,7 @@ TYPED_TEST(ContainersTest, EdgeIteratorConstructor) {
     }
     TypeParam L(Z.begin(), Z.end());
     ASSERT_EQ(L.size(), Z.size());
+    ASSERT_TRUE(std::is_sorted(V(L).begin(), V(L).end()));
 
     std::list<EID> N;  // Very long sequence with non-contiguous memory.
     for (VID i = 0; i < MAX; i++) {
@@ -118,6 +123,7 @@ TYPED_TEST(ContainersTest, EdgeIteratorConstructor) {
     }
     TypeParam M(N.begin(), N.end());
     ASSERT_EQ(M.size(), M.size());
+    ASSERT_TRUE(std::is_sorted(V(M).begin(), V(M).end()));
 }
 
 TYPED_TEST(ContainersTest, AdjacencyListConstructor) {

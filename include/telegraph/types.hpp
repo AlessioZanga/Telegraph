@@ -4,8 +4,8 @@
 #include <algorithm>
 #include <any>
 #include <boost/bimap.hpp>
-#include <boost/bimap/unordered_set_of.hpp>
 #include <boost/bimap/support/lambda.hpp>
+#include <boost/bimap/unordered_set_of.hpp>
 #include <boost/container_hash/hash.hpp>
 #include <boost/iterator/transform_iterator.hpp>
 #include <cstdint>
