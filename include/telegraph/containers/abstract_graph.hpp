@@ -954,6 +954,22 @@ class AbstractGraph {
     /** @}*/
 
     /**
+     * @brief Whether the graph is defined as directed or not.
+     * 
+     * @return true If the graph is defined as directed,
+     * @return false Otherwise.
+     */
+    inline virtual bool is_directed() const = 0;
+
+    /**
+     * @brief Whether the graph is defined as partially directed or not.
+     * 
+     * @return true If the graph is defined as partially directed,
+     * @return false Otherwise.
+     */
+    inline virtual bool is_partially_directed() const = 0;
+
+    /**
      * @brief Output stream operator.
      *
      * @param out Output stream reference.

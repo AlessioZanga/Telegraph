@@ -1,4 +1,3 @@
-#include <cxxabi.h>
 #include <gtest/gtest.h>
 
 #include <cstdlib>
@@ -13,7 +12,7 @@ template <typename T>
 class ContainersTest : public ::testing::Test {};
 
 // Define list of types
-using GraphTypes = ::testing::Types<DenseGraph>;
+using GraphTypes = ::testing::Types<DirectedDenseGraph>;
 
 // Create typed test suite
 TYPED_TEST_SUITE(ContainersTest, GraphTypes);
@@ -1621,13 +1620,11 @@ TYPED_TEST(ContainersTest, Hash) {
 }
 
 TYPED_TEST(ContainersTest, ToStream) {
-    int status;
-    std::string classname = abi::__cxa_demangle(typeid(TypeParam).name(), 0, 0, &status);
-    std::ostringstream out;
-
     TypeParam G;
+    std::ostringstream out;
+    
     out << G;
-    ASSERT_EQ(out.str(), (classname + "(label = '', V = (), E = (), Vp = (), Ep = ())"));
+    ASSERT_EQ(out.str(), ("(label = '', V = (), E = (), Vp = (), Ep = ())"));
 
     G.set_label("G");
     G.add_vertex("0");
@@ -1637,5 +1634,5 @@ TYPED_TEST(ContainersTest, ToStream) {
     out.str("");
     out.clear();
     out << G;
-    ASSERT_EQ(out.str(), (classname + "(label = 'G', V = (0, 1, ), E = ((0, 1), ), Vp = ((0, '0'), (1, '1'), ), Ep = (((0, 1), '0 --- 1'), ))"));
+    ASSERT_EQ(out.str(), ("(label = 'G', V = (0, 1, ), E = ((0, 1), ), Vp = ((0, '0'), (1, '1'), ), Ep = (((0, 1), '0 --- 1'), ))"));
 }

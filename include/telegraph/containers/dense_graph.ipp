@@ -6,21 +6,6 @@ DenseGraph::DenseGraph() {}
 
 DenseGraph::DenseGraph(const DenseGraph &other) : AbstractGraph(other), A(other.A), M(other.M) {}
 
-DenseGraph &DenseGraph::operator=(const DenseGraph &other) {
-    DenseGraph tmp(other);
-    if (this != &other) {
-        std::swap(glb, tmp.glb);
-        std::swap(vlbs, tmp.vlbs);
-        std::swap(elbs, tmp.elbs);
-        std::swap(gattrs, tmp.gattrs);
-        std::swap(vattrs, tmp.vattrs);
-        std::swap(eattrs, tmp.eattrs);
-        std::swap(A, tmp.A);
-        std::swap(M, tmp.M);
-    }
-    return *this;
-}
-
 DenseGraph::~DenseGraph() {}
 
 DenseGraph::DenseGraph(std::size_t n) {
@@ -358,7 +343,7 @@ inline std::size_t DenseGraph::hash() const {
 
 void DenseGraph::to_stream(std::ostream &out) const {
     // Print graph class.
-    out << "DenseGraph(";
+    out << "(";
 
     // Print graph label.
     out << "label = '" << (has_label() ? get_label() : "") << "', ";

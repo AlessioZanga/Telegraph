@@ -7,6 +7,7 @@
 /** CONTAINERS */
 #include <telegraph/containers/abstract_graph.ipp>
 #include <telegraph/containers/dense_graph.ipp>
+#include <telegraph/containers/directed_dense_graph.ipp>
 
 /** OPERATORS */
 #include <telegraph/operators/operators.ipp>

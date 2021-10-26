@@ -87,7 +87,7 @@ template <typename T>
 class OperatorsTest : public ::testing::Test {};
 
 // Define list of types
-using GraphTypes = typename TestTypes<Product<Types<DenseGraph>>>::type;
+using GraphTypes = typename TestTypes<Product<Types<DirectedDenseGraph>>>::type;
 
 // Create typed test suite
 TYPED_TEST_SUITE(OperatorsTest, GraphTypes);

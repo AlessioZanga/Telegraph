@@ -22,9 +22,6 @@ class DenseGraph : public AbstractGraph {
     //! Copy constructor for a new Dense Graph object.
     DenseGraph(const DenseGraph &other);
 
-    //! Assignment constructor for a new Dense Graph object.
-    DenseGraph &operator=(const DenseGraph &other);
-
     //! Destroy the Dense Graph object.
     virtual ~DenseGraph();
 
