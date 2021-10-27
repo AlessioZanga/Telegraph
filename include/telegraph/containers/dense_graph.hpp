@@ -4,17 +4,11 @@
 
 class DenseGraph : public AbstractGraph {
    protected:
+    //! Dense adjacency matrix.
     AdjacencyMatrix A;
-    VIDmIndex M;
 
-   public:
-    //! Enforce superclass namespace resolution to avoid name hiding with overloading.
-    using AbstractGraph::add_edge;
-    using AbstractGraph::add_vertex;
-    using AbstractGraph::del_edge;
-    using AbstractGraph::del_vertex;
-    using AbstractGraph::has_edge;
-    using AbstractGraph::has_vertex;
+    //! Bidirectional VID-Index map.
+    VIDmIndex M;
 
     //! Default constructor for a new Dense Graph object.
     DenseGraph();
@@ -24,6 +18,19 @@ class DenseGraph : public AbstractGraph {
 
     //! Destroy the Dense Graph object.
     virtual ~DenseGraph();
+
+    inline virtual std::size_t hash() const;
+
+    virtual void to_stream(std::ostream &out) const;
+
+   public:
+    //! Enforce superclass namespace resolution to avoid name hiding with overloading.
+    using AbstractGraph::add_edge;
+    using AbstractGraph::add_vertex;
+    using AbstractGraph::del_edge;
+    using AbstractGraph::del_vertex;
+    using AbstractGraph::has_edge;
+    using AbstractGraph::has_vertex;
 
     /**
      * @brief Construct a new Dense Graph object.
@@ -250,9 +257,4 @@ class DenseGraph : public AbstractGraph {
     inline virtual EID add_edge(const EID &X);
 
     inline virtual EID del_edge(const EID &X);
-
-   private:
-    inline virtual std::size_t hash() const;
-
-    virtual void to_stream(std::ostream &out) const;
 };

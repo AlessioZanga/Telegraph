@@ -1,8 +1,9 @@
 #pragma once
 
 #include <telegraph/containers/dense_graph.ipp>
+#include <telegraph/containers/directed_graph.ipp>
 
-class DirectedDenseGraph : public DenseGraph {
+class DirectedDenseGraph : public DenseGraph, public DirectedGraph {
    public:
     using DenseGraph::DenseGraph;
 
@@ -17,8 +18,4 @@ class DirectedDenseGraph : public DenseGraph {
 
     //! Destroy the Directed Dense Graph object.
     virtual ~DirectedDenseGraph();
-
-    inline bool is_directed() const;
-
-    inline bool is_partially_directed() const;
 };

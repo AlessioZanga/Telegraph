@@ -18,7 +18,6 @@ class AbstractGraph {
     //! Edges attributes.
     EAttrs eattrs;
 
-   public:
     //! Default constructor for a new Abstract Graph object.
     AbstractGraph();
 
@@ -28,6 +27,21 @@ class AbstractGraph {
     //! Destroy the Abstract Graph object.
     inline virtual ~AbstractGraph();
 
+    /**
+     * @brief Hash function of a graph.
+     *
+     * @return std::size_t Hash of a graph.
+     */
+    inline virtual std::size_t hash() const = 0;
+
+    /**
+     * @brief Incrementally write text representation of the graph to output stream.
+     *
+     * @param out Output stream reference.
+     */
+    virtual void to_stream(std::ostream &out) const = 0;
+
+   public:
     /**
      * @brief The adjacency list representation of the graph.
      *
@@ -954,22 +968,6 @@ class AbstractGraph {
     /** @}*/
 
     /**
-     * @brief Whether the graph is defined as directed or not.
-     * 
-     * @return true If the graph is defined as directed,
-     * @return false Otherwise.
-     */
-    inline virtual bool is_directed() const = 0;
-
-    /**
-     * @brief Whether the graph is defined as partially directed or not.
-     * 
-     * @return true If the graph is defined as partially directed,
-     * @return false Otherwise.
-     */
-    inline virtual bool is_partially_directed() const = 0;
-
-    /**
      * @brief Output stream operator.
      *
      * @param out Output stream reference.
@@ -980,19 +978,4 @@ class AbstractGraph {
 
     //! Standard hash function.
     friend class std::hash<AbstractGraph>;
-
-   protected:
-    /**
-     * @brief Hash function of a graph.
-     *
-     * @return std::size_t Hash of a graph.
-     */
-    inline virtual std::size_t hash() const = 0;
-
-    /**
-     * @brief Incrementally write text representation of the graph to output stream.
-     *
-     * @param out Output stream reference.
-     */
-    virtual void to_stream(std::ostream &out) const = 0;
 };

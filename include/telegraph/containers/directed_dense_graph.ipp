@@ -22,7 +22,3 @@ DirectedDenseGraph &DirectedDenseGraph::operator=(const DirectedDenseGraph &othe
 }
 
 DirectedDenseGraph::~DirectedDenseGraph() {}
-
-inline bool DirectedDenseGraph::is_directed() const { return true; }
-
-inline bool DirectedDenseGraph::is_partially_directed() const { return true; }
