@@ -26,5 +26,6 @@ jobs:
       - name: Benchmarks
         run: |
           mkdir -p build && cd build
+          sudo cpupower frequency-set --governor performance
           cmake -DCMAKE_BUILD_TYPE=Release -DTELEGRAPH_ENABLE_TESTS=OFF -DTELEGRAPH_ENABLE_BENCHMARKS=ON ..
           make -j $(nproc) && ./benchmarks/benchmarks | tee output.txt
