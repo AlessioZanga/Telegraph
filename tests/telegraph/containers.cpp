@@ -247,7 +247,6 @@ TYPED_TEST(ContainersTest, VerticesIterator) {
     ASSERT_NO_THROW({ w = v; });
 
     typename TypeParam::VIDsIterator::const_iterator it, ite;
-    ASSERT_DEATH({ it++; }, ".*");
 
     it = V(G).begin();
     ASSERT_EQ(it, V(G).begin());
@@ -291,7 +290,6 @@ TYPED_TEST(ContainersTest, EdgesIterator) {
     ASSERT_NO_THROW({ w = v; });
 
     typename TypeParam::EIDsIterator::const_iterator it, ite;
-    ASSERT_DEATH({ it++; }, ".*");
 
     it = E(G).begin();
     ASSERT_EQ(it, E(G).begin());
@@ -364,7 +362,6 @@ TYPED_TEST(ContainersTest, VerticesLabelsIterator) {
     ASSERT_NO_THROW({ w = v; });
 
     typename TypeParam::VLBsIterator::const_iterator it, ite;
-    ASSERT_DEATH({ it++; }, ".*");
 
     it = Vl(G).begin();
     ASSERT_EQ(it, Vl(G).begin());
@@ -401,7 +398,6 @@ TYPED_TEST(ContainersTest, EdgesLabelsIterator) {
     ASSERT_NO_THROW({ w = v; });
 
     typename TypeParam::ELBsIterator::const_iterator it, ite;
-    ASSERT_DEATH({ it++; }, ".*");
 
     it = El(G).begin();
     ASSERT_EQ(it, El(G).begin());
