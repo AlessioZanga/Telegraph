@@ -95,6 +95,23 @@ static inline auto Ep(const T &G) {
     return G.Ep();
 }
 
+namespace std {
+
+template <>
+struct hash<EID> {
+    std::size_t operator()(const EID &value) const {
+        // Initialize seed hash.
+        std::size_t seed = 0;
+        // Hash EID.
+        boost::hash_combine(seed, value.first);
+        boost::hash_combine(seed, value.second);
+        // Return hash.
+        return seed;
+    }
+};
+
+}  // namespace std
+
 namespace boost {
 
 template <>

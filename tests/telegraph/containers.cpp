@@ -34,7 +34,7 @@ TYPED_TEST(ContainersTest, Destructor) {
     delete G;
 }
 
-TYPED_TEST(ContainersTest, SizedConstructor) {
+TYPED_TEST(ContainersTest, OrderConstructor) {
     TypeParam G(0);  // Zero lower bound.
     ASSERT_EQ(G.order(), 0);
 
